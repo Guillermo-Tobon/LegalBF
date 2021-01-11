@@ -18,12 +18,16 @@ export class ClientesService {
               private http: HttpClient
               ) {
 
-    this.httpOptions = { headers: new HttpHeaders({ 'Content-Type':  'application/json', 'x-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MTAwNjYxNzcsImV4cCI6MTYxMDEwOTM3N30.0G6Az9dA3E_j2SYfnNQC0X8mVQDIemnord3oAF97tjg'}) };
+    this.httpOptions = { headers: new HttpHeaders({ 'Content-Type':  'application/json', 'x-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MTAzOTg2OTUsImV4cCI6MTYxMDQ0MTg5NX0.TtwCXRHfxPFrG4-rU53aiA3HBToN6ILIEckMUwWFeYc'}) };
 
     }
 
 
-
+  
+  /**
+   * Método de servicio para insertar clientes
+   * @param formData => Datos del formulario
+   */
   public crearClienteServices = ( formData:ClienteForm ) =>{
 
     const json = {
@@ -42,6 +46,29 @@ export class ClientesService {
     ) 
     
   }
+
+
+
+  /**
+   * Método de servicio para insertar usuarios
+   * @param formData => Datos del formulario
+   */
+  public insertUsuarios = (formData: ClienteForm) =>{
+
+    const json = {
+      nombres: formData.nombres,
+      apellidos: formData.apellidos,
+      email: formData.email,
+      password: formData.password,
+      telefono: formData.telefono,
+      estado: formData.estado == true? 1 : 0,
+    }
+
+    return this.http.post(`${BASE_URL}/insertUsuario`, json, this.httpOptions).pipe(
+      tap( (resp:any) =>{ })
+    )
+  }
+
 
 
 
