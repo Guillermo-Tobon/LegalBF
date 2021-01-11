@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 
 import { RouterModule } from '@angular/router';
 
@@ -10,6 +11,8 @@ import { PagesComponent } from './pages.component';
 import { SharedModule } from '../shared/shared.module';
 import { ComponentsModule } from '../components/components.module';
 import { ConfiguracionCuentaComponent } from './configuracion-cuenta/configuracion-cuenta.component';
+import { CrearClienteComponent } from './crear-cliente/crear-cliente.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -19,6 +22,7 @@ import { ConfiguracionCuentaComponent } from './configuracion-cuenta/configuraci
     CuentaComponent,
     PagesComponent,
     ConfiguracionCuentaComponent,
+    CrearClienteComponent,
   ],
   exports: [
     DashboardComponent,
@@ -31,7 +35,10 @@ import { ConfiguracionCuentaComponent } from './configuracion-cuenta/configuraci
     CommonModule,
     SharedModule,
     RouterModule,
-    ComponentsModule
+    ComponentsModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ]
 })
 export class PagesModule { }
