@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, ɵConsole } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { map, tap } from 'rxjs/operators';
 
@@ -18,7 +18,7 @@ export class ClientesService {
               private http: HttpClient
               ) {
 
-    this.httpOptions = { headers: new HttpHeaders({ 'Content-Type':  'application/json', 'x-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MTAzOTg2OTUsImV4cCI6MTYxMDQ0MTg5NX0.TtwCXRHfxPFrG4-rU53aiA3HBToN6ILIEckMUwWFeYc'}) };
+    this.httpOptions = { headers: new HttpHeaders({ 'Content-Type':  'application/json', 'x-token': localStorage.getItem('token')}) };
 
     }
 
@@ -35,7 +35,7 @@ export class ClientesService {
       apellidos: formData.apellidos,
       email: formData.email,
       telefono: formData.telefono,
-      compania: formData.nomCia,
+      compania: formData.compania,
       estado: formData.estado == true? 1 : 0,
     }
 
@@ -61,6 +61,7 @@ export class ClientesService {
       email: formData.email,
       password: formData.password,
       telefono: formData.telefono,
+      compania: formData.compania,
       estado: formData.estado == true? 1 : 0,
     }
 

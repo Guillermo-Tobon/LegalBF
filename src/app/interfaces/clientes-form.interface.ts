@@ -3,6 +3,7 @@ export interface ClienteForm {
   apellidos: string;
   email: string;
   telefono: string;
+  compania: string;
   password: string;
   passwordConfir?: string;
   nomCia: string;

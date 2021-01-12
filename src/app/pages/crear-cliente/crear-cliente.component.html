@@ -60,7 +60,7 @@
           <div class="row">
             <div class="col-6">
               <div class="form-group m-b-40 focused">
-                <input type="text" formControlName="nomCia" class="form-control" id="input5">
+                <input type="text" formControlName="compania" class="form-control" id="input5">
                 <span class="bar"></span>
                 <label for="input3">Nombre Compañía</label>
               </div>
@@ -88,7 +88,7 @@
               <p *ngIf="campoNoValido('apellidos')">*El apellido es obligatorio.</p>
               <p *ngIf="campoNoValido('email')">*El E-mail es obligatorio y valido.</p>
               <p *ngIf="campoNoValido('telefono')">*El teléfono es obligatorio.</p>
-              <p *ngIf="campoNoValido('nomCia')">*El nombre de la compañía es obligatorio.</p>
+              <p *ngIf="campoNoValido('compania')">*El nombre de la compañía es obligatorio.</p>
               <p *ngIf="contrasenasNoValidas()">*Las contraseñas deben de ser iguales(min 6 caracteres).</p>
             </div>
           </div>

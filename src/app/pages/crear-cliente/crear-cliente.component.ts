@@ -18,10 +18,10 @@ export class CrearClienteComponent implements OnInit {
     nombres: ['', [Validators.required, Validators.minLength(3)]],
     apellidos: ['', [Validators.required, Validators.minLength(3)]],
     email: ['', [Validators.required, Validators.email, Validators.minLength(6)]],
-    telefono: ['3125641289', [Validators.required, Validators.minLength(6)]],
+    telefono: ['', [Validators.required, Validators.minLength(6)]],
     password: ['', [Validators.required, Validators.minLength(6)]],
     passwordConfir: ['', [Validators.required, Validators.minLength(6)]],
-    nomCia: [' S.A.S', [Validators.required, Validators.minLength(5)]],
+    compania: ['', [Validators.required, Validators.minLength(5)]],
     estado: [true, [Validators.required, Validators.minLength(5)]],
   }, {
     validators: this.passwordsIguales('password', 'passwordConfir')
@@ -46,18 +46,12 @@ export class CrearClienteComponent implements OnInit {
       return; 
     }
 
-    this.clienteSrs.crearClienteServices(this.regisFormCliente.value).subscribe( resp =>{
+    this.clienteSrs.insertUsuarios(this.regisFormCliente.value).subscribe( resp =>{
 
       if ( resp.ok ) {
         
-        this.clienteSrs.insertUsuarios(this.regisFormCliente.value).subscribe( resp2 =>{
-
-          if( resp2.ok ){
-            Swal.fire('Bien hecho!', resp.msg, 'success');
-            setTimeout(() => { window.location.reload(); }, 2000);
-          }
-
-        });
+        Swal.fire('Bien hecho!', resp.msg, 'success');
+        setTimeout(() => { window.location.reload(); }, 2000);
         
       } else {
         Swal.fire('Error', 'No es posible procesar los datos. Inténtelo más tarde.', 'error');
