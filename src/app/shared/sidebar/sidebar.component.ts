@@ -9,11 +9,14 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class SidebarComponent implements OnInit {
 
+  public usuario:any[] = [];
+
   constructor(
     private autServ: AuthService
   ) { }
 
   ngOnInit(): void {
+    this.usuario = this.autServ.usuario;
   }
 
 

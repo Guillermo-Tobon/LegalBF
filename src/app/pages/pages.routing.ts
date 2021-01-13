@@ -8,6 +8,8 @@ import { PerfilComponent } from './perfil/perfil.component';
 import { CuentaComponent } from './cuenta/cuenta.component';
 import { ConfiguracionCuentaComponent } from './configuracion-cuenta/configuracion-cuenta.component';
 import { CrearClienteComponent } from './crear-cliente/crear-cliente.component';
+import { ListaClientesComponent } from './lista-clientes/lista-clientes.component';
+import { DetalleClienteComponent } from './detalle-cliente/detalle-cliente.component';
 
 
 const routes: Routes = [
@@ -20,7 +22,9 @@ const routes: Routes = [
       { path: 'perfil', component: PerfilComponent },
       { path: 'cuenta', component: CuentaComponent },
       { path: 'configuracion-cuenta', component: ConfiguracionCuentaComponent },
-      { path: 'crear-cliente', component: CrearClienteComponent }
+      { path: 'crear-cliente', component: CrearClienteComponent },
+      { path: 'lista-clientes', component: ListaClientesComponent },
+      { path: 'detalle-cliente/:usuario', component: DetalleClienteComponent }
     ]
   },
 ];

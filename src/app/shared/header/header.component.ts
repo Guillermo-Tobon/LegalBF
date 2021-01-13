@@ -10,11 +10,14 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
 
+  public usuario:any[] = [];
+
   constructor(
               private autServ: AuthService
   ) { }
 
   ngOnInit(): void {
+    this.usuario = this.autServ.usuario;
   }
 
 

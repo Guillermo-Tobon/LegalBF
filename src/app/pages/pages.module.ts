@@ -13,6 +13,8 @@ import { ComponentsModule } from '../components/components.module';
 import { ConfiguracionCuentaComponent } from './configuracion-cuenta/configuracion-cuenta.component';
 import { CrearClienteComponent } from './crear-cliente/crear-cliente.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ListaClientesComponent } from './lista-clientes/lista-clientes.component';
+import { DetalleClienteComponent } from './detalle-cliente/detalle-cliente.component';
 
 
 @NgModule({
@@ -23,6 +25,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     PagesComponent,
     ConfiguracionCuentaComponent,
     CrearClienteComponent,
+    ListaClientesComponent,
+    DetalleClienteComponent,
   ],
   exports: [
     DashboardComponent,

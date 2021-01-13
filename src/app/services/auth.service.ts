@@ -15,6 +15,7 @@ const BASE_URL: String = environment.base_url;
 export class AuthService {
 
   public httpOptions:any = {}; 
+  public usuario:any[] = [];
 
   constructor( 
               private http: HttpClient,
@@ -51,6 +52,7 @@ export class AuthService {
 
     return this.http.get(`${BASE_URL}/loginrenew`, header).pipe(
       tap( (resp:any) =>{
+        this.usuario = resp.usuario;
         localStorage.setItem('token', resp.token);
       }),
       map( resp => true),

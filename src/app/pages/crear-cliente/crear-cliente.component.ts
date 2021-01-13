@@ -46,7 +46,7 @@ export class CrearClienteComponent implements OnInit {
       return; 
     }
 
-    this.clienteSrs.insertUsuarios(this.regisFormCliente.value).subscribe( resp =>{
+    this.clienteSrs.insertUsuariosServices(this.regisFormCliente.value).subscribe( resp =>{
 
       if ( resp.ok ) {
         

@@ -1,0 +1,82 @@
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">En el siguiente formulario puede actualizar y cargar documentos para el cliente.</h4>
+        <h6 class="card-subtitle">Una vez modificada la cuenta, se notificará vía correo electrónico al cliente.</h6>
+        
+        <form class="floating-labels m-t-40" [formGroup]="updateFormCliente" (submit)="actualizarCliente()">
+          <div class="row">
+            <div class="col-6">
+              <div class="form-group m-b-40 focused">
+                <input type="text" formControlName="nombres" class="form-control">
+                <span class="bar"></span>
+                <label for="input1">Nombres</label>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-group m-b-40 focused">
+                <input type="text" formControlName="apellidos" class="form-control">
+                <span class="bar"></span>
+                <label for="input2">Apellidos</label>
+              </div>
+            </div>
+          </div>
+          
+          <div class="row">
+            <div class="col-6">
+              <div class="form-group m-b-40 focused">
+                <input type="email" formControlName="email" class="form-control">
+                <span class="bar"></span>
+                <label for="input3">E-mail</label>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-group m-b-40 focused">
+                <input type="text" formControlName="telefono" class="form-control">
+                <span class="bar"></span>
+                <label for="input3">Teléfono</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-6">
+              <div class="form-group m-b-40 focused">
+                <input type="text" formControlName="compania" class="form-control" id="input5">
+                <span class="bar"></span>
+                <label for="input3">Nombre Compañía</label>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="checkbox checkbox-info pull-left p-t-0">
+                <input id="checkbox-signup" formControlName="estado" type="checkbox" class="filled-in chk-col-light-blue">
+                <label for="checkbox-signup">Cliente Activo </label><br><br>
+                <h6>La cuenta del cliente la puede inactivar. </h6>
+              </div> 
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-6">
+              <div class="form-group">
+                <button type="submit" class="btn waves-effect waves-light btn-rounded btn-success btn-block">Actualizar Cliente</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col text-danger">
+              <p *ngIf="campoNoValido('nombres')">*El nombre es obligatorio.</p>
+              <p *ngIf="campoNoValido('apellidos')">*El apellido es obligatorio.</p>
+              <p *ngIf="campoNoValido('email')">*El E-mail es obligatorio y valido.</p>
+              <p *ngIf="campoNoValido('telefono')">*El teléfono es obligatorio.</p>
+              <p *ngIf="campoNoValido('compania')">*El nombre de la compañía es obligatorio.</p>
+            </div>
+          </div>
+      
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -53,7 +53,7 @@ export class ClientesService {
    * Método de servicio para insertar usuarios
    * @param formData => Datos del formulario
    */
-  public insertUsuarios = (formData: ClienteForm) =>{
+  public insertUsuariosServices = (formData: ClienteForm) =>{
 
     const json = {
       nombres: formData.nombres,
@@ -67,6 +67,17 @@ export class ClientesService {
 
     return this.http.post(`${BASE_URL}/insertUsuario`, json, this.httpOptions).pipe(
       tap( (resp:any) =>{ })
+    )
+  }
+
+
+
+  /**
+   * Método de servicio para obtener los usuarios
+   */
+  public getUsuariosService = () =>{
+    return this.http.get(`${BASE_URL}/usuarios`, this.httpOptions).pipe(
+      map( data => data )
     )
   }
 
