@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ClienteForm } from 'src/app/interfaces/clientes-form.interface';
+import Swal from 'sweetalert2';
+import { ClientesService } from 'src/app/services/clientes.service';
 
 @Component({
   selector: 'app-detalle-cliente',
@@ -17,6 +18,7 @@ export class DetalleClienteComponent implements OnInit {
 
   constructor(
               private routeActive: ActivatedRoute,
+              private clienteServ: ClientesService,
               private router: Router,
               private fb: FormBuilder,
   ) { }
@@ -42,7 +44,22 @@ export class DetalleClienteComponent implements OnInit {
       return; 
     }
 
-    console.log(this.updateFormCliente.value)
+    this.clienteServ.updateClienteService(this.updateFormCliente.value).subscribe( (resp:any) =>{
+      
+      if(resp.ok){
+
+        Swal.fire('Bien Hecho!', `Cliente ${this.updateFormCliente.get('nombres').value } actualizado con éxito.`, 'error');
+        setTimeout(() => { this.router.navigate(['dashboard/lista-clientes']) }, 2000);
+
+      } else{
+
+        Swal.fire('Error', 'En este momento no se puede actualizar el cliente. Inténtelo más tarde.', 'error');
+      }
+
+    }, (err) =>{
+      //En caso de un error
+      Swal.fire('Error', err.error.msg, 'error');
+    })
   }
 
 
@@ -68,7 +85,9 @@ export class DetalleClienteComponent implements OnInit {
       email: [usuario['email_us'], [Validators.required, Validators.email, Validators.minLength(6)]],
       telefono: [usuario['telefono_us'], [Validators.required, Validators.minLength(6)]],
       compania: [usuario['compania_us'], [Validators.required, Validators.minLength(5)]],
-      estado: [usuario['estado_us'], [Validators.required, Validators.minLength(5)]],
+      descripcion: [usuario['descripcion_us'], [Validators.required, Validators.minLength(20)]],
+      estado: [usuario['estado_us'] === 1? true : false, [Validators.required]],
+      id: [usuario['id_us'], [Validators.required, Validators.minLength(5)]],
     });
   }
 

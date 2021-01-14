@@ -49,10 +49,10 @@
               </div>
             </div>
             <div class="col-6">
-              <div class="checkbox checkbox-info pull-left p-t-0">
-                <input id="checkbox-signup" formControlName="estado" type="checkbox" class="filled-in chk-col-light-blue">
-                <label for="checkbox-signup">Cliente Activo </label><br><br>
-                <h6>La cuenta del cliente la puede inactivar. </h6>
+              <div class="form-group m-b-40 focused">
+                <textarea class="form-control" formControlName="descripcion" rows="2"></textarea>
+                <span class="bar"></span>
+                <label for="input3">Descripción</label>
               </div> 
             </div>
           </div>
@@ -63,6 +63,14 @@
                 <button type="submit" class="btn waves-effect waves-light btn-rounded btn-success btn-block">Actualizar Cliente</button>
               </div>
             </div>
+            <div class="col-6">
+              <div class="checkbox checkbox-info pull-left p-t-0">
+                <input id="checkbox-signup" formControlName="estado" type="checkbox" class="filled-in chk-col-light-blue">
+                <label for="checkbox-signup">Cliente Activo </label><br><br>
+                <h6>La cuenta del cliente la puede inactivar. </h6>
+                <input type="hidden" formControlName="id" class="form-control">
+              </div> 
+            </div>
           </div>
 
           <div class="row">
@@ -72,6 +80,7 @@
               <p *ngIf="campoNoValido('email')">*El E-mail es obligatorio y valido.</p>
               <p *ngIf="campoNoValido('telefono')">*El teléfono es obligatorio.</p>
               <p *ngIf="campoNoValido('compania')">*El nombre de la compañía es obligatorio.</p>
+              <p *ngIf="campoNoValido('descripcion')">*La descripción es obligatoria.</p>
             </div>
           </div>
       

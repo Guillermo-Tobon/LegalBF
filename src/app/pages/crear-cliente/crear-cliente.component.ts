@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 
 import { ClientesService } from 'src/app/services/clientes.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -22,6 +23,7 @@ export class CrearClienteComponent implements OnInit {
     password: ['', [Validators.required, Validators.minLength(6)]],
     passwordConfir: ['', [Validators.required, Validators.minLength(6)]],
     compania: ['', [Validators.required, Validators.minLength(5)]],
+    descripcion: ['', [Validators.required, Validators.minLength(20)]],
     estado: [true, [Validators.required, Validators.minLength(5)]],
   }, {
     validators: this.passwordsIguales('password', 'passwordConfir')
@@ -29,6 +31,7 @@ export class CrearClienteComponent implements OnInit {
 
   constructor( 
               private fb: FormBuilder,
+              private router: Router,
               private clienteSrs: ClientesService ) { }
 
   ngOnInit(): void {
@@ -51,7 +54,7 @@ export class CrearClienteComponent implements OnInit {
       if ( resp.ok ) {
         
         Swal.fire('Bien hecho!', resp.msg, 'success');
-        setTimeout(() => { window.location.reload(); }, 2000);
+        setTimeout(() => { this.router.navigate(['dashboard/lista-clientes']) }, 2000);
         
       } else {
         Swal.fire('Error', 'No es posible procesar los datos. Inténtelo más tarde.', 'error');

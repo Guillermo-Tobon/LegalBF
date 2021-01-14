@@ -36,6 +36,7 @@ export class AuthService {
       map( resp => resp ),
       tap( (resp:any) =>{
         localStorage.setItem('token', resp.token);
+        localStorage.setItem('Ingresado', 'Si');
       })
     )
 

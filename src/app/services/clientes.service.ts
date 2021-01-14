@@ -62,6 +62,7 @@ export class ClientesService {
       password: formData.password,
       telefono: formData.telefono,
       compania: formData.compania,
+      descripcion: formData.descripcion,
       estado: formData.estado == true? 1 : 0,
     }
 
@@ -79,6 +80,31 @@ export class ClientesService {
     return this.http.get(`${BASE_URL}/usuarios`, this.httpOptions).pipe(
       map( data => data )
     )
+  }
+
+
+
+  /**
+   * Método de servicio para actualizar el cliente
+   * @param formData => Información del formulario
+   */
+  public updateClienteService = (formData:ClienteForm) =>{
+
+    const json = {
+      id: formData.id,
+      nombres: formData.nombres,
+      apellidos: formData.apellidos,
+      email: formData.email,
+      telefono: formData.telefono,
+      compania: formData.compania,
+      descripcion: formData.descripcion,
+      estado: formData.estado === true? 1: 0
+    }
+
+    return this.http.put(`${BASE_URL}/updateCliente`, json, this.httpOptions).pipe(
+      map( resp => resp )
+    )
+
   }
 
 

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { AuthService } from 'src/app/services/auth.service';
 import { JsonpClientBackend } from '@angular/common/http';
+import { LoginForm } from 'src/app/interfaces/login-form.interface';
 
 @Component({
   selector: 'app-login',
@@ -39,17 +40,12 @@ export class LoginComponent implements OnInit {
     }
 
     this.authServ.loginService( this.loginForm.value ).subscribe( resp =>{
+
+      console.log(resp)
       
       if ( resp.ok ) {
+        this.guardaLocalStorage(this.loginForm.value);
         this.router.navigateByUrl('/');
-
-        if ( this.loginForm.get('remember').value ) {
-          localStorage.setItem('email', this.loginForm.get('email').value );
-          localStorage.setItem('remember', JSON.stringify(this.loginForm.get('remember').value) );
-        } else {
-          localStorage.removeItem('email');
-          localStorage.removeItem('remember');
-        }
         
       } else {
         Swal.fire('Error', 'En este momento no se puede iniciar sesión. Inténtelo más tarde.', 'error');
@@ -75,6 +71,24 @@ export class LoginComponent implements OnInit {
       return true;
     } else {
       return false;
+    }
+  }
+
+
+
+
+  /**
+   * Método para guardar el localstorage
+   * @param formData => Data del formulario login
+   */
+  public guardaLocalStorage = (formData:LoginForm) => {
+    
+    if ( formData.remember ) {
+      localStorage.setItem('email', formData.email );
+      localStorage.setItem('remember', JSON.stringify(formData.remember) );
+    } else {
+      localStorage.removeItem('email');
+      localStorage.removeItem('remember');
     }
   }
 

@@ -115,3 +115,12 @@ User card page
 .iconLink{
 cursor: pointer;
 }
+.estadoCliente{
+  background-color: #e68079;
+  color: white;
+  padding: 3px 18px;
+  border-radius: 10px;
+  position: absolute;
+  bottom: 0;
+  left: 3px;
+}

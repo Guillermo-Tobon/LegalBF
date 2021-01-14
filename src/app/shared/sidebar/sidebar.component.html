@@ -11,8 +11,6 @@
               <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><img src="./assets/images/users/profile.png" alt="user" /><span class="hide-menu">{{usuario[0].nombres_us}} </span></a>
               <ul aria-expanded="false" class="collapse">
                 <li><a routerLink="perfil">Mi Perfil </a></li>
-                <li><a routerLink="cuenta">Mi Cuenta</a></li>
-                <li><a href="javascript:void()">Mis Balances</a></li>
                 <li><a routerLink="configuracion-cuenta">Configuraciones</a></li>
                 <li class="aCursor"><a (click)="logoutUser()">Cerrar Sesión</a></li>
               </ul>
@@ -21,22 +19,38 @@
             <li class="nav-small-cap">PERSONAL</li>
             <li> <a class="has-arrow waves-effect waves-dark" routerLink="/" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Dashboard <span class="label label-rouded label-themecolor pull-right">4</span></span></a>
             </li>
-            <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-bullseye"></i><span class="hide-menu">área de Clientes</span></a>
+            <li *ngIf="usuario[0].admin_us === 'Y'"> 
+              <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
+                <i class="mdi mdi-account-multiple"></i><span class="hide-menu">Área de Clientes</span>
+              </a>
               <ul aria-expanded="false" class="collapse">
                 <li><a routerLink="lista-clientes">Lista Clientes</a></li>
                 <li><a routerLink="crear-cliente">Crear Clientes</a></li>
                 <li><a href="app-contact.html">Documentos Generales</a></li>
               </ul>
             </li>
-            <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-email"></i><span class="hide-menu">Finanzas</span></a>
+            <li>
+              <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
+                <i class="mdi mdi-chart-areaspline"></i><span class="hide-menu">Finanzas</span>
+              </a>
               <ul aria-expanded="false" class="collapse">
-                <li><a href="app-email.html">Balances</a></li>
-                <li><a href="app-email-detail.html">Inversiones</a></li>
+                <li><a routerLink="balances">Balances</a></li>
+                <li><a routerLink="inversiones">Inversiones</a></li>
+                <li><a routerLink="documentacion">Documentación</a></li>
+              </ul>
+            </li>
+            <li>
+              <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
+                <i class="mdi mdi-message-reply-text"></i><span class="hide-menu">Soporte</span>
+              </a>
+              <ul aria-expanded="false" class="collapse">
+                <li *ngIf="usuario[0].admin_us === 'N'"><a routerLink="tickets">Tickets</a></li>
+                <li *ngIf="usuario[0].admin_us === 'Y'"><a routerLink="lista-tickets">Lista de tickets</a></li>
               </ul>
             </li>
             <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">Acerca de LegalBF </span></a>
               <ul aria-expanded="false" class="collapse">
-                <li><a href="ui-cards.html">Quiénes Somos</a></li>
+                <li><a routerLink="quienes-somos">Quiénes Somos</a></li>
                 <li><a href="ui-buttons.html">Como funciona</a></li>
                 <li><a href="ui-modals.html">Contratos</a></li>
                 <li><a href="ui-tab.html">Términos y Condiciones</a></li>

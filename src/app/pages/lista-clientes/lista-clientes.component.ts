@@ -31,6 +31,8 @@ export class ListaClientesComponent implements OnInit {
 
         this.usuarios = data.usuarios;
 
+        console.log(this.usuarios)
+
       } else {
         Swal.fire('Error', 'En este momento no podemos procesar la información. Inténtelo más tarde.', 'error');
         setTimeout(() => { this.router.navigateByUrl('/'); }, 1200);

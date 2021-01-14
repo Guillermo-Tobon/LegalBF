@@ -17,11 +17,13 @@ export class PerfilComponent implements OnInit {
 
   ngOnInit(): void {
     this.usuario = this.authServ.usuario;
+
+    console.log(this.usuario)
   
     if (this.usuario[0].estado_us === 1) {
-      this.estado = 'Activo';
+      this.estado = 'ACTIVO';
     } else {
-      this.estado = 'Inactivo';        
+      this.estado = 'INACTIVO';        
     }
   }
 
