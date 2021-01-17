@@ -52,9 +52,33 @@ export class CrearClienteComponent implements OnInit {
     this.clienteSrs.insertUsuariosServices(this.regisFormCliente.value).subscribe( resp =>{
 
       if ( resp.ok ) {
-        
-        Swal.fire('Bien hecho!', resp.msg, 'success');
-        setTimeout(() => { this.router.navigate(['dashboard/lista-clientes']) }, 2000);
+
+        const json = {
+          nombres: this.regisFormCliente.get('nombres').value,
+          apellidos: this.regisFormCliente.get('apellidos').value,
+          email: this.regisFormCliente.get('email').value,
+          asunto: 'Cuenta de usuario creada en LegalBF',
+          descripcion: `<p>Se ha creado su cuenta de LegalBF por parte del administador.</p>
+                        <p>Ingrese a: <a href="https://www.legalbf.com/" target="_blank">www.legalbf.com</a> con los siguientes datos:</p>
+                        <p>Username: ${this.regisFormCliente.get('email').value}</p>
+                        <p>Password: ${this.regisFormCliente.get('password').value}</p>
+                        <br>
+                        <b>Para más información, comuníquese con el administrador de LegalBF </b>
+                        <br>
+                        <p>©2021 - Todos los derechos reservados - es un servicio gratuito de LegalBG</p>`,
+        }
+
+        this.clienteSrs.sendEmailClienteService(json).subscribe( (resp2:any) =>{
+
+          if( resp2.ok ){
+            Swal.fire('Bien hecho!', resp.msg, 'success');
+            setTimeout(() => { this.router.navigate(['dashboard/lista-clientes']) }, 2000);
+          }
+
+        }, (err) =>{
+          //En caso de un error
+          Swal.fire('Error', err.error.msg, 'error');
+        })
         
       } else {
         Swal.fire('Error', 'No es posible procesar los datos. Inténtelo más tarde.', 'error');
