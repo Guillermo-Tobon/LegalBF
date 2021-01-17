@@ -108,6 +108,19 @@ export class ClientesService {
   }
 
 
+  /**
+   * Método de servicio para enviar correos
+   * @param formData => información del cliente
+   */
+  public sendEmailClienteService = (formData:any) =>{
+
+    return this.http.post(`${BASE_URL}/email`, formData, this.httpOptions).pipe(
+      map( resp => resp )
+    )
+
+  }
+
+
 
 
 }

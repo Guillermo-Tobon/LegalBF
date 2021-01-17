@@ -48,8 +48,25 @@ export class DetalleClienteComponent implements OnInit {
       
       if(resp.ok){
 
-        Swal.fire('Bien Hecho!', `Cliente ${this.updateFormCliente.get('nombres').value } actualizado con éxito.`, 'error');
-        setTimeout(() => { this.router.navigate(['dashboard/lista-clientes']) }, 2000);
+        const json = {
+          nombres: this.updateFormCliente.get('nombres').value,
+          apellidos: this.updateFormCliente.get('apellidos').value,
+          email: this.updateFormCliente.get('email').value,
+          asunto: 'Actualización cuenta en LegalBF',
+          descripcion: 'se ha actualizado su cuenta de LegalBF por parte del administador. Por favor ingrese y verifique su información.'
+        }
+        this.clienteServ.sendEmailClienteService(json).subscribe( (resp2:any) =>{
+
+          if (resp2.ok) {
+            Swal.fire('Bien Hecho!', `Cliente ${this.updateFormCliente.get('nombres').value } actualizado y notificado por correo electrónico con éxito.`, 'success');
+            setTimeout(() => { this.router.navigate(['dashboard/lista-clientes']) }, 2000);
+          }
+
+        }, (err) =>{
+          //En caso de un error
+          Swal.fire('Error', err.error.msg, 'error');
+        })
+
 
       } else{
 
