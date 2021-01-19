@@ -53,7 +53,12 @@ export class DetalleClienteComponent implements OnInit {
           apellidos: this.updateFormCliente.get('apellidos').value,
           email: this.updateFormCliente.get('email').value,
           asunto: 'Actualización cuenta en LegalBF',
-          descripcion: 'se ha actualizado su cuenta de LegalBF por parte del administador. Por favor ingrese y verifique su información.'
+          descripcion: `<p>Se actualizó su cuenta de LegalBF por parte del administador.</p>
+                        <p>Por favor ingrese a: <a href="https://www.legalbf.com/" target="_blank">www.legalbf.com</a> y verifique su información</p>
+                        <br>
+                        <b>Para más información, comuníquese con el administrador de LegalBF </b>
+                        <br>
+                        <p>©2021 - Todos los derechos reservados - es un servicio gratuito de LegalBG</p>`
         }
         this.clienteServ.sendEmailClienteService(json).subscribe( (resp2:any) =>{
 
