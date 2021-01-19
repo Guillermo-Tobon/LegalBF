@@ -23,18 +23,18 @@ const routes: Routes = [
     component: PagesComponent,
     canActivate: [AuthGuard],
     children: [
-      { path: '', component: DashboardComponent },
-      { path: 'perfil', component: PerfilComponent },
-      { path: 'balances', component: BalancesComponent },
-      { path: 'inversiones', component: InversionesComponent },
-      { path: 'documentacion', component: DocumentacionComponent },
-      { path: 'configuracion-cuenta', component: ConfiguracionCuentaComponent },
-      { path: 'crear-cliente', component: CrearClienteComponent },
-      { path: 'lista-clientes', component: ListaClientesComponent },
-      { path: 'detalle-cliente/:usuario', component: DetalleClienteComponent },
-      { path: 'tickets', component: TicketsComponent },
-      { path: 'lista-tickets', component: ListaTicketsComponent },
-      { path: 'quienes-somos', component: QuienesSomosComponent }
+      { path: '', component: DashboardComponent, data: {titulo: 'Dashboard'} },
+      { path: 'perfil', component: PerfilComponent, data: {titulo: 'Perfil'} },
+      { path: 'balances', component: BalancesComponent, data: {titulo: 'Balances'} },
+      { path: 'inversiones', component: InversionesComponent, data: {titulo: 'Inversiones'} },
+      { path: 'documentacion', component: DocumentacionComponent, data: {titulo: 'Documentación'} },
+      { path: 'configuracion-cuenta', component: ConfiguracionCuentaComponent, data: {titulo: 'Configuración cuenta'} },
+      { path: 'crear-cliente', component: CrearClienteComponent, data: {titulo: 'Crear cliente'} },
+      { path: 'lista-clientes', component: ListaClientesComponent, data: {titulo: 'Lista clientes'} },
+      { path: 'detalle-cliente/:usuario', component: DetalleClienteComponent, data: {titulo: 'Detalle cliente'} },
+      { path: 'tickets/:usuario', component: TicketsComponent, data: {titulo: 'Tickets'} },
+      { path: 'lista-tickets', component: ListaTicketsComponent, data: {titulo: 'Lista de tickets'} },
+      { path: 'quienes-somos', component: QuienesSomosComponent, data: {titulo: 'Quiénes somos'} }
     ]
   },
 ];

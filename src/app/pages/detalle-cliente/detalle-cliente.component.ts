@@ -94,7 +94,10 @@ export class DetalleClienteComponent implements OnInit {
   }
 
 
-
+  /**
+   * Método para iniciar el formulario
+   * @param usuario => Datos de usuario
+   */
   public iniciarFormulario = (usuario:any) =>{
     this.updateFormCliente = this.fb.group({
       nombres: [usuario['nombres_us'], [Validators.required, Validators.minLength(3)]],

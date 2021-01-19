@@ -1,1 +1,98 @@
-<p>tickets works!</p>
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Comuníquese directamente con el administrador y argumente el asunto.</h4>
+        <h6 class="card-subtitle">Una vez creado el ticket, se notificará vía correo electrónico al administrador y tiene un periodo de respuesta entre 24 y 48 horas.</h6>
+
+        <div class="tab-content">        
+          <div class="tab-pane active" id="settings" role="tabpanel">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-6">
+                  <small class="text-muted">Nombre completo:</small>
+                  <h6>{{usuario[0].nombres_us}} {{usuario[0].apellidos_us}}</h6> 
+                </div>
+                <div class="col-6">
+                  <small class="text-muted">E-mail:</small>
+                  <h6>{{usuario[0].email_us}}</h6> 
+                </div>
+              </div>
+              <br>
+              <div class="row">
+                <div class="col-6">
+                  <small class="text-muted">Teléfono:</small>
+                  <h6>{{usuario[0].telefono_us}}</h6> 
+                </div>
+                <div class="col-6">
+                  <small class="text-muted">Compañía:</small>
+                  <h6>{{usuario[0].compania_us}}</h6> 
+                </div>
+              </div>
+              <br>
+              <div class="row">
+                <div class="col-6">
+                  <small class="text-muted">Fecha de registro:</small>
+                  <h6>{{usuario[0].fecha_reg_us | date: 'dd/MM/yyyy'}}</h6> 
+                </div>
+                <div class="col-6">
+                  <small class="text-muted">Estado:</small>
+                  <h6 class="text-warning">ACTIVO</h6> 
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <form class="floating-labels m-t-40" [formGroup]="ticketFormCliente" (submit)="regisTicketCliente()">
+          <div class="row">
+            <div class="col-7">
+              <div class="form-group m-b-40 focused">
+                <input type="text" formControlName="asunto" class="form-control">
+                <span class="bar"></span>
+                <label for="input3">Asunto</label>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-7">
+              <div class="form-group m-b-40 focused">
+                <textarea class="form-control" formControlName="descripcion" rows="2"></textarea>
+                <span class="bar"></span>
+                <label for="input3">Mensaje</label>
+              </div>
+            </div>
+            <div class="col-5">
+              <div class="checkbox checkbox-info pull-left p-t-0">
+                <input id="checkbox-signup" formControlName="acepto" type="checkbox" class="filled-in chk-col-light-blue">
+                <label for="checkbox-signup">Acepto términos y condiciones <a routerLink="terminos">Leer aquí</a> </label><br><br>
+              </div> 
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-6">
+              <div class="form-group">
+                <button type="submit" class="btn waves-effect waves-light btn-rounded btn-success btn-block">Enviar ticket</button>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="checkbox checkbox-info pull-left p-t-0">
+                <input type="hidden" formControlName="id" class="form-control">
+              </div> 
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col text-danger">
+              <p *ngIf="campoNoValido('asunto')">*El asunto es obligatorio.</p>
+              <p *ngIf="campoNoValido('descripcion')">*El mensaje es obligatorio.</p>
+              <p *ngIf="campoNoValido('acepto')">*Debe aceptar términos y condiciones.</p>
+            </div>
+          </div>
+      
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
