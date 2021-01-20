@@ -15,6 +15,7 @@ import { TicketsComponent } from './tickets/tickets.component';
 import { DocumentacionComponent } from './documentacion/documentacion.component';
 import { ListaTicketsComponent } from './lista-tickets/lista-tickets.component';
 import { QuienesSomosComponent } from './quienes-somos/quienes-somos.component';
+import { TerminosComponent } from './terminos/terminos.component';
 
 
 const routes: Routes = [
@@ -34,7 +35,8 @@ const routes: Routes = [
       { path: 'detalle-cliente/:usuario', component: DetalleClienteComponent, data: {titulo: 'Detalle cliente'} },
       { path: 'tickets/:usuario', component: TicketsComponent, data: {titulo: 'Tickets'} },
       { path: 'lista-tickets', component: ListaTicketsComponent, data: {titulo: 'Lista de tickets'} },
-      { path: 'quienes-somos', component: QuienesSomosComponent, data: {titulo: 'Quiénes somos'} }
+      { path: 'quienes-somos', component: QuienesSomosComponent, data: {titulo: 'Quiénes somos'} },
+      { path: 'terminos', component: TerminosComponent, data: {titulo: 'Términos y condiciones'} }
     ]
   },
 ];

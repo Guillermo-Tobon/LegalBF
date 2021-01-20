@@ -43,8 +43,7 @@
                 <i class="mdi mdi-message-reply-text"></i><span class="hide-menu">Soporte</span>
               </a>
               <ul aria-expanded="false" class="collapse">
-                <!-- <li *ngIf="usuario[0].admin_us === 'N'"><a class="aCursor" routerLink="tickets">Tickets</a></li> -->
-                <li><a class="aCursor" (click)="navegarTicket()">Tickets</a></li>
+                <li *ngIf="usuario[0].admin_us === 'N'"><a class="aCursor" (click)="navegarTicket()">Tickets</a></li>
                 <li><a routerLink="lista-tickets">Lista de tickets</a></li>
               </ul>
             </li>
@@ -53,7 +52,7 @@
                 <li><a routerLink="quienes-somos">Quiénes Somos</a></li>
                 <li><a href="ui-buttons.html">Como funciona</a></li>
                 <li><a href="ui-modals.html">Contratos</a></li>
-                <li><a href="ui-tab.html">Términos y Condiciones</a></li>
+                <li><a routerLink="terminos">Términos y Condiciones</a></li>
                 <li><a href="ui-user-card.html">Políticas de manejo de datos</a></li>
               </ul>
             </li>

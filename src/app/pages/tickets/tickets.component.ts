@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ClientesService } from 'src/app/services/clientes.service';
 import { TicketsService } from 'src/app/services/tickets.service';
 import Swal from 'sweetalert2';
 
@@ -19,7 +20,8 @@ export class TicketsComponent implements OnInit {
               private routeActive: ActivatedRoute,
               private fb: FormBuilder,
               private router: Router,
-              private ticketServ: TicketsService
+              private ticketServ: TicketsService,
+              private clienteSrs: ClientesService
   ) { }
 
   ngOnInit(): void {
@@ -54,12 +56,27 @@ export class TicketsComponent implements OnInit {
       //setTimeout(() => { window.location.reload(); }, 2000);
 
       const json = {
-        nombres: this.usuario[0]['nombres_us'],
-        apellidos: this.usuario[0]['apellidos_us'],
+        nombres: 'Administrador de LegalBF',
+        apellidos: '',
         email: 'gtobonbarco@gmail.com',
         asunto: 'Creación de ticket en LegalBF',
-          descripcion: 'se ha actualizado su cuenta de LegalBF por parte del administador. Por favor ingrese y verifique su información.'
+        descripcion: `<p>Se ha creado un ticket con número <b>${resp.idticket}</b> en LegalBF.</p>
+                      <p><b>Nombre: </b>${this.usuario[0]['nombres_us']} ${this.usuario[0]['apellidos_us']}</p>
+                      <p><b>Email: </b>${this.usuario[0]['email_us']}</p>
+                      <p><b>Teléfono: </b>${this.usuario[0]['telefono_us']}</p>
+                      <p><b>Asunto: </b>${this.ticketFormCliente.get('asunto').value}</p>
+                      <p><b>Mensaje: </b>${this.ticketFormCliente.get('descripcion').value}</p>
+                      <p>Ingrese a: <a href="https://www.legalbf.com/" target="_blank">www.legalbf.com</a> y verifique los tickets.</p>
+                      <br>
+                      <p>©2021 - Todos los derechos reservados - es un servicio gratuito de LegalBG</p>`
       }
+
+      this.clienteSrs.sendEmailClienteService(json).subscribe( (resp2:any) =>{
+        console.log(resp2)
+      }, (err) =>{
+        console.log(err)
+      })
+      
 
     }, (err) =>{
       //En caso de un error
@@ -75,7 +92,6 @@ export class TicketsComponent implements OnInit {
  * @param usuario => Datos de usuario
  */
   public iniciarFormulario = (usuario:any) =>{
-    console.log(this.usuario)
    
     this.ticketFormCliente = this.fb.group({
       nombrecompleto: [`${usuario[0]['nombres_us']} ${usuario[0]['apellidos_us']}`, [Validators.required, Validators.minLength(3)]],

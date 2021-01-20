@@ -17,23 +17,40 @@ export class TicketsService {
               private http: HttpClient
   ) {
     this.httpOptions = { headers: new HttpHeaders({ 'Content-Type':  'application/json', 'x-token': localStorage.getItem('token')}) };
-   }
+  }
 
 
-   /**
-    * Método para creat tickets
-    * @param formData => Datos del formulario
-    */
-   public creatTicketService = ( formData:ClienteForm ) =>{
+  /**
+  * Método para creat tickets
+  * @param formData => Datos del formulario
+  */
+  public creatTicketService = ( formData:ClienteForm ) =>{
 
     return this.http.post(`${BASE_URL}/crearticket`, formData, this.httpOptions).pipe(
       map( resp => resp )
     )
 
-   }
+  }
+
+  /**
+   * Método de servicio para consultar los ticket por id user
+   * @param id => ID de usuario logueado
+   */
+  public getTicketByIdService = (id:any) =>{
+    return this.http.get(`${BASE_URL}/tickets/${id}`, this.httpOptions).pipe(
+      map( resp => resp )
+    )
+  }
 
 
-  
+  /**
+   * Método de servicio para obtener todos los tickets
+   */
+  public getAllTicketsService = () =>{
+    return this.http.get(`${BASE_URL}/alltickets`, this.httpOptions).pipe(
+      map( resp => resp )
+    )
+  }
 
 
 

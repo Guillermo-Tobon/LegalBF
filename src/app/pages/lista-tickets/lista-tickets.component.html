@@ -1,1 +1,27 @@
-<p>lista-tickets works!</p>
+<div class="card">
+  <!-- ============================================================== -->
+  <!-- Comment widgets -->
+  <!-- ============================================================== -->
+  <div class="comment-widgets m-b-20">
+    <!-- Comment Row -->
+    <div *ngFor="let ticket of tickets" class="d-flex flex-row comment-row">
+      <div class="p-2"><span class="round"><img src="../assets/images/users/1.jpg" alt="user" width="50"></span></div>
+      <div class="comment-text w-100">
+        <h5>{{ticket.nombre_tic}}</h5>
+        <div class="comment-footer">
+          <span class="date">{{ticket.fechareg_tic | date: 'EEEE, MMMM d, y'}}</span>&nbsp;
+          <span *ngIf="ticket.estado_tic === 0" class="label label-info">Pendiente</span>
+          <span *ngIf="ticket.estado_tic === 1" class="label label-success">Atendido</span>
+          <span class="action-icons">
+            <a href="javascript:void(0)" title="Editar"><i class="mdi mdi-pencil-circle"></i></a>
+            <a href="javascript:void(0)" title="Eliminar"><i class="mdi mdi-close-circle"></i></a>
+            <!-- <a href="javascript:void(0)"><i class="mdi mdi-heart"></i></a>     -->
+          </span>
+        </div>
+        <p>Ticket <span class="label label-warning">{{ticket.id_tic}}</span></p>
+        <p class="m-b-5 m-t-10"><b>{{ticket.asunto_tic}}: </b>{{ticket.mensaje_tic}}</p>
+      </div>
+    </div>
+
+  </div>
+</div>

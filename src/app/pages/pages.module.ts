@@ -20,6 +20,7 @@ import { TicketsComponent } from './tickets/tickets.component';
 import { DocumentacionComponent } from './documentacion/documentacion.component';
 import { ListaTicketsComponent } from './lista-tickets/lista-tickets.component';
 import { QuienesSomosComponent } from './quienes-somos/quienes-somos.component';
+import { TerminosComponent } from './terminos/terminos.component';
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import { QuienesSomosComponent } from './quienes-somos/quienes-somos.component';
     DocumentacionComponent,
     ListaTicketsComponent,
     QuienesSomosComponent,
+    TerminosComponent,
   ],
   exports: [
     DashboardComponent,
