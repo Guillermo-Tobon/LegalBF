@@ -43,7 +43,8 @@
                 <i class="mdi mdi-message-reply-text"></i><span class="hide-menu">Soporte</span>
               </a>
               <ul aria-expanded="false" class="collapse">
-                <li *ngIf="usuario[0].admin_us === 'N'"><a class="aCursor" (click)="navegarTicket()">Tickets</a></li>
+                <!-- <li *ngIf="usuario[0].admin_us === 'N'"><a class="aCursor" (click)="navegarTicket()">Tickets</a></li> -->
+                <li><a class="aCursor" (click)="navegarTicket()">Tickets</a></li>
                 <li><a routerLink="lista-tickets">Lista de tickets</a></li>
               </ul>
             </li>

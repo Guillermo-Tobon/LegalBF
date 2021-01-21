@@ -40,8 +40,6 @@ export class LoginComponent implements OnInit {
     }
 
     this.authServ.loginService( this.loginForm.value ).subscribe( resp =>{
-
-      console.log(resp)
       
       if ( resp.ok ) {
         this.guardaLocalStorage(this.loginForm.value);

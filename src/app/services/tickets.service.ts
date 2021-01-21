@@ -54,4 +54,16 @@ export class TicketsService {
 
 
 
+  /**
+   * Método de servicio para eliminar tickets
+   * @param idTicket => ID Ticket a eliminar
+   */
+  public deleteTicketService = (idTicket:any) =>{
+    return this.http.delete(`${BASE_URL}/deleteticket/${idTicket}`,  this.httpOptions ).pipe(
+      map( resp => resp )
+    )
+  }
+
+
+
 }

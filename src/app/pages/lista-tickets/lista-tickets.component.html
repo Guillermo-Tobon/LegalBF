@@ -13,15 +13,43 @@
           <span *ngIf="ticket.estado_tic === 0" class="label label-info">Pendiente</span>
           <span *ngIf="ticket.estado_tic === 1" class="label label-success">Atendido</span>
           <span class="action-icons">
-            <a href="javascript:void(0)" title="Editar"><i class="mdi mdi-pencil-circle"></i></a>
-            <a href="javascript:void(0)" title="Eliminar"><i class="mdi mdi-close-circle"></i></a>
+            <a *ngIf="ticket.estado_tic === 0" (click)="modalEditTicket(ticket)" title="Editar" data-toggle="modal" data-target=".modalEditTicket"><i class="mdi mdi-lead-pencil"></i></a>
+            <a (click)="eliminarTicket(ticket.id_tic)" title="Eliminar"><i class="mdi mdi-delete"></i></a>
+            <a *ngIf="usuario[0].admin_us === 'Y'" (click)="contestarTicket(ticket.id_tic)" title="Responder"><i class="mdi mdi-comment-processing"></i></a>
             <!-- <a href="javascript:void(0)"><i class="mdi mdi-heart"></i></a>     -->
           </span>
         </div>
-        <p>Ticket <span class="label label-warning">{{ticket.id_tic}}</span></p>
+        <p>Ticket <span class="label label-default" style="color:#839daa;">{{ticket.id_tic}}</span></p>
         <p class="m-b-5 m-t-10"><b>{{ticket.asunto_tic}}: </b>{{ticket.mensaje_tic}}</p>
       </div>
     </div>
 
+  </div>
+</div>
+
+
+<!-- Modal para editar el ticket -->
+<div class="modal fade modalEditTicket" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myLargeModalLabel">Large modal</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="comment-text w-100">
+          <h5>{{editTicket['nombre_tic']}}</h5>
+          <div class="comment-footer">
+            <span class="date">{{editTicket['fechareg_tic'] | date: 'EEEE, MMMM d, y'}}</span>&nbsp;
+            <span *ngIf="editTicket['estado_tic'] === 0" class="label label-info">Pendiente</span>
+          </div>
+          <p>Ticket <span class="label label-default" style="color:#839daa;">{{editTicket['id_tic']}}</span></p>
+          <p class="m-b-5 m-t-10"><b>{{editTicket['asunto_tic']}}: </b>{{editTicket['mensaje_tic']}}</p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger waves-effect text-left" data-dismiss="modal">Close</button>
+      </div>
+    </div>
   </div>
 </div>

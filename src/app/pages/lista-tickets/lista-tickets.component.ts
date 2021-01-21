@@ -12,6 +12,7 @@ export class ListaTicketsComponent implements OnInit {
 
   public usuario:any[] = [];
   public tickets:any[] = [];
+  public editTicket:{} = {};
 
   constructor(
               private authServ: AuthService,
@@ -59,6 +60,56 @@ export class ListaTicketsComponent implements OnInit {
     }, (err) =>{
       //En caso de un error
       Swal.fire('Error', err.error.msg, 'error');
+    })
+  }
+
+
+  /**
+   * Método para editar tickets
+   * @param ticket => Ticket a modificar
+   */
+  public modalEditTicket = (ticket:any) =>{
+    this.editTicket =  ticket;
+  }
+
+
+
+  public contestarTicket = (ticket:any) =>{
+
+  }
+
+
+
+
+  /**
+   * Método para eliminar tickets
+   * @param idTicket => ID Ticket
+   */
+  public eliminarTicket = (idTicket:any) =>{
+    
+    Swal.fire({
+      title: `Desea eliminar el Ticket ${idTicket}`,
+      text: "Una vez eliminado no se puede recuperar!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, Eliminar!'
+    }).then((result) => {
+
+      if (result.isConfirmed) {
+        this.ticketServ.deleteTicketService(idTicket).subscribe( (resp:any) =>{
+          
+          Swal.fire('Bien hecho!', resp.msg, 'success');
+          setTimeout(() => { window.location.reload(); }, 2000);
+        
+        }, (err) =>{
+          //En caso de un error
+          Swal.fire('Error', err.error.msg, 'error');
+          console.log(err)
+        })
+      }
+
     })
   }
   
