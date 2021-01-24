@@ -148,3 +148,17 @@ File: scss
   color: #ffb22b; }
   .form-group.issue .help-block ul li {
     list-style: none; }
+
+
+.contenidoArchivos{
+  height: 288px;
+  overflow-y: scroll;
+}
+.contenidoArchivos .alert-info{
+  font-weight: 600;
+}
+.contenidoArchivos .alert-info .fechArchivo{
+  font-size: 11px;
+  float: right;
+  line-height: 28px;
+}
