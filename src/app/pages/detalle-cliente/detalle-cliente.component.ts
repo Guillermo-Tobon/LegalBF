@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { ClientesService } from 'src/app/services/clientes.service';
+import { ArchivosService } from 'src/app/services/archivos.service';
 
 @Component({
   selector: 'app-detalle-cliente',
@@ -12,6 +13,7 @@ import { ClientesService } from 'src/app/services/clientes.service';
 export class DetalleClienteComponent implements OnInit {
 
   public usuario:any[] = [];
+  public archivos:any[] = [];
   public formSubmitted = false;
   public updateFormCliente:any;
   
@@ -19,6 +21,7 @@ export class DetalleClienteComponent implements OnInit {
   constructor(
               private routeActive: ActivatedRoute,
               private clienteServ: ClientesService,
+              private archivosServ: ArchivosService,
               private router: Router,
               private fb: FormBuilder,
   ) { }
@@ -29,6 +32,8 @@ export class DetalleClienteComponent implements OnInit {
       this.usuario = JSON.parse( data['usuario'] ) || [];
       
       this.iniciarFormulario(this.usuario);
+
+      this.getArchivosUserById(this.usuario['id_us']);
     })
 
   }
@@ -76,6 +81,64 @@ export class DetalleClienteComponent implements OnInit {
       } else{
 
         Swal.fire('Error', 'En este momento no se puede actualizar el cliente. Inténtelo más tarde.', 'error');
+      }
+
+    }, (err) =>{
+      //En caso de un error
+      Swal.fire('Error', err.error.msg, 'error');
+    })
+  }
+
+
+
+  /**
+   * Método para consultar los archivos por usuario
+   * @param idUser => ID del usuario
+   */
+  public getArchivosUserById = (idUser:any) =>{
+
+    this.archivosServ.getFilesUserService(idUser).subscribe( (resp:any) =>{
+
+      this.archivos = resp.archivos;      
+
+    }, (err) =>{
+      //En caso de un error
+      console.log(err.error.msg);
+    })
+
+  }
+
+  /**
+   * Método para visualizar archivo por id
+   * @param archivo => Objeto archivo a visualizar 
+   */
+  public verArchivo = (archivo:any) =>{
+
+    this.archivosServ.viewFileService( archivo.tipo_archivo_info, archivo.nom_archivo_info ).subscribe( (resp:any) =>{
+
+      console.log(resp)
+    
+    }, (err) =>{
+      //En caso de un error
+      Swal.fire('Error', err.error.msg, 'error');
+      console.log(err)
+    })
+
+  }
+
+
+
+  /**
+   * Método para eliminar archivo por id
+   * @param archivo => Objeto archivo a eliminar 
+   */
+  public eliminarArchivo = (archivo:any) =>{
+    
+    this.archivosServ.deleleFileService(archivo.id_info).subscribe( (resp:any) =>{
+      
+      if ( resp.ok ) {
+        Swal.fire('Bien hecho!', resp.msg, 'success');
+        setTimeout(() => { window.location.reload(); }, 2000);
       }
 
     }, (err) =>{

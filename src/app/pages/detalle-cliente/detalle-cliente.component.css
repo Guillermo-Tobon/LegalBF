@@ -159,6 +159,17 @@ File: scss
 }
 .contenidoArchivos .alert-info .fechArchivo{
   font-size: 11px;
-  float: right;
   line-height: 28px;
+}
+.opcionesFile{
+  float: right;
+  position: relative;
+}
+.opcionesFile a{
+  cursor: pointer;
+}
+.opcionesFile i{
+  color: #06d79c;
+  font-size: 18px;
+  margin: 0 3px;
 }

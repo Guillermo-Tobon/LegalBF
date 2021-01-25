@@ -7,14 +7,14 @@
         
         <form class="floating-labels m-t-40" [formGroup]="updateFormCliente" (submit)="actualizarCliente()">
           <div class="row">
-            <div class="col-6">
+            <div class="col-lg-6 col-md-6">
               <div class="form-group m-b-40 focused">
                 <input type="text" formControlName="nombres" class="form-control">
                 <span class="bar"></span>
                 <label for="input1">Nombres</label>
               </div>
             </div>
-            <div class="col-6">
+            <div class="col-lg-6 col-md-6">
               <div class="form-group m-b-40 focused">
                 <input type="text" formControlName="apellidos" class="form-control">
                 <span class="bar"></span>
@@ -24,14 +24,14 @@
           </div>
           
           <div class="row">
-            <div class="col-6">
+            <div class="col-lg-6 col-md-6">
               <div class="form-group m-b-40 focused">
                 <input type="email" formControlName="email" class="form-control">
                 <span class="bar"></span>
                 <label for="input3">E-mail</label>
               </div>
             </div>
-            <div class="col-6">
+            <div class="col-lg-6 col-md-6">
               <div class="form-group m-b-40 focused">
                 <input type="text" formControlName="telefono" class="form-control">
                 <span class="bar"></span>
@@ -41,14 +41,14 @@
           </div>
 
           <div class="row">
-            <div class="col-6">
+            <div class="col-lg-6 col-md-6">
               <div class="form-group m-b-40 focused">
                 <input type="text" formControlName="compania" class="form-control" id="input5">
                 <span class="bar"></span>
                 <label for="input3">Nombre Compañía</label>
               </div>
             </div>
-            <div class="col-6">
+            <div class="col-lg-6 col-md-6">
               <div class="form-group m-b-40 focused">
                 <textarea class="form-control" formControlName="descripcion" rows="2"></textarea>
                 <span class="bar"></span>
@@ -58,12 +58,12 @@
           </div>
 
           <div class="row">
-            <div class="col-6">
+            <div class="col-lg-6 col-md-6">
               <div class="form-group">
                 <button type="submit" class="btn waves-effect waves-light btn-rounded btn-success btn-block">Actualizar Cliente</button>
               </div>
             </div>
-            <div class="col-6">
+            <div class="col-lg-6 col-md-6">
               <div class="checkbox checkbox-info pull-left p-t-0">
                 <input id="checkbox-signup" formControlName="estado" type="checkbox" class="filled-in chk-col-light-blue">
                 <label for="checkbox-signup">Cliente Activo </label><br><br>
@@ -92,7 +92,7 @@
 
 
 <div class="row">
-  <div class="col-lg-6 col-md-6">
+  <div class="col-lg-5 col-md-5">
     <div class="card">
       <div class="card-body">
         <h4 class="card-title">Carga de archivos para {{usuario['nombres_us']}}</h4>
@@ -104,15 +104,21 @@
     </div>
   </div>
 
-  <div class="col-lg-6 col-md-6">
+  <div class="col-lg-7 col-md-7">
     <div class="card">
       <div class="card-body">
         <h4 class="card-title">Archivos cargados para {{usuario['nombres_us']}}</h4>
         <label for="input-file-now">Lista de todos los archivos cargados.</label>
         <div class="contenidoArchivos">
-          <div class="alert alert-info">Archivo-cargado.pdf  <span class="fechArchivo">Publicado: 12/12/2020</span></div>
-          <div class="alert alert-info">Archivo-cargado.pdf  <span class="fechArchivo">Publicado: 12/12/2020</span></div>
-          <div class="alert alert-info">Archivo-cargado.pdf  <span class="fechArchivo">Publicado: 12/12/2020</span></div>
+          
+          <div *ngFor="let archivo of archivos" class="alert alert-info">{{archivo.nom_archivo_info | slice:9:30 }} {{ (archivo.nom_archivo_info.length > 30)? '...': '' }}
+            <br>
+            <span class="fechArchivo">Publicado: {{archivo.fech_publica_info | date: 'dd/MM/yyyy' }} </span>
+            <div class="opcionesFile">
+              <a (click)="verArchivo(archivo)" title="View"> <i class="mdi mdi-eye"></i> </a>
+              <a (click)="eliminarArchivo(archivo)" title="Delete file"> <i class="mdi mdi-delete"></i> </a>
+            </div>
+          </div>
           
         </div>
       </div>
