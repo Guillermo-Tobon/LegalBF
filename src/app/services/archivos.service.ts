@@ -22,6 +22,34 @@ export class ArchivosService {
 
 
     /**
+     * Método de servicio para subir archivos por usuario
+     * @param idUser => ID de usuario
+     */
+    public uploadFilesServices = async(archivo:File, idUser:Number) =>{
+
+      const url = `${BASE_URL}/uploadfile/${idUser}`;
+      const formData = new FormData();
+      formData.append( 'archivo', archivo );
+
+      const resp = await fetch( url, {
+        method: 'PUT',
+        body: formData,
+        mode: 'cors',
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'x-token': localStorage.getItem('token')
+        }
+      });
+
+      const data = resp.json();
+      return data;
+
+    }
+
+
+
+
+    /**
      * Método de servicio para obtener los archivos por user
      * @param id => ID del usuario
      */

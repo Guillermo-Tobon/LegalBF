@@ -16,6 +16,7 @@ export class DetalleClienteComponent implements OnInit {
   public archivos:any[] = [];
   public formSubmitted = false;
   public updateFormCliente:any;
+  public archivoSubir:File;
   
 
   constructor(
@@ -92,6 +93,37 @@ export class DetalleClienteComponent implements OnInit {
 
 
   /**
+   * Método para obtener el archivo por usuario
+   * @param file => Objeto file del archivo a subir
+   */
+  public obtenerArchivo = (file:File) =>{
+    this.archivoSubir = file
+  }
+
+
+  /**
+   *  Método para subir el archivo por usuario
+   */
+  public  subirArchivoById = () =>{
+    
+    this.archivosServ.uploadFilesServices(this.archivoSubir, this.usuario['id_us']).then( (resp:any) =>{
+
+      if( resp.ok ){
+        Swal.fire('Bien hecho!', resp.msg, 'success');
+        setTimeout(() => { window.location.reload(); }, 2000);
+
+      } else {
+        Swal.fire('Error', 'No se pudo cargar el archivo. Inténtelo más tarde.', 'error');
+      }
+      
+    }).catch( (err) =>{
+      Swal.fire('Error', err.error.msg, 'error');
+    })
+  }
+
+
+
+  /**
    * Método para consultar los archivos por usuario
    * @param idUser => ID del usuario
    */
@@ -116,7 +148,8 @@ export class DetalleClienteComponent implements OnInit {
 
     this.archivosServ.viewFileService( archivo.tipo_archivo_info, archivo.nom_archivo_info ).subscribe( (resp:any) =>{
 
-      console.log(resp)
+      //window.open(resp.pathFile, "_blank");
+      window.open(`http://127.0.0.1:8887/${archivo.tipo_archivo_info}/${archivo.nom_archivo_info}`, "_blank");
     
     }, (err) =>{
       //En caso de un error
