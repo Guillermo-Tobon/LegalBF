@@ -40,9 +40,7 @@ export class ClientesService {
     }
 
     return this.http.post(`${BASE_URL}/insertCliente`, json, this.httpOptions ).pipe(
-      tap( (resp:any) =>{
-
-      })
+      tap( (resp:any) =>{})
     ) 
     
   }

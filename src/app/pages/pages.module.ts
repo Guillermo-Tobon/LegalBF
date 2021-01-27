@@ -21,6 +21,7 @@ import { DocumentacionComponent } from './documentacion/documentacion.component'
 import { ListaTicketsComponent } from './lista-tickets/lista-tickets.component';
 import { QuienesSomosComponent } from './quienes-somos/quienes-somos.component';
 import { TerminosComponent } from './terminos/terminos.component';
+import { CrearInversionComponent } from './crear-inversion/crear-inversion.component';
 
 
 @NgModule({
@@ -39,6 +40,7 @@ import { TerminosComponent } from './terminos/terminos.component';
     ListaTicketsComponent,
     QuienesSomosComponent,
     TerminosComponent,
+    CrearInversionComponent,
   ],
   exports: [
     DashboardComponent,

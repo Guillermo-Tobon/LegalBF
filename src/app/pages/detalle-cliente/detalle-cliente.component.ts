@@ -35,6 +35,7 @@ export class DetalleClienteComponent implements OnInit {
       this.iniciarFormulario(this.usuario);
 
       this.getArchivosUserById(this.usuario['id_us']);
+
     })
 
   }
@@ -89,6 +90,22 @@ export class DetalleClienteComponent implements OnInit {
       Swal.fire('Error', err.error.msg, 'error');
     })
   }
+
+
+
+  /**
+   * Método para navegar a crear inversión
+   */
+  public navegarCrearInversion = () =>{
+
+    const user = JSON.stringify(this.usuario);
+    this.router.navigate(['dashboard/crear-inversion', user]);
+
+  }
+
+
+
+
 
 
 
@@ -154,7 +171,6 @@ export class DetalleClienteComponent implements OnInit {
     }, (err) =>{
       //En caso de un error
       Swal.fire('Error', err.error.msg, 'error');
-      console.log(err)
     })
 
   }
@@ -166,18 +182,30 @@ export class DetalleClienteComponent implements OnInit {
    * @param archivo => Objeto archivo a eliminar 
    */
   public eliminarArchivo = (archivo:any) =>{
-    
-    this.archivosServ.deleleFileService(archivo.id_info).subscribe( (resp:any) =>{
-      
-      if ( resp.ok ) {
-        Swal.fire('Bien hecho!', resp.msg, 'success');
-        setTimeout(() => { window.location.reload(); }, 2000);
-      }
 
-    }, (err) =>{
-      //En caso de un error
-      Swal.fire('Error', err.error.msg, 'error');
+    Swal.fire({
+      text: "¿Realmente desea eliminar el archivo " + archivo.nom_archivo_info + "?",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, eliminar!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.archivosServ.deleleFileService(archivo.tipo_archivo_info, archivo.nom_archivo_info, archivo.id_info).subscribe( (resp:any) =>{
+          
+          if ( resp.ok ) {
+            Swal.fire('Bien hecho!', resp.msg, 'success');
+            setTimeout(() => { window.location.reload(); }, 2000);
+          }
+    
+        }, (err) =>{
+          //En caso de un error
+          Swal.fire('Error', err.error.msg, 'error');
+        })
+      }
     })
+    
   }
 
 

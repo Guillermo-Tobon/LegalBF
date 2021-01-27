@@ -69,7 +69,7 @@ export class ArchivosService {
      */
     public viewFileService = (extension:any, nomFile:any) =>{
 
-      return this.http.get(`${BASE_URL}/getimagen/${extension}/${nomFile}`, this.httpOptions).pipe(
+      return this.http.get(`${BASE_URL}/getarchivo/${extension}/${nomFile}`, this.httpOptions).pipe(
         map( resp => resp )
       )
     }
@@ -80,9 +80,9 @@ export class ArchivosService {
      * Método de servicio para eliminar archivos por id
      * @param id => ID del archivo a eliminar
      */
-    public deleleFileService = (id:number) =>{
+    public deleleFileService = (extension:string, nomFile:string, id:number) =>{
 
-      return this.http.delete(`${BASE_URL}/deletearchivo/${id}`, this.httpOptions).pipe(
+      return this.http.delete(`${BASE_URL}/deletearchivo/${extension}/${nomFile}/${id}`, this.httpOptions).pipe(
         map(resp => resp )
       )
 

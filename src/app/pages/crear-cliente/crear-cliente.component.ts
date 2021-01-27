@@ -24,7 +24,7 @@ export class CrearClienteComponent implements OnInit {
     passwordConfir: ['', [Validators.required, Validators.minLength(6)]],
     compania: ['', [Validators.required, Validators.minLength(5)]],
     descripcion: ['', [Validators.required, Validators.minLength(20)]],
-    estado: [true, [Validators.required, Validators.minLength(5)]],
+    estado: [true, [Validators.required]],
   }, {
     validators: this.passwordsIguales('password', 'passwordConfir')
   });

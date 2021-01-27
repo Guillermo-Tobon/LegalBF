@@ -92,6 +92,17 @@
 
 
 <div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-body">
+        <button type="button" (click)="navegarCrearInversion()" class="btn waves-effect waves-light btn-rounded btn-success text-center">Crear inversión para {{usuario['nombres_us']}}</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="row">
   <div class="col-lg-5 col-md-5">
     <div class="card">
       <div class="card-body">
@@ -111,7 +122,10 @@
         <label for="input-file-now">Lista de todos los archivos cargados.</label>
         <div class="contenidoArchivos">
           
-          <div *ngFor="let archivo of archivos" class="alert alert-info">{{archivo.nom_archivo_info | slice:9:30 }} {{ (archivo.nom_archivo_info.length > 30)? '...': '' }}
+          <div *ngFor="let archivo of archivos" class="alert alert-info">
+            <img *ngIf=" archivo.tipo_archivo_info === 'pdf' " class="logoFile" src="../../../assets/images/pdf.png" alt="">
+            <img *ngIf=" archivo.tipo_archivo_info === 'word' " class="logoFile" src="../../../assets/images/word.png" alt="">
+            {{archivo.nom_archivo_info | slice:9:30 }} {{ (archivo.nom_archivo_info.length > 30)? '...': '' }}
             <br>
             <span class="fechArchivo">Publicado: {{archivo.fech_publica_info | date: 'dd/MM/yyyy' }} </span>
             <div class="opcionesFile">
