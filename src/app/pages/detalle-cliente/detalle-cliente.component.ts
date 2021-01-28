@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { Location } from '@angular/common';
 import { ClientesService } from 'src/app/services/clientes.service';
 import { ArchivosService } from 'src/app/services/archivos.service';
+import { InversionesService } from 'src/app/services/inversiones.service';
 
 @Component({
   selector: 'app-detalle-cliente',
@@ -14,6 +16,7 @@ export class DetalleClienteComponent implements OnInit {
 
   public usuario:any[] = [];
   public archivos:any[] = [];
+  public inversiones:any[] = [];
   public formSubmitted = false;
   public updateFormCliente:any;
   public archivoSubir:File;
@@ -21,8 +24,10 @@ export class DetalleClienteComponent implements OnInit {
 
   constructor(
               private routeActive: ActivatedRoute,
+              private location: Location,
               private clienteServ: ClientesService,
               private archivosServ: ArchivosService,
+              private inversionesServ: InversionesService,
               private router: Router,
               private fb: FormBuilder,
   ) { }
@@ -33,6 +38,8 @@ export class DetalleClienteComponent implements OnInit {
       this.usuario = JSON.parse( data['usuario'] ) || [];
       
       this.iniciarFormulario(this.usuario);
+
+      this.getInversionesById(this.usuario['id_us']);
 
       this.getArchivosUserById(this.usuario['id_us']);
 
@@ -104,39 +111,37 @@ export class DetalleClienteComponent implements OnInit {
   }
 
 
-
-
-
-
-
   /**
-   * Método para obtener el archivo por usuario
-   * @param file => Objeto file del archivo a subir
+   * Método para cargar las inversiones por usuario
+   * @param idUs => ID de usuario
    */
-  public obtenerArchivo = (file:File) =>{
-    this.archivoSubir = file
-  }
+  public getInversionesById = (idUs:number) =>{
 
+    this.inversionesServ.getInversionesUserService(idUs).subscribe( (resp:any) =>{
 
-  /**
-   *  Método para subir el archivo por usuario
-   */
-  public  subirArchivoById = () =>{
-    
-    this.archivosServ.uploadFilesServices(this.archivoSubir, this.usuario['id_us']).then( (resp:any) =>{
+      this.inversiones = resp.inversiones || [];
 
-      if( resp.ok ){
-        Swal.fire('Bien hecho!', resp.msg, 'success');
-        setTimeout(() => { window.location.reload(); }, 2000);
-
-      } else {
-        Swal.fire('Error', 'No se pudo cargar el archivo. Inténtelo más tarde.', 'error');
-      }
-      
-    }).catch( (err) =>{
-      Swal.fire('Error', err.error.msg, 'error');
+    }, (err) =>{
+      //En caso de un error
+      console.log(err.error.msg);
     })
+
+  } 
+
+
+
+  public navegarInversion = (inversion:any) =>{
+
+    const inver = JSON.stringify(inversion);
+    this.router.navigate(['dashboard/detalle-inversion', inver]);
+
   }
+
+
+
+
+  
+
 
 
 
@@ -148,7 +153,7 @@ export class DetalleClienteComponent implements OnInit {
 
     this.archivosServ.getFilesUserService(idUser).subscribe( (resp:any) =>{
 
-      this.archivos = resp.archivos;      
+      this.archivos = resp.archivos || [];      
 
     }, (err) =>{
       //En caso de un error
@@ -239,5 +244,11 @@ export class DetalleClienteComponent implements OnInit {
       id: [usuario['id_us'], [Validators.required, Validators.minLength(5)]],
     });
   }
+
+
+  goBack(){
+    this.location.back();
+  }
+  
 
 }

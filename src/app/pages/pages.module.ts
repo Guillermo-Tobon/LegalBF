@@ -22,6 +22,7 @@ import { ListaTicketsComponent } from './lista-tickets/lista-tickets.component';
 import { QuienesSomosComponent } from './quienes-somos/quienes-somos.component';
 import { TerminosComponent } from './terminos/terminos.component';
 import { CrearInversionComponent } from './crear-inversion/crear-inversion.component';
+import { DetalleInversionComponent } from './detalle-inversion/detalle-inversion.component';
 
 
 @NgModule({
@@ -41,6 +42,7 @@ import { CrearInversionComponent } from './crear-inversion/crear-inversion.compo
     QuienesSomosComponent,
     TerminosComponent,
     CrearInversionComponent,
+    DetalleInversionComponent
   ],
   exports: [
     DashboardComponent,

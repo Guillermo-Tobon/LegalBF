@@ -34,8 +34,10 @@ export class InversionesService {
       idUs: idUser,
       nombre: formData.nombreInver,
       capital: formData.capital,
+      moneda: formData.moneda,
       tiempo: formData.tiempo,
       tasa: JSON.stringify(formData.tasainteres),
+      pais: formData.pais,
       descripcion: formData.descripcion,
       estado: formData.estado == true? 1 : 0
     }
@@ -44,6 +46,20 @@ export class InversionesService {
       tap( (resp:any) =>{})
     )
 
+
+  }
+
+
+
+  /**
+   * Método de servicio para obtener las inversiones por usuario
+   * @param idUs => ID de usuario
+   */
+  public getInversionesUserService = (idUs:number) =>{
+
+    return this.http.get(`${BASE_URL}/inversiones/${idUs}`, this.httpOptions).pipe(
+      map( resp => resp )
+    )
 
   }
 

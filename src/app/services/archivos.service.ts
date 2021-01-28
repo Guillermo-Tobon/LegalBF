@@ -25,9 +25,9 @@ export class ArchivosService {
      * Método de servicio para subir archivos por usuario
      * @param idUser => ID de usuario
      */
-    public uploadFilesServices = async(archivo:File, idUser:Number) =>{
+    public uploadFilesServices = async(archivo:File, idInver:string, idUser:Number) =>{
 
-      const url = `${BASE_URL}/uploadfile/${idUser}`;
+      const url = `${BASE_URL}/uploadfile/${idInver}/${idUser}`;
       const formData = new FormData();
       formData.append( 'archivo', archivo );
 
@@ -56,6 +56,20 @@ export class ArchivosService {
     public getFilesUserService = (id:any) =>{
 
       return this.http.get(`${BASE_URL}/archivos/${id}`, this.httpOptions).pipe(
+        map( resp => resp )
+      )
+
+    }
+
+
+    /**
+     * Método de servicio para obtener los archivos por user e inversión
+     * @param idInver => ID inversión
+     * @param id => ID del usuario 
+     */
+    public getFilesInverUserService = (idInver:string, id:any) =>{
+
+      return this.http.get(`${BASE_URL}/archivos/${idInver}/${id}`, this.httpOptions).pipe(
         map( resp => resp )
       )
 

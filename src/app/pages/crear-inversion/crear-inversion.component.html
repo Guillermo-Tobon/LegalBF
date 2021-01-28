@@ -7,35 +7,52 @@
         
         <form class="floating-labels m-t-40" [formGroup]="crearFormInversion" (submit)="crearInversion()">
           <div class="row">
-            <div class="col-6">
+            <div class="col-lg-4 col-md-4">
               <div class="form-group m-b-40 focused">
                 <input type="text" formControlName="nombreInver" class="form-control">
                 <span class="bar"></span>
                 <label for="input1">Nombre inversión</label>
               </div>
             </div>
-            <div class="col-6">
+            <div class="col-lg-4 col-md-4">
               <div class="form-group m-b-40 focused">
                 <input type="number" formControlName="capital" class="form-control">
                 <span class="bar"></span>
                 <label for="input2">Capital invertido</label>
               </div>
             </div>
+            <div class="col-lg-4 col-md-4">
+              <div class="form-group m-b-40 focused">
+                <label for="input3">Tipo moneda inversión</label>
+                <select formControlName="moneda" class="form-control">
+                  <option value="COP">COP</option>
+                  <option value="EUR">EUR</option>
+                  <option value="USD">USD</option>
+                </select>
+              </div>
+            </div>
           </div>
           
           <div class="row">
-            <div class="col-6">
+            <div class="col-lg-4 col-md-4">
               <div class="form-group m-b-40 focused">
                 <input type="number" formControlName="tiempo" class="form-control">
                 <span class="bar"></span>
                 <label for="input3">Tiempo estimado inversión (días)</label>
               </div>
             </div>
-            <div class="col-6">
+            <div class="col-lg-4 col-md-4">
               <div class="form-group m-b-40 focused">
                 <input type="number" formControlName="tasainteres" class="form-control">
                 <span class="bar"></span>
                 <label for="input3">Tasa Interés EA</label>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-4">
+              <div class="form-group m-b-40 focused">
+                <input type="text" formControlName="pais" class="form-control">
+                <span class="bar"></span>
+                <label for="input1">País inversión</label>
               </div>
             </div>
           </div>
@@ -53,7 +70,9 @@
           <div class="row">
             <div class="col-6">
               <div class="form-group">
-                <button type="submit" class="btn waves-effect waves-light btn-rounded btn-success btn-block">Crear inversión</button>
+                <button *ngIf="btnActive" type="submit" class="btn waves-effect waves-light btn-rounded btn-success">Crear inversión</button>
+                &nbsp;
+                <button type="button" (click)="goBack()" class="btn waves-effect waves-light btn-rounded btn-danger">Volver</button>
               </div>
             </div>
             <div class="col-6">
@@ -69,13 +88,30 @@
             <div class="col text-danger">
               <p *ngIf="campoNoValido('nombreInver')">*El nombre de la inversión es obligatorio.</p>
               <p *ngIf="campoNoValido('capital')">*El capital invertido es obligatorio.</p>
+              <p *ngIf="campoNoValido('moneda')">*El tipo de moneda es obligatorio.</p>
               <p *ngIf="campoNoValido('tiempo')">*El tiempo estimado es obligatorio y valido.</p>
               <p *ngIf="campoNoValido('tasainteres')">*La tasa interés es obligatoria.</p>
+              <p *ngIf="campoNoValido('pais')">*El país es obligatorio.</p>
               <p *ngIf="campoNoValido('descripcion')">*La descripción es obligatoria.</p>
             </div>
           </div>
       
         </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Cargar archivos -->
+<div *ngIf="!btnActive" class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Carga de archivos para {{usuario['nombres_us']}}</h4>
+        <label for="input-file-now">Publique los archivo necesarios.</label>
+        <input type="file" (change)="obtenerArchivo( $event.target.files[0] )" id="input-file-now" class="dropify-fr" />
+        <br><br>
+        <button type="button" [disabled]="!archivoSubir" (click)="subirArchivoById()" class="btn waves-effect waves-light btn-rounded btn-success btn-block">Subir archivo para {{usuario['nombres_us']}}</button>
       </div>
     </div>
   </div>

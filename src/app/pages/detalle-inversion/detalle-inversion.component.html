@@ -1,0 +1,113 @@
+
+<div class="row">
+    <!-- Column -->
+  <div class="col-lg-7 col-xlg-9 col-md-7">
+    <div class="card">
+      <!-- Nav tabs -->
+      <ul class="nav nav-tabs profile-tab" role="tablist">
+        <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#settings" role="tab">Información general</a> </li>
+      </ul>
+      <!-- Tab panes -->
+      <div class="tab-content">        
+        <div class="tab-pane active" id="settings" role="tabpanel">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-lg-6 col-md-6">
+                <small class="text-muted">ID inversión: &nbsp; <b>{{inversion['id_inv']}}</b> </small>
+              </div>
+              <br>
+              <div class="col-lg-6 col-md-6">
+                <small class="text-muted">Fecha inversión: &nbsp; {{inversion['fechareg_inv'] | date: 'dd/MM/yyyy'}} </small>
+              </div>
+            </div>
+            <br>
+
+            <div class="row">
+              <div class="col-lg-12">
+                <small class="text-muted">Nombre inversión:</small>
+                <h6>{{inversion['nombre_inv']}}</h6> 
+              </div>
+            </div>
+            <br>
+
+            <div class="row">
+              <div class="col-lg-4 col-md-4">
+                <small class="text-muted">Capital invertido:</small>
+                <h6>{{inversion['capital_inv'] | currency: inversion['moneda_inv']}}</h6> 
+              </div>
+              <br>
+              <div class="col-lg-4 col-md-4">
+                <small class="text-muted">Tipo de moneda:</small>
+                <h6>{{inversion['moneda_inv']}}</h6> 
+              </div>
+              <br>
+              <div class="col-lg-4 col-md-4">
+                <small class="text-muted">País:</small>
+                <h6>{{inversion['pais_inv']}}</h6>
+              </div>
+            </div>
+            <br>
+
+            <div class="row">
+              <div class="col-lg-4 col-md-4">
+                <small class="text-muted">Tiempo inversión:</small>
+                <h6>{{inversion['tiempo_inv']}} días</h6>
+              </div>
+              <br>
+              <div class="col-lg-4 col-md-4">
+                <small class="text-muted">Tasa de interés (EA):</small>
+                <h6>{{inversion['tasa_ea_inv']}}%</h6>
+              </div>
+              <br>
+              <div class="col-lg-4 col-md-4">
+                <small class="text-muted">Estado inversión:</small>
+                <h6 *ngIf="inversion['estado_inv'] === 1" class="text-warning">ACTIVO</h6>
+                <h6 *ngIf="inversion['estado_inv'] === 0" class="text-danger">INACTIVO</h6>
+              </div>
+            </div>
+            <br>
+
+            <div class="row">
+              <div class="col-lg-8">
+                <small class="text-muted">Descripción:</small>
+                <h6>{{inversion['descripcion_inv']}}</h6>
+              </div>
+            </div>
+            <br>
+
+            <div class="row">
+              <div class="col-lg-12">
+                <button *ngIf="this.usuario[0].admin_us === 'Y'" type="button"  class="btn waves-effect waves-light btn-rounded btn-success">Editar inversión</button>
+                &nbsp;
+                <button type="button" (click)="goBack()" class="btn waves-effect waves-light btn-rounded btn-danger">Volver</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Column -->
+  <div class="col-lg-5 col-xlg-3 col-md-5">
+    <div class="card">
+      <ul class="nav nav-tabs profile-tab" role="tablist">
+        <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#settings" role="tab">Documentos relacionados</a> </li>
+      </ul>
+      <div class="card-body contenidoArchivos">
+        <div *ngFor="let archivo of archivos" class="alert alert-info">
+          <img *ngIf=" archivo.tipo_archivo_info === 'pdf' " class="logoFile" src="../../../assets/images/pdf.png" alt="">
+          <img *ngIf=" archivo.tipo_archivo_info === 'word' " class="logoFile" src="../../../assets/images/word.png" alt="">
+          {{archivo.nom_archivo_info | slice:9:30 }} {{ (archivo.nom_archivo_info.length > 30)? '...': '' }}
+          <br>
+          <span class="fechArchivo">Publicado: {{archivo.fech_publica_info | date: 'dd/MM/yyyy' }} </span>
+          <div class="opcionesFile">
+            <a (click)="verArchivo(archivo)" title="View"> <i class="mdi mdi-eye"></i> </a>
+            <a *ngIf="this.usuario[0].admin_us === 'Y'" (click)="eliminarArchivo(archivo)" title="Delete file"> <i class="mdi mdi-delete"></i> </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

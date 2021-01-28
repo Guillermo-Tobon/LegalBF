@@ -33,7 +33,8 @@ export class HeaderComponent implements OnInit {
     if( ingresado === 'Si' ){
       Swal.fire({
         icon: 'success',
-        title: `Bienvenido(a) ${nombre}`,
+        title: `Bienvenido(a)`,
+        text: `${nombre}`,
         showConfirmButton: false,
         timer: 2500
       });
