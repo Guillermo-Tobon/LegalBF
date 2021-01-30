@@ -12,15 +12,20 @@
           <span class="date">{{ticket.fechareg_tic | date: 'EEEE, MMMM d, y'}}</span>&nbsp;
           <span *ngIf="ticket.estado_tic === 0" class="label label-info">Pendiente</span>
           <span *ngIf="ticket.estado_tic === 1" class="label label-success">Atendido</span>
+
           <span class="action-icons">
-            <a *ngIf="ticket.estado_tic === 0" (click)="modalEditTicket(ticket)" title="Editar" data-toggle="modal" data-target=".modalEditTicket"><i class="mdi mdi-lead-pencil"></i></a>
+            <a *ngIf="ticket.estado_tic === 0 && this.usuario[0].admin_us === 'N'" (click)="modalEditTicket(ticket)" title="Editar" data-toggle="modal" data-target=".modalEditTicket"><i class="mdi mdi-lead-pencil"></i></a>
+            <a *ngIf="usuario[0].admin_us === 'Y' && ticket.estado_tic === 0" (click)="modalContestTicket(ticket)" title="Responder" data-toggle="modal" data-target=".modalAnswerTicket"><i class="mdi mdi-comment-processing"></i></a>
             <a (click)="eliminarTicket(ticket.id_tic)" title="Eliminar"><i class="mdi mdi-delete"></i></a>
-            <a *ngIf="usuario[0].admin_us === 'Y'" (click)="contestarTicket(ticket.id_tic)" title="Responder"><i class="mdi mdi-comment-processing"></i></a>
-            <!-- <a href="javascript:void(0)"><i class="mdi mdi-heart"></i></a>     -->
           </span>
+
         </div>
         <p>Ticket <span class="label label-default" style="color:#839daa;">{{ticket.id_tic}}</span></p>
         <p class="m-b-5 m-t-10"><b>{{ticket.asunto_tic}}: </b>{{ticket.mensaje_tic}}</p>
+        <p *ngIf="ticket.estado_tic === 1" class="m-b-5 m-t-10 pRespuesta"><b>
+          <i class="mdi mdi-subdirectory-arrow-right"></i>Respuesta: </b>{{ticket.respuesta_tic}}
+        </p>
+
       </div>
     </div>
 
@@ -33,7 +38,7 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="myLargeModalLabel">Large modal</h4>
+        <h4 class="modal-title" id="myLargeModalLabel">Editar ticket</h4>
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
       </div>
       <div class="modal-body">
@@ -44,11 +49,91 @@
             <span *ngIf="editTicket['estado_tic'] === 0" class="label label-info">Pendiente</span>
           </div>
           <p>Ticket <span class="label label-default" style="color:#839daa;">{{editTicket['id_tic']}}</span></p>
-          <p class="m-b-5 m-t-10"><b>{{editTicket['asunto_tic']}}: </b>{{editTicket['mensaje_tic']}}</p>
+          
+          <form class="formEditTicket m-t-40" [formGroup]="FormEditTicket" (submit)="editarTicket(editTicket['id_tic'])">
+            <div class="row">
+              <div class="col-lg-7 col-md-7">
+                <div class="form-group m-b-40 focused">
+                  <label for="input1">Asunto</label>
+                  <input type="text" formControlName="asunto" class="form-control">
+                  <span class="bar"></span>
+                </div>
+              </div>
+              <div class="col-lg-12">
+                <div class="form-group m-b-40 focused">
+                  <label for="input2">Mensaje</label>
+                  <textarea class="form-control" formControlName="mensaje" rows="2"></textarea>
+                  <span class="bar"></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-6 col-md-6">
+                <div class="form-group">
+                  <button type="submit" class="btn waves-effect waves-light btn-rounded btn-success btn-block">Editar ticket</button>
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6">
+                <button type="button" class="btn waves-effect waves-light btn-rounded btn-danger btn-block" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger waves-effect text-left" data-dismiss="modal">Close</button>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Modal para contestar el ticket -->
+<div class="modal fade modalAnswerTicket" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myLargeModalLabel">Responder Ticket</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="comment-text w-100">
+          <h5>{{responTicket['nombre_tic']}}</h5>
+          <div class="comment-footer">
+            <span class="date">{{responTicket['fechareg_tic'] | date: 'EEEE, MMMM d, y'}}</span>&nbsp;
+            <span *ngIf="responTicket['estado_tic'] === 0" class="label label-info">Pendiente</span>
+          </div>
+          <p>Ticket <span class="label label-default" style="color:#839daa;">{{responTicket['id_tic']}}</span></p>
+          <p class="m-b-5 m-t-10"><b>{{responTicket['asunto_tic']}}: </b>{{responTicket['mensaje_tic']}}</p>
+          
+          <form class="floating-labels m-t-40" [formGroup]="FormAnswerTicket" (submit)="contestarTicket(responTicket)">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="form-group m-b-40 focused">
+                  <textarea class="form-control" formControlName="respuesta" rows="2"></textarea>
+                  <span class="bar"></span>
+                  <label for="input2">Respuesta al ticket</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col text-danger">
+                <p *ngIf="campoNoValido('respuesta')">*La respuesta es obligatoria.</p>
+              </div>
+            </div>
+            <br><br>
+            <div class="row">
+              <div class="col-lg-6 col-md-6">
+                <div class="form-group">
+                  <button type="submit" class="btn waves-effect waves-light btn-rounded btn-success btn-block">Responder ticket</button>
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6">
+                <button type="button" class="btn waves-effect waves-light btn-rounded btn-danger btn-block" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   </div>

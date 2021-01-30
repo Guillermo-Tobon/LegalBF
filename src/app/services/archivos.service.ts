@@ -63,6 +63,20 @@ export class ArchivosService {
 
 
     /**
+    * Método de servicio para obtener todos los archivos
+    */
+    public getAllFilesService = () =>{
+
+      return this.http.get(`${BASE_URL}/archivos`, this.httpOptions).pipe(
+        map( resp => resp )
+      )
+
+    }
+
+
+
+
+    /**
      * Método de servicio para obtener los archivos por user e inversión
      * @param idInver => ID inversión
      * @param id => ID del usuario 

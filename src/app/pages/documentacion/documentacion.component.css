@@ -1,0 +1,25 @@
+.contenidoArchivos{
+  position: relative;
+}
+.contenidoArchivos .alert-info{
+  font-weight: 600;
+}
+.contenidoArchivos .alert-info .fechArchivo{
+  font-size: 11px;
+  line-height: 28px;
+}
+.opcionesFile{
+  float: right;
+  position: relative;
+}
+.opcionesFile a{
+  cursor: pointer;
+}
+.opcionesFile i{
+  color: #06d79c;
+  font-size: 18px;
+  margin: 0 3px;
+}
+.logoFile{
+  width: 30px;
+}

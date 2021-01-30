@@ -1,1 +1,37 @@
-<p>inversiones works!</p>
+<!-- Tabla de inversiones -->
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <h4 *ngIf="usuario[0].admin_us == 'N'" class="card-title">Inversiones realizadas de {{usuario[0].nombres_us}}</h4>
+        <h4 *ngIf="usuario[0].admin_us == 'Y'" class="card-title">Todas las inversiones realizadas.</h4>
+        <h6 class="card-subtitle">Puede visualizar el detalle de la inversión y los documentos adjuntos.</h6>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th># Inversión</th>
+                <th>Nom. Proyecto</th>
+                <th>Capital invertido</th>
+                <th>País</th>
+                <th>Fecha Inversión</th>
+                <th>Estado</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let inversion of inversiones">
+                <td><a class="aInversion" title="Ver Inversión" (click)="navegarInversion(inversion)">{{inversion.id_inv}} </a></td>
+                <td>{{inversion.nombre_inv}}</td>
+                <td>{{inversion.capital_inv | currency: inversion.moneda_inv }} </td>
+                <td> {{inversion.pais_inv}} </td>
+                <td><span class="text-muted"><i class="fa fa-calendar-o"></i> {{inversion.fechareg_inv | date: 'dd/MM/yyyy'}}</span> </td>
+                <td *ngIf=" inversion.estado_inv === 1 " ><div class="label label-table label-success">Activo</div></td>
+                <td *ngIf=" inversion.estado_inv === 0 " ><div class="label label-table label-danger">Inactivo</div></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -64,6 +64,47 @@ export class InversionesService {
   }
 
 
+  /**
+   * Método para obtener todas las inversiones
+   */
+  public getAllInversionesService = () =>{
+
+    return this.http.get(`${BASE_URL}/inversiones`, this.httpOptions).pipe(
+      map( resp => resp )
+    )
+
+  }
+
+
+
+
+  /**
+   * Método de servicio para actualizar inversiones
+   * @param formData => Datos del formulario
+   * @param idUser => ID del usuario
+   */
+  public updateInversionService = (formData:InversionForm, idInversion:string) =>{
+
+    const json = {
+      idInversion,
+      nombreInver: formData.nombreInver,
+      capital: formData.capital,
+      moneda: formData.moneda,
+      tiempo: formData.tiempo,
+      tasainteres: JSON.stringify(formData.tasainteres),
+      pais: formData.pais,
+      descripcion: formData.descripcion,
+      estado: formData.estado == true? 1 : 0
+    }
+
+    return this.http.put(`${BASE_URL}/updateInversion`, json, this.httpOptions).pipe(
+      tap( (resp:any) =>{})
+    )
+
+
+  }
+
+
 
 
 

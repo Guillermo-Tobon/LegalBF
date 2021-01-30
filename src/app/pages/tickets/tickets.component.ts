@@ -53,12 +53,11 @@ export class TicketsComponent implements OnInit {
     this.ticketServ.creatTicketService( this.ticketFormCliente.value ).subscribe( (resp:any) =>{
 
       Swal.fire('Bien hecho!!', `${resp.msg} - Ticket ( ${resp.idticket} )`, 'success');
-      //setTimeout(() => { window.location.reload(); }, 2000);
 
       const json = {
         nombres: 'Administrador de LegalBF',
         apellidos: '',
-        email: 'gtobonbarco@gmail.com',
+        email: 'desarrollomemo@gmail.com',
         asunto: 'Creación de ticket en LegalBF',
         descripcion: `<p>Se ha creado un ticket con número <b>${resp.idticket}</b> en LegalBF.</p>
                       <p><b>Nombre: </b>${this.usuario[0]['nombres_us']} ${this.usuario[0]['apellidos_us']}</p>

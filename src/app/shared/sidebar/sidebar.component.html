@@ -33,7 +33,7 @@
                 <i class="mdi mdi-chart-areaspline"></i><span class="hide-menu">Finanzas</span>
               </a>
               <ul aria-expanded="false" class="collapse">
-                <li><a routerLink="balances">Balances</a></li>
+                <!-- <li><a routerLink="balances">Balances</a></li> -->
                 <li><a routerLink="inversiones">Inversiones</a></li>
                 <li><a routerLink="documentacion">Documentación</a></li>
               </ul>
@@ -43,8 +43,8 @@
                 <i class="mdi mdi-message-reply-text"></i><span class="hide-menu">Soporte</span>
               </a>
               <ul aria-expanded="false" class="collapse">
-                <!-- <li *ngIf="usuario[0].admin_us === 'N'"><a class="aCursor" (click)="navegarTicket()">Tickets</a></li> -->
-                <li><a class="aCursor" (click)="navegarTicket()">Tickets</a></li>
+                <li *ngIf="usuario[0].admin_us === 'N'"><a class="aCursor" (click)="navegarTicket()">Tickets</a></li>
+                <!-- <li><a class="aCursor" (click)="navegarTicket()">Tickets</a></li> -->
                 <li><a routerLink="lista-tickets">Lista de tickets</a></li>
               </ul>
             </li>

@@ -1,9 +1,10 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
 import { ClienteForm } from '../interfaces/clientes-form.interface';
+import { TicketForm } from '../interfaces/ticket-form.interface';
 const BASE_URL: String = environment.base_url;
 
 @Injectable({
@@ -50,6 +51,46 @@ export class TicketsService {
     return this.http.get(`${BASE_URL}/alltickets`, this.httpOptions).pipe(
       map( resp => resp )
     )
+  }
+
+
+  /**
+   * Método de servicio para actualizar el ticket
+   * @param formData => Datos del formulario
+   * @param idTicket => id ticket
+   */
+  public updateTicketService = (formData:TicketForm, idTicket:string) =>{
+
+    const json = {
+      idTicket,
+      asunto: formData.asunto,
+      mensaje: formData.mensaje
+    }
+
+    return this.http.put(`${BASE_URL}/updateTicket`, json, this.httpOptions).pipe(
+      tap( (resp:any) =>{resp})
+    )
+
+  }
+
+
+
+  /**
+   * Método de servicio para responder el ticket
+   * @param formData => Datos del formulario
+   * @param idTicket => id ticket
+   */
+  public upResponTicketService = (formData:TicketForm, idTicket:string) =>{
+
+    const json = {
+      respuesta: formData.respuesta,
+      idTicket
+    }
+
+    return this.http.put(`${BASE_URL}/answerTicket`, json, this.httpOptions).pipe(
+      tap( (resp:any) =>{resp})
+    )
+
   }
 
 

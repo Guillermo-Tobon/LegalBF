@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import Swal from 'sweetalert2';
 import { ArchivosService } from 'src/app/services/archivos.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { InversionesService } from 'src/app/services/inversiones.service';
 
 @Component({
   selector: 'app-detalle-inversion',
@@ -16,24 +17,30 @@ export class DetalleInversionComponent implements OnInit {
   public usuario:any[] = [];
   public inversion:any[] = [];
   public archivos:any[] = [];
+  public editInversion:{} = {};
+  public FormEditInversion:any;
+  public formSubmitted = false;
 
   constructor(
               private routeActive: ActivatedRoute,
               private archivosServ: ArchivosService,
+              private InversionServ: InversionesService,
               private authServ: AuthService,
               private location: Location,
+              private router: Router,
               private fb: FormBuilder,
   ) { }
 
   ngOnInit(): void {
 
     this.usuario = this.authServ.usuario;
-    console.log(this.usuario[0].admin_us)
 
     this.routeActive.params.subscribe( data =>{
       this.inversion = JSON.parse( data['inversion'] ) || [];
 
       this.getArchivosUserInversion(this.inversion['id_inv'], this.inversion['id_us_inv']);
+
+      this.cargarFormEditInver(this.inversion);
 
     })
   }
@@ -105,6 +112,59 @@ export class DetalleInversionComponent implements OnInit {
       }
     })
     
+  }
+
+
+
+  /**
+   * Método para cargar el modal de editar inversión
+   * @param inversion => Inversión a editar
+   */
+  public modalEditInvert = (inversion:any) =>{
+    this.editInversion = inversion;
+  }
+
+
+  /**
+   * Método para actualizar la inversión
+   * @param idInversion => ID inversión
+   */
+  public editarInversion = ( idInversion:string ) =>{
+
+    this.InversionServ.updateInversionService( this.FormEditInversion.value, idInversion ).subscribe( (resp:any) =>{
+
+      if( resp.ok ){
+        Swal.fire('Bien hecho!', resp.msg, 'success');
+        setTimeout(() => { 
+          this.router.navigate(['dashboard/inversiones']); 
+          window.location.reload();
+        }, 2000);
+      }
+
+    }, (err) =>{
+      //En caso de un error
+      Swal.fire('Error', err.error.msg, 'error');
+    })
+
+  }
+
+
+
+  /**
+   * Método para cargar el formulario de editar inversión
+   * @param inversion => Objeto de inversión a editar
+   */
+  public cargarFormEditInver = (inversion:any) =>{
+    this.FormEditInversion = this.fb.group({
+      nombreInver: [inversion['nombre_inv'], [Validators.required, Validators.minLength(5)]],
+      capital: [inversion['capital_inv'], [Validators.required, Validators.minLength(3)]],
+      moneda: [inversion['moneda_inv'], [Validators.required]],
+      tiempo: [inversion['tiempo_inv'], [Validators.required, Validators.minLength(2)]],
+      tasainteres: [inversion['tasa_ea_inv'], [Validators.required, Validators.minLength(1)]],
+      pais: [inversion['pais_inv'], [Validators.required, Validators.minLength(3)]],
+      descripcion: [inversion['descripcion_inv'], [Validators.required, Validators.minLength(20)]],
+      estado: [inversion['estado_inv'] == 1? true : false, [Validators.required]],
+    })
   }
 
 

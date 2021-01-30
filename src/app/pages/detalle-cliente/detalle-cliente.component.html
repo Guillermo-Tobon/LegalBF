@@ -138,31 +138,3 @@
     </div>
   </div>
 </div>
-
-
-<div class="row">
-
-  <div class="col-lg-7 col-md-7">
-    <div class="card">
-      <div class="card-body">
-        <h4 class="card-title">Archivos cargados para {{usuario['nombres_us']}}</h4>
-        <label for="input-file-now">Lista de todos los archivos cargados.</label>
-        <div class="contenidoArchivos">
-          
-          <div *ngFor="let archivo of archivos" class="alert alert-info">
-            <img *ngIf=" archivo.tipo_archivo_info === 'pdf' " class="logoFile" src="../../../assets/images/pdf.png" alt="">
-            <img *ngIf=" archivo.tipo_archivo_info === 'word' " class="logoFile" src="../../../assets/images/word.png" alt="">
-            {{archivo.nom_archivo_info | slice:9:30 }} {{ (archivo.nom_archivo_info.length > 30)? '...': '' }}
-            <br>
-            <span class="fechArchivo">Publicado: {{archivo.fech_publica_info | date: 'dd/MM/yyyy' }} </span>
-            <div class="opcionesFile">
-              <a (click)="verArchivo(archivo)" title="View"> <i class="mdi mdi-eye"></i> </a>
-              <a (click)="eliminarArchivo(archivo)" title="Delete file"> <i class="mdi mdi-delete"></i> </a>
-            </div>
-          </div>
-          
-        </div>
-      </div>
-    </div>
-  </div>
-</div>

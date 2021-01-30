@@ -27,3 +27,19 @@
 .logoFile{
   width: 30px;
 }
+
+.formEditTicket .form-group {
+  position: relative;
+}
+
+.formEditTicket .form-control {
+  padding: 10px 10px 10px 0;
+  display: block;
+  border: none;
+  font-family: "Montserrat", sans-serif;
+  border-radius: 0px;
+  border-bottom: 1px solid #e9edf2;
+}
+.formEditTicket label{
+  font-size: 12px;
+}
