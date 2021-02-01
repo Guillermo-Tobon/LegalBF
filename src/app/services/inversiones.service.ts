@@ -101,6 +101,42 @@ export class InversionesService {
       tap( (resp:any) =>{})
     )
 
+  }
+
+
+  /**
+   * 
+   * @param dataForm => Data del formulario
+   * @param dataInver => Data de la inversión
+   */
+  public crearAnexoServices = (dataForm:any, dataInver:any) =>{
+
+    const json = {
+      nombre: dataForm.nombreAnexo,
+      comentario: dataForm.comentario,
+      ganancias: dataForm.ganancias,
+      idInversion: dataInver.idInversion,
+      idUser: dataInver.idUser,
+      tasa: dataInver.tasa,
+      moneda: dataInver.moneda
+    }
+    
+    return this.http.post(`${BASE_URL}/insertAnexo`, json, this.httpOptions).pipe(
+      tap((resp:any) => resp)
+    )
+
+  }
+
+
+  /**
+   * Método de servicio para obtener los anexos por id inversión
+   * @param idInversion => ID de la inversión
+   */
+  public getAnexosByIdService = (idInversion:string) => {
+
+    return this.http.get(`${BASE_URL}/anexos/${idInversion}`, this.httpOptions).pipe(
+      map( resp => resp )
+    )
 
   }
 

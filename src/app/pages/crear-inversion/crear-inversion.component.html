@@ -5,7 +5,7 @@
         <h4 class="card-title">En el siguiente formulario puede crear inversiones para {{usuario['nombres_us']}}.</h4>
         <h6 class="card-subtitle">Una vez creada la inversión, se notificará vía correo electrónico ( {{usuario['email_us']}} ).</h6>
         
-        <form class="floating-labels m-t-40" [formGroup]="crearFormInversion" (submit)="crearInversion()">
+        <form class="floating-labels m-t-40" #FormInver="ngForm" [formGroup]="crearFormInversion" (submit)="crearInversion(); FormInver.reset()">
           <div class="row">
             <div class="col-lg-4 col-md-4">
               <div class="form-group m-b-40 focused">

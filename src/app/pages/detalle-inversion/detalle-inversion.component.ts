@@ -14,12 +14,21 @@ import { InversionesService } from 'src/app/services/inversiones.service';
 })
 export class DetalleInversionComponent implements OnInit {
 
+
   public usuario:any[] = [];
   public inversion:any[] = [];
   public archivos:any[] = [];
+  public anexos:any[] = [];
   public editInversion:{} = {};
   public FormEditInversion:any;
   public formSubmitted = false;
+  public archivoSubir:File;
+
+  public FormCrearAnexo = this.fb.group({
+    nombreAnexo: ['', [Validators.required, Validators.minLength(5)]],
+    ganancias: ['', [Validators.required, Validators.minLength(5)]],
+    comentario: ['', [Validators.required, Validators.minLength(20)]],
+  });
 
   constructor(
               private routeActive: ActivatedRoute,
@@ -41,6 +50,8 @@ export class DetalleInversionComponent implements OnInit {
       this.getArchivosUserInversion(this.inversion['id_inv'], this.inversion['id_us_inv']);
 
       this.cargarFormEditInver(this.inversion);
+
+      this.getAnexosByIdInver(this.inversion['id_inv']);
 
     })
   }
@@ -126,6 +137,16 @@ export class DetalleInversionComponent implements OnInit {
 
 
   /**
+   * Método para cargar el modal de editar inversión
+   * @param inversion => Inversión a editar
+   */
+  public modalCrearAnexos = (inversion:any) =>{
+    this.editInversion = inversion;
+  }
+
+
+
+  /**
    * Método para actualizar la inversión
    * @param idInversion => ID inversión
    */
@@ -149,6 +170,94 @@ export class DetalleInversionComponent implements OnInit {
   }
 
 
+  /**
+   * Método para crear anexos a la inversión
+   * @param inversion => ID de la inversión
+   */
+  public crearAnexos = (inversion:any) =>{
+    this.formSubmitted = true;
+
+    if ( this.FormCrearAnexo.invalid ) {
+      return; 
+    }
+
+    const dataInver = {
+      idUser: inversion.id_us_inv,
+      idInversion: inversion.id_inv,
+      tasa: inversion.tasa_ea_inv,
+      moneda: inversion.moneda_inv
+    }
+
+    this.InversionServ.crearAnexoServices( this.FormCrearAnexo.value, dataInver ).subscribe( (resp:any) =>{
+
+      if( resp.ok ){
+        Swal.fire('Bien hecho!', `${resp.msg} A continuación suba los documentos necesarios.`, 'success');
+        this.formSubmitted = false;
+        setTimeout(() => { window.location.reload(); }, 2000);
+      }
+
+      
+    }, (err) =>{
+      //En caso de un error
+      Swal.fire('Error', err.error.msg, 'error');
+    })
+
+  } 
+
+
+  /**
+   * Método para obtener los anexos
+   * @param idInversion => ID inversión
+   */
+  public getAnexosByIdInver = (idInversion:string) =>{
+
+    this.InversionServ.getAnexosByIdService(idInversion).subscribe( (resp:any) =>{
+
+      console.log(resp.anexos)
+
+      if( resp.ok ){
+        this.anexos = resp.anexos || [];
+      }
+      
+    }, (err) =>{
+      //En caso de un error
+      Swal.fire('Error', err.error.msg, 'error');
+    });
+  }
+
+
+
+  /**
+   * Método para obtener el archivo por usuario
+   * @param file => Objeto file del archivo a subir
+   */
+  public obtenerArchivo = (file:File) =>{
+    this.archivoSubir = file
+  }
+
+
+
+  /**
+   *  Método para subir el archivo por usuario
+   */
+  public  subirArchivoById = () =>{
+    
+    this.archivosServ.uploadFilesServices(this.archivoSubir, this.inversion['id_inv'], this.inversion['id_us_inv']).then( (resp:any) =>{
+
+      if( resp.ok ){
+        Swal.fire('Bien hecho!', resp.msg, 'success');
+        setTimeout(() => { window.location.reload(); }, 2000);
+
+      } else {
+        Swal.fire('Error', 'No se pudo cargar el archivo. Inténtelo más tarde.', 'error');
+      }
+      
+    }).catch( (err) =>{
+      Swal.fire('Error', err.error.msg, 'error');
+    })
+  }
+
+
 
   /**
    * Método para cargar el formulario de editar inversión
@@ -166,6 +275,20 @@ export class DetalleInversionComponent implements OnInit {
       estado: [inversion['estado_inv'] == 1? true : false, [Validators.required]],
     })
   }
+
+
+  /**
+   * Método para validar el campo del formulario
+   * @param campo => valor del campo a validar
+   */
+  public campoNoValido = (campo:any): boolean =>{
+    if ( this.FormCrearAnexo.get(campo).invalid && this.formSubmitted ) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
 
 
   goBack(){

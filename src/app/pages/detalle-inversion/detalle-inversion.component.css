@@ -5,6 +5,10 @@
   color: #398bf7;
   font-weight: 700;
 }
+.contenidoArchivos{
+  height: 490px;
+  overflow-y: scroll;
+}
 .contenidoArchivos .alert-info{
   font-weight: 600;
 }
@@ -42,4 +46,9 @@
 }
 .formEditTicket label{
   font-size: 12px;
+}
+
+.tablaAnexos thead tr th,
+.tablaAnexos tbody tr td{
+  font-size: 13px;
 }

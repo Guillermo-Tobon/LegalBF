@@ -112,6 +112,66 @@
   </div>
 </div>
 
+<!-- Tabla con los anexos -->
+<div *ngIf=" anexos.length > 0 " class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Anexos cargados actualmente</h4>
+        <h6 class="card-subtitle">Estos son los anexos cargados para la inversión {{inversion['nombre_inv']}} </h6>
+        <div class="table-responsive">
+          <table class="table tablaAnexos">
+            <thead>
+              <tr>
+                <th># Anexo</th>
+                <th>Nom. Anexo</th>
+                <th>Ganancias</th>
+                <th>Tasa (EA) inicial</th>
+                <th>Moneda</th>
+                <th>Comentario</th>
+                <th>Fecha publicación</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let anexo of anexos">
+                <td>{{anexo.id_anex}}</td>
+                <td>{{anexo.nombre_anex}}</td>
+                <td>{{anexo.ganacias_anex | currency: anexo.moneda_anex }} </td>
+                <td>{{anexo.tasa_anex}}%</td>
+                <td>{{anexo.moneda_anex}}</td>
+                <td>{{anexo.comentario_anex}}</td>
+                <td><span class="text-muted"><i class="fa fa-calendar-o"></i> {{anexo.fechpublica_anex | date: 'dd/MM/yyyy'}}</span> </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Anexos para la inversión  -->
+<div *ngIf="this.usuario[0].admin_us === 'Y'" class="row">
+  <div class="col-lg-7 col-md-7">
+    <div class="card">
+      <div class="card-body">
+        <button type="button" (click)="modalCrearAnexos(inversion)" class="btn waves-effect waves-light btn-rounded btn-success btn-block" data-toggle="modal" data-target=".modalCrearAnexo">Crear Anexo</button>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-5 col-md-5">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Carga de archivos para el anexo</h4>
+        <label for="input-file-now">Publique los archivo necesarios.</label>
+        <input type="file" (change)="obtenerArchivo( $event.target.files[0] )" id="input-file-now" class="dropify-fr" />
+        <br><br>
+        <button type="button" [disabled]="!archivoSubir" (click)="subirArchivoById()" class="btn waves-effect waves-light btn-rounded btn-success btn-block">Subir archivo</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 
 
@@ -213,3 +273,73 @@
     </div>
   </div>
 </div>
+
+
+
+<!-- ************************************************************************************************* -->
+<!-- Modal para crear anexo de la inversión -->
+<!-- ************************************************************************************************* -->
+<div class="modal fade modalCrearAnexo" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myLargeModalLabel">ID inversión: &nbsp; <b>{{editInversion['id_inv']}}</b></h4>
+        <h4 class="modal-title" id="myLargeModalLabel">Fecha inversión: &nbsp; {{editInversion['fechareg_inv'] | date: 'dd/MM/yyyy'}}</h4>
+      </div>
+      <div class="modal-body">
+        <div class="comment-text w-100">
+          <h4>Formulario para crear anexos a esta inversión</h4>
+          <form class="formEditTicket m-t-40" #FormAnex="ngForm" [formGroup]="FormCrearAnexo" (submit)="crearAnexos( editInversion ); FormAnex.reset()">
+            <div class="row">
+              <div class="col-lg-6 col-md-6">
+                <div class="form-group m-b-40 focused">
+                  <label for="input1">Nombre anexo</label>
+                  <input type="text" formControlName="nombreAnexo" class="form-control">
+                  <span class="bar"></span>
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6">
+                <div class="form-group m-b-40 focused">
+                  <label for="input1">Ganancias captados</label>
+                  <input type="number" formControlName="ganancias" class="form-control">
+                  <span class="bar"></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="form-group m-b-40 focused">
+                  <label for="input2">Comentario</label>
+                  <textarea class="form-control" formControlName="comentario" rows="3"></textarea>
+                  <span class="bar"></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col text-danger">
+                <p *ngIf="campoNoValido('nombreAnexo')">*El nombre del anexo es obligatorio.</p>
+                <p *ngIf="campoNoValido('ganancias')">*Las ganancias son obligatorias.</p>
+                <p *ngIf="campoNoValido('comentario')">*El comentario es obligatorio.</p>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-6 col-md-6">
+                <div class="form-group">
+                  <button type="submit" class="btn waves-effect waves-light btn-rounded btn-success btn-block">Crear anexo</button>
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6">
+                <button type="button" class="btn waves-effect waves-light btn-rounded btn-danger btn-block" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
