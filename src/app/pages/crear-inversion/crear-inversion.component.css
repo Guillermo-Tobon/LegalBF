@@ -1,23 +1,4 @@
-/*
-Template Name: Admin pro Admin
-Author: Wrappixel
-Email: niravjoshi87@gmail.com
-File: scss
-*/
-/*
-Template Name: Admin Pro Admin
-Author: Wrappixel
-Email: niravjoshi87@gmail.com
-File: scss
-*/
-/*Theme Colors*/
-/*bootstrap Color*/
-/*Light colors*/
-/*Normal Color*/
-/*Extra Variable*/
-/*******************/
-/*Floating Label*/
-/*******************/
+
 .floating-labels .form-group {
   position: relative; }
 
@@ -140,11 +121,11 @@ File: scss
 .form-group.error .help-block ul {
   padding: 0px;
   color: #ef5350; }
-  .form-group.error .help-block ul li {
-    list-style: none; }
+.form-group.error .help-block ul li {
+  list-style: none; }
 
 .form-group.issue .help-block ul {
   padding: 0px;
   color: #ffb22b; }
-  .form-group.issue .help-block ul li {
-    list-style: none; }
+.form-group.issue .help-block ul li {
+  list-style: none; }

@@ -12,6 +12,7 @@
             <img *ngIf=" archivo.tipo_archivo_info === 'word' " class="logoFile" src="../../../assets/images/word.png" alt="">
             {{archivo.nom_archivo_info | slice:9:50 }}
             <br>
+            <span *ngIf="usuario[0].admin_us == 'Y'" class="fechArchivo">Usuario: {{archivo.nombres_us }} </span><br>
             <span class="fechArchivo">Publicado: {{archivo.fech_publica_info | date: 'dd/MM/yyyy' }} </span>
             <div class="opcionesFile">
               <a (click)="verArchivo(archivo)" title="View"> <i class="mdi mdi-eye"></i> </a>

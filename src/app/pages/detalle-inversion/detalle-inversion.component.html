@@ -291,17 +291,24 @@
           <h4>Formulario para crear anexos a esta inversión</h4>
           <form class="formEditTicket m-t-40" #FormAnex="ngForm" [formGroup]="FormCrearAnexo" (submit)="crearAnexos( editInversion ); FormAnex.reset()">
             <div class="row">
-              <div class="col-lg-6 col-md-6">
+              <div class="col-lg-4 col-md-4">
                 <div class="form-group m-b-40 focused">
                   <label for="input1">Nombre anexo</label>
                   <input type="text" formControlName="nombreAnexo" class="form-control">
                   <span class="bar"></span>
                 </div>
               </div>
-              <div class="col-lg-6 col-md-6">
+              <div class="col-lg-4 col-md-4">
                 <div class="form-group m-b-40 focused">
                   <label for="input1">Ganancias captados</label>
                   <input type="number" formControlName="ganancias" class="form-control">
+                  <span class="bar"></span>
+                </div>
+              </div>
+              <div class="col-lg-4 col-md-4">
+                <div class="form-group m-b-40 focused">
+                  <label for="input1">Fecha anexo</label>
+                  <input type="date" formControlName="fecha" class="form-control">
                   <span class="bar"></span>
                 </div>
               </div>

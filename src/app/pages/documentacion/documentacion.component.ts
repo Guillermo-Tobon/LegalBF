@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ɵConsole } from '@angular/core';
 import Swal from 'sweetalert2';
 import { ArchivosService } from 'src/app/services/archivos.service';
 import { AuthService } from 'src/app/services/auth.service';
@@ -42,6 +42,8 @@ export class DocumentacionComponent implements OnInit {
 
       this.archivos = resp.archivos || [];  
 
+      console.log(this.archivos)
+
     }, (err) =>{
       //En caso de un error
       console.log(err.error.msg);
@@ -59,7 +61,9 @@ export class DocumentacionComponent implements OnInit {
 
     this.archivosServ.getFilesUserService(idUser).subscribe( (resp:any) =>{
 
-      this.archivos = resp.archivos || [];      
+      this.archivos = resp.archivos || [];  
+      
+      console.log(this.archivos)
 
     }, (err) =>{
       //En caso de un error

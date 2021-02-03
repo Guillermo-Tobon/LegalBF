@@ -115,6 +115,7 @@ export class InversionesService {
       nombre: dataForm.nombreAnexo,
       comentario: dataForm.comentario,
       ganancias: dataForm.ganancias,
+      fecha: dataForm.fecha,
       idInversion: dataInver.idInversion,
       idUser: dataInver.idUser,
       tasa: dataInver.tasa,

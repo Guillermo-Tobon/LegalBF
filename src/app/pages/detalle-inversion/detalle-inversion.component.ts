@@ -27,6 +27,7 @@ export class DetalleInversionComponent implements OnInit {
   public FormCrearAnexo = this.fb.group({
     nombreAnexo: ['', [Validators.required, Validators.minLength(5)]],
     ganancias: ['', [Validators.required, Validators.minLength(5)]],
+    fecha: ['', [Validators.required]],
     comentario: ['', [Validators.required, Validators.minLength(20)]],
   });
 
