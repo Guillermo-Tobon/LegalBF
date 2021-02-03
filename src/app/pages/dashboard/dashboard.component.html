@@ -1,9 +1,13 @@
-<div class="row">
-  <div class="col-6">
-    <app-dona title="Mi Inversión"></app-dona>
+<div *ngIf=" usuario[0].admin_us === 'N' " class="row">
+  <div class="col-lg-9 col-md-9">
+    <app-lineal [labels]="labels2" [data]="Data2" title="Inversión/Ganancias" [nombreInv]="nomInversion" [capitalInv]="capital" [monedaInv]="moneda" [tasaInv]="tasa"></app-lineal>
   </div>
+  <div class="col-lg-3 col-md-3"></div>
+</div>
 
-  <div class="col-6">
+
+<div class="row">
+  <div class="col-lg-6 col-md-6">
     <app-dona [labels]="labels1" [data]="Data1" title="Mis Ganancias"></app-dona>
   </div>
 </div>

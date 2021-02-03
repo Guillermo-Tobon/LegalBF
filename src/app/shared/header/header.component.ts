@@ -84,8 +84,6 @@ export class HeaderComponent implements OnInit {
     await this.ticketServ.getTicketByIdService(id).subscribe( (resp:any) =>{
 
       this.tickets = resp.tickets || []; 
-
-      console.log(this.tickets)
       
     }, (err) =>{
       //En caso de un error

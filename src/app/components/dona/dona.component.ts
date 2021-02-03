@@ -10,14 +10,11 @@ import { MultiDataSet, Label } from 'ng2-charts';
 })
 export class DonaComponent implements OnInit {
 
-  @Input() title:string = 'Sin título';
+  @Input() title:string;
 
-  @Input('labels') doughnutChartLabels: Label[] = ['Sin dato 1', 'Sin dato 3', 'Sin dato 3'];
-  @Input('data') doughnutChartData: MultiDataSet = [
-    [350, 450, 100],
-    [150, 250, 300],
-    
-  ];
+  @Input('labels') doughnutChartLabels: Label[];
+  @Input('data') doughnutChartData: MultiDataSet;
+  
   public doughnutChartType: ChartType = 'doughnut';
 
   constructor() { }
