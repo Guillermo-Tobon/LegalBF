@@ -28,7 +28,7 @@
                 <li><a routerLink="crear-cliente">Crear Clientes</a></li>
               </ul>
             </li>
-            <li>
+            <li *ngIf="usuario[0].admin_us === 'Y' ">
               <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
                 <i class="mdi mdi-chart-areaspline"></i><span class="hide-menu">Finanzas</span>
               </a>
@@ -44,11 +44,10 @@
               </a>
               <ul aria-expanded="false" class="collapse">
                 <li *ngIf="usuario[0].admin_us === 'N'"><a class="aCursor" (click)="navegarTicket()">Tickets</a></li>
-                <!-- <li><a class="aCursor" (click)="navegarTicket()">Tickets</a></li> -->
                 <li><a routerLink="lista-tickets">Lista de tickets</a></li>
               </ul>
             </li>
-            <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">Acerca de LegalBF </span></a>
+            <!-- <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">Acerca de LegalBF </span></a>
               <ul aria-expanded="false" class="collapse">
                 <li><a routerLink="quienes-somos">Quiénes Somos</a></li>
                 <li><a href="ui-buttons.html">Como funciona</a></li>
@@ -56,7 +55,7 @@
                 <li><a routerLink="terminos">Términos y Condiciones</a></li>
                 <li><a href="ui-user-card.html">Políticas de manejo de datos</a></li>
               </ul>
-            </li>
+            </li> -->
           </ul>
         </nav>
         <!-- End Sidebar navigation -->

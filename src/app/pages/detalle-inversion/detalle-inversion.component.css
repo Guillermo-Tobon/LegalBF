@@ -6,7 +6,7 @@
   font-weight: 700;
 }
 .contenidoArchivos{
-  height: 490px;
+  height: 430px;
   overflow-y: scroll;
 }
 .contenidoArchivos .alert-info{

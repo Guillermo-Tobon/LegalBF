@@ -1,13 +1,215 @@
+<div class="row">
+  <div class="col-lg-3">
+    <div class="card">
+      <div class="card-body">
+        <div class="d-flex no-block">
+          <div class="m-r-20 align-self-center"><span class="lstick m-r-20"></span><img src="../assets/images/icon/staff.png" alt="Income"></div>
+          <div class="align-self-center">
+            <h6 class="text-muted m-t-10 m-b-0">User</h6>
+            <h2 class="m-t-0">{{usuario[0].nombres_us}}</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-3">
+    <div class="card">
+      <div class="card-body">
+        <div class="d-flex no-block">
+          <div class="m-r-20 align-self-center"><span class="lstick m-r-20"></span><img src="../assets/images/icon/income.png" alt="Income"></div>
+          <div class="align-self-center">
+            <h6 class="text-muted m-t-10 m-b-0">Ganancias totales</h6>
+            <h2 class="m-t-0">{{ sumGanan | currency: moneda }}</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-3">
+    <div class="card">
+      <div class="card-body">
+        <div class="d-flex no-block">
+          <div class="m-r-20 align-self-center"><span class="lstick m-r-20"></span><img src="../assets/images/icon/expense.png" alt="Income"></div>
+          <div class="align-self-center">
+            <h6 class="text-muted m-t-10 m-b-0">Total anexos</h6>
+            <h2 class="m-t-0">{{ anexos.length }} anexos</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-3">
+    <div class="card">
+      <div class="card-body">
+        <div class="d-flex no-block">
+          <div class="m-r-20 align-self-center"><span class="lstick m-r-20"></span><img src="../assets/images/icon/assets.png" alt="Income"></div>
+          <div class="align-self-center">
+            <h6 class="text-muted m-t-10 m-b-0">Tiempo inversión</h6>
+            <h2 class="m-t-0">{{ tiempo }} días</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div *ngIf=" usuario[0].admin_us === 'N' " class="row">
-  <div class="col-lg-9 col-md-9">
+  <div class="col-lg-12">
     <app-lineal [labels]="labels2" [data]="Data2" title="Inversión/Ganancias" [nombreInv]="nomInversion" [capitalInv]="capital" [monedaInv]="moneda" [tasaInv]="tasa"></app-lineal>
   </div>
-  <div class="col-lg-3 col-md-3"></div>
 </div>
 
 
-<div class="row">
-  <div class="col-lg-6 col-md-6">
+
+<!-- Información detallada de la inversion y los anexos -->
+<div *ngIf=" usuario[0].admin_us === 'N' " class="row">
+  <!-- Column -->
+  <div class="col-lg-8 col-xlg-9 col-md-8">
+    <div class="card">
+      <!-- Nav tabs -->
+      <ul class="nav nav-tabs profile-tab" role="tablist">
+        <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#settings" role="tab">Información general inversión</a> </li>
+      </ul>
+      <!-- Tab panes -->
+      <div class="tab-content">        
+        <div class="tab-pane active" id="settings" role="tabpanel">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-lg-6 col-md-6">
+                <small class="text-muted">ID inversión: &nbsp; <b>{{ idInv }}</b> </small>
+              </div>
+              <br>
+              <div class="col-lg-6 col-md-6">
+                <small class="text-muted">Fecha inversión: &nbsp; {{ fechareg | date: 'dd/MM/yyyy'}} </small>
+              </div>
+            </div>
+            <br>
+
+            <div class="row">
+              <div class="col-lg-12">
+                <small class="text-muted">Nombre inversión:</small>
+                <h6>{{ nomInversion }}</h6> 
+              </div>
+            </div>
+            <br>
+
+            <div class="row">
+              <div class="col-lg-4 col-md-4">
+                <small class="text-muted">Capital invertido:</small>
+                <h6>{{ capital | currency: moneda }}</h6> 
+              </div>
+              <br>
+              <div class="col-lg-4 col-md-4">
+                <small class="text-muted">Tipo de moneda:</small>
+                <h6>{{ moneda }}</h6> 
+              </div>
+              <br>
+              <div class="col-lg-4 col-md-4">
+                <small class="text-muted">País:</small>
+                <h6>{{ pais }}</h6>
+              </div>
+            </div>
+            <br>
+
+            <div class="row">
+              <div class="col-lg-4 col-md-4">
+                <small class="text-muted">Tiempo inversión:</small>
+                <h6>{{ tiempo }} días</h6>
+              </div>
+              <br>
+              <div class="col-lg-4 col-md-4">
+                <small class="text-muted">Tasa de interés (EA):</small>
+                <h6>{{ tasa }}%</h6>
+              </div>
+              <br>
+              <div class="col-lg-4 col-md-4">
+                <small class="text-muted">Estado inversión:</small>
+                <h6 *ngIf=" estado === 1 " class="text-warning">ACTIVO</h6>
+                <h6 *ngIf=" estado === 0" class="text-danger">INACTIVO</h6>
+              </div>
+            </div>
+            <br>
+
+            <div class="row">
+              <div class="col-lg-10">
+                <small class="text-muted">Descripción:</small>
+                <h6>{{ descripcion }}</h6>
+              </div>
+            </div>
+            <br>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Column -->
+  <div class="col-lg-4 col-xlg-3 col-md-4">
+    <div class="card">
+      <ul class="nav nav-tabs profile-tab" role="tablist">
+        <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#settings" role="tab">Documentos relacionados</a> </li>
+      </ul>
+      <div class="card-body contenidoArchivos">
+        <div *ngFor="let archivo of archivos" class="alert alert-info">
+          <img *ngIf=" archivo.tipo_archivo_info === 'pdf' " class="logoFile" src="../../../assets/images/pdf.png" alt="">
+          <img *ngIf=" archivo.tipo_archivo_info === 'word' " class="logoFile" src="../../../assets/images/word.png" alt="">
+          {{archivo.nom_archivo_info | slice:9:30 }} {{ (archivo.nom_archivo_info.length > 30)? '...': '' }}
+          <br>
+          <span class="fechArchivo">Publicado: {{archivo.fech_publica_info | date: 'dd/MM/yyyy' }} </span>
+          <div class="opcionesFile">
+            <a (click)="verArchivo(archivo)" title="View"> <i class="mdi mdi-eye"></i> </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Tabla con los anexos -->
+<div *ngIf=" anexos.length > 0 && usuario[0].admin_us === 'N' " class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Anexos cargados actualmente</h4>
+        <h6 class="card-subtitle">Estos son los anexos cargados para la inversión {{ nomInversion }} </h6>
+        <div class="table-responsive">
+          <table class="table tablaAnexos">
+            <thead>
+              <tr>
+                <th># Anexo</th>
+                <th>Nom. Anexo</th>
+                <th>Ganancias</th>
+                <th>Tasa (EA) inicial</th>
+                <th>Moneda</th>
+                <th>Comentario</th>
+                <th>Fecha publicación</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let anexo of anexos">
+                <td>{{anexo.id_anex}}</td>
+                <td>{{anexo.nombre_anex}}</td>
+                <td>{{anexo.ganacias_anex | currency: anexo.moneda_anex }} </td>
+                <td>{{anexo.tasa_anex}}%</td>
+                <td>{{anexo.moneda_anex}}</td>
+                <td>{{anexo.comentario_anex}}</td>
+                <td><span class="text-muted"><i class="fa fa-calendar-o"></i> {{anexo.fechpublica_anex | date: 'dd/MM/yyyy'}}</span> </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<div *ngIf=" usuario[0].admin_us === 'Y' " class="row">
+  <div class="col-lg-7 col-md-7">
     <app-dona [labels]="labels1" [data]="Data1" title="Mis Ganancias"></app-dona>
   </div>
 </div>
