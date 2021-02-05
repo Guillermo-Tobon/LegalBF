@@ -32,3 +32,11 @@
 .tablaAnexos tbody tr td{
   font-size: 13px;
 }
+.tableUsers{
+  height: 280px;
+}
+.verUsuarios{
+  position: absolute;
+  right: 35px;
+  top: 17px;
+}

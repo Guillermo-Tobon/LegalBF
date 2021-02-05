@@ -9,33 +9,33 @@
           <div class="tab-pane active" id="settings" role="tabpanel">
             <div class="card-body">
               <div class="row">
-                <div class="col-6">
+                <div class="col-lg-6 col-md-6">
                   <small class="text-muted">Nombre completo:</small>
                   <h6>{{usuario[0].nombres_us}} {{usuario[0].apellidos_us}}</h6> 
                 </div>
-                <div class="col-6">
+                <div class="col-lg-6 col-md-6">
                   <small class="text-muted">E-mail:</small>
                   <h6>{{usuario[0].email_us}}</h6> 
                 </div>
               </div>
               <br>
               <div class="row">
-                <div class="col-6">
+                <div class="col-lg-6 col-md-6">
                   <small class="text-muted">Teléfono:</small>
                   <h6>{{usuario[0].telefono_us}}</h6> 
                 </div>
-                <div class="col-6">
+                <div class="col-lg-6 col-md-6">
                   <small class="text-muted">Compañía:</small>
                   <h6>{{usuario[0].compania_us}}</h6> 
                 </div>
               </div>
               <br>
               <div class="row">
-                <div class="col-6">
+                <div class="col-lg-6 col-md-6">
                   <small class="text-muted">Fecha de registro:</small>
                   <h6>{{usuario[0].fecha_reg_us | date: 'dd/MM/yyyy'}}</h6> 
                 </div>
-                <div class="col-6">
+                <div class="col-lg-6 col-md-6">
                   <small class="text-muted">Estado:</small>
                   <h6 class="text-warning">ACTIVO</h6> 
                 </div>
@@ -71,12 +71,12 @@
           </div>
 
           <div class="row">
-            <div class="col-6">
+            <div class="col-lg-6 col-md-6">
               <div class="form-group">
                 <button type="submit" class="btn waves-effect waves-light btn-rounded btn-success btn-block">Enviar ticket</button>
               </div>
             </div>
-            <div class="col-6">
+            <div class="col-lg-6 col-md-6">
               <div class="checkbox checkbox-info pull-left p-t-0">
                 <input type="hidden" formControlName="id" class="form-control">
               </div> 

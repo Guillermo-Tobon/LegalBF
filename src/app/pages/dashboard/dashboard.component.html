@@ -1,51 +1,63 @@
 <div class="row">
-  <div class="col-lg-3">
+  <div class="col-lg-3 col-md-6 col-sm-6">
     <div class="card">
       <div class="card-body">
         <div class="d-flex no-block">
           <div class="m-r-20 align-self-center"><span class="lstick m-r-20"></span><img src="../assets/images/icon/staff.png" alt="Income"></div>
           <div class="align-self-center">
             <h6 class="text-muted m-t-10 m-b-0">User</h6>
-            <h2 class="m-t-0">{{usuario[0].nombres_us}}</h2>
+            <h2 class="m-t-0">{{usuario[0].nombres_us | slice:0:10 }}</h2>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="col-lg-3">
+  <div class="col-lg-3 col-md-6 col-sm-6">
     <div class="card">
       <div class="card-body">
         <div class="d-flex no-block">
           <div class="m-r-20 align-self-center"><span class="lstick m-r-20"></span><img src="../assets/images/icon/income.png" alt="Income"></div>
-          <div class="align-self-center">
+          <div *ngIf=" usuario[0].admin_us === 'N' " class="align-self-center">
             <h6 class="text-muted m-t-10 m-b-0">Ganancias totales</h6>
             <h2 class="m-t-0">{{ sumGanan | currency: moneda }}</h2>
+          </div>
+          <div *ngIf=" usuario[0].admin_us === 'Y' " class="align-self-center">
+            <h6 class="text-muted m-t-10 m-b-0">Asociados</h6>
+            <h2 class="m-t-0">{{ usuarios.length }} usuarios</h2>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="col-lg-3">
+  <div class="col-lg-3 col-md-6 col-sm-6">
     <div class="card">
       <div class="card-body">
         <div class="d-flex no-block">
           <div class="m-r-20 align-self-center"><span class="lstick m-r-20"></span><img src="../assets/images/icon/expense.png" alt="Income"></div>
-          <div class="align-self-center">
+          <div *ngIf=" usuario[0].admin_us === 'N' " class="align-self-center">
             <h6 class="text-muted m-t-10 m-b-0">Total anexos</h6>
             <h2 class="m-t-0">{{ anexos.length }} anexos</h2>
+          </div>
+          <div *ngIf=" usuario[0].admin_us === 'Y' " class="align-self-center">
+            <h6 class="text-muted m-t-10 m-b-0">Inversiones</h6>
+            <h2 class="m-t-0">{{ totalInver.length }} activas</h2>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="col-lg-3">
+  <div class="col-lg-3 col-md-6 col-sm-6">
     <div class="card">
       <div class="card-body">
         <div class="d-flex no-block">
           <div class="m-r-20 align-self-center"><span class="lstick m-r-20"></span><img src="../assets/images/icon/assets.png" alt="Income"></div>
-          <div class="align-self-center">
+          <div *ngIf=" usuario[0].admin_us === 'N' " class="align-self-center">
             <h6 class="text-muted m-t-10 m-b-0">Tiempo inversión</h6>
             <h2 class="m-t-0">{{ tiempo }} días</h2>
+          </div>
+          <div *ngIf=" usuario[0].admin_us === 'Y' " class="align-self-center">
+            <h6 class="text-muted m-t-10 m-b-0">Pendientes</h6>
+            <h2 class="m-t-0">{{ tickets.length }} tickets</h2>
           </div>
         </div>
       </div>
@@ -209,7 +221,55 @@
 
 
 <div *ngIf=" usuario[0].admin_us === 'Y' " class="row">
-  <div class="col-lg-7 col-md-7">
+  <div class="col-lg-8 col-md-8">
+    <app-lineal-admin [labels]="labels3" [data]="Data3" title="Usuarios/Inversión inicial"></app-lineal-admin>
+  </div>
+  <div class="col-lg-4 col-md-4">
+    <div class="card">
+      <div class="card-body">
+        <div class="text-center">
+          <h5 class="box-title m-t-30">Datepicker Inline</h5>
+          <p class="text-muted m-b-20">You also can set the datepicker to be inline and flat.</p>
+            <div id="datepicker-inline"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-5 col-md-5">
     <app-dona [labels]="labels1" [data]="Data1" title="Mis Ganancias"></app-dona>
   </div>
+  <div class="col-lg-7 col-md-7">
+    <div class="card">
+      <div class="card-body">
+        <div class="d-flex">
+          <div>
+            <h4 class="card-title"><span class="lstick"></span>Usuarios registrados </h4>
+            <a routerLink="lista-clientes" class="btn waves-effect waves-light btn-rounded btn-success verUsuarios">Ver usuarios</a>
+          </div>
+        </div>
+        <div class="table-responsive m-t-20 tableUsers">
+          <table class="table vm no-th-brd no-wrap pro-of-month">
+            <thead>
+              <tr>
+                <th colspan="2">User</th>
+                <th>Email</th>
+                <th>Estado</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor=" let usuario of usuarios ">
+                <td style="width:50px;"><span class="round"><img src="../assets/images/users/1.jpg" alt="user" width="50"></span></td>
+                <td><h6> {{usuario.nombres_us}} </h6><small class="text-muted">{{usuario.compania_us}}</small></td>
+                <td>{{usuario.email_us | slice:0:11 }} {{ (usuario.email_us.length > 11)? '...':'' }}</td>
+                <td *ngIf=" usuario.estado_us === 1 " ><span class="label label-success label-rounded">Activo</span></td>
+                <td *ngIf=" usuario.estado_us === 0 " ><span class="label label-warning label-rounded">Inactivo</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+

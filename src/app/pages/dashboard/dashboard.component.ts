@@ -4,6 +4,8 @@ import Swal from 'sweetalert2';
 import { AuthService } from 'src/app/services/auth.service';
 import { InversionesService } from 'src/app/services/inversiones.service';
 import { ArchivosService } from 'src/app/services/archivos.service';
+import { ClientesService } from 'src/app/services/clientes.service';
+import { TicketsService } from 'src/app/services/tickets.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -20,11 +22,17 @@ export class DashboardComponent implements OnInit {
   ];
   
   public labels2:string[] = [];               
-  public Data2:any[] = [];               
+  public Data2:any[] = [];  
+  public labels3:string[] = [];               
+  public Data3:any[] = [];               
   public usuario:any[] = [];
+  public usuarios:any[] = [];
   public inversiones:any[] = [];
+  public totalInver:any[] = [];
+  public userInver:any[] = [];
   public anexos:any[] = [];
   public archivos:any[] = [];
+  public tickets:any[] = [];
   public nomInversion:string;
   public idInv:number;
   public capital:number;
@@ -40,6 +48,8 @@ export class DashboardComponent implements OnInit {
   constructor(
               private autServ: AuthService,
               private inversionesServ: InversionesService,
+              private clientesServ: ClientesService,
+              private ticketServ: TicketsService,
               private archivosServ: ArchivosService,
   ) { }
 
@@ -48,6 +58,13 @@ export class DashboardComponent implements OnInit {
     this.usuario = this.autServ.usuario;
     
     this.getInversionesById(this.usuario[0].id_us);
+
+    if ( this.usuario[0].admin_us === 'Y' ) {
+      this.obtenerUsuarios();
+      this.getTodasInversiones();
+      this.getAllTickets();
+      this.getUsuariosInversiones();
+    }
   }
 
 
@@ -152,6 +169,79 @@ export class DashboardComponent implements OnInit {
       Swal.fire('Error', err.error.msg, 'error');
     })
 
+  }
+
+
+
+  /**
+   * Método para obtener los usuarios
+   */
+  public obtenerUsuarios = () =>{
+    this.clientesServ.getUsuariosService().subscribe( (data:any) =>{
+      
+      this.usuarios = data.usuarios || [];
+
+      console.log(this.usuarios)
+     
+    }, (err) =>{
+      //En caso de un error
+      console.log(err.error.msg);
+    })
+  }
+
+
+
+  /**
+   * Método para obtener todas las inversiones 
+   */
+  public getTodasInversiones = () =>{
+    this.inversionesServ.getAllInversionesService().subscribe( (resp:any) =>{
+
+      this.totalInver = resp.inversiones || [];
+
+    }, (err) =>{
+      //En caso de un error
+      console.log(err.error.msg);
+    })
+  }
+
+
+
+  /**
+   * Método para obtener todos los tickets
+   */
+  public getAllTickets = () =>{
+    this.ticketServ.getAllTicketsService().subscribe( (resp:any) =>{
+
+      this.tickets = resp.tickets || []; 
+
+    }, (err) =>{
+      //En caso de un error
+      console.log(err.error.msg);
+    })
+  }
+
+
+  /**
+   * Método para obtener los usuarios e inversiones
+   */
+  public getUsuariosInversiones = () =>{
+    this.inversionesServ.getUserInversionService().subscribe( (resp:any) =>{
+
+      this.userInver = resp.datos || [];
+      let dataInver = [];
+
+      for (let i = 0; i < this.userInver.length; i++) {
+        dataInver[i] = this.userInver[i].capital_inv;
+        this.labels3[i] = this.userInver[i].nombres_us; 
+      }
+
+      this.Data3 = [{data: dataInver, label: 'Inversión($)'}]; 
+
+    }, (err) =>{
+      //En caso de un error
+      console.log(err.error.msg);
+    })
   }
 
 

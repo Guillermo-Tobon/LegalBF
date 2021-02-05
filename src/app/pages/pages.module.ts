@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import {BrowserModule } from '@angular/platform-browser';
 
 import { RouterModule } from '@angular/router';
 
@@ -23,6 +24,7 @@ import { QuienesSomosComponent } from './quienes-somos/quienes-somos.component';
 import { TerminosComponent } from './terminos/terminos.component';
 import { CrearInversionComponent } from './crear-inversion/crear-inversion.component';
 import { DetalleInversionComponent } from './detalle-inversion/detalle-inversion.component';
+import { CalendarModule, DatePickerModule } from '@syncfusion/ej2-angular-calendars';
 
 
 @NgModule({
@@ -57,7 +59,10 @@ import { DetalleInversionComponent } from './detalle-inversion/detalle-inversion
     ComponentsModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserModule,
+    CalendarModule,
+    DatePickerModule
   ]
 })
 export class PagesModule { }

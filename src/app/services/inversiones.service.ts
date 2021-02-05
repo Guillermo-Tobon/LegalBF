@@ -143,6 +143,17 @@ export class InversionesService {
 
 
 
+  /**
+   * Método de servicio para obtener los usuarios y sus inversiones
+   */
+  public getUserInversionService = () =>{
+    return this.http.get(`${BASE_URL}/usuariosInversion`, this.httpOptions).pipe(
+      map( resp => resp )
+    )
+  }
+
+
+
 
 
 }

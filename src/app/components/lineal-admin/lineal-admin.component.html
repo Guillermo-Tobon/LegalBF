@@ -1,0 +1,14 @@
+<div class="card">
+  <div class="card-body">
+    <h4 class="card-title">{{title}} </h4>
+    <canvas baseChart
+            [datasets]="lineChartData"
+            [labels]="lineChartLabels"
+            [options]="lineChartOptions"
+            [colors]="lineChartColors"
+            [legend]="lineChartLegend"
+            [chartType]="lineChartType"
+            [plugins]="lineChartPlugins">
+    </canvas>
+  </div>
+</div>

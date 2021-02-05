@@ -3,23 +3,17 @@ import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { Color, BaseChartDirective, Label } from 'ng2-charts';
 import * as pluginAnnotations from 'chartjs-plugin-annotation';
 
-
 @Component({
-  selector: 'app-lineal',
-  templateUrl: './lineal.component.html',
-  styleUrls: ['./lineal.component.css']
+  selector: 'app-lineal-admin',
+  templateUrl: './lineal-admin.component.html',
+  styleUrls: ['./lineal-admin.component.css']
 })
-export class LinealComponent implements OnInit {
+export class LinealAdminComponent implements OnInit {
 
   @Input() title:string;
-  @Input() nombreInv:string;
-  @Input() capitalInv:number;
-  @Input() monedaInv:string;
-  @Input() tasaInv:string;
 
   @Input('labels') lineChartLabels: Label[];
-  @Input('data') lineChartData: ChartDataSets[]; 
-
+  @Input('data') lineChartData: ChartDataSets[];
 
   @ViewChild(BaseChartDirective, { static: true }) chart: BaseChartDirective;
   
@@ -65,24 +59,22 @@ export class LinealComponent implements OnInit {
   };
   
   public lineChartColors: Color[] = [
-    { // dark grey
-      backgroundColor: 'rgba(57,139,247,0.2)',
-      borderColor: 'rgba(57,139,247,1)',
-      pointBackgroundColor: 'rgba(57,139,247,1)',
+    { // grey
+      backgroundColor: 'rgba(74,101,255,0.2)',
+      borderColor: 'rgba(74,101,255,1)',
+      pointBackgroundColor: 'rgba(74,101,255,1)',
       pointBorderColor: '#fff',
       pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(57,139,247,1)'
+      pointHoverBorderColor: 'rgba(74,101,255,0.8)'
     }
   ];
   public lineChartLegend = true;
   public lineChartType: ChartType = 'line';
   public lineChartPlugins = [pluginAnnotations];
 
-
   constructor() { }
 
-  ngOnInit(): void { 
+  ngOnInit(): void {
   }
-
 
 }

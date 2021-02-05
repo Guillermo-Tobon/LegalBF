@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-12">
+  <div class="col-lg-12">
     <div class="card">
       <div class="card-body">
         <h4 class="card-title">En el siguiente formulario puede crear cuentas para clientes nuevos</h4>
@@ -7,14 +7,14 @@
         
         <form class="floating-labels m-t-40" [formGroup]="regisFormCliente" (submit)="registrarCliente()">
           <div class="row">
-            <div class="col-6">
+            <div class="col-lg-6 col-md-6">
               <div class="form-group m-b-40 focused">
                 <input type="text" formControlName="nombres" class="form-control">
                 <span class="bar"></span>
                 <label for="input1">Nombres</label>
               </div>
             </div>
-            <div class="col-6">
+            <div class="col-lg-6 col-md-6">
               <div class="form-group m-b-40 focused">
                 <input type="text" formControlName="apellidos" class="form-control">
                 <span class="bar"></span>
@@ -24,14 +24,14 @@
           </div>
           
           <div class="row">
-            <div class="col-6">
+            <div class="col-lg-6 col-md-6">
               <div class="form-group m-b-40 focused">
                 <input type="email" formControlName="email" class="form-control">
                 <span class="bar"></span>
                 <label for="input3">E-mail</label>
               </div>
             </div>
-            <div class="col-6">
+            <div class="col-lg-6 col-md-6">
               <div class="form-group m-b-40 focused">
                 <input type="text" formControlName="telefono" class="form-control">
                 <span class="bar"></span>
@@ -41,14 +41,14 @@
           </div>
 
           <div class="row">
-            <div class="col-6">
+            <div class="col-lg-6 col-md-6">
               <div class="form-group m-b-40 focused">
                 <input type="password" formControlName="password" class="form-control" id="input5">
                 <span class="bar"></span>
                 <label for="input3">Password</label>
               </div>
             </div>
-            <div class="col-6">
+            <div class="col-lg-6 col-md-6">
               <div class="form-group m-b-40 focused">
                 <input type="password" formControlName="passwordConfir" class="form-control" id="input5">
                 <span class="bar"></span>
@@ -58,14 +58,14 @@
           </div>
 
           <div class="row">
-            <div class="col-6">
+            <div class="col-lg-6 col-md-6">
               <div class="form-group m-b-40 focused">
                 <input type="text" formControlName="compania" class="form-control">
                 <span class="bar"></span>
                 <label for="input3">Nombre Compañía</label>
               </div>
             </div>
-            <div class="col-6">
+            <div class="col-lg-6 col-md-6">
               <div class="form-group m-b-40 focused">
                 <textarea class="form-control" formControlName="descripcion" rows="2"></textarea>
                 <span class="bar"></span>
@@ -75,12 +75,12 @@
           </div>
 
           <div class="row">
-            <div class="col-6">
+            <div class="col-lg-6 col-md-6">
               <div class="form-group">
                 <button type="submit" class="btn waves-effect waves-light btn-rounded btn-success btn-block">Registrar Cliente</button>
               </div>
             </div>
-            <div class="col-6">
+            <div class="col-lg-6 col-md-6">
               <div class="checkbox checkbox-info pull-left p-t-0">
                 <input id="checkbox-signup" formControlName="estado" type="checkbox" class="filled-in chk-col-light-blue">
                 <label for="checkbox-signup">Cliente Activo </label><br><br>
