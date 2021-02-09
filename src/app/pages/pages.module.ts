@@ -62,7 +62,7 @@ import { CalendarModule, DatePickerModule } from '@syncfusion/ej2-angular-calend
     HttpClientModule,
     BrowserModule,
     CalendarModule,
-    DatePickerModule
+    DatePickerModule,
   ]
 })
 export class PagesModule { }

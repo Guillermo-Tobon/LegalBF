@@ -169,10 +169,10 @@ const customInitFunctions = () =>{
   // Translated
   $('.dropify-fr').dropify({
       messages: {
-        default: 'Arrastre y suelte un archivo aquí o haga clic aquí',
-        replace: 'Arrastra y suelta o haz clic para reemplazar',
-        remove:  'Remover',
-        error:   'Vaya, se agregó algo incorrecto.'
+        default: 'Drag and drop a file here or click here',
+        replace: 'Drag and drop or click to replace',
+        remove:  'Remove',
+        error:   'Oops, something wrong was added.'
       }
   });
 

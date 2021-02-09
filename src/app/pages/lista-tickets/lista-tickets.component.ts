@@ -3,7 +3,6 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import Swal from 'sweetalert2';
 import { AuthService } from 'src/app/services/auth.service';
 import { TicketsService } from 'src/app/services/tickets.service';
-import { ReturnStatement } from '@angular/compiler';
 import { ClientesService } from 'src/app/services/clientes.service';
 
 @Component({
@@ -55,9 +54,9 @@ export class ListaTicketsComponent implements OnInit {
   /**
    * Método para obtener todos los tickets
    */
-  public getAllTickets = async() =>{
-    await this.ticketServ.getAllTicketsService().subscribe( (resp:any) =>{
-      this.tickets = resp.tickets; 
+  public getAllTickets = () =>{
+    this.ticketServ.getAllTicketsService().subscribe( (resp:any) =>{
+      this.tickets = resp.tickets || []; 
 
     }, (err) =>{
       //En caso de un error
@@ -71,9 +70,9 @@ export class ListaTicketsComponent implements OnInit {
    * Método para obtener los ticket por id usuario
    * @param id => ID de usuario logueado
    */
-  public getTicketsUsuario = async(id:any) =>{
+  public getTicketsUsuario = (id:any) =>{
 
-    await this.ticketServ.getTicketByIdService(id).subscribe( (resp:any) =>{
+    this.ticketServ.getTicketByIdService(id).subscribe( (resp:any) =>{
       this.tickets = resp.tickets; 
       
     }, (err) =>{
@@ -172,7 +171,7 @@ export class ListaTicketsComponent implements OnInit {
 
           if( resp2.ok ){
             Swal.fire('Bien hecho!', resp.msg, 'success');
-            setTimeout(() => { window.location.reload(); }, 2000);
+            this.getAllTickets();
           }
 
         }, (err) =>{
@@ -201,7 +200,7 @@ export class ListaTicketsComponent implements OnInit {
     Swal.fire({
       title: `Desea eliminar el Ticket ${idTicket}`,
       text: "Una vez eliminado no se puede recuperar!",
-      icon: 'warning',
+      icon: 'question',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
@@ -212,12 +211,11 @@ export class ListaTicketsComponent implements OnInit {
         this.ticketServ.deleteTicketService(idTicket).subscribe( (resp:any) =>{
           
           Swal.fire('Bien hecho!', resp.msg, 'success');
-          setTimeout(() => { window.location.reload(); }, 2000);
+          this.getAllTickets();
         
         }, (err) =>{
           //En caso de un error
           Swal.fire('Error', err.error.msg, 'error');
-          console.log(err)
         })
       }
 

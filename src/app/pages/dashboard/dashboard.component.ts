@@ -16,10 +16,7 @@ export class DashboardComponent implements OnInit {
 
   //Para grafica de dona
   public labels1:string[] = ['Download Sales', 'In-Store Sales', 'Mail-Order Sales'];
-  public Data1 = [
-    [350, 450, 100],
-    [150, 250, 300],
-  ];
+  public Data1 = [[350, 450, 100]];
   
   public labels2:string[] = [];               
   public Data2:any[] = [];  

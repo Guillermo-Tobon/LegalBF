@@ -8,6 +8,7 @@ import { ArchivosService } from 'src/app/services/archivos.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { InversionesService } from 'src/app/services/inversiones.service';
 
+
 @Component({
   selector: 'app-detalle-inversion',
   templateUrl: './detalle-inversion.component.html',
@@ -115,7 +116,7 @@ export class DetalleInversionComponent implements OnInit {
           
           if ( resp.ok ) {
             Swal.fire('Bien hecho!', resp.msg, 'success');
-            setTimeout(() => { window.location.reload(); }, 2000);
+            this.getArchivosUserInversion(this.inversion['id_inv'], this.inversion['id_us_inv']);
           }
     
         }, (err) =>{
@@ -195,7 +196,7 @@ export class DetalleInversionComponent implements OnInit {
       if( resp.ok ){
         Swal.fire('Bien hecho!', `${resp.msg} A continuación suba los documentos necesarios.`, 'success');
         this.formSubmitted = false;
-        setTimeout(() => { window.location.reload(); }, 2000);
+        this.getAnexosByIdInver(this.inversion['id_inv']);
       }
 
       
@@ -214,16 +215,12 @@ export class DetalleInversionComponent implements OnInit {
   public getAnexosByIdInver = (idInversion:string) =>{
 
     this.InversionServ.getAnexosByIdService(idInversion).subscribe( (resp:any) =>{
-
-      console.log(resp.anexos)
-
-      if( resp.ok ){
-        this.anexos = resp.anexos || [];
-      }
+      
+      this.anexos = resp.anexos || [];
       
     }, (err) =>{
       //En caso de un error
-      Swal.fire('Error', err.error.msg, 'error');
+      console.log(err.error.msg);
     });
   }
 
@@ -248,7 +245,7 @@ export class DetalleInversionComponent implements OnInit {
 
       if( resp.ok ){
         Swal.fire('Bien hecho!', resp.msg, 'success');
-        setTimeout(() => { window.location.reload(); }, 2000);
+        this.getArchivosUserInversion(this.inversion['id_inv'], this.inversion['id_us_inv']);
 
       } else {
         Swal.fire('Error', 'No se pudo cargar el archivo. Inténtelo más tarde.', 'error');

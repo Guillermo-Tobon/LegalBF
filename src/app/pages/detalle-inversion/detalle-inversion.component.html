@@ -152,19 +152,19 @@
 
 <!-- Anexos para la inversión  -->
 <div *ngIf="this.usuario[0].admin_us === 'Y'" class="row">
-  <div class="col-lg-7 col-md-7">
+  <div class="col-lg-6 col-md-6">
     <div class="card">
       <div class="card-body">
         <button type="button" (click)="modalCrearAnexos(inversion)" class="btn waves-effect waves-light btn-rounded btn-success btn-block" data-toggle="modal" data-target=".modalCrearAnexo">Crear Anexo</button>
       </div>
     </div>
   </div>
-  <div class="col-lg-5 col-md-5">
+  <div class="col-lg-6 col-md-6">
     <div class="card">
       <div class="card-body">
         <h4 class="card-title">Carga de archivos para el anexo</h4>
         <label for="input-file-now">Publique los archivo necesarios.</label>
-        <input type="file" (change)="obtenerArchivo( $event.target.files[0] )" id="input-file-now" class="dropify-fr" />
+        <input type="file" (change)="obtenerArchivo( $event.target.files[0] )" id="input-file-now" class="dropify"/>
         <br><br>
         <button type="button" [disabled]="!archivoSubir" (click)="subirArchivoById()" class="btn waves-effect waves-light btn-rounded btn-success btn-block">Subir archivo</button>
       </div>
@@ -260,7 +260,7 @@
             <div class="row">
               <div class="col-lg-6 col-md-6">
                 <div class="form-group">
-                  <button type="submit" class="btn waves-effect waves-light btn-rounded btn-success btn-block">Editar ticket</button>
+                  <button type="submit" class="btn waves-effect waves-light btn-rounded btn-success btn-block">Editar inversión</button>
                 </div>
               </div>
               <div class="col-lg-6 col-md-6">

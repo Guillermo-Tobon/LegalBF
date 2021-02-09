@@ -42,8 +42,6 @@ export class DocumentacionComponent implements OnInit {
 
       this.archivos = resp.archivos || [];  
 
-      console.log(this.archivos)
-
     }, (err) =>{
       //En caso de un error
       console.log(err.error.msg);
@@ -62,8 +60,6 @@ export class DocumentacionComponent implements OnInit {
     this.archivosServ.getFilesUserService(idUser).subscribe( (resp:any) =>{
 
       this.archivos = resp.archivos || [];  
-      
-      console.log(this.archivos)
 
     }, (err) =>{
       //En caso de un error
@@ -103,7 +99,7 @@ export class DocumentacionComponent implements OnInit {
 
     Swal.fire({
       text: "¿Realmente desea eliminar el archivo " + archivo.nom_archivo_info + "?",
-      icon: 'warning',
+      icon: 'question',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
@@ -114,7 +110,7 @@ export class DocumentacionComponent implements OnInit {
           
           if ( resp.ok ) {
             Swal.fire('Bien hecho!', resp.msg, 'success');
-            setTimeout(() => { window.location.reload(); }, 2000);
+            this.getAllArchivos();
           }
     
         }, (err) =>{
