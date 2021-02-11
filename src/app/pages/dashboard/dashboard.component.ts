@@ -14,10 +14,8 @@ import { TicketsService } from 'src/app/services/tickets.service';
 })
 export class DashboardComponent implements OnInit {
 
-  //Para grafica de dona
-  public labels1:string[] = ['Download Sales', 'In-Store Sales', 'Mail-Order Sales'];
-  public Data1 = [[350, 450, 100]];
-  
+  public labels1:string[] = [];
+  public Data1:any[] = [];
   public labels2:string[] = [];               
   public Data2:any[] = [];  
   public labels3:string[] = [];               
@@ -61,6 +59,7 @@ export class DashboardComponent implements OnInit {
       this.getTodasInversiones();
       this.getAllTickets();
       this.getUsuariosInversiones();
+      setTimeout(() => { this.cargarGraficaDona(); }, 1000);
     }
   }
 
@@ -115,7 +114,7 @@ export class DashboardComponent implements OnInit {
 
         for (let i = 0; i < this.anexos.length; i++) {
           dataGanan[i] = this.anexos[i].ganacias_anex;
-          this.labels2[i] = this.anexos[i].fechpublica_anex;
+          this.labels2[i] = this.anexos[i].fechAnexo;
 
           this.sumGanan += this.anexos[i].ganacias_anex;  
         }
@@ -154,12 +153,12 @@ export class DashboardComponent implements OnInit {
    * Método para visualizar archivo por id
    * @param archivo => Objeto archivo a visualizar 
    */
-  public verArchivo = (archivo:any) =>{
+  public verArchivo = (tipoFile:any, nomFile:any) =>{
 
-    this.archivosServ.viewFileService( archivo.tipo_archivo_info, archivo.nom_archivo_info ).subscribe( (resp:any) =>{
+    this.archivosServ.viewFileService( tipoFile, nomFile ).subscribe( (resp:any) =>{
 
       //window.open(resp.pathFile, "_blank");
-      window.open(`http://127.0.0.1:8887/${archivo.tipo_archivo_info}/${archivo.nom_archivo_info}`, "_blank");
+      window.open(`http://127.0.0.1:8887/${tipoFile}/${nomFile}`, "_blank");
     
     }, (err) =>{
       //En caso de un error
@@ -177,8 +176,6 @@ export class DashboardComponent implements OnInit {
     this.clientesServ.getUsuariosService().subscribe( (data:any) =>{
       
       this.usuarios = data.usuarios || [];
-
-      console.log(this.usuarios)
      
     }, (err) =>{
       //En caso de un error
@@ -239,6 +236,17 @@ export class DashboardComponent implements OnInit {
       //En caso de un error
       console.log(err.error.msg);
     })
+  }
+
+
+
+  /**
+   * Método para cargar la grafica de rosca
+   */
+  public cargarGraficaDona = () =>{
+    this.labels1 = ['Users', 'Investments', 'Tickets'];
+    this.Data1 = [[this.usuarios.length, this.totalInver.length, this.tickets.length]];
+
   }
 
 

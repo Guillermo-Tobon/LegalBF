@@ -25,6 +25,7 @@ import { TerminosComponent } from './terminos/terminos.component';
 import { CrearInversionComponent } from './crear-inversion/crear-inversion.component';
 import { DetalleInversionComponent } from './detalle-inversion/detalle-inversion.component';
 import { CalendarModule, DatePickerModule } from '@syncfusion/ej2-angular-calendars';
+import { CrearAnexoComponent } from './crear-anexo/crear-anexo.component';
 
 
 @NgModule({
@@ -44,7 +45,8 @@ import { CalendarModule, DatePickerModule } from '@syncfusion/ej2-angular-calend
     QuienesSomosComponent,
     TerminosComponent,
     CrearInversionComponent,
-    DetalleInversionComponent
+    DetalleInversionComponent,
+    CrearAnexoComponent
   ],
   exports: [
     DashboardComponent,

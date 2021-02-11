@@ -1,0 +1,77 @@
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">En el siguiente formulario puede crear anexos para la inversión <span class="aInversion"> {{inversion['id_inv']}} </span></h4>
+        <h6 class="card-subtitle">Una vez creado el anexo, se notificará vía correo electrónico.</h6>
+      
+        <form class="floating-labels m-t-40" #FormAnex="ngForm" [formGroup]="FormCrearAnexo" (submit)="crearAnexos(); FormAnex.reset()">
+          <div class="row">
+            <div class="col-lg-4 col-md-4">
+              <div class="form-group m-b-40 focused">
+                <label for="input1">Nombre anexo</label>
+                <input type="text" formControlName="nombreAnexo" class="form-control">
+                <span class="bar"></span>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-4">
+              <div class="form-group m-b-40 focused">
+                <label for="input1">Ganancias captados</label>
+                <input type="number" formControlName="ganancias" class="form-control">
+                <span class="bar"></span>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-4">
+              <div class="form-group grupoDate">
+                <span class="spanFech" >Fecha anexo</span>
+                <input type="date" formControlName="fecha" class="form-control">
+                <span class="bar"></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="form-group m-b-40 focused">
+                <label for="input2">Comentario</label>
+                <textarea class="form-control" formControlName="comentario" rows="3"></textarea>
+                <span class="bar"></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-lg-2 col-md-2"></div>
+            <div class="col-lg-8">
+              <div class="form-group m-b-40 focused">
+                <label for="input-file-now">Cargue el archivo para el anexo.</label>
+                <input type="file" (change)="obtenerArchivo( $event.target.files[0] )" id="input-file-now" class="dropify"/>
+                <span class="bar"></span>
+              </div>
+            </div>
+            <div class="col-lg-2 col-md-2"></div>
+          </div>
+
+          <div class="row">
+            <div class="col text-danger">
+              <p *ngIf="campoNoValido('nombreAnexo')">*El nombre del anexo es obligatorio.</p>
+              <p *ngIf="campoNoValido('ganancias')">*Las ganancias son obligatorias.</p>
+              <p *ngIf="campoNoValido('comentario')">*El comentario es obligatorio.</p>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-lg-6 col-md-6">
+              <div class="form-group">
+                <button type="submit" class="btn waves-effect waves-light btn-rounded btn-success">Crear anexo</button>
+                &nbsp;
+                <button type="button" (click)="goBack()" class="btn waves-effect waves-light btn-rounded btn-danger" data-dismiss="modal">Volver</button>
+              </div>
+            </div>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>

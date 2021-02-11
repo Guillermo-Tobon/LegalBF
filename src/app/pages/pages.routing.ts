@@ -17,6 +17,7 @@ import { ListaTicketsComponent } from './lista-tickets/lista-tickets.component';
 import { QuienesSomosComponent } from './quienes-somos/quienes-somos.component';
 import { TerminosComponent } from './terminos/terminos.component';
 import { CrearInversionComponent } from './crear-inversion/crear-inversion.component';
+import { CrearAnexoComponent } from './crear-anexo/crear-anexo.component';
 import { DetalleInversionComponent } from './detalle-inversion/detalle-inversion.component';
 
 
@@ -34,6 +35,7 @@ const routes: Routes = [
       { path: 'configuracion-cuenta', component: ConfiguracionCuentaComponent, data: {titulo: 'Configuración cuenta'} },
       { path: 'crear-cliente', component: CrearClienteComponent, data: {titulo: 'Crear cliente'} },
       { path: 'crear-inversion/:usuario', component: CrearInversionComponent, data: {titulo: 'Crear inversión'} },
+      { path: 'crear-anexo/:inversion', component: CrearAnexoComponent, data: {titulo: 'Crear anexo'} },
       { path: 'lista-clientes', component: ListaClientesComponent, data: {titulo: 'Lista clientes'} },
       { path: 'detalle-cliente/:usuario', component: DetalleClienteComponent, data: {titulo: 'Detalle cliente'} },
       { path: 'detalle-inversion/:inversion', component: DetalleInversionComponent, data: {titulo: 'Detalle inversión'} },

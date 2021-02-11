@@ -25,9 +25,9 @@ export class ArchivosService {
      * Método de servicio para subir archivos por usuario
      * @param idUser => ID de usuario
      */
-    public uploadFilesServices = async(archivo:File, idInver:string, idUser:Number) =>{
+    public uploadFilesServices = async(archivo:File, idInver:string, idAnexo:any, idUser:Number) =>{
 
-      const url = `${BASE_URL}/uploadfile/${idInver}/${idUser}`;
+      const url = `${BASE_URL}/uploadfile/${idInver}/${idAnexo}/${idUser}`;
       const formData = new FormData();
       formData.append( 'archivo', archivo );
 

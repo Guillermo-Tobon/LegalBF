@@ -52,3 +52,9 @@
 .tablaAnexos tbody tr td{
   font-size: 13px;
 }
+.headW{
+  width: 111px;
+}
+.cursor{
+  cursor: pointer;
+}

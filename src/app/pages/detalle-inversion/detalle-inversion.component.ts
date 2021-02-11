@@ -81,12 +81,12 @@ export class DetalleInversionComponent implements OnInit {
    * Método para visualizar archivo por id
    * @param archivo => Objeto archivo a visualizar 
    */
-  public verArchivo = (archivo:any) =>{
+  public verArchivo = (tipoFile:any, nomFile:any) =>{
 
-    this.archivosServ.viewFileService( archivo.tipo_archivo_info, archivo.nom_archivo_info ).subscribe( (resp:any) =>{
+    this.archivosServ.viewFileService( tipoFile, nomFile ).subscribe( (resp:any) =>{
 
       //window.open(resp.pathFile, "_blank");
-      window.open(`http://127.0.0.1:8887/${archivo.tipo_archivo_info}/${archivo.nom_archivo_info}`, "_blank");
+      window.open(`http://127.0.0.1:8887/${tipoFile}/${nomFile}`, "_blank");
     
     }, (err) =>{
       //En caso de un error
@@ -139,14 +139,6 @@ export class DetalleInversionComponent implements OnInit {
   }
 
 
-  /**
-   * Método para cargar el modal de editar inversión
-   * @param inversion => Inversión a editar
-   */
-  public modalCrearAnexos = (inversion:any) =>{
-    this.editInversion = inversion;
-  }
-
 
 
   /**
@@ -173,40 +165,6 @@ export class DetalleInversionComponent implements OnInit {
   }
 
 
-  /**
-   * Método para crear anexos a la inversión
-   * @param inversion => ID de la inversión
-   */
-  public crearAnexos = (inversion:any) =>{
-    this.formSubmitted = true;
-
-    if ( this.FormCrearAnexo.invalid ) {
-      return; 
-    }
-
-    const dataInver = {
-      idUser: inversion.id_us_inv,
-      idInversion: inversion.id_inv,
-      tasa: inversion.tasa_ea_inv,
-      moneda: inversion.moneda_inv
-    }
-
-    this.InversionServ.crearAnexoServices( this.FormCrearAnexo.value, dataInver ).subscribe( (resp:any) =>{
-
-      if( resp.ok ){
-        Swal.fire('Bien hecho!', `${resp.msg} A continuación suba los documentos necesarios.`, 'success');
-        this.formSubmitted = false;
-        this.getAnexosByIdInver(this.inversion['id_inv']);
-      }
-
-      
-    }, (err) =>{
-      //En caso de un error
-      Swal.fire('Error', err.error.msg, 'error');
-    })
-
-  } 
-
 
   /**
    * Método para obtener los anexos
@@ -217,6 +175,7 @@ export class DetalleInversionComponent implements OnInit {
     this.InversionServ.getAnexosByIdService(idInversion).subscribe( (resp:any) =>{
       
       this.anexos = resp.anexos || [];
+      console.log(this.anexos)
       
     }, (err) =>{
       //En caso de un error
@@ -225,36 +184,6 @@ export class DetalleInversionComponent implements OnInit {
   }
 
 
-
-  /**
-   * Método para obtener el archivo por usuario
-   * @param file => Objeto file del archivo a subir
-   */
-  public obtenerArchivo = (file:File) =>{
-    this.archivoSubir = file
-  }
-
-
-
-  /**
-   *  Método para subir el archivo por usuario
-   */
-  public  subirArchivoById = () =>{
-    
-    this.archivosServ.uploadFilesServices(this.archivoSubir, this.inversion['id_inv'], this.inversion['id_us_inv']).then( (resp:any) =>{
-
-      if( resp.ok ){
-        Swal.fire('Bien hecho!', resp.msg, 'success');
-        this.getArchivosUserInversion(this.inversion['id_inv'], this.inversion['id_us_inv']);
-
-      } else {
-        Swal.fire('Error', 'No se pudo cargar el archivo. Inténtelo más tarde.', 'error');
-      }
-      
-    }).catch( (err) =>{
-      Swal.fire('Error', err.error.msg, 'error');
-    })
-  }
 
 
 
@@ -286,6 +215,18 @@ export class DetalleInversionComponent implements OnInit {
     } else {
       return false;
     }
+  }
+
+
+
+  /**
+   * Método para navegar a crear anexos
+   */
+  public navegarCrearAnexo = () =>{
+
+    const inver = JSON.stringify(this.inversion);
+    this.router.navigate(['dashboard/crear-anexo', inver]);
+
   }
 
 

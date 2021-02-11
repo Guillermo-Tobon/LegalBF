@@ -76,7 +76,7 @@
 <!-- Información detallada de la inversion y los anexos -->
 <div *ngIf=" usuario[0].admin_us === 'N' " class="row">
   <!-- Column -->
-  <div class="col-lg-8 col-xlg-9 col-md-8">
+  <div class="col-lg-12">
     <div class="card">
       <!-- Nav tabs -->
       <ul class="nav nav-tabs profile-tab" role="tablist">
@@ -155,27 +155,6 @@
       </div>
     </div>
   </div>
-
-  <!-- Column -->
-  <div class="col-lg-4 col-xlg-3 col-md-4">
-    <div class="card">
-      <ul class="nav nav-tabs profile-tab" role="tablist">
-        <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#settings" role="tab">Documentos relacionados</a> </li>
-      </ul>
-      <div class="card-body contenidoArchivos">
-        <div *ngFor="let archivo of archivos" class="alert alert-info">
-          <img *ngIf=" archivo.tipo_archivo_info === 'pdf' " class="logoFile" src="../../../assets/images/pdf.png" alt="">
-          <img *ngIf=" archivo.tipo_archivo_info === 'word' " class="logoFile" src="../../../assets/images/word.png" alt="">
-          {{archivo.nom_archivo_info | slice:9:30 }} {{ (archivo.nom_archivo_info.length > 30)? '...': '' }}
-          <br>
-          <span class="fechArchivo">Publicado: {{archivo.fech_publica_info | date: 'dd/MM/yyyy' }} </span>
-          <div class="opcionesFile">
-            <a (click)="verArchivo(archivo)" title="View"> <i class="mdi mdi-eye"></i> </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 </div>
 
 
@@ -185,7 +164,7 @@
     <div class="card">
       <div class="card-body">
         <h4 class="card-title">Anexos cargados actualmente</h4>
-        <h6 class="card-subtitle">Estos son los anexos cargados para la inversión {{ nomInversion }} </h6>
+        <h6 class="card-subtitle">Estos son los anexos cargados para la inversión &nbsp; <b>{{ idInv }}</b></h6>
         <div class="table-responsive">
           <table class="table tablaAnexos">
             <thead>
@@ -196,7 +175,8 @@
                 <th>Tasa (EA) inicial</th>
                 <th>Moneda</th>
                 <th>Comentario</th>
-                <th>Fecha publicación</th>
+                <th class="headW">Fecha</th>
+                <th>File</th>
               </tr>
             </thead>
             <tbody>
@@ -207,7 +187,9 @@
                 <td>{{anexo.tasa_anex}}%</td>
                 <td>{{anexo.moneda_anex}}</td>
                 <td>{{anexo.comentario_anex}}</td>
-                <td><span class="text-muted"><i class="fa fa-calendar-o"></i> {{anexo.fechpublica_anex | date: 'dd/MM/yyyy'}}</span> </td>
+                <td><span class="text-muted"><i class="fa fa-calendar-o"></i> {{ anexo.fechAnexo }}</span> </td>
+                <td *ngIf=" anexo.tipo_archivo_info === 'pdf' " (click)="verArchivo( anexo.tipo_archivo_info, anexo.nom_archivo_info )" class="cursor"><img class="logoFile" src="../../../assets/images/pdf.png" alt=""> </td>
+                <td *ngIf=" anexo.tipo_archivo_info === 'word' " (click)="verArchivo( anexo.tipo_archivo_info, anexo.nom_archivo_info )" class="cursor"><img class="logoFile" src="../../../assets/images/word.png" alt=""></td>
               </tr>
             </tbody>
           </table>
@@ -229,7 +211,7 @@
   </div>
 
   <div class="col-lg-5 col-md-5">
-    <app-dona [labels]="labels1" [data]="Data1" title="Mis Ganancias"></app-dona>
+    <app-dona [labels]="labels1" [data]="Data1" title="Estado plataforma"></app-dona>
   </div>
   <div class="col-lg-7 col-md-7">
     <div class="card">

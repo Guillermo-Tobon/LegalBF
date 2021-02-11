@@ -17,8 +17,7 @@ export class CrearInversionComponent implements OnInit {
   public usuario:any[] = [];
   public idInversion:string = '';
   public formSubmitted = false;
-  public btnActive:boolean = true;
-  public archivoSubir:File;
+  
 
   public crearFormInversion = this.fb.group({
     nombreInver: ['', [Validators.required, Validators.minLength(3)]],
@@ -64,9 +63,8 @@ export class CrearInversionComponent implements OnInit {
     this.inversionServ.crearInversionService( this.crearFormInversion.value, this.usuario['id_us'] ).subscribe( (resp:any) =>{
 
       if( resp.ok ){
-        Swal.fire('Bien hecho!', `${resp.msg} A continuación suba los documentos necesarios.`, 'success');
-        //setTimeout(() => { window.location.reload(); }, 2000);
-        this.btnActive = false;
+        Swal.fire('Bien hecho!', `${resp.msg}.`, 'success');
+        setTimeout(() => { window.location.reload(); }, 2000);
         this.idInversion = resp.idInver;
       }
 
@@ -78,35 +76,6 @@ export class CrearInversionComponent implements OnInit {
 
   }
 
-
-  /**
-   * Método para obtener el archivo por usuario
-   * @param file => Objeto file del archivo a subir
-   */
-  public obtenerArchivo = (file:File) =>{
-    this.archivoSubir = file
-  }
-
-
-  /**
-   *  Método para subir el archivo por usuario
-   */
-  public  subirArchivoById = () =>{
-    
-    this.archivosServ.uploadFilesServices(this.archivoSubir, this.idInversion, this.usuario['id_us']).then( (resp:any) =>{
-
-      if( resp.ok ){
-        Swal.fire('Bien hecho!', resp.msg, 'success');
-        //setTimeout(() => { window.location.reload(); }, 2000);
-
-      } else {
-        Swal.fire('Error', 'No se pudo cargar el archivo. Inténtelo más tarde.', 'error');
-      }
-      
-    }).catch( (err) =>{
-      Swal.fire('Error', err.error.msg, 'error');
-    })
-  }
 
 
 
