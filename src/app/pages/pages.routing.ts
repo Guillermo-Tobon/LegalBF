@@ -19,6 +19,7 @@ import { TerminosComponent } from './terminos/terminos.component';
 import { CrearInversionComponent } from './crear-inversion/crear-inversion.component';
 import { CrearAnexoComponent } from './crear-anexo/crear-anexo.component';
 import { DetalleInversionComponent } from './detalle-inversion/detalle-inversion.component';
+import { DetalleAnexoComponent } from './detalle-anexo/detalle-anexo.component';
 
 
 const routes: Routes = [
@@ -38,6 +39,7 @@ const routes: Routes = [
       { path: 'crear-anexo/:inversion', component: CrearAnexoComponent, data: {titulo: 'Crear anexo'} },
       { path: 'lista-clientes', component: ListaClientesComponent, data: {titulo: 'Lista clientes'} },
       { path: 'detalle-cliente/:usuario', component: DetalleClienteComponent, data: {titulo: 'Detalle cliente'} },
+      { path: 'detalle-anexo/:anexo', component: DetalleAnexoComponent, data: {titulo: 'Detalle anexo'} },
       { path: 'detalle-inversion/:inversion', component: DetalleInversionComponent, data: {titulo: 'Detalle inversión'} },
       { path: 'tickets/:usuario', component: TicketsComponent, data: {titulo: 'Tickets'} },
       { path: 'lista-tickets', component: ListaTicketsComponent, data: {titulo: 'Lista de tickets'} },

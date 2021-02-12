@@ -20,6 +20,7 @@ export class CrearClienteComponent implements OnInit {
     apellidos: ['', [Validators.required, Validators.minLength(3)]],
     email: ['', [Validators.required, Validators.email, Validators.minLength(6)]],
     telefono: ['', [Validators.required, Validators.minLength(6)]],
+    pais: ['', [Validators.required, Validators.minLength(3)]],
     password: ['', [Validators.required, Validators.minLength(6)]],
     passwordConfir: ['', [Validators.required, Validators.minLength(6)]],
     compania: ['', [Validators.required, Validators.minLength(5)]],

@@ -4,6 +4,7 @@ export interface ClienteForm {
   apellidos: string;
   email: string;
   telefono: string;
+  pais: string;
   compania: string;
   descripcion: string;
   password: string;

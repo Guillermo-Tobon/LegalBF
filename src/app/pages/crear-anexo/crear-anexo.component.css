@@ -143,3 +143,8 @@
   position: absolute;
   top: -11px;
 }
+.nomUser{
+  float: right;
+  color: #c4bdce;
+  font-size: 12px;
+}

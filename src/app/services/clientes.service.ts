@@ -59,6 +59,7 @@ export class ClientesService {
       email: formData.email,
       password: formData.password,
       telefono: formData.telefono,
+      pais: formData.pais,
       compania: formData.compania,
       descripcion: formData.descripcion,
       estado: formData.estado == true? 1 : 0,
@@ -83,6 +84,20 @@ export class ClientesService {
 
 
   /**
+   * Método de servicio para obtener usuario pot id
+   * @param idUser => ID del usuario a consultar
+   */
+  public getUserByIdService = (idUser:any) =>{
+
+    return this.http.get(`${BASE_URL}/usuarios/${idUser}`, this.httpOptions).pipe(
+      map( resp => resp)
+    )
+
+  }
+
+
+
+  /**
    * Método de servicio para actualizar el cliente
    * @param formData => Información del formulario
    */
@@ -94,6 +109,7 @@ export class ClientesService {
       apellidos: formData.apellidos,
       email: formData.email,
       telefono: formData.telefono,
+      pais: formData.pais,
       compania: formData.compania,
       descripcion: formData.descripcion,
       estado: formData.estado === true? 1: 0

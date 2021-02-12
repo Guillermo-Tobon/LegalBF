@@ -6,6 +6,7 @@ import { InversionesService } from 'src/app/services/inversiones.service';
 import { ArchivosService } from 'src/app/services/archivos.service';
 import { ClientesService } from 'src/app/services/clientes.service';
 import { TicketsService } from 'src/app/services/tickets.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -46,6 +47,7 @@ export class DashboardComponent implements OnInit {
               private clientesServ: ClientesService,
               private ticketServ: TicketsService,
               private archivosServ: ArchivosService,
+              private router: Router
   ) { }
 
 
@@ -246,6 +248,18 @@ export class DashboardComponent implements OnInit {
   public cargarGraficaDona = () =>{
     this.labels1 = ['Users', 'Investments', 'Tickets'];
     this.Data1 = [[this.usuarios.length, this.totalInver.length, this.tickets.length]];
+
+  }
+
+
+
+  /**
+   * Método para navegar a detalle anexo
+   */
+  public navegarAnexo = (anexo:any) =>{
+
+    const obAnexo = JSON.stringify(anexo);
+    this.router.navigate(['dashboard/detalle-anexo', obAnexo]);
 
   }
 

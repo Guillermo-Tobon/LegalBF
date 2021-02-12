@@ -160,6 +160,7 @@ export class DetalleClienteComponent implements OnInit {
       apellidos: [usuario['apellidos_us'], [Validators.required, Validators.minLength(3)]],
       email: [usuario['email_us'], [Validators.required, Validators.email, Validators.minLength(6)]],
       telefono: [usuario['telefono_us'], [Validators.required, Validators.minLength(6)]],
+      pais: [usuario['pais'], [Validators.required, Validators.minLength(3)]],
       compania: [usuario['compania_us'], [Validators.required, Validators.minLength(5)]],
       descripcion: [usuario['descripcion_us'], [Validators.required, Validators.minLength(20)]],
       estado: [usuario['estado_us'] === 1? true : false, [Validators.required]],

@@ -181,7 +181,7 @@
             </thead>
             <tbody>
               <tr *ngFor="let anexo of anexos">
-                <td>{{anexo.id_anex}}</td>
+                <td> <a class="aAnexos" title="Ver Anexo" (click)="navegarAnexo(anexo)"> {{anexo.id_anex}} </a></td>
                 <td>{{anexo.nombre_anex}}</td>
                 <td>{{anexo.ganacias_anex | currency: anexo.moneda_anex }} </td>
                 <td>{{anexo.tasa_anex}}%</td>

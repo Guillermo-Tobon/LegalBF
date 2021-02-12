@@ -58,3 +58,20 @@
 .cursor{
   cursor: pointer;
 }
+.liInfoGen{
+  position: relative;
+}
+.nomUser{
+  position: absolute;
+  right: 10px;
+  top: 20px;
+  color: #c4bdce;
+  font-size: 12px;
+}
+.aAnexos{
+  cursor: pointer;
+  background-color: #e9edf2;
+  border-radius: 6px;
+  padding: 3px 6px;
+  font-size: 12px;
+}

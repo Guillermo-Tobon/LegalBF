@@ -2,7 +2,7 @@
   <div class="col-lg-12">
     <div class="card">
       <div class="card-body">
-        <h4 class="card-title">En el siguiente formulario puede crear anexos para la inversión <span class="aInversion"> {{inversion['id_inv']}} </span></h4>
+        <h4 class="card-title">En el siguiente formulario puede crear anexos para la inversión <span class="aInversion"> {{inversion['id_inv']}} </span> <span class="nomUser">User: {{usuario[0].nombres_us}}</span></h4>
         <h6 class="card-subtitle">Una vez creado el anexo, se notificará vía correo electrónico.</h6>
       
         <form class="floating-labels m-t-40" #FormAnex="ngForm" [formGroup]="FormCrearAnexo" (submit)="crearAnexos(); FormAnex.reset()">
@@ -31,25 +31,20 @@
           </div>
 
           <div class="row">
-            <div class="col-lg-12">
+            <div class="col-lg-7 col-md-7">
               <div class="form-group m-b-40 focused">
                 <label for="input2">Comentario</label>
                 <textarea class="form-control" formControlName="comentario" rows="3"></textarea>
                 <span class="bar"></span>
               </div>
             </div>
-          </div>
-
-          <div class="row">
-            <div class="col-lg-2 col-md-2"></div>
-            <div class="col-lg-8">
+            <div class="col-lg-5 col-md-5">
               <div class="form-group m-b-40 focused">
                 <label for="input-file-now">Cargue el archivo para el anexo.</label>
                 <input type="file" (change)="obtenerArchivo( $event.target.files[0] )" id="input-file-now" class="dropify"/>
                 <span class="bar"></span>
               </div>
             </div>
-            <div class="col-lg-2 col-md-2"></div>
           </div>
 
           <div class="row">

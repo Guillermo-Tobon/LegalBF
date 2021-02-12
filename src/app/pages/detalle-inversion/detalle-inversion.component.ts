@@ -7,6 +7,7 @@ import Swal from 'sweetalert2';
 import { ArchivosService } from 'src/app/services/archivos.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { InversionesService } from 'src/app/services/inversiones.service';
+import { ClientesService } from 'src/app/services/clientes.service';
 
 
 @Component({
@@ -18,6 +19,7 @@ export class DetalleInversionComponent implements OnInit {
 
 
   public usuario:any[] = [];
+  public userAsociado:any[] = [];
   public inversion:any[] = [];
   public archivos:any[] = [];
   public anexos:any[] = [];
@@ -37,6 +39,7 @@ export class DetalleInversionComponent implements OnInit {
               private routeActive: ActivatedRoute,
               private archivosServ: ArchivosService,
               private InversionServ: InversionesService,
+              private clientesSrv: ClientesService,
               private authServ: AuthService,
               private location: Location,
               private router: Router,
@@ -55,6 +58,8 @@ export class DetalleInversionComponent implements OnInit {
       this.cargarFormEditInver(this.inversion);
 
       this.getAnexosByIdInver(this.inversion['id_inv']);
+
+      this.getUserById(this.inversion['id_us_inv']);
 
     })
   }
@@ -175,7 +180,6 @@ export class DetalleInversionComponent implements OnInit {
     this.InversionServ.getAnexosByIdService(idInversion).subscribe( (resp:any) =>{
       
       this.anexos = resp.anexos || [];
-      console.log(this.anexos)
       
     }, (err) =>{
       //En caso de un error
@@ -220,12 +224,41 @@ export class DetalleInversionComponent implements OnInit {
 
 
   /**
+  * Método para obtener usuario pot id
+  * @param idUser => ID del usuario a consultar
+  */
+ public getUserById = (idUse:any) =>{
+  this.clientesSrv.getUserByIdService( idUse ).subscribe( (resp:any) =>{
+
+    this.userAsociado = resp.usuario || [];
+
+  }, (err) =>{
+    //En caso de un error
+    console.log(err.error.msg);
+  })
+}
+
+
+
+
+  /**
    * Método para navegar a crear anexos
    */
   public navegarCrearAnexo = () =>{
 
     const inver = JSON.stringify(this.inversion);
     this.router.navigate(['dashboard/crear-anexo', inver]);
+
+  }
+
+
+  /**
+   * Método para navegar a detalle anexo
+   */
+  public navegarAnexo = (anexo:any) =>{
+
+    const obAnexo = JSON.stringify(anexo);
+    this.router.navigate(['dashboard/detalle-anexo', obAnexo]);
 
   }
 

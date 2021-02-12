@@ -5,6 +5,7 @@ import { Location } from '@angular/common';
 import Swal from 'sweetalert2';
 import { InversionesService } from 'src/app/services/inversiones.service';
 import { ArchivosService } from 'src/app/services/archivos.service';
+import { ClientesService } from 'src/app/services/clientes.service';
 
 @Component({
   selector: 'app-crear-anexo',
@@ -14,6 +15,7 @@ import { ArchivosService } from 'src/app/services/archivos.service';
 export class CrearAnexoComponent implements OnInit {
 
   public inversion:any[] = [];
+  public usuario:any[] = [];
   public formSubmitted:boolean = false;
   public idAnexo:String = '';
   public archivoSubir:File;
@@ -29,6 +31,7 @@ export class CrearAnexoComponent implements OnInit {
               private routeActive: ActivatedRoute,
               private InversionServ: InversionesService,
               private archivosServ: ArchivosService,
+              private clientesSrv: ClientesService,
               private location: Location,
               private fb: FormBuilder,
   ) { }
@@ -37,6 +40,9 @@ export class CrearAnexoComponent implements OnInit {
 
     this.routeActive.params.subscribe( data => {
       this.inversion = JSON.parse( data['inversion'] ) || [];
+
+      this.getUserById(this.inversion['id_us_inv'])
+
     })
   }
 
@@ -48,8 +54,6 @@ export class CrearAnexoComponent implements OnInit {
    * @param inversion => ID de la inversión
    */
   public crearAnexos = () =>{
-
-    console.log(this.archivoSubir)
   
     this.formSubmitted = true;
 
@@ -64,16 +68,37 @@ export class CrearAnexoComponent implements OnInit {
       moneda: this.inversion['moneda_inv']
     }
 
-    this.InversionServ.crearAnexoServices( this.FormCrearAnexo.value, dataInver ).subscribe( (resp:any) =>{
+    this.InversionServ.crearAnexoServices( this.FormCrearAnexo.value, dataInver ).subscribe( (resp1:any) =>{
 
-      if( resp.ok ){
+      if( resp1.ok ){
         this.formSubmitted = false;
-        this.idAnexo = resp.idAnexo;
+        this.idAnexo = resp1.idAnexo;
         
         this.archivosServ.uploadFilesServices( this.archivoSubir, this.inversion['id_inv'], this.idAnexo, this.inversion['id_us_inv'] ).then(
-          (resp:any) =>{
-            Swal.fire('Bien hecho!', `${resp.msg}`, 'success');
-            setTimeout(() => { window.location.reload(); }, 2000);
+          (resp2:any) =>{
+
+            const json = {
+              nombres: this.usuario[0].nombres_us,
+              apellidos: this.usuario[0].apellidos_us,
+              //email: this.usuario[0].email_us,
+              email: 'desarrollomemo@gmail.com',
+              asunto: 'Creación de anexo a su inversión en LegalBF',
+              descripcion: `<p>Se creó un anexo a su inversión <strong>${this.inversion['nombre_inv']}</strong> de LegalBF por parte del administador.</p>
+                            <p>Por favor ingrese a: <a href="https://www.legalbf.com/" target="_blank">www.legalbf.com</a> y verifique su información.</p>
+                            <br>
+                            <b>Para más información, comuníquese con el administrador de LegalBF </b>
+                            <br>
+                            <p>©2021 - Todos los derechos reservados - es un servicio gratuito de LegalBG</p>`
+            }
+            this.clientesSrv.sendEmailClienteService(json).subscribe( (resp:any) =>{
+
+              Swal.fire('Bien hecho!', `${resp1.msg}`, 'success');
+              setTimeout(() => { window.location.reload(); }, 2000);
+
+            }, (err) =>{
+              //En caso de un error
+              Swal.fire('Error', err.error.msg, 'error');
+            })
 
           }).catch( (err) =>{
               Swal.fire('Error', err.error.msg, 'error');
@@ -110,6 +135,22 @@ export class CrearAnexoComponent implements OnInit {
     } else {
       return false;
     }
+  }
+
+
+  /**
+  * Método para obtener usuario pot id
+  * @param idUser => ID del usuario a consultar
+  */
+  public getUserById = (idUse:any) =>{
+    this.clientesSrv.getUserByIdService( idUse ).subscribe( (resp:any) =>{
+
+      this.usuario = resp.usuario || [];
+
+    }, (err) =>{
+      //En caso de un error
+      console.log(err.error.msg);
+    })
   }
 
 

@@ -24,6 +24,7 @@ import { QuienesSomosComponent } from './quienes-somos/quienes-somos.component';
 import { TerminosComponent } from './terminos/terminos.component';
 import { CrearInversionComponent } from './crear-inversion/crear-inversion.component';
 import { DetalleInversionComponent } from './detalle-inversion/detalle-inversion.component';
+import { DetalleAnexoComponent } from './detalle-anexo/detalle-anexo.component';
 import { CalendarModule, DatePickerModule } from '@syncfusion/ej2-angular-calendars';
 import { CrearAnexoComponent } from './crear-anexo/crear-anexo.component';
 
@@ -46,7 +47,8 @@ import { CrearAnexoComponent } from './crear-anexo/crear-anexo.component';
     TerminosComponent,
     CrearInversionComponent,
     DetalleInversionComponent,
-    CrearAnexoComponent
+    DetalleAnexoComponent,
+    CrearAnexoComponent,
   ],
   exports: [
     DashboardComponent,
