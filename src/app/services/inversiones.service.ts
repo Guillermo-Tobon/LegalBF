@@ -28,20 +28,25 @@ export class InversionesService {
    * @param formData => Datos del formulario
    * @param idUser => ID del usuario
    */
-  public crearInversionService = (formData:InversionForm, idUser:number) =>{
+  public crearInversionService = (formData:any, idUser:number) =>{
 
     const json = {
       idUs: idUser,
-      nombre: formData.nombreInver,
-      capital: formData.capital,
-      moneda: formData.moneda,
-      tiempo: formData.tiempo,
-      tasa: JSON.stringify(formData.tasainteres),
+      nombreInver: formData.nombreInver,
+      capitalExtra: formData.capitalExtra,
+      monedaInver: formData.monedaExtra,
+      tasaCambio: formData.tasaCambio,
+      capitalCop: formData.capitalCop,
+      tasaEA: formData.tasaInteres,
+      interesExtra: formData.interesExtra,
+      interesCop: formData.interesCop,
       pais: formData.pais,
+      rentaExtra: formData.rentaExtra,
+      rentaCop: formData.rentaCop,
+      tiempo: formData.tiempo,
       descripcion: formData.descripcion,
       estado: formData.estado == true? 1 : 0
     }
-
     return this.http.post(`${BASE_URL}/insertInversion`, json, this.httpOptions).pipe(
       tap( (resp:any) =>{})
     )
@@ -88,11 +93,17 @@ export class InversionesService {
     const json = {
       idInversion,
       nombreInver: formData.nombreInver,
-      capital: formData.capital,
-      moneda: formData.moneda,
-      tiempo: formData.tiempo,
-      tasainteres: JSON.stringify(formData.tasainteres),
+      capitalExtra: formData.capitalExtra,
+      monedaInver: formData.monedaExtra,
+      tasaCambio: formData.tasaCambio,
+      capitalCop: formData.capitalCop,
+      tasaEA: formData.tasaInteres,
+      interesExtra: formData.interesExtra,
+      interesCop: formData.interesCop,
       pais: formData.pais,
+      rentaExtra: formData.rentaExtra,
+      rentaCop: formData.rentaCop,
+      tiempo: formData.tiempo,
       descripcion: formData.descripcion,
       estado: formData.estado == true? 1 : 0
     }
@@ -105,21 +116,25 @@ export class InversionesService {
 
 
   /**
-   * 
+   * Método de servicio para crear anexos
    * @param dataForm => Data del formulario
    * @param dataInver => Data de la inversión
    */
   public crearAnexoServices = (dataForm:any, dataInver:any) =>{
 
     const json = {
-      nombre: dataForm.nombreAnexo,
+      movimiento: dataForm.movimientoAnexo,
+      fecha: dataForm.fechaAnexo,
+      capitalExtra: dataForm.capitalExtra,
+      capitalCop: dataForm.capitalCop,
+      interesExtra: dataForm.interesExtra,
+      interesCop: dataForm.interesCop,
+      capiInterExtra: dataForm.capitalInteresExtra,
+      capiInterCop: dataForm.capitalInteresCop,
       comentario: dataForm.comentario,
-      ganancias: dataForm.ganancias,
-      fecha: dataForm.fecha,
       idInversion: dataInver.idInversion,
       idUser: dataInver.idUser,
-      tasa: dataInver.tasa,
-      moneda: dataInver.moneda
+      monedaAnex: dataInver.moneda
     }
     
     return this.http.post(`${BASE_URL}/insertAnexo`, json, this.httpOptions).pipe(
@@ -127,6 +142,35 @@ export class InversionesService {
     )
 
   }
+
+
+  /**
+   * Método de servicio para actualizar anexos
+   * @param formData => Datos del formulario
+   * @param idUser => ID del inverción
+   */
+  public updateAnexoService = (dataForm:any, idInversion:string) =>{
+
+    const json = {
+      idInversion,
+      movimiento: dataForm.movimientoAnexo,
+      fecha: dataForm.fechaAnexo,
+      capitalExtra: dataForm.capitalExtra,
+      capitalCop: dataForm.capitalCop,
+      interesExtra: dataForm.interesExtra,
+      interesCop: dataForm.interesCop,
+      capiInterExtra: dataForm.capitalInteresExtra,
+      capiInterCop: dataForm.capitalInteresCop,
+      comentario: dataForm.descripcion,
+    }
+    return this.http.put(`${BASE_URL}/updateAnexo`, json, this.httpOptions).pipe(
+      tap( (resp:any) =>{})
+    )
+
+  }
+
+
+
 
 
   /**

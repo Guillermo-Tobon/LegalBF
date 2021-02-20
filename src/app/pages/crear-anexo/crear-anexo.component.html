@@ -5,26 +5,70 @@
         <h4 class="card-title">En el siguiente formulario puede crear anexos para la inversión <span class="aInversion"> {{inversion['id_inv']}} </span> <span class="nomUser">User: {{usuario[0].nombres_us}}</span></h4>
         <h6 class="card-subtitle">Una vez creado el anexo, se notificará vía correo electrónico.</h6>
       
-        <form class="floating-labels m-t-40" #FormAnex="ngForm" [formGroup]="FormCrearAnexo" (submit)="crearAnexos(); FormAnex.reset()">
+        <form class="floating-labels m-t-40" [formGroup]="FormCrearAnexo" (submit)="crearAnexos()">
           <div class="row">
-            <div class="col-lg-4 col-md-4">
+            <div class="col-lg-6 col-md-6">
               <div class="form-group m-b-40 focused">
-                <label for="input1">Nombre anexo</label>
-                <input type="text" formControlName="nombreAnexo" class="form-control">
+                <label for="input1">Movimiento anexo</label>
+                <input type="text" formControlName="movimientoAnexo" class="form-control">
                 <span class="bar"></span>
               </div>
             </div>
-            <div class="col-lg-4 col-md-4">
-              <div class="form-group m-b-40 focused">
-                <label for="input1">Ganancias captados</label>
-                <input type="number" formControlName="ganancias" class="form-control">
-                <span class="bar"></span>
-              </div>
-            </div>
-            <div class="col-lg-4 col-md-4">
+            <div class="col-lg-6 col-md-6">
               <div class="form-group grupoDate">
                 <span class="spanFech" >Fecha anexo</span>
-                <input type="date" formControlName="fecha" class="form-control">
+                <input type="date" formControlName="fechaAnexo" class="form-control">
+                <span class="bar"></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-lg-6 col-md-6">
+              <div class="form-group m-b-40 focused">
+                <label for="input1">Capital en Moneda Extranjera</label>
+                <input type="number" formControlName="capitalExtra" class="form-control">
+                <span class="bar"></span>
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-6">
+              <div class="form-group m-b-40 focused">
+                <label for="input1">Capital en Moneda COP</label>
+                <input type="number" formControlName="capitalCop" class="form-control">
+                <span class="bar"></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-lg-6 col-md-6">
+              <div class="form-group m-b-40 focused">
+                <label for="input1">Intereses en Moneda Extranjera</label>
+                <input type="text" formControlName="interesExtra" class="form-control">
+                <span class="bar"></span>
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-6">
+              <div class="form-group m-b-40 focused">
+                <label for="input1">Intereses en Moneda COP</label>
+                <input type="text" formControlName="interesCop" class="form-control">
+                <span class="bar"></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-lg-6 col-md-6">
+              <div class="form-group m-b-40 focused">
+                <label for="input1">Capital + Intereses en Moneda Extranjera</label>
+                <input type="number" formControlName="capitalInteresExtra" class="form-control">
+                <span class="bar"></span>
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-6">
+              <div class="form-group m-b-40 focused">
+                <label for="input1">Capital + Intereses en Moneda COP</label>
+                <input type="number" formControlName="capitalInteresCop" class="form-control">
                 <span class="bar"></span>
               </div>
             </div>
@@ -49,8 +93,14 @@
 
           <div class="row">
             <div class="col text-danger">
-              <p *ngIf="campoNoValido('nombreAnexo')">*El nombre del anexo es obligatorio.</p>
-              <p *ngIf="campoNoValido('ganancias')">*Las ganancias son obligatorias.</p>
+              <p *ngIf="campoNoValido('movimientoAnexo')">*El movimiento del anexo es obligatorio.</p>
+              <p *ngIf="campoNoValido('fechaAnexo')">*La fecha del anexo es obligatoria.</p>
+              <p *ngIf="campoNoValido('capitalExtra')">*El capital en moneda extranjera son obligatoria.</p>
+              <p *ngIf="campoNoValido('capitalCop')">*El capital en moneda COP son obligatoria.</p>
+              <p *ngIf="campoNoValido('interesExtra')">*Los Intereses en Moneda Extranjera son obligatorios.</p>
+              <p *ngIf="campoNoValido('interesCop')">*Los Intereses en Moneda COP son obligatorios.</p>
+              <p *ngIf="campoNoValido('capitalInteresExtra')">*El Capital + Intereses en Moneda Extranjera es obligatorio.</p>
+              <p *ngIf="campoNoValido('capitalInteresCop')">*El Capital + Intereses en Moneda COP es obligatorio.</p>
               <p *ngIf="campoNoValido('comentario')">*El comentario es obligatorio.</p>
             </div>
           </div>

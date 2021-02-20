@@ -53,6 +53,8 @@ export class DetalleInversionComponent implements OnInit {
     this.routeActive.params.subscribe( data =>{
       this.inversion = JSON.parse( data['inversion'] ) || [];
 
+      console.log(this.inversion)
+
       this.getArchivosUserInversion(this.inversion['id_inv'], this.inversion['id_us_inv']);
 
       this.cargarFormEditInver(this.inversion);
@@ -60,6 +62,7 @@ export class DetalleInversionComponent implements OnInit {
       this.getAnexosByIdInver(this.inversion['id_inv']);
 
       this.getUserById(this.inversion['id_us_inv']);
+
 
     })
   }
@@ -151,15 +154,24 @@ export class DetalleInversionComponent implements OnInit {
    * @param idInversion => ID inversión
    */
   public editarInversion = ( idInversion:string ) =>{
+    this.formSubmitted = true;
+
+    if ( this.FormEditInversion.invalid ) {
+      return; 
+    }
 
     this.InversionServ.updateInversionService( this.FormEditInversion.value, idInversion ).subscribe( (resp:any) =>{
 
       if( resp.ok ){
-        Swal.fire('Bien hecho!', resp.msg, 'success');
-        setTimeout(() => { 
-          this.router.navigate(['dashboard/inversiones']); 
-          window.location.reload();
-        }, 2000);
+        Swal.fire({
+          icon: 'success',
+          title: 'Bien hecho!',
+          text: resp.msg,
+          showConfirmButton: true,
+          timer: 1800
+        });
+        this.router.navigate(['dashboard/inversiones']);
+        setTimeout(() => { window.location.reload(); }, 2000);
       }
 
     }, (err) =>{
@@ -197,12 +209,18 @@ export class DetalleInversionComponent implements OnInit {
    */
   public cargarFormEditInver = (inversion:any) =>{
     this.FormEditInversion = this.fb.group({
-      nombreInver: [inversion['nombre_inv'], [Validators.required, Validators.minLength(5)]],
-      capital: [inversion['capital_inv'], [Validators.required, Validators.minLength(3)]],
-      moneda: [inversion['moneda_inv'], [Validators.required]],
-      tiempo: [inversion['tiempo_inv'], [Validators.required, Validators.minLength(2)]],
-      tasainteres: [inversion['tasa_ea_inv'], [Validators.required, Validators.minLength(1)]],
+      nombreInver: [inversion['nombre_inv'], [Validators.required, Validators.minLength(3)]],
+      capitalExtra: [inversion['capital_extra_inv'], [Validators.required]],
+      monedaExtra: [inversion['moneda_extra_inv'], [Validators.required]],
+      tasaCambio: [inversion['tasa_cambio_inv'], [Validators.required]],
+      capitalCop: [inversion['capital_cop_inv'], [Validators.required]],
+      tasaInteres: [inversion['tasa_ea_inv'], [Validators.required, Validators.minLength(1)]],
+      interesExtra: [inversion['interes_extra_inv'], [Validators.required, Validators.minLength(1)]],
+      interesCop: [inversion['interes_cop_inv'], [Validators.required, Validators.minLength(1)]],
       pais: [inversion['pais_inv'], [Validators.required, Validators.minLength(3)]],
+      rentaExtra: [inversion['renta_extra_inv'], [Validators.required]],
+      rentaCop: [inversion['renta_cop_inv'], [Validators.required]],
+      tiempo: [inversion['tiempo_inv'], [Validators.required]],
       descripcion: [inversion['descripcion_inv'], [Validators.required, Validators.minLength(20)]],
       estado: [inversion['estado_inv'] == 1? true : false, [Validators.required]],
     })
@@ -214,7 +232,7 @@ export class DetalleInversionComponent implements OnInit {
    * @param campo => valor del campo a validar
    */
   public campoNoValido = (campo:any): boolean =>{
-    if ( this.FormCrearAnexo.get(campo).invalid && this.formSubmitted ) {
+    if ( this.FormEditInversion.get(campo).invalid && this.formSubmitted ) {
       return true;
     } else {
       return false;
@@ -227,16 +245,16 @@ export class DetalleInversionComponent implements OnInit {
   * Método para obtener usuario pot id
   * @param idUser => ID del usuario a consultar
   */
- public getUserById = (idUse:any) =>{
-  this.clientesSrv.getUserByIdService( idUse ).subscribe( (resp:any) =>{
+  public getUserById = (idUse:any) =>{
+    this.clientesSrv.getUserByIdService( idUse ).subscribe( (resp:any) =>{
 
-    this.userAsociado = resp.usuario || [];
+      this.userAsociado = resp.usuario || [];
 
-  }, (err) =>{
-    //En caso de un error
-    console.log(err.error.msg);
-  })
-}
+    }, (err) =>{
+      //En caso de un error
+      console.log(err.error.msg);
+    })
+  }
 
 
 

@@ -21,9 +21,14 @@ export class CrearAnexoComponent implements OnInit {
   public archivoSubir:File;
 
   public FormCrearAnexo = this.fb.group({
-    nombreAnexo: ['', [Validators.required, Validators.minLength(5)]],
-    ganancias: ['', [Validators.required, Validators.minLength(5)]],
-    fecha: ['', [Validators.required]],
+    movimientoAnexo: ['', [Validators.required, Validators.minLength(5)]],
+    fechaAnexo: ['', [Validators.required]],
+    capitalExtra: ['', [Validators.required]],
+    capitalCop: ['', [Validators.required]],
+    interesExtra: ['', [Validators.required]],
+    interesCop: ['', [Validators.required]],
+    capitalInteresExtra: ['', [Validators.required]],
+    capitalInteresCop: ['', [Validators.required]],
     comentario: ['', [Validators.required, Validators.minLength(20)]],
   });
 
@@ -54,9 +59,9 @@ export class CrearAnexoComponent implements OnInit {
    * @param inversion => ID de la inversión
    */
   public crearAnexos = () =>{
-  
+    
     this.formSubmitted = true;
-
+    
     if ( this.FormCrearAnexo.invalid ) {
       return; 
     }
@@ -64,7 +69,6 @@ export class CrearAnexoComponent implements OnInit {
     const dataInver = {
       idUser: this.inversion['id_us_inv'],
       idInversion: this.inversion['id_inv'],  
-      tasa: this.inversion['tasa_ea_inv'],
       moneda: this.inversion['moneda_inv']
     }
 
@@ -80,8 +84,8 @@ export class CrearAnexoComponent implements OnInit {
             const json = {
               nombres: this.usuario[0].nombres_us,
               apellidos: this.usuario[0].apellidos_us,
-              //email: this.usuario[0].email_us,
-              email: 'desarrollomemo@gmail.com',
+              email: this.usuario[0].email_us,
+              //email: 'desarrollomemo@gmail.com',
               asunto: 'Creación de anexo a su inversión en LegalBF',
               descripcion: `<p>Se creó un anexo a su inversión <strong>${this.inversion['nombre_inv']}</strong> de LegalBF por parte del administador.</p>
                             <p>Por favor ingrese a: <a href="https://www.legalbf.com/" target="_blank">www.legalbf.com</a> y verifique su información.</p>

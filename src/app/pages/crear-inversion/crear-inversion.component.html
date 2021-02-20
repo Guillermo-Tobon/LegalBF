@@ -16,15 +16,15 @@
             </div>
             <div class="col-lg-4 col-md-4">
               <div class="form-group m-b-40 focused">
-                <input type="number" formControlName="capital" class="form-control">
+                <input type="number" formControlName="capitalExtra" class="form-control">
                 <span class="bar"></span>
-                <label for="input2">Capital invertido</label>
+                <label for="input2">Capital invertido Moneda Extranjera</label>
               </div>
             </div>
             <div class="col-lg-4 col-md-4">
               <div class="form-group m-b-40 focused">
-                <label for="input3">Tipo moneda inversión</label>
-                <select formControlName="moneda" class="form-control">
+                <label for="input3">Moneda Extranjera</label>
+                <select formControlName="monedaExtra" class="form-control">
                   <option value="COP">COP</option>
                   <option value="EUR">EUR</option>
                   <option value="USD">USD</option>
@@ -36,16 +36,40 @@
           <div class="row">
             <div class="col-lg-4 col-md-4">
               <div class="form-group m-b-40 focused">
-                <input type="number" formControlName="tiempo" class="form-control">
+                <input type="number" formControlName="tasaCambio" class="form-control">
                 <span class="bar"></span>
-                <label for="input3">Tiempo estimado inversión (días)</label>
+                <label for="input3">Tasa de Cambio</label>
               </div>
             </div>
             <div class="col-lg-4 col-md-4">
               <div class="form-group m-b-40 focused">
-                <input type="number" formControlName="tasainteres" class="form-control">
+                <input type="number" formControlName="capitalCop" class="form-control">
                 <span class="bar"></span>
-                <label for="input3">Tasa Interés EA</label>
+                <label for="input3">Capital Invertido en COP</label>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-4">
+              <div class="form-group m-b-40 focused">
+                <input type="number" formControlName="tasaInteres" class="form-control">
+                <span class="bar"></span>
+                <label for="input1">Tasa Interés EA</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-lg-4 col-md-4">
+              <div class="form-group m-b-40 focused">
+                <input type="text" formControlName="interesExtra" class="form-control">
+                <span class="bar"></span>
+                <label for="input1">Interés Futuro en Moneda Extranjera</label>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-4">
+              <div class="form-group m-b-40 focused">
+                <input type="text" formControlName="interesCop" class="form-control">
+                <span class="bar"></span>
+                <label for="input1">Interés Futuro Anual en COP</label>
               </div>
             </div>
             <div class="col-lg-4 col-md-4">
@@ -58,24 +82,38 @@
           </div>
 
           <div class="row">
-            <div class="col-12">
+            <div class="col-lg-4 col-md-4">
+              <div class="form-group m-b-40 focused">
+                <input type="number" formControlName="rentaExtra" class="form-control">
+                <span class="bar"></span>
+                <label for="input1">Rentabilidad en Moneda Extranjera</label>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-4">
+              <div class="form-group m-b-40 focused">
+                <input type="number" formControlName="rentaCop" class="form-control">
+                <span class="bar"></span>
+                <label for="input1">Rentabilidad en Moneda COP</label>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-4">
+              <div class="form-group m-b-40 focused">
+                <input type="number" formControlName="tiempo" class="form-control">
+                <span class="bar"></span>
+                <label for="input1">Tiempo de inversión</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-lg-8 col-md-8">
               <div class="form-group m-b-40 focused">
                 <textarea class="form-control" formControlName="descripcion" rows="2"></textarea>
                 <span class="bar"></span>
                 <label for="input3">Descripción de la inversión</label>
               </div>
             </div>
-          </div>
-
-          <div class="row">
-            <div class="col-lg-6 col-md-6">
-              <div class="form-group">
-                <button type="submit" class="btn waves-effect waves-light btn-rounded btn-success">Crear inversión</button>
-                &nbsp;
-                <button type="button" (click)="goBack()" class="btn waves-effect waves-light btn-rounded btn-danger">Volver</button>
-              </div>
-            </div>
-            <div class="col-lg-6 col-md-6">
+            <div class="col-lg-4 col-md-4">
               <div class="checkbox checkbox-info pull-left p-t-0">
                 <input id="checkbox-signup" formControlName="estado" type="checkbox" class="filled-in chk-col-light-blue">
                 <label for="checkbox-signup">Inversión visible </label><br><br>
@@ -85,13 +123,29 @@
           </div>
 
           <div class="row">
+            <div class="col-lg-12">
+              <div class="form-group">
+                <button type="submit" class="btn waves-effect waves-light btn-rounded btn-success">Crear inversión</button>
+                &nbsp;
+                <button type="button" (click)="goBack()" class="btn waves-effect waves-light btn-rounded btn-danger">Volver</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
             <div class="col text-danger">
               <p *ngIf="campoNoValido('nombreInver')">*El nombre de la inversión es obligatorio.</p>
-              <p *ngIf="campoNoValido('capital')">*El capital invertido es obligatorio.</p>
-              <p *ngIf="campoNoValido('moneda')">*El tipo de moneda es obligatorio.</p>
-              <p *ngIf="campoNoValido('tiempo')">*El tiempo estimado es obligatorio y valido.</p>
-              <p *ngIf="campoNoValido('tasainteres')">*La tasa interés es obligatoria.</p>
+              <p *ngIf="campoNoValido('capitalExtra')">*El capital en moneda extranjera es obligatorio.</p>
+              <p *ngIf="campoNoValido('monedaExtra')">*La moneda extranjera es obligatoria.</p>
+              <p *ngIf="campoNoValido('tasaCambio')">*La tasa de cambio es obligatoria.</p>
+              <p *ngIf="campoNoValido('capitalCop')">*El capital invertido en COP es obligatoria.</p>
+              <p *ngIf="campoNoValido('tasaInteres')">*La tasa de interés es obligatoria.</p>
+              <p *ngIf="campoNoValido('interesExtra')">*Los intereses en moneda extranjera son obligatorios.</p>
+              <p *ngIf="campoNoValido('interesCop')">*Los intereses en moneda COP son obligatorios.</p>
               <p *ngIf="campoNoValido('pais')">*El país es obligatorio.</p>
+              <p *ngIf="campoNoValido('rentaExtra')">*La rentabilidad en Moneda Extranjera es obligatoria.</p>
+              <p *ngIf="campoNoValido('rentaCop')">*La rentabilidad en Moneda COP es obligatoria.</p>
+              <p *ngIf="campoNoValido('tiempo')">*El tiempo de inversión es obligatorio.</p>
               <p *ngIf="campoNoValido('descripcion')">*La descripción es obligatoria.</p>
             </div>
           </div>

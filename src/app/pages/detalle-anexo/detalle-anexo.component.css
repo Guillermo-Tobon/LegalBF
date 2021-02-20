@@ -1,0 +1,25 @@
+.nomUser{
+  position: absolute;
+  right: 10px;
+  top: 20px;
+  color: #c4bdce;
+  font-size: 12px;
+}
+.logoFile{
+  width: 30px;
+}
+.formEditAnexo .form-group {
+  position: relative;
+}
+
+.formEditAnexo .form-control {
+  padding: 10px 10px 10px 0;
+  display: block;
+  border: none;
+  font-family: "Montserrat", sans-serif;
+  border-radius: 0px;
+  border-bottom: 1px solid #e9edf2;
+}
+.formEditAnexo label{
+  font-size: 12px;
+}

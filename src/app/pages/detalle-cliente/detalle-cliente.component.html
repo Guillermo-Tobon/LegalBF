@@ -113,8 +113,9 @@
               <tr>
                 <th># Inversión</th>
                 <th>Nom. Proyecto</th>
-                <th>Capital invertido</th>
-                <th>País</th>
+                <th>Capital en Moneda Extranjera</th>
+                <th>Moneda Extranjera</th>
+                <th>Capital Invertido en COP</th>
                 <th>Fecha Inversión</th>
                 <th>Estado</th>
               </tr>
@@ -123,8 +124,9 @@
               <tr *ngFor="let inversion of inversiones">
                 <td><a class="aInversion" title="Ver Inversión" (click)="navegarInversion(inversion)">{{inversion.id_inv}} </a></td>
                 <td>{{inversion.nombre_inv}}</td>
-                <td>{{inversion.capital_inv | currency: inversion.moneda_inv }} </td>
-                <td> {{inversion.pais_inv}} </td>
+                <td>{{inversion.capital_extra_inv | currency: inversion.moneda_extra_inv }} </td>
+                <td> {{inversion.moneda_extra_inv}} </td>
+                <td>{{inversion.capital_cop_inv | currency: inversion.moneda_extra_inv }} </td>
                 <td><span class="text-muted"><i class="fa fa-calendar-o"></i> {{inversion.fechareg_inv | date: 'dd/MM/yyyy'}}</span> </td>
                 <td *ngIf=" inversion.estado_inv === 1 " ><div class="label label-table label-success">Activo</div></td>
                 <td *ngIf=" inversion.estado_inv === 0 " ><div class="label label-table label-danger">Inactivo</div></td>

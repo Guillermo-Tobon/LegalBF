@@ -1,11 +1,17 @@
 export interface InversionForm {
   id?: number;
   nombreInver: string;
-  capital: number;
-  moneda: string;
-  tiempo: number;
-  tasainteres: number;
+  capitalExtra: number;
+  capitalCop: number;
+  monedaExtra: string;
+  tasaCambio: number;
+  tasaInteres: number;
+  interesExtra: string;
+  interesCop: string;
   pais: string;
+  rentaExtra: number;
+  rentaCop: number;
+  tiempo: number;
   descripcion: string;
   estado: boolean;
 }

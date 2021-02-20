@@ -4,11 +4,11 @@ import { HttpClientModule } from '@angular/common/http';
 import {BrowserModule } from '@angular/platform-browser';
 
 import { RouterModule } from '@angular/router';
+import { SharedModule } from '../shared/shared.module';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { PagesComponent } from './pages.component';
-import { SharedModule } from '../shared/shared.module';
 import { ComponentsModule } from '../components/components.module';
 import { ConfiguracionCuentaComponent } from './configuracion-cuenta/configuracion-cuenta.component';
 import { CrearClienteComponent } from './crear-cliente/crear-cliente.component';

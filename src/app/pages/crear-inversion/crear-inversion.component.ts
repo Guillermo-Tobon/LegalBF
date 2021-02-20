@@ -21,11 +21,17 @@ export class CrearInversionComponent implements OnInit {
 
   public crearFormInversion = this.fb.group({
     nombreInver: ['', [Validators.required, Validators.minLength(3)]],
-    capital: ['', [Validators.required, Validators.minLength(3)]],
-    moneda: ['', [Validators.required]],
-    tiempo: ['', [Validators.required, Validators.minLength(2)]],
-    tasainteres: ['', [Validators.required, Validators.minLength(1)]],
+    capitalExtra: ['', [Validators.required]],
+    monedaExtra: ['', [Validators.required]],
+    tasaCambio: ['', [Validators.required]],
+    capitalCop: ['', [Validators.required]],
+    tasaInteres: ['', [Validators.required, Validators.minLength(1)]],
+    interesExtra: ['', [Validators.required, Validators.minLength(1)]],
+    interesCop: ['', [Validators.required, Validators.minLength(1)]],
     pais: ['', [Validators.required, Validators.minLength(3)]],
+    rentaExtra: ['', [Validators.required]],
+    rentaCop: ['', [Validators.required]],
+    tiempo: ['', [Validators.required]],
     descripcion: ['', [Validators.required, Validators.minLength(20)]],
     estado: [true, [Validators.required]],
   })
