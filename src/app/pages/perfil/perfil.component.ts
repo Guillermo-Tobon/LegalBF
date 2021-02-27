@@ -19,9 +19,9 @@ export class PerfilComponent implements OnInit {
     this.usuario = this.authServ.usuario;
   
     if (this.usuario[0].estado_us === 1) {
-      this.estado = 'ACTIVO';
+      this.estado = 'ACTIVE';
     } else {
-      this.estado = 'INACTIVO';        
+      this.estado = 'INACTIVE';        
     }
   }
 

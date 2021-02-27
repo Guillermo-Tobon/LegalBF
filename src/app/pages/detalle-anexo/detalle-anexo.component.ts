@@ -21,6 +21,8 @@ export class DetalleAnexoComponent implements OnInit {
   public editAnexo:{} = {};
   public FormEditarAnexo:any;
   public formSubmitted = false;
+  public cambiarFile:String = 'hiddenInputFile';
+  public archivoSubir:File;
 
   constructor(
               private routeActive: ActivatedRoute,
@@ -39,6 +41,8 @@ export class DetalleAnexoComponent implements OnInit {
 
     this.routeActive.params.subscribe( data =>{
       this.anexo = JSON.parse( data['anexo'] ) || [];
+
+      console.log(this.anexo)
 
       this.getUserById(this.anexo['id_us_inv']);
       
@@ -67,18 +71,18 @@ export class DetalleAnexoComponent implements OnInit {
           apellidos: this.userAsociado[0].apellidos_us,
           email: this.userAsociado[0].email_us,
           //email: 'desarrollomemo@gmail.com',
-          asunto: 'Actualización de anexo a su inversión en LegalBF',
-          descripcion: `<p>Se Actualizó el anexo <strong>${this.anexo['movimiento_anex']}</strong> de su inversión en LegalBF por parte del administador.</p>
-                        <p>Por favor ingrese a: <a href="https://www.legalbf.com/" target="_blank">www.legalbf.com</a> y verifique su información.</p>
+          asunto: 'Annex update to your project in LegalBF',
+          descripcion: `<p>The <strong>${this.anexo['movimiento_anex']}</strong> annex was updated of your project at LegalBF.</p>
+                        <p>Please go to: <a href="https://www.legalbf.com/" target="_blank">www.legalbf.com</a> You can verify your information.</p>
                         <br>
-                        <b>Para más información, comuníquese con el administrador de LegalBF </b>
+                        <b>For more information, contact LegalBF administrator. </b>
                         <br>
-                        <p>©2021 - Todos los derechos reservados - es un servicio gratuito de LegalBG</p>`
+                        <p>©2021 - LegalBF Service</p>`
         }
         this.clientesSrv.sendEmailClienteService(json);
         Swal.fire({
           icon: 'success',
-          title: 'Bien hecho!',
+          title: 'Success!',
           text: resp.msg,
           showConfirmButton: true,
           timer: 1800
@@ -92,6 +96,22 @@ export class DetalleAnexoComponent implements OnInit {
       Swal.fire('Error', err.error.msg, 'error');
     })
 
+  }
+
+
+
+  /**
+   * Método para validar si cambia el archivo
+   * @param check => estado del checkbox
+   */
+  public checkCambiarFile = (check:any) =>{
+    if (check) {
+      this.cambiarFile = '';
+      
+    } else {
+      this.cambiarFile = 'hiddenInputFile';
+      
+    }
   }
 
 
@@ -177,7 +197,34 @@ export class DetalleAnexoComponent implements OnInit {
   }
 
 
-  public obtenerArchivo = (event:any) =>{
+  public obtenerArchivo = (file:File) =>{
+    this.archivoSubir = file;
+  }
+
+
+  /**
+   * Método para cambiar el archivo por id de anexo
+   */
+  public cambiarArchivoById = () =>{
+    if ( this.archivoSubir == undefined) {
+      return;
+    }
+
+    this.archivosServ.deleleFileService(this.anexo['tipo_archivo_info'], this.anexo['nom_archivo_info'], this.anexo['id_info']).subscribe((resp:any) =>{
+
+      this.archivosServ.uploadFilesServices(this.archivoSubir, this.anexo['id_inv'], this.anexo['id_anex'], this.userAsociado[0].id_us).then(
+        (resp2:any) =>{
+          Swal.fire('Success!', `${resp2.msg}`, 'success');
+          this.location.back();
+
+        }).catch( (err) =>{
+              Swal.fire('Error', err.error.msg, 'error');
+          })
+
+    }, (err) =>{
+      //En caso de un error
+      Swal.fire('Error', err.error.msg, 'error');
+    })
 
   }
 

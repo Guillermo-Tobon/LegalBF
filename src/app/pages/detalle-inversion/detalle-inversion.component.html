@@ -5,7 +5,7 @@
     <div class="card">
       <!-- Nav tabs -->
       <ul class="nav nav-tabs profile-tab" role="tablist">
-        <li class="nav-item"> <a class="nav-link active liInfoGen" data-toggle="tab" href="#" role="tab">Información general inversión</a> <span class="nomUser">User: {{userAsociado[0].nombres_us}}</span></li>
+        <li class="nav-item"> <a class="nav-link active liInfoGen" data-toggle="tab" href="#" role="tab">General project information</a> <span class="nomUser">User: {{userAsociado[0].nombres_us}}</span></li>
       </ul>
       <!-- Tab panes -->
       <div class="tab-content">        
@@ -13,26 +13,26 @@
           <div class="card-body">
             <div class="row">
               <div class="col-lg-8 col-md-8">
-                <small class="text-muted">ID inversión: &nbsp; <b>{{inversion['id_inv']}}</b> </small>
+                <small class="text-muted">Project ID: &nbsp; <b>{{inversion['id_inv']}}</b> </small>
               </div>
               <br>
               <div class="col-lg-4 col-md-4">
-                <small class="text-muted">Fecha inversión: &nbsp; {{inversion['fechareg_inv'] | date: 'dd/MM/yyyy'}} </small>
+                <small class="text-muted">Project date: &nbsp; {{inversion['fechareg_inv'] | date: 'dd/MM/yyyy'}} </small>
               </div>
             </div>
             <br>
 
             <div class="row">
               <div class="col-lg-4 col-md-4">
-                <small class="text-muted">Nombre inversión:</small>
+                <small class="text-muted">Project name:</small>
                 <h6>{{inversion['nombre_inv']}}</h6> 
               </div>
               <div class="col-lg-4 col-md-4">
-                <small class="text-muted">Capital invertido moneda extranjera:</small>
+                <small class="text-muted">Capital invested in foreign currency:</small>
                 <h6>{{inversion['capital_extra_inv'] | currency: inversion['moneda_extra_inv']}}</h6> 
               </div>
               <div class="col-lg-4 col-md-4">
-                <small class="text-muted">Moneda extranjera:</small>
+                <small class="text-muted">Foreign currency:</small>
                 <h6>{{inversion['moneda_extra_inv']}}</h6> 
               </div>
             </div>
@@ -40,17 +40,17 @@
 
             <div class="row">
               <div class="col-lg-4 col-md-4">
-                <small class="text-muted">Tasa de cambio:</small>
+                <small class="text-muted">Exchange rate:</small>
                 <h6>{{ inversion['tasa_cambio_inv'] | currency: inversion['moneda_extra_inv'] }}</h6> 
               </div>
               <br>
               <div class="col-lg-4 col-md-4">
-                <small class="text-muted">Capital invertido en COP:</small>
+                <small class="text-muted">Capital invested in COP currency:</small>
                 <h6>{{inversion['capital_cop_inv'] | currency: inversion['moneda_extra_inv']}}</h6> 
               </div>
               <br>
               <div class="col-lg-4 col-md-4">
-                <small class="text-muted">Tasa de interés (EA):</small>
+                <small class="text-muted">Interest rate (AE):</small>
                 <h6>{{inversion['tasa_ea_inv']}}%</h6>
               </div>
             </div>
@@ -58,17 +58,17 @@
 
             <div class="row">
               <div class="col-lg-4 col-md-4">
-                <small class="text-muted">Interés a futuro en Moneda extranjera:</small>
+                <small class="text-muted">Interest accrued to date in Foreign Currency:</small>
                 <h6>{{inversion['interes_extra_inv']}}%</h6>
               </div>
               <br>
               <div class="col-lg-4 col-md-4">
-                <small class="text-muted">Interés a futuro en COP:</small>
+                <small class="text-muted">Interest accrued to date in Currency COP:</small>
                 <h6>{{inversion['interes_cop_inv']}}%</h6>
               </div>
               <br>
               <div class="col-lg-4 col-md-4">
-                <small class="text-muted">Pais inversión:</small>
+                <small class="text-muted">Project country:</small>
                 <h6>{{inversion['pais_inv']}}</h6>
               </div>
             </div>
@@ -76,17 +76,17 @@
 
             <div class="row">
               <div class="col-lg-4 col-md-4">
-                <small class="text-muted">Rentabilidad en moneda extranjera:</small>
+                <small class="text-muted">Annual return in foreign currency:</small>
                 <h6>{{inversion['renta_extra_inv'] | currency: inversion['moneda_extra_inv']}}</h6>
               </div>
               <br>
               <div class="col-lg-4 col-md-4">
-                <small class="text-muted">Rentabilidad en moneda COP:</small>
+                <small class="text-muted">Annual return in COP currency:</small>
                 <h6>{{inversion['renta_cop_inv'] | currency: inversion['moneda_extra_inv']}}</h6>
               </div>
               <br>
               <div class="col-lg-4 col-md-4">
-                <small class="text-muted">Tiempo inversión:</small>
+                <small class="text-muted">Project time:</small>
                 <h6>{{inversion['tiempo_inv']}} días</h6>
               </div>
             </div>
@@ -94,23 +94,23 @@
 
             <div class="row">
               <div class="col-lg-8 col-md-8">
-                <small class="text-muted">Descripción:</small>
+                <small class="text-muted">Description:</small>
                 <h6>{{inversion['descripcion_inv']}}</h6>
               </div>
               <br>
               <div class="col-lg-4 col-md-4">
-                <small class="text-muted">Estado inversión:</small>
-                <h6 *ngIf="inversion['estado_inv'] === 1" class="text-warning">ACTIVO</h6>
-                <h6 *ngIf="inversion['estado_inv'] === 0" class="text-danger">INACTIVO</h6>
+                <small class="text-muted">Project status:</small>
+                <h6 *ngIf="inversion['estado_inv'] === 1" class="text-warning">ACTIVE</h6>
+                <h6 *ngIf="inversion['estado_inv'] === 0" class="text-danger">INACTIVE</h6>
               </div>
             </div>
             <br>
 
             <div class="row">
               <div class="col-lg-12">
-                <button *ngIf="this.usuario[0].admin_us === 'Y'" type="button" (click)="modalEditInvert(inversion)" class="btn waves-effect waves-light btn-rounded btn-success" data-toggle="modal" data-target=".modalEditInver">Editar inversión</button>
+                <button *ngIf="this.usuario[0].admin_us === 'Y'" type="button" (click)="modalEditInvert(inversion)" class="btn waves-effect waves-light btn-rounded btn-success" data-toggle="modal" data-target=".modalEditInver">Edit project</button>
                 &nbsp;
-                <button type="button" (click)="goBack()" class="btn waves-effect waves-light btn-rounded btn-danger">Volver</button>
+                <button type="button" (click)="goBack()" class="btn waves-effect waves-light btn-rounded btn-danger">Back</button>
               </div>
             </div>
 
@@ -126,19 +126,19 @@
   <div class="col-lg-12">
     <div class="card">
       <div class="card-body">
-        <h4 class="card-title">Anexos cargados actualmente</h4>
-        <h6 class="card-subtitle">Estos son los anexos cargados para la inversión {{inversion['nombre_inv']}} </h6>
+        <h4 class="card-title">Currently loaded attachments</h4>
+        <h6 class="card-subtitle">These are the annexes loaded for the project {{inversion['nombre_inv']}} </h6>
         <div class="table-responsive">
           <table class="table tablaAnexos">
             <thead>
               <tr>
-                <th># Anexo</th>
-                <th>Movimiento</th>
-                <th>Capital moneda extranjera</th>
-                <th>Capital moneda COP</th>
-                <th>Intereses moneda extranjera</th>
-                <th>Intereses moneda COP</th>
-                <th class="headW">Fecha</th>
+                <th># Annexed</th>
+                <th>Movement</th>
+                <th>Capital foreign currency</th>
+                <th>Capital currency COP</th>
+                <th>Interest in foreign currency</th>
+                <th>Interest in COP currency</th>
+                <th class="headW">Date</th>
                 <th>File</th>
               </tr>
             </thead>
@@ -167,7 +167,7 @@
   <div class="col-lg-12">
     <div class="card">
       <div class="card-body">
-        <button type="button" (click)="navegarCrearAnexo()" class="btn waves-effect waves-light btn-rounded btn-success btn-block" >Crear Anexo</button>
+        <button type="button" (click)="navegarCrearAnexo()" class="btn waves-effect waves-light btn-rounded btn-success btn-block" >Create Annex</button>
       </div>
     </div>
   </div>
@@ -183,8 +183,8 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="myLargeModalLabel">ID inversión: &nbsp; <b>{{editInversion['id_inv']}}</b></h4>
-        <h4 class="modal-title" id="myLargeModalLabel">Fecha inversión: &nbsp; {{editInversion['fechareg_inv'] | date: 'dd/MM/yyyy'}}</h4>
+        <h4 class="modal-title" id="myLargeModalLabel">Project ID: &nbsp; <b>{{editInversion['id_inv']}}</b></h4>
+        <h4 class="modal-title" id="myLargeModalLabel">Project date: &nbsp; {{editInversion['fechareg_inv'] | date: 'dd/MM/yyyy'}}</h4>
       </div>
       <div class="modal-body">
         <div class="comment-text w-100">
@@ -195,19 +195,19 @@
                 <div class="form-group m-b-40 focused">
                   <input type="text" formControlName="nombreInver" class="form-control">
                   <span class="bar"></span>
-                  <label for="input1">Nombre inversión</label>
+                  <label for="input1">Project name</label>
                 </div>
               </div>
               <div class="col-lg-4 col-md-4">
                 <div class="form-group m-b-40 focused">
                   <input type="number" formControlName="capitalExtra" class="form-control">
                   <span class="bar"></span>
-                  <label for="input2">Capital invertido Moneda Extranjera</label>
+                  <label for="input2">Capital invested in foreign currency</label>
                 </div>
               </div>
               <div class="col-lg-4 col-md-4">
                 <div class="form-group m-b-40 focused">
-                  <label for="input3">Moneda Extranjera</label>
+                  <label for="input3">Foreign currency</label>
                   <select formControlName="monedaExtra" class="form-control">
                     <option value="COP">COP</option>
                     <option value="EUR">EUR</option>
@@ -222,21 +222,21 @@
                 <div class="form-group m-b-40 focused">
                   <input type="number" formControlName="tasaCambio" class="form-control">
                   <span class="bar"></span>
-                  <label for="input3">Tasa de Cambio</label>
+                  <label for="input3">Exchange rate</label>
                 </div>
               </div>
               <div class="col-lg-4 col-md-4">
                 <div class="form-group m-b-40 focused">
                   <input type="number" formControlName="capitalCop" class="form-control">
                   <span class="bar"></span>
-                  <label for="input3">Capital Invertido en COP</label>
+                  <label for="input3">Capital invested in COP currency</label>
                 </div>
               </div>
               <div class="col-lg-4 col-md-4">
                 <div class="form-group m-b-40 focused">
                   <input type="number" formControlName="tasaInteres" class="form-control">
                   <span class="bar"></span>
-                  <label for="input1">Tasa Interés EA</label>
+                  <label for="input1">Interest rate (AE)</label>
                 </div>
               </div>
             </div>
@@ -246,21 +246,21 @@
                 <div class="form-group m-b-40 focused">
                   <input type="text" formControlName="interesExtra" class="form-control">
                   <span class="bar"></span>
-                  <label for="input1">Interés Futuro en Moneda Extranjera</label>
+                  <label for="input1">Interest accrued to date in Foreign Currency</label>
                 </div>
               </div>
               <div class="col-lg-4 col-md-4">
                 <div class="form-group m-b-40 focused">
                   <input type="text" formControlName="interesCop" class="form-control">
                   <span class="bar"></span>
-                  <label for="input1">Interés Futuro Anual en COP</label>
+                  <label for="input1">Interest accrued to date in Currency COP</label>
                 </div>
               </div>
               <div class="col-lg-4 col-md-4">
                 <div class="form-group m-b-40 focused">
                   <input type="text" formControlName="pais" class="form-control">
                   <span class="bar"></span>
-                  <label for="input1">País inversión</label>
+                  <label for="input1">Project country</label>
                 </div>
               </div>
             </div>
@@ -270,21 +270,21 @@
                 <div class="form-group m-b-40 focused">
                   <input type="number" formControlName="rentaExtra" class="form-control">
                   <span class="bar"></span>
-                  <label for="input1">Rentabilidad en Moneda Extranjera</label>
+                  <label for="input1">Annual return in foreign currency</label>
                 </div>
               </div>
               <div class="col-lg-4 col-md-4">
                 <div class="form-group m-b-40 focused">
                   <input type="number" formControlName="rentaCop" class="form-control">
                   <span class="bar"></span>
-                  <label for="input1">Rentabilidad en Moneda COP</label>
+                  <label for="input1">Annual return in COP currency</label>
                 </div>
               </div>
               <div class="col-lg-4 col-md-4">
                 <div class="form-group m-b-40 focused">
                   <input type="number" formControlName="tiempo" class="form-control">
                   <span class="bar"></span>
-                  <label for="input1">Tiempo de inversión</label>
+                  <label for="input1">Project time</label>
                 </div>
               </div>
             </div>
@@ -294,14 +294,14 @@
                 <div class="form-group m-b-40 focused">
                   <textarea class="form-control" formControlName="descripcion" rows="2"></textarea>
                   <span class="bar"></span>
-                  <label for="input3">Descripción de la inversión</label>
+                  <label for="input3">Description</label>
                 </div>
               </div>
               <div class="col-lg-4 col-md-4">
                 <div class="checkbox checkbox-info pull-left p-t-0">
                   <input id="checkbox-signup" formControlName="estado" type="checkbox" class="filled-in chk-col-light-blue">
-                  <label for="checkbox-signup">Inversión visible </label><br><br>
-                  <h6>Puede Actualizar la inversión y permitir ser vista. </h6>
+                   <label for="checkbox-signup">Project enabled</label><br><br>
+                  <h6>You can update the project and allow it to be seen. </h6>
                 </div> 
               </div>
             </div>
@@ -309,7 +309,7 @@
             <div class="row">
               <div class="col-lg-6 col-md-6">
                 <div class="form-group">
-                  <button type="submit" class="btn waves-effect waves-light btn-rounded btn-success btn-block">Editar inversión</button>
+                  <button type="submit" class="btn waves-effect waves-light btn-rounded btn-success btn-block">Edit project</button>
                 </div>
               </div>
               <div class="col-lg-6 col-md-6">
@@ -319,19 +319,19 @@
   
             <div class="row">
               <div class="col text-danger">
-                <p *ngIf="campoNoValido('nombreInver')">*El nombre de la inversión es obligatorio.</p>
-                <p *ngIf="campoNoValido('capitalExtra')">*El capital en moneda extranjera es obligatorio.</p>
-                <p *ngIf="campoNoValido('monedaExtra')">*La moneda extranjera es obligatoria.</p>
-                <p *ngIf="campoNoValido('tasaCambio')">*La tasa de cambio es obligatoria.</p>
-                <p *ngIf="campoNoValido('capitalCop')">*El capital invertido en COP es obligatoria.</p>
-                <p *ngIf="campoNoValido('tasaInteres')">*La tasa de interés es obligatoria.</p>
-                <p *ngIf="campoNoValido('interesExtra')">*Los intereses en moneda extranjera son obligatorios.</p>
-                <p *ngIf="campoNoValido('interesCop')">*Los intereses en moneda COP son obligatorios.</p>
-                <p *ngIf="campoNoValido('pais')">*El país es obligatorio.</p>
-                <p *ngIf="campoNoValido('rentaExtra')">*La rentabilidad en Moneda Extranjera es obligatoria.</p>
-                <p *ngIf="campoNoValido('rentaCop')">*La rentabilidad en Moneda COP es obligatoria.</p>
-                <p *ngIf="campoNoValido('tiempo')">*El tiempo de inversión es obligatorio.</p>
-                <p *ngIf="campoNoValido('descripcion')">*La descripción es obligatoria.</p>
+                <p *ngIf="campoNoValido('nombreInver')">*Project name is required.</p>
+                <p *ngIf="campoNoValido('capitalExtra')">*Capital in foreign currency is required.</p>
+                <p *ngIf="campoNoValido('monedaExtra')">*Foreign currency is required.</p>
+                <p *ngIf="campoNoValido('tasaCambio')">*The exchange rate is required.</p>
+                <p *ngIf="campoNoValido('capitalCop')">*The capital invested in COP is required.</p>
+                <p *ngIf="campoNoValido('tasaInteres')">*The interest rate is required.</p>
+                <p *ngIf="campoNoValido('interesExtra')">*Interest in foreign currency is required.</p>
+                <p *ngIf="campoNoValido('interesCop')">*Interest in COP currency is required.</p>
+                <p *ngIf="campoNoValido('pais')">*Country is required.</p>
+                <p *ngIf="campoNoValido('rentaExtra')">*Profitability in Foreign Currency is required.</p>
+                <p *ngIf="campoNoValido('rentaCop')">*Profitability in COP Currency is required.</p>
+                <p *ngIf="campoNoValido('tiempo')">*Project time is required.</p>
+                <p *ngIf="campoNoValido('descripcion')">*Description is required.</p>
               </div>
             </div>
           </form>

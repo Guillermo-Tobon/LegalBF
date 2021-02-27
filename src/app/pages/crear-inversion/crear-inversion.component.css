@@ -129,3 +129,8 @@
   color: #ffb22b; }
 .form-group.issue .help-block ul li {
   list-style: none; }
+
+
+.formCrearInver label{
+  font-size: 12px;
+}

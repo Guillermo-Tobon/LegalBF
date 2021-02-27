@@ -4,7 +4,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { Location } from '@angular/common';
 import { ClientesService } from 'src/app/services/clientes.service';
-import { ArchivosService } from 'src/app/services/archivos.service';
 import { InversionesService } from 'src/app/services/inversiones.service';
 
 @Component({
@@ -63,18 +62,18 @@ export class DetalleClienteComponent implements OnInit {
           nombres: this.updateFormCliente.get('nombres').value,
           apellidos: this.updateFormCliente.get('apellidos').value,
           email: this.updateFormCliente.get('email').value,
-          asunto: 'Actualización cuenta en LegalBF',
-          descripcion: `<p>Se actualizó su cuenta de LegalBF por parte del administador.</p>
-                        <p>Por favor ingrese a: <a href="https://www.legalbf.com/" target="_blank">www.legalbf.com</a> y verifique su información</p>
+          asunto: 'Update account in LegalBF',
+          descripcion: `<p>Your LegalBF account was updated by the administrator.</p>
+                        <p>Please go to: <a href="https://www.legalbf.com/" target="_blank">www.legalbf.com</a> You can verify your information</p>
                         <br>
-                        <b>Para más información, comuníquese con el administrador de LegalBF </b>
+                        <b>For more information, contact LegalBF administrator. </b>
                         <br>
-                        <p>©2021 - Todos los derechos reservados - es un servicio gratuito de LegalBG</p>`
+                        <p>©2021 - LegalBF Service</p>`
         }
         this.clienteServ.sendEmailClienteService(json).subscribe( (resp2:any) =>{
 
           if (resp2.ok) {
-            Swal.fire('Bien Hecho!', `Cliente ${this.updateFormCliente.get('nombres').value } actualizado y notificado por correo electrónico con éxito.`, 'success');
+            Swal.fire('Success!', `Cliente ${this.updateFormCliente.get('nombres').value } updated and notified by email successfully.`, 'success');
             setTimeout(() => { this.router.navigate(['dashboard/lista-clientes']) }, 2000);
           }
 
@@ -86,7 +85,7 @@ export class DetalleClienteComponent implements OnInit {
 
       } else{
 
-        Swal.fire('Error', 'En este momento no se puede actualizar el cliente. Inténtelo más tarde.', 'error');
+        Swal.fire('Error', 'At this time the client cannot be updated. Please try again later.', 'error');
       }
 
     }, (err) =>{
@@ -160,7 +159,7 @@ export class DetalleClienteComponent implements OnInit {
       apellidos: [usuario['apellidos_us'], [Validators.required, Validators.minLength(3)]],
       email: [usuario['email_us'], [Validators.required, Validators.email, Validators.minLength(6)]],
       telefono: [usuario['telefono_us'], [Validators.required, Validators.minLength(6)]],
-      pais: [usuario['pais'], [Validators.required, Validators.minLength(3)]],
+      pais: [usuario['pais_us'], [Validators.required, Validators.minLength(3)]],
       compania: [usuario['compania_us'], [Validators.required, Validators.minLength(5)]],
       descripcion: [usuario['descripcion_us'], [Validators.required, Validators.minLength(20)]],
       estado: [usuario['estado_us'] === 1? true : false, [Validators.required]],

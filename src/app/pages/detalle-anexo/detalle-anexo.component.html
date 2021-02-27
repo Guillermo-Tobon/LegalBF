@@ -4,7 +4,7 @@
     <div class="card">
       <!-- Nav tabs -->
       <ul class="nav nav-tabs profile-tab" role="tablist">
-        <li class="nav-item"> <a class="nav-link active liInfoGen" data-toggle="tab" href="#" role="tab">Información general anexo</a> <span class="nomUser">User: {{userAsociado[0].nombres_us}}</span></li>
+        <li class="nav-item"> <a class="nav-link active liInfoGen" data-toggle="tab" href="#" role="tab">Annex general information</a> <span class="nomUser">User: {{userAsociado[0].nombres_us}}</span></li>
       </ul>
       <!-- Tab panes -->
       <div class="tab-content">        
@@ -12,18 +12,18 @@
           <div class="card-body">
             <div class="row">
               <div class="col-lg-6 col-md-6">
-                <small class="text-muted">ID inversión: &nbsp; <b>{{anexo['id_inv']}}</b> </small>
+                <small class="text-muted">Project ID: &nbsp; <b>{{anexo['id_inv']}}</b> </small>
               </div>
             </div>
             <br>
 
             <div class="row">
               <div class="col-lg-6 col-md-6">
-                <small class="text-muted">Movimiento anexo:</small>
+                <small class="text-muted">Annex movement:</small>
                 <h6>{{anexo['movimiento_anex']}}</h6> 
               </div>
               <div class="col-lg-6 col-md-6">
-                <small class="text-muted">Fecha anexo:</small>
+                <small class="text-muted">Annex date:</small>
                 <h6>{{anexo['fechAnexo']}}</h6> 
               </div>
             </div>
@@ -31,12 +31,12 @@
 
             <div class="row">
               <div class="col-lg-6 col-md-6">
-                <small class="text-muted">Capital en Moneda Extranjera:</small>
+                <small class="text-muted">Capital in Foreign Currency:</small>
                 <h6>{{ anexo['capital_extra_anex'] | currency: anexo['moneda_anex'] }}</h6> 
               </div>
               <br>
               <div class="col-lg-6 col-md-6">
-                <small class="text-muted">Capital en Moneda COP:</small>
+                <small class="text-muted">Capital in COP Currency:</small>
                 <h6>{{anexo['capital_cop_anex'] | currency: anexo['moneda_anex']}}</h6> 
               </div>
             </div>
@@ -44,12 +44,12 @@
 
             <div class="row">
               <div class="col-lg-6 col-md-6">
-                <small class="text-muted">Intereses en Moneda Extranjera:</small>
+                <small class="text-muted">Interests in Foreign Currency:</small>
                 <h6>{{anexo['interes_extra_anex']}}%</h6>
               </div>
               <br>
               <div class="col-lg-6 col-md-6">
-                <small class="text-muted">Interés en Moneda COP:</small>
+                <small class="text-muted">Interest in Currency COP:</small>
                 <h6>{{anexo['interes_cop_anex']}}%</h6>
               </div>
             </div>
@@ -57,12 +57,12 @@
 
             <div class="row">
               <div class="col-lg-6 col-md-6">
-                <small class="text-muted">Capital + Intereses en Moneda Extranjera:</small>
+                <small class="text-muted">Capital + Interest in Foreign Currency:</small>
                 <h6>{{anexo['capital_interes_extra_anex'] | currency: anexo['moneda_anex']}}</h6>
               </div>
               <br>
               <div class="col-lg-6 col-md-6">
-                <small class="text-muted">Capital + Intereses en Moneda COP:</small>
+                <small class="text-muted">Capital + Interest in Currency COP:</small>
                 <h6>{{anexo['capital_interes_cop_anex'] | currency: anexo['moneda_anex']}}</h6>
               </div>
             </div>
@@ -70,19 +70,27 @@
 
             <div class="row">
               <div class="col-lg-6 col-md-6">
-                <small class="text-muted">Descripción:</small>
+                <small class="text-muted">Description:</small>
                 <h6>{{anexo['descripcion_anex']}}</h6>
               </div>
               <br>
               <div class="col-lg-6 col-md-6">
-                <small class="text-muted">Documento adjunto:</small>
+                <small class="text-muted">Attached document:</small>
                 <h6 *ngIf="anexo['tipo_archivo_info'] === 'pdf'" (click)="verArchivo( anexo['tipo_archivo_info'], anexo['nom_archivo_info'] )" class="cursor"><img class="logoFile" src="../../../assets/images/pdf.png" alt=""> {{anexo['nom_archivo_info'] | slice:9:50 }}</h6>
                 <h6 *ngIf="anexo['tipo_archivo_info'] === 'word'" (click)="verArchivo( anexo['tipo_archivo_info'], anexo['nom_archivo_info'] )" class="cursor"><img class="logoFile" src="../../../assets/images/word.png" alt=""> {{anexo['nom_archivo_info'] }}</h6>
-              
-                <div class="form-group m-b-40 focused">
-                  <label for="input-file-now">Cargue el archivo para el anexo.</label>
+
+                <br>
+                <div class="checkbox checkbox-info">
+                  <input id="checkbox-signup" type="checkbox" (change)="checkCambiarFile($event.target.checked)" class="filled-in chk-col-light-blue">
+                  <label for="checkbox-signup">Change file?</label>
+                </div> 
+                <br>
+                
+                <div class="form-group m-b-40 focused {{cambiarFile}}">
+                  <label for="input-file-now">Upload the file for the attachment.</label>
                   <input type="file" (change)="obtenerArchivo( $event.target.files[0] )" id="input-file-now" class="dropify"/>
                   <span class="bar"></span>
+                  <button type="button" (click)="cambiarArchivoById()" class="btn waves-effect waves-light btn-rounded btn-success btn-block">Change file</button>
                 </div>
               </div>
             </div>
@@ -90,9 +98,9 @@
 
             <div class="row">
               <div class="col-lg-12">
-                <button *ngIf="this.usuario[0].admin_us === 'Y'" type="button" (click)="modalEditAnexo(anexo)" class="btn waves-effect waves-light btn-rounded btn-success" data-toggle="modal" data-target=".modalEditAnexo">Editar anexo</button>
+                <button *ngIf="this.usuario[0].admin_us === 'Y'" type="button" (click)="modalEditAnexo(anexo)" class="btn waves-effect waves-light btn-rounded btn-success" data-toggle="modal" data-target=".modalEditAnexo">Edit annex</button>
                 &nbsp;
-                <button type="button" (click)="goBack()" class="btn waves-effect waves-light btn-rounded btn-danger">Volver</button>
+                <button type="button" (click)="goBack()" class="btn waves-effect waves-light btn-rounded btn-danger">back</button>
               </div>
             </div>
 
@@ -112,8 +120,8 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="myLargeModalLabel">ID inversión: &nbsp; <b>{{editAnexo['id_inv']}}</b></h4>
-        <h4 class="modal-title" id="myLargeModalLabel">Fecha inversión: &nbsp; {{editAnexo['fechAnexo']}}</h4>
+        <h4 class="modal-title" id="myLargeModalLabel">Project ID: &nbsp; <b>{{editAnexo['id_inv']}}</b></h4>
+        <h4 class="modal-title" id="myLargeModalLabel">Project date: &nbsp; {{editAnexo['fechAnexo']}}</h4>
       </div>
       <div class="modal-body">
         <div class="comment-text w-100">
@@ -122,14 +130,14 @@
             <div class="row">
               <div class="col-lg-6 col-md-6">
                 <div class="form-group m-b-40 focused">
-                  <label for="input1">Movimiento anexo</label>
+                  <label for="input1">Annex movement</label>
                   <input type="text" formControlName="movimientoAnexo" class="form-control">
                   <span class="bar"></span>
                 </div>
               </div>
               <div class="col-lg-6 col-md-6">
                 <div class="form-group grupoDate">
-                  <span class="spanFech" >Fecha anexo</span>
+                  <span class="spanFech" >Annex date</span>
                   <input type="date" formControlName="fechaAnexo" class="form-control">
                   <span class="bar"></span>
                 </div>
@@ -139,14 +147,14 @@
             <div class="row">
               <div class="col-lg-6 col-md-6">
                 <div class="form-group m-b-40 focused">
-                  <label for="input1">Capital en Moneda Extranjera</label>
+                  <label for="input1">Capital in Foreign Currency</label>
                   <input type="number" formControlName="capitalExtra" class="form-control">
                   <span class="bar"></span>
                 </div>
               </div>
               <div class="col-lg-6 col-md-6">
                 <div class="form-group m-b-40 focused">
-                  <label for="input1">Capital en Moneda COP</label>
+                  <label for="input1">Capital in COP Currency</label>
                   <input type="number" formControlName="capitalCop" class="form-control">
                   <span class="bar"></span>
                 </div>
@@ -156,14 +164,14 @@
             <div class="row">
               <div class="col-lg-6 col-md-6">
                 <div class="form-group m-b-40 focused">
-                  <label for="input1">Intereses en Moneda Extranjera</label>
+                  <label for="input1">Interests in Foreign Currency</label>
                   <input type="text" formControlName="interesExtra" class="form-control">
                   <span class="bar"></span>
                 </div>
               </div>
               <div class="col-lg-6 col-md-6">
                 <div class="form-group m-b-40 focused">
-                  <label for="input1">Intereses en Moneda COP</label>
+                  <label for="input1">Interest in Currency COP</label>
                   <input type="text" formControlName="interesCop" class="form-control">
                   <span class="bar"></span>
                 </div>
@@ -173,14 +181,14 @@
             <div class="row">
               <div class="col-lg-6 col-md-6">
                 <div class="form-group m-b-40 focused">
-                  <label for="input1">Capital + Intereses en Moneda Extranjera</label>
+                  <label for="input1">Capital + Interest in Foreign Currency</label>
                   <input type="number" formControlName="capitalInteresExtra" class="form-control">
                   <span class="bar"></span>
                 </div>
               </div>
               <div class="col-lg-6 col-md-6">
                 <div class="form-group m-b-40 focused">
-                  <label for="input1">Capital + Intereses en Moneda COP</label>
+                  <label for="input1">Capital + Interest in Currency COP</label>
                   <input type="number" formControlName="capitalInteresCop" class="form-control">
                   <span class="bar"></span>
                 </div>
@@ -190,7 +198,7 @@
             <div class="row">
               <div class="col-lg-10 col-md-10">
                 <div class="form-group m-b-40 focused">
-                  <label for="input2">Comentario</label>
+                  <label for="input2">Description</label>
                   <textarea class="form-control" formControlName="descripcion" rows="3"></textarea>
                   <span class="bar"></span>
                 </div>
@@ -199,24 +207,24 @@
   
             <div class="row">
               <div class="col text-danger">
-                <p *ngIf="campoNoValido('movimientoAnexo')">*El movimiento del anexo es obligatorio.</p>
-                <p *ngIf="campoNoValido('fechaAnexo')">*La fecha del anexo es obligatoria.</p>
-                <p *ngIf="campoNoValido('capitalExtra')">*El capital en moneda extranjera son obligatoria.</p>
-                <p *ngIf="campoNoValido('capitalCop')">*El capital en moneda COP son obligatoria.</p>
-                <p *ngIf="campoNoValido('interesExtra')">*Los Intereses en Moneda Extranjera son obligatorios.</p>
-                <p *ngIf="campoNoValido('interesCop')">*Los Intereses en Moneda COP son obligatorios.</p>
-                <p *ngIf="campoNoValido('capitalInteresExtra')">*El Capital + Intereses en Moneda Extranjera es obligatorio.</p>
-                <p *ngIf="campoNoValido('capitalInteresCop')">*El Capital + Intereses en Moneda COP es obligatorio.</p>
-                <p *ngIf="campoNoValido('descripcion')">*La descripción es obligatoria.</p>
+                <p *ngIf="campoNoValido('movimientoAnexo')">*The annex movement is required.</p>
+                <p *ngIf="campoNoValido('fechaAnexo')">*The date of the annex is required.</p>
+                <p *ngIf="campoNoValido('capitalExtra')">*The capital in foreign currency is required.</p>
+                <p *ngIf="campoNoValido('capitalCop')">*The capital in COP currency is required.</p>
+                <p *ngIf="campoNoValido('interesExtra')">*Interest in Foreign Currency is required.</p>
+                <p *ngIf="campoNoValido('interesCop')">*Interest in COP Currency is required.</p>
+                <p *ngIf="campoNoValido('capitalInteresExtra')">*The Capital + Interest in Foreign Currency is required.</p>
+                <p *ngIf="campoNoValido('capitalInteresCop')">*The Capital + Interest in Currency COP is required.</p>
+                <p *ngIf="campoNoValido('descripcion')">*Description is required.</p>
               </div>
             </div>
   
             <div class="row">
               <div class="col-lg-6 col-md-6">
                 <div class="form-group">
-                  <button type="submit" class="btn waves-effect waves-light btn-rounded btn-success">Actualizar anexo</button>
+                  <button type="submit" class="btn waves-effect waves-light btn-rounded btn-success">Update annex</button>
                   &nbsp;
-                  <button type="button" (click)="goBack()" class="btn waves-effect waves-light btn-rounded btn-danger" data-dismiss="modal">Volver</button>
+                  <button type="button" class="btn waves-effect waves-light btn-rounded btn-danger" data-dismiss="modal">Close</button>
                 </div>
               </div>
             </div>

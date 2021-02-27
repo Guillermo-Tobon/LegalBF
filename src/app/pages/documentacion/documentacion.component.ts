@@ -98,18 +98,18 @@ export class DocumentacionComponent implements OnInit {
   public eliminarArchivo = (archivo:any) =>{
 
     Swal.fire({
-      text: "¿Realmente desea eliminar el archivo " + archivo.nom_archivo_info + "?",
+      text: "You really want to delete the file " + archivo.nom_archivo_info + "?",
       icon: 'question',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Si, eliminar!'
+      confirmButtonText: 'Yes, delete!'
     }).then((result) => {
       if (result.isConfirmed) {
         this.archivosServ.deleleFileService(archivo.tipo_archivo_info, archivo.nom_archivo_info, archivo.id_info).subscribe( (resp:any) =>{
           
           if ( resp.ok ) {
-            Swal.fire('Bien hecho!', resp.msg, 'success');
+            Swal.fire('Success!', resp.msg, 'success');
             this.getAllArchivos();
           }
     

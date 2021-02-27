@@ -28,13 +28,6 @@ export class DetalleInversionComponent implements OnInit {
   public formSubmitted = false;
   public archivoSubir:File;
 
-  public FormCrearAnexo = this.fb.group({
-    nombreAnexo: ['', [Validators.required, Validators.minLength(5)]],
-    ganancias: ['', [Validators.required, Validators.minLength(5)]],
-    fecha: ['', [Validators.required]],
-    comentario: ['', [Validators.required, Validators.minLength(20)]],
-  });
-
   constructor(
               private routeActive: ActivatedRoute,
               private archivosServ: ArchivosService,
@@ -52,8 +45,6 @@ export class DetalleInversionComponent implements OnInit {
 
     this.routeActive.params.subscribe( data =>{
       this.inversion = JSON.parse( data['inversion'] ) || [];
-
-      console.log(this.inversion)
 
       this.getArchivosUserInversion(this.inversion['id_inv'], this.inversion['id_us_inv']);
 
@@ -112,18 +103,18 @@ export class DetalleInversionComponent implements OnInit {
   public eliminarArchivo = (archivo:any) =>{
 
     Swal.fire({
-      text: "¿Realmente desea eliminar el archivo " + archivo.nom_archivo_info + "?",
-      icon: 'warning',
+      text: "¿You really want to delete the file " + archivo.nom_archivo_info + "?",
+      icon: 'question',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Si, eliminar!'
+      confirmButtonText: 'Yes, delete!'
     }).then((result) => {
       if (result.isConfirmed) {
         this.archivosServ.deleleFileService(archivo.tipo_archivo_info, archivo.nom_archivo_info, archivo.id_info).subscribe( (resp:any) =>{
           
           if ( resp.ok ) {
-            Swal.fire('Bien hecho!', resp.msg, 'success');
+            Swal.fire('Success!', resp.msg, 'success');
             this.getArchivosUserInversion(this.inversion['id_inv'], this.inversion['id_us_inv']);
           }
     
@@ -165,7 +156,7 @@ export class DetalleInversionComponent implements OnInit {
       if( resp.ok ){
         Swal.fire({
           icon: 'success',
-          title: 'Bien hecho!',
+          title: 'Success!',
           text: resp.msg,
           showConfirmButton: true,
           timer: 1800

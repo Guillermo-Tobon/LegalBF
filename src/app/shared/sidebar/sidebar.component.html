@@ -10,9 +10,9 @@
             <li class="user-profile">
               <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><img src="./assets/images/users/profile.png" alt="user" /><span class="hide-menu">{{usuario[0].nombres_us}} </span></a>
               <ul aria-expanded="false" class="collapse">
-                <li><a routerLink="perfil">Mi Perfil </a></li>
-                <li><a routerLink="configuracion-cuenta">Configuraciones</a></li>
-                <li class="aCursor"><a (click)="logoutUser()">Cerrar Sesión</a></li>
+                <li><a routerLink="perfil">My Profile </a></li>
+                <li><a routerLink="configuracion-cuenta">Settings</a></li>
+                <li class="aCursor"><a (click)="logoutUser()">LogOut</a></li>
               </ul>
             </li>
             <li class="nav-devider"></li>
@@ -21,30 +21,30 @@
             </li>
             <li *ngIf="usuario[0].admin_us === 'Y'"> 
               <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
-                <i class="mdi mdi-account-multiple"></i><span class="hide-menu">Área de Clientes</span>
+                <i class="mdi mdi-account-multiple"></i><span class="hide-menu">Clients Area</span>
               </a>
               <ul aria-expanded="false" class="collapse">
-                <li><a routerLink="lista-clientes">Lista Clientes</a></li>
-                <li><a routerLink="crear-cliente">Crear Clientes</a></li>
+                <li><a routerLink="lista-clientes">Clients list</a></li>
+                <li><a routerLink="crear-cliente">Create Clients</a></li>
               </ul>
             </li>
             <li *ngIf="usuario[0].admin_us === 'Y' ">
               <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
-                <i class="mdi mdi-chart-areaspline"></i><span class="hide-menu">Finanzas</span>
+                <i class="mdi mdi-chart-areaspline"></i><span class="hide-menu">Finance</span>
               </a>
               <ul aria-expanded="false" class="collapse">
                 <!-- <li><a routerLink="balances">Balances</a></li> -->
-                <li><a routerLink="inversiones">Inversiones</a></li>
-                <li><a routerLink="documentacion">Documentación</a></li>
+                <li><a routerLink="inversiones">Projects</a></li>
+                <li><a routerLink="documentacion">Documentation</a></li>
               </ul>
             </li>
             <li>
               <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
-                <i class="mdi mdi-message-reply-text"></i><span class="hide-menu">Soporte</span>
+                <i class="mdi mdi-message-reply-text"></i><span class="hide-menu">Support</span>
               </a>
               <ul aria-expanded="false" class="collapse">
                 <li *ngIf="usuario[0].admin_us === 'N'"><a class="aCursor" (click)="navegarTicket()">Tickets</a></li>
-                <li><a routerLink="lista-tickets">Lista de tickets</a></li>
+                <li><a routerLink="lista-tickets">Tickets list</a></li>
               </ul>
             </li>
             <!-- <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">Acerca de LegalBF </span></a>

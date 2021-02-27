@@ -121,7 +121,7 @@ export class DashboardComponent implements OnInit {
           this.sumGanan += this.anexos[i].ganacias_anex;  
         }
 
-        this.Data2 = [{data: dataGanan, label: 'Ganancias'}]; 
+        this.Data2 = [{data: dataGanan, label: 'Profits'}]; 
 
       }
       
@@ -232,7 +232,7 @@ export class DashboardComponent implements OnInit {
         this.labels3[i] = this.userInver[i].nombres_us; 
       }
 
-      this.Data3 = [{data: dataInver, label: 'Inversión($)'}]; 
+      this.Data3 = [{data: dataInver, label: 'Investment($)'}]; 
 
     }, (err) =>{
       //En caso de un error
@@ -246,7 +246,7 @@ export class DashboardComponent implements OnInit {
    * Método para cargar la grafica de rosca
    */
   public cargarGraficaDona = () =>{
-    this.labels1 = ['Users', 'Investments', 'Tickets'];
+    this.labels1 = ['Users', 'Projects', 'Tickets'];
     this.Data1 = [[this.usuarios.length, this.totalInver.length, this.tickets.length]];
 
   }

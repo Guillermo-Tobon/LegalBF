@@ -29,10 +29,10 @@ export class ListaClientesComponent implements OnInit {
     this.clientesServ.getUsuariosService().subscribe( (data:any) =>{
       if(data.ok){
 
-        this.usuarios = data.usuarios;
+        this.usuarios = data.usuarios || [];
 
       } else {
-        Swal.fire('Error', 'En este momento no podemos procesar la información. Inténtelo más tarde.', 'error');
+        Swal.fire('Error', 'At this time we are unable to process the information. Please try again later.', 'error');
         setTimeout(() => { this.router.navigateByUrl('/'); }, 1200);
 
       }

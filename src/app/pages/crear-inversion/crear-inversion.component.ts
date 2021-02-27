@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import Swal from 'sweetalert2';
 
 import { InversionesService } from 'src/app/services/inversiones.service';
 import { ArchivosService } from 'src/app/services/archivos.service';
+import { ClientesService } from 'src/app/services/clientes.service';
 
 @Component({
   selector: 'app-crear-inversion',
@@ -41,14 +42,17 @@ export class CrearInversionComponent implements OnInit {
               private routeActive: ActivatedRoute,
               private location: Location,
               private inversionServ: InversionesService,
-              private archivosServ: ArchivosService,
+              private clienteSrs: ClientesService,
               private fb: FormBuilder,
+              private router: Router,
   ) { }
 
   ngOnInit(): void {
 
     this.routeActive.params.subscribe( data =>{
       this.usuario = JSON.parse( data['usuario'] ) || [];
+
+      console.log(this.usuario)
 
     })
 
@@ -69,9 +73,23 @@ export class CrearInversionComponent implements OnInit {
     this.inversionServ.crearInversionService( this.crearFormInversion.value, this.usuario['id_us'] ).subscribe( (resp:any) =>{
 
       if( resp.ok ){
-        Swal.fire('Bien hecho!', `${resp.msg}.`, 'success');
+
+        const json = {
+          nombres: this.usuario['nombres_us'],
+          apellidos: this.usuario['apellidos_us'],
+          email: this.usuario['email_us'],
+          asunto: 'Project created in LegalBF',
+          descripcion: `<p>The ${this.crearFormInversion.get('nombreInver').value} project was created in LegalBF</p>
+                        <p>Enter: <a href="https://www.legalbf.com/" target="_blank">www.legalbf.com</a> You can verify the information</p>
+                        <br>
+                        <b>For more information, contact LegalBF administrator. </b>
+                        <br>
+                        <p>©2021 - LegalBF Service</p>`,
+        }
+        this.clienteSrs.sendEmailClienteService(json);
+        Swal.fire('Success!', resp.msg, 'success');
         setTimeout(() => { window.location.reload(); }, 2000);
-        this.idInversion = resp.idInver;
+        this.idInversion = resp.idInver;       
       }
 
     }, (err) =>{

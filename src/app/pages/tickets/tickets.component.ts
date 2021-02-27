@@ -52,22 +52,22 @@ export class TicketsComponent implements OnInit {
 
     this.ticketServ.creatTicketService( this.ticketFormCliente.value ).subscribe( (resp:any) =>{
 
-      Swal.fire('Bien hecho!!', `${resp.msg} - Ticket ( ${resp.idticket} )`, 'success');
+      Swal.fire('Success!!', `${resp.msg} - Ticket ( ${resp.idticket} )`, 'success');
 
       const json = {
-        nombres: 'Administrador de LegalBF',
+        nombres: 'LegalBF Administrator',
         apellidos: '',
         email: 'desarrollomemo@gmail.com',
-        asunto: 'Creación de ticket en LegalBF',
-        descripcion: `<p>Se ha creado un ticket con número <b>${resp.idticket}</b> en LegalBF.</p>
-                      <p><b>Nombre: </b>${this.usuario[0]['nombres_us']} ${this.usuario[0]['apellidos_us']}</p>
+        asunto: 'Ticket creation in LegalBF',
+        descripcion: `<p>A ticket with a number has been created <b>${resp.idticket}</b> in LegalBF.</p>
+                      <p><b>Name: </b>${this.usuario[0]['nombres_us']} ${this.usuario[0]['apellidos_us']}</p>
                       <p><b>Email: </b>${this.usuario[0]['email_us']}</p>
-                      <p><b>Teléfono: </b>${this.usuario[0]['telefono_us']}</p>
-                      <p><b>Asunto: </b>${this.ticketFormCliente.get('asunto').value}</p>
-                      <p><b>Mensaje: </b>${this.ticketFormCliente.get('descripcion').value}</p>
-                      <p>Ingrese a: <a href="https://www.legalbf.com/" target="_blank">www.legalbf.com</a> y verifique los tickets.</p>
+                      <p><b>Phone: </b>${this.usuario[0]['telefono_us']}</p>
+                      <p><b>Affair: </b>${this.ticketFormCliente.get('asunto').value}</p>
+                      <p><b>Message: </b>${this.ticketFormCliente.get('descripcion').value}</p>
+                      <p>Enter: <a href="https://www.legalbf.com/" target="_blank">www.legalbf.com</a> and check the tickets.</p>
                       <br>
-                      <p>©2021 - Todos los derechos reservados - es un servicio gratuito de LegalBG</p>`
+                      <p>©2021 - All rights reserved - it is a free service of LegalBG</p>`
       }
 
       this.clienteSrs.sendEmailClienteService(json).subscribe( (resp2:any) =>{

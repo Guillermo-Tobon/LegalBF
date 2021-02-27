@@ -100,13 +100,13 @@ export class HeaderComponent implements OnInit {
   public logoutUser = () =>{
 
     Swal.fire({
-      title: 'Desea cerrar sesión?',
-      text: "Recuerde verificar todos los datos procesados!",
-      icon: 'warning',
+      title: 'Do you want to LogOut?',
+      text: "Remember to verify all processed data!",
+      icon: 'question',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Si, Cerrar Sesión!'
+      confirmButtonText: 'Yes, LogOut!'
     }).then((result) => {
       if (result.isConfirmed) {
         setTimeout(() => { this.autServ.logoutService(); }, 1200);

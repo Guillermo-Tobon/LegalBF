@@ -86,17 +86,17 @@ export class CrearAnexoComponent implements OnInit {
               apellidos: this.usuario[0].apellidos_us,
               email: this.usuario[0].email_us,
               //email: 'desarrollomemo@gmail.com',
-              asunto: 'Creación de anexo a su inversión en LegalBF',
-              descripcion: `<p>Se creó un anexo a su inversión <strong>${this.inversion['nombre_inv']}</strong> de LegalBF por parte del administador.</p>
-                            <p>Por favor ingrese a: <a href="https://www.legalbf.com/" target="_blank">www.legalbf.com</a> y verifique su información.</p>
+              asunto: 'Creating an annex to your project in LegalBF',
+              descripcion: `<p>An annex to your <strong>${this.inversion['nombre_inv']}</strong> project was created.</p>
+                            <p>Please go to: <a href="https://www.legalbf.com/" target="_blank">www.legalbf.com</a> verify your information.</p>
                             <br>
-                            <b>Para más información, comuníquese con el administrador de LegalBF </b>
+                            <b>For more information, contact LegalBF administrator. </b>
                             <br>
-                            <p>©2021 - Todos los derechos reservados - es un servicio gratuito de LegalBG</p>`
+                            <p>©2021 - LegalBF Service</p>`
             }
             this.clientesSrv.sendEmailClienteService(json).subscribe( (resp:any) =>{
 
-              Swal.fire('Bien hecho!', `${resp1.msg}`, 'success');
+              Swal.fire('Success!', `${resp1.msg}`, 'success');
               setTimeout(() => { window.location.reload(); }, 2000);
 
             }, (err) =>{

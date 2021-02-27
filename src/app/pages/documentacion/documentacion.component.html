@@ -2,9 +2,9 @@
   <div class="col-lg-12">
     <div class="card">
       <div class="card-body">
-        <h4 *ngIf="usuario[0].admin_us == 'N'" class="card-title">Archivos cargados para {{usuario[0].nombres_us}}</h4>
-        <h4 *ngIf="usuario[0].admin_us == 'Y'" class="card-title">Todos los Archivos cargados</h4>
-        <label for="input-file-now">Lista de todos los archivos cargados.</label>
+        <h4 *ngIf="usuario[0].admin_us == 'N'" class="card-title">Files uploaded for {{usuario[0].nombres_us}}</h4>
+        <h4 *ngIf="usuario[0].admin_us == 'Y'" class="card-title">All Uploaded Files</h4>
+        <label for="input-file-now">List of all uploaded files.</label>
         <div class="contenidoArchivos">
           
           <div *ngFor="let archivo of archivos" class="alert alert-info">
@@ -12,8 +12,8 @@
             <img *ngIf=" archivo.tipo_archivo_info === 'word' " class="logoFile" src="../../../assets/images/word.png" alt="">
             {{archivo.nom_archivo_info | slice:9:50 }}
             <br>
-            <span *ngIf="usuario[0].admin_us == 'Y'" class="fechArchivo">Usuario: {{archivo.nombres_us }} </span><br>
-            <span class="fechArchivo">Publicado: {{archivo.fech_publica_info | date: 'dd/MM/yyyy' }} </span>
+            <span *ngIf="usuario[0].admin_us == 'Y'" class="fechArchivo">User: {{archivo.nombres_us }} </span><br>
+            <span class="fechArchivo">Upload date: {{archivo.fech_publica_info | date: 'dd/MM/yyyy' }} </span>
             <div class="opcionesFile">
               <a (click)="verArchivo(archivo)" title="View"> <i class="mdi mdi-eye"></i> </a>
               <a *ngIf="usuario[0].admin_us == 'Y'" (click)="eliminarArchivo(archivo)" title="Delete file"> <i class="mdi mdi-delete"></i> </a>

@@ -18,12 +18,12 @@
         <div class="d-flex no-block">
           <div class="m-r-20 align-self-center"><span class="lstick m-r-20"></span><img src="../assets/images/icon/income.png" alt="Income"></div>
           <div *ngIf=" usuario[0].admin_us === 'N' " class="align-self-center">
-            <h6 class="text-muted m-t-10 m-b-0">Ganancias totales</h6>
+            <h6 class="text-muted m-t-10 m-b-0">Total winnings</h6>
             <h2 class="m-t-0">{{ sumGanan | currency: moneda }}</h2>
           </div>
           <div *ngIf=" usuario[0].admin_us === 'Y' " class="align-self-center">
-            <h6 class="text-muted m-t-10 m-b-0">Asociados</h6>
-            <h2 class="m-t-0">{{ usuarios.length }} usuarios</h2>
+            <h6 class="text-muted m-t-10 m-b-0">Associates</h6>
+            <h2 class="m-t-0">{{ usuarios.length }} users</h2>
           </div>
         </div>
       </div>
@@ -35,12 +35,12 @@
         <div class="d-flex no-block">
           <div class="m-r-20 align-self-center"><span class="lstick m-r-20"></span><img src="../assets/images/icon/expense.png" alt="Income"></div>
           <div *ngIf=" usuario[0].admin_us === 'N' " class="align-self-center">
-            <h6 class="text-muted m-t-10 m-b-0">Total anexos</h6>
-            <h2 class="m-t-0">{{ anexos.length }} anexos</h2>
+            <h6 class="text-muted m-t-10 m-b-0">Total annexes</h6>
+            <h2 class="m-t-0">{{ anexos.length }} annexes</h2>
           </div>
           <div *ngIf=" usuario[0].admin_us === 'Y' " class="align-self-center">
-            <h6 class="text-muted m-t-10 m-b-0">Inversiones</h6>
-            <h2 class="m-t-0">{{ totalInver.length }} activas</h2>
+            <h6 class="text-muted m-t-10 m-b-0">Projects</h6>
+            <h2 class="m-t-0">{{ totalInver.length }} active</h2>
           </div>
         </div>
       </div>
@@ -52,11 +52,11 @@
         <div class="d-flex no-block">
           <div class="m-r-20 align-self-center"><span class="lstick m-r-20"></span><img src="../assets/images/icon/assets.png" alt="Income"></div>
           <div *ngIf=" usuario[0].admin_us === 'N' " class="align-self-center">
-            <h6 class="text-muted m-t-10 m-b-0">Tiempo inversión</h6>
-            <h2 class="m-t-0">{{ tiempo }} días</h2>
+            <h6 class="text-muted m-t-10 m-b-0">Project time</h6>
+            <h2 class="m-t-0">{{ tiempo }} days</h2>
           </div>
           <div *ngIf=" usuario[0].admin_us === 'Y' " class="align-self-center">
-            <h6 class="text-muted m-t-10 m-b-0">Pendientes</h6>
+            <h6 class="text-muted m-t-10 m-b-0">Slopes</h6>
             <h2 class="m-t-0">{{ tickets.length }} tickets</h2>
           </div>
         </div>
@@ -80,7 +80,9 @@
     <div class="card">
       <!-- Nav tabs -->
       <ul class="nav nav-tabs profile-tab" role="tablist">
-        <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#settings" role="tab">Información general inversión</a> </li>
+        <li class="nav-item">
+          <a class="nav-link active" data-toggle="tab" href="#settings" role="tab">General project information</a>
+        </li>
       </ul>
       <!-- Tab panes -->
       <div class="tab-content">        
@@ -88,18 +90,18 @@
           <div class="card-body">
             <div class="row">
               <div class="col-lg-6 col-md-6">
-                <small class="text-muted">ID inversión: &nbsp; <b>{{ idInv }}</b> </small>
+                <small class="text-muted">Project ID: &nbsp; <b>{{ idInv }}</b> </small>
               </div>
               <br>
               <div class="col-lg-6 col-md-6">
-                <small class="text-muted">Fecha inversión: &nbsp; {{ fechareg | date: 'dd/MM/yyyy'}} </small>
+                <small class="text-muted">Project date: &nbsp; {{ fechareg | date: 'dd/MM/yyyy'}} </small>
               </div>
             </div>
             <br>
 
             <div class="row">
               <div class="col-lg-12">
-                <small class="text-muted">Nombre inversión:</small>
+                <small class="text-muted">Project name:</small>
                 <h6>{{ nomInversion }}</h6> 
               </div>
             </div>
@@ -107,17 +109,17 @@
 
             <div class="row">
               <div class="col-lg-4 col-md-4">
-                <small class="text-muted">Capital invertido:</small>
+                <small class="text-muted">Project capital:</small>
                 <h6>{{ capital | currency: moneda }}</h6> 
               </div>
               <br>
               <div class="col-lg-4 col-md-4">
-                <small class="text-muted">Tipo de moneda:</small>
+                <small class="text-muted">Type of currency:</small>
                 <h6>{{ moneda }}</h6> 
               </div>
               <br>
               <div class="col-lg-4 col-md-4">
-                <small class="text-muted">País:</small>
+                <small class="text-muted">Country:</small>
                 <h6>{{ pais }}</h6>
               </div>
             </div>
@@ -125,26 +127,26 @@
 
             <div class="row">
               <div class="col-lg-4 col-md-4">
-                <small class="text-muted">Tiempo inversión:</small>
-                <h6>{{ tiempo }} días</h6>
+                <small class="text-muted">Project date:</small>
+                <h6>{{ tiempo }} days</h6>
               </div>
               <br>
               <div class="col-lg-4 col-md-4">
-                <small class="text-muted">Tasa de interés (EA):</small>
+                <small class="text-muted">Interest rate (AE):</small>
                 <h6>{{ tasa }}%</h6>
               </div>
               <br>
               <div class="col-lg-4 col-md-4">
-                <small class="text-muted">Estado inversión:</small>
-                <h6 *ngIf=" estado === 1 " class="text-warning">ACTIVO</h6>
-                <h6 *ngIf=" estado === 0" class="text-danger">INACTIVO</h6>
+                <small class="text-muted">Project status:</small>
+                <h6 *ngIf=" estado === 1 " class="text-warning">ACTIVE</h6>
+                <h6 *ngIf=" estado === 0" class="text-danger">INACTIVE</h6>
               </div>
             </div>
             <br>
 
             <div class="row">
               <div class="col-lg-10">
-                <small class="text-muted">Descripción:</small>
+                <small class="text-muted">Description:</small>
                 <h6>{{ descripcion }}</h6>
               </div>
             </div>
@@ -163,14 +165,14 @@
   <div class="col-lg-12">
     <div class="card">
       <div class="card-body">
-        <h4 class="card-title">Anexos cargados actualmente</h4>
-        <h6 class="card-subtitle">Estos son los anexos cargados para la inversión &nbsp; <b>{{ idInv }}</b></h6>
+        <h4 class="card-title">Currently loaded attachments</h4>
+        <h6 class="card-subtitle">These are the attachments uploaded for the project &nbsp; <b>{{ idInv }}</b></h6>
         <div class="table-responsive">
           <table class="table tablaAnexos">
             <thead>
               <tr>
-                <th># Anexo</th>
-                <th>Nom. Anexo</th>
+                <th># Annexed</th>
+                <th>Nom. Annexed</th>
                 <th>Ganancias</th>
                 <th>Tasa (EA) inicial</th>
                 <th>Moneda</th>
@@ -204,22 +206,22 @@
 
 <div *ngIf=" usuario[0].admin_us === 'Y' " class="row">
   <div class="col-lg-8 col-md-8">
-    <app-lineal-admin [labels]="labels3" [data]="Data3" title="Usuarios/Inversión inicial"></app-lineal-admin>
+    <app-lineal-admin [labels]="labels3" [data]="Data3" title="Users / initial project"></app-lineal-admin>
   </div>
   <div class="col-lg-4 col-md-4">
     <app-datepicker-inline title="Calendary"></app-datepicker-inline>
   </div>
 
   <div class="col-lg-5 col-md-5">
-    <app-dona [labels]="labels1" [data]="Data1" title="Estado plataforma"></app-dona>
+    <app-dona [labels]="labels1" [data]="Data1" title="Platform status"></app-dona>
   </div>
   <div class="col-lg-7 col-md-7">
     <div class="card">
       <div class="card-body">
         <div class="d-flex">
           <div>
-            <h4 class="card-title"><span class="lstick"></span>Usuarios registrados </h4>
-            <a routerLink="lista-clientes" class="btn waves-effect waves-light btn-rounded btn-success verUsuarios">Ver usuarios</a>
+            <h4 class="card-title"><span class="lstick"></span>Registered users </h4>
+            <a routerLink="lista-clientes" class="btn waves-effect waves-light btn-rounded btn-success verUsuarios">View users</a>
           </div>
         </div>
         <div class="table-responsive m-t-20 tableUsers">
@@ -228,7 +230,7 @@
               <tr>
                 <th colspan="2">User</th>
                 <th>Email</th>
-                <th>Estado</th>
+                <th>Status</th>
               </tr>
             </thead>
             <tbody>
@@ -236,8 +238,8 @@
                 <td style="width:50px;"><span class="round"><img src="../assets/images/users/1.jpg" alt="user" width="50"></span></td>
                 <td><h6> {{usuario.nombres_us}} </h6><small class="text-muted">{{usuario.compania_us}}</small></td>
                 <td>{{usuario.email_us | slice:0:11 }} {{ (usuario.email_us.length > 11)? '...':'' }}</td>
-                <td *ngIf=" usuario.estado_us === 1 " ><span class="label label-success label-rounded">Activo</span></td>
-                <td *ngIf=" usuario.estado_us === 0 " ><span class="label label-warning label-rounded">Inactivo</span></td>
+                <td *ngIf=" usuario.estado_us === 1 " ><span class="label label-success label-rounded">Active</span></td>
+                <td *ngIf=" usuario.estado_us === 0 " ><span class="label label-warning label-rounded">Inactive</span></td>
               </tr>
             </tbody>
           </table>

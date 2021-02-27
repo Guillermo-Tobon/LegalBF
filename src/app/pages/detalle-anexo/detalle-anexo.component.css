@@ -23,3 +23,6 @@
 .formEditAnexo label{
   font-size: 12px;
 }
+.hiddenInputFile{
+  display: none;
+}

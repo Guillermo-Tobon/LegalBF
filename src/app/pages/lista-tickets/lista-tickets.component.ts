@@ -118,7 +118,7 @@ export class ListaTicketsComponent implements OnInit {
     this.ticketServ.updateTicketService( this.FormEditTicket.value, idTicket ).subscribe( (resp:any) =>{
 
       if(resp.ok){
-        Swal.fire('Bien hecho!', resp.msg, 'success');
+        Swal.fire('Success!', resp.msg, 'success');
         setTimeout(() => { window.location.reload(); }, 2000);
       }
 
@@ -153,24 +153,24 @@ export class ListaTicketsComponent implements OnInit {
           nombres: ticket.nombre_tic,
           apellidos: '',
           email: ticket.email_tic,
-          asunto: `Respuesta al ticket ${ticket.id_tic} creado en LegalBF`,
-          descripcion: `<p>Se ha dado respuesta por parte del administador a su ticket creado en LegalBF.</p>
+          asunto: `Response to ticket ${ticket.id_tic} created in LegalBF`,
+          descripcion: `<p>The administrator has responded to his ticket created in LegalBF.</p>
                         <p>Ticket: ${ticket.id_tic}</p>
-                        <p>Asunto: ${ticket.asunto_tic}</p>
-                        <p>Mensaje: ${ticket.mensaje_tic}</p>
-                        <p>Respuesta: ${this.FormAnswerTicket.get('respuesta').value}</p>
+                        <p>Affair: ${ticket.asunto_tic}</p>
+                        <p>Message: ${ticket.mensaje_tic}</p>
+                        <p>Answer: ${this.FormAnswerTicket.get('respuesta').value}</p>
                         <br>
-                        <p>Ingrese a: <a href="https://www.legalbf.com/" target="_blank">www.legalbf.com</a> y verifique su ticket.</p>
+                        <p>Enter: <a href="https://www.legalbf.com/" target="_blank">www.legalbf.com</a>and verify your ticket.</p>
                         <br>
-                        <b>Para más información, comuníquese con el administrador de LegalBF </b>
+                        <b>For more information, contact LegalBF administrator. </b>
                         <br>
-                        <p>©2021 - Todos los derechos reservados - es un servicio gratuito de LegalBG</p>`,
+                        <p>©2021 - LegalBF Service</p>`,
         }
 
         this.clienteSrs.sendEmailClienteService(json).subscribe( (resp2:any) =>{
 
           if( resp2.ok ){
-            Swal.fire('Bien hecho!', resp.msg, 'success');
+            Swal.fire('Success!', resp.msg, 'success');
             this.getAllTickets();
           }
 
@@ -198,19 +198,19 @@ export class ListaTicketsComponent implements OnInit {
   public eliminarTicket = (idTicket:any) =>{
     
     Swal.fire({
-      title: `Desea eliminar el Ticket ${idTicket}`,
-      text: "Una vez eliminado no se puede recuperar!",
+      title: `You want to delete the Ticket ${idTicket}`,
+      text: "Once deleted it cannot be recovered!",
       icon: 'question',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Si, Eliminar!'
+      confirmButtonText: 'Yes, delete!'
     }).then((result) => {
 
       if (result.isConfirmed) {
         this.ticketServ.deleteTicketService(idTicket).subscribe( (resp:any) =>{
           
-          Swal.fire('Bien hecho!', resp.msg, 'success');
+          Swal.fire('Success!', resp.msg, 'success');
           this.getAllTickets();
         
         }, (err) =>{

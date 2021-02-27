@@ -16,11 +16,11 @@
       <div>
         <hr> </div>
       <div class="card-body"> 
-        <small class="text-muted">Descripción</small>
+        <small class="text-muted">Description</small>
         <h6>{{usuario[0].descripcion_us}}</h6> 
-        <small class="text-muted">Perfil</small>
-        <h6 *ngIf="usuario[0].admin_us === 'Y'" class="h6Perfil">ADMINISTRADOR</h6> 
-        <h6 *ngIf="usuario[0].admin_us === 'N'" class="h6Perfil">ASOCIADO</h6> 
+        <small class="text-muted">Profile</small>
+        <h6 *ngIf="usuario[0].admin_us === 'Y'" class="h6Perfil">ADMINISTRATOR</h6> 
+        <h6 *ngIf="usuario[0].admin_us === 'N'" class="h6Perfil">ASSOCIATED</h6> 
         <small class="text-muted p-t-30 db">Social Profile</small>
         <br>
         <button class="btn btn-circle btn-secondary"><i class="fa fa-facebook"></i></button>
@@ -35,31 +35,31 @@
     <div class="card">
       <!-- Nav tabs -->
       <ul class="nav nav-tabs profile-tab" role="tablist">
-        <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#settings" role="tab">Información general</a> </li>
+        <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#settings" role="tab">General Information</a> </li>
       </ul>
       <!-- Tab panes -->
       <div class="tab-content">        
         <div class="tab-pane active" id="settings" role="tabpanel">
           <div class="card-body">
-            <small class="text-muted">Nombre completo:</small>
+            <small class="text-muted">Name:</small>
             <h6>{{usuario[0].nombres_us}} {{usuario[0].apellidos_us}}</h6> 
             <br>
-            <small class="text-muted">Compañía:</small>
+            <small class="text-muted">Company:</small>
             <h6>{{usuario[0].compania_us}}</h6> 
             <br>
             <small class="text-muted">E-mail:</small>
             <h6>{{usuario[0].email_us}}</h6> 
             <br>
-            <small class="text-muted">Teléfono:</small>
+            <small class="text-muted">Phone:</small>
             <h6>{{usuario[0].telefono_us}}</h6> 
             <br>
-            <small class="text-muted">Fecha de registro:</small>
+            <small class="text-muted">Registration date:</small>
             <h6>{{usuario[0].fecha_reg_us | date: 'dd/MM/yyyy'}}</h6> 
             <br>
-            <small class="text-muted">Estado:</small>
+            <small class="text-muted">Status:</small>
             <h6 class="text-warning">{{estado}}</h6> 
             <br>
-            <button type="button" routerLink="/" class="btn waves-effect waves-light btn-rounded btn-danger">Volver</button>
+            <button type="button" routerLink="/" class="btn waves-effect waves-light btn-rounded btn-danger">Back</button>
 
           </div>
         </div>

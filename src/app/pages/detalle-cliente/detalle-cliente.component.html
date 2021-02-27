@@ -2,8 +2,8 @@
   <div class="col-12">
     <div class="card">
       <div class="card-body">
-        <h4 class="card-title">En el siguiente formulario puede actualizar y ver las inversiones de {{usuario['nombres_us']}}.</h4>
-        <h6 class="card-subtitle">Una vez modificada la información, se notificará vía correo electrónico ( {{usuario['email_us']}} ).</h6>
+        <h4 class="card-title">In the following form you can update and see {{usuario['nombres_us']}} investments.</h4>
+        <h6 class="card-subtitle">Once the information has been modified, it will be notified via email ( {{usuario['email_us']}} ).</h6>
         
         <form class="floating-labels m-t-40" [formGroup]="updateFormCliente" (submit)="actualizarCliente()">
           <div class="row">
@@ -11,14 +11,14 @@
               <div class="form-group m-b-40 focused">
                 <input type="text" formControlName="nombres" class="form-control">
                 <span class="bar"></span>
-                <label for="input1">Nombres</label>
+                <label for="input1">Names</label>
               </div>
             </div>
             <div class="col-lg-6 col-md-6">
               <div class="form-group m-b-40 focused">
                 <input type="text" formControlName="apellidos" class="form-control">
                 <span class="bar"></span>
-                <label for="input2">Apellidos</label>
+                <label for="input2">Surnames</label>
               </div>
             </div>
           </div>
@@ -35,14 +35,14 @@
               <div class="form-group m-b-40 focused">
                 <input type="text" formControlName="telefono" class="form-control">
                 <span class="bar"></span>
-                <label for="input3">Teléfono</label>
+                <label for="input3">Phone</label>
               </div>
             </div>
             <div class="col-lg-4 col-md-4">
               <div class="form-group m-b-40 focused">
                 <input type="text" formControlName="pais" class="form-control">
                 <span class="bar"></span>
-                <label for="input3">País</label>
+                <label for="input3">Country</label>
               </div>
             </div>
           </div>
@@ -52,14 +52,14 @@
               <div class="form-group m-b-40 focused">
                 <input type="text" formControlName="compania" class="form-control" id="input5">
                 <span class="bar"></span>
-                <label for="input3">Nombre Compañía</label>
+                <label for="input3">Company name</label>
               </div>
             </div>
             <div class="col-lg-6 col-md-6">
               <div class="form-group m-b-40 focused">
                 <textarea class="form-control" formControlName="descripcion" rows="2"></textarea>
                 <span class="bar"></span>
-                <label for="input3">Descripción</label>
+                <label for="input3">Description</label>
               </div> 
             </div>
           </div>
@@ -67,16 +67,16 @@
           <div class="row">
             <div class="col-lg-6 col-md-6">
               <div class="form-group">
-                <button type="submit" class="btn waves-effect waves-light btn-rounded btn-success">Actualizar Cliente</button>
+                <button type="submit" class="btn waves-effect waves-light btn-rounded btn-success">Update Client</button>
                 &nbsp;
-                <button type="button" (click)="goBack()" class="btn waves-effect waves-light btn-rounded btn-danger">Volver</button>
+                <button type="button" (click)="goBack()" class="btn waves-effect waves-light btn-rounded btn-danger">Back</button>
               </div>
             </div>
             <div class="col-lg-6 col-md-6">
               <div class="checkbox checkbox-info pull-left p-t-0">
                 <input id="checkbox-signup" formControlName="estado" type="checkbox" class="filled-in chk-col-light-blue">
-                <label for="checkbox-signup">Cliente Activo </label><br><br>
-                <h6>La cuenta del cliente la puede inactivar. </h6>
+                <label for="checkbox-signup">Active Client </label><br><br>
+                <h6>Customer account can be inactivated. </h6>
                 <input type="hidden" formControlName="id" class="form-control">
               </div> 
             </div>
@@ -84,13 +84,13 @@
 
           <div class="row">
             <div class="col text-danger">
-              <p *ngIf="campoNoValido('nombres')">*El nombre es obligatorio.</p>
-              <p *ngIf="campoNoValido('apellidos')">*El apellido es obligatorio.</p>
-              <p *ngIf="campoNoValido('email')">*El E-mail es obligatorio y valido.</p>
-              <p *ngIf="campoNoValido('telefono')">*El teléfono es obligatorio.</p>
-              <p *ngIf="campoNoValido('pais')">*El país es obligatorio.</p>
-              <p *ngIf="campoNoValido('compania')">*El nombre de la compañía es obligatorio.</p>
-              <p *ngIf="campoNoValido('descripcion')">*La descripción es obligatoria.</p>
+              <p *ngIf="campoNoValido('nombres')">*The name is required.</p>
+              <p *ngIf="campoNoValido('apellidos')">*The last name is required.</p>
+              <p *ngIf="campoNoValido('email')">*The E-mail is mandatory and valid.</p>
+              <p *ngIf="campoNoValido('telefono')">*The phone is mandatory.</p>
+              <p *ngIf="campoNoValido('pais')">*Country is required.</p>
+              <p *ngIf="campoNoValido('compania')">*The company name is required.</p>
+              <p *ngIf="campoNoValido('descripcion')">*Description is required.</p>
             </div>
           </div>
       
@@ -105,19 +105,19 @@
   <div class="col-12">
     <div class="card">
       <div class="card-body">
-        <h4 class="card-title">Inversiones realizadas de {{usuario['nombres_us']}}</h4>
-        <h6 class="card-subtitle">Puede visualizar el detalle de la inversión y los documentos adjuntos.</h6>
+        <h4 class="card-title">Project made of {{usuario['nombres_us']}}</h4>
+        <h6 class="card-subtitle">You can view the details of the investment and the attached documents.</h6>
         <div class="table-responsive">
           <table class="table">
             <thead>
               <tr>
-                <th># Inversión</th>
-                <th>Nom. Proyecto</th>
-                <th>Capital en Moneda Extranjera</th>
-                <th>Moneda Extranjera</th>
-                <th>Capital Invertido en COP</th>
-                <th>Fecha Inversión</th>
-                <th>Estado</th>
+                <th># ID</th>
+                <th>Project name</th>
+                <th>Capital in Foreign Currency</th>
+                <th>Foreign currency</th>
+                <th>Capital Invested in COP</th>
+                <th>Date</th>
+                <th>Status</th>
               </tr>
             </thead>
             <tbody>
@@ -128,8 +128,8 @@
                 <td> {{inversion.moneda_extra_inv}} </td>
                 <td>{{inversion.capital_cop_inv | currency: inversion.moneda_extra_inv }} </td>
                 <td><span class="text-muted"><i class="fa fa-calendar-o"></i> {{inversion.fechareg_inv | date: 'dd/MM/yyyy'}}</span> </td>
-                <td *ngIf=" inversion.estado_inv === 1 " ><div class="label label-table label-success">Activo</div></td>
-                <td *ngIf=" inversion.estado_inv === 0 " ><div class="label label-table label-danger">Inactivo</div></td>
+                <td *ngIf=" inversion.estado_inv === 1 " ><div class="label label-table label-success">Active</div></td>
+                <td *ngIf=" inversion.estado_inv === 0 " ><div class="label label-table label-danger">Inactive</div></td>
               </tr>
             </tbody>
           </table>
@@ -143,7 +143,7 @@
   <div class="col-lg-12">
     <div class="card">
       <div class="card-body">
-        <button type="button" (click)="navegarCrearInversion()" class="btn waves-effect waves-light btn-rounded btn-success text-center btn-block">Crear inversión para {{usuario['nombres_us']}}</button>
+        <button type="button" (click)="navegarCrearInversion()" class="btn waves-effect waves-light btn-rounded btn-success text-center btn-block">Create project of {{usuario['nombres_us']}}</button>
       </div>
     </div>
   </div>

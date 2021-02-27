@@ -1,14 +1,14 @@
 <div class="row el-element-overlay">
   <div class="col-md-12">
-    <h4 class="card-title">Todos los clientes</h4>
-    <h6 class="card-subtitle m-b-20 text-muted">Puede ver el detalle de cliente y modificar sus datos.</h6> </div>
+    <h4 class="card-title">All clients</h4>
+    <h6 class="card-subtitle m-b-20 text-muted">You can see the customer details and modify their data.</h6> </div>
   
     <div *ngFor="let usuario of usuarios; let i = index;" class="col-lg-3 col-md-4 col-sm-6">
       <div class="card">
         <div class="el-card-item">
           <div class="el-card-avatar el-overlay-1">
             <img src="./assets/images/users/1.jpg" alt="user">
-            <span *ngIf="usuario.estado_us === 0" class="estadoCliente">Inactivo</span>
+            <span *ngIf="usuario.estado_us === 0" class="estadoCliente">Inactive</span>
             <div class="el-overlay">
               <ul class="el-info">
                 <li><a class="btn default btn-outline iconLink" (click)="verDetalleCliente(usuario)"><i class="icon-link"></i></a></li>
