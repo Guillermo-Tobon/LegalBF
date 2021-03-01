@@ -80,7 +80,7 @@
                 <h6 *ngIf="anexo['tipo_archivo_info'] === 'word'" (click)="verArchivo( anexo['tipo_archivo_info'], anexo['nom_archivo_info'] )" class="cursor"><img class="logoFile" src="../../../assets/images/word.png" alt=""> {{anexo['nom_archivo_info'] }}</h6>
 
                 <br>
-                <div class="checkbox checkbox-info">
+                <div *ngIf="this.usuario[0].admin_us === 'Y'" class="checkbox checkbox-info">
                   <input id="checkbox-signup" type="checkbox" (change)="checkCambiarFile($event.target.checked)" class="filled-in chk-col-light-blue">
                   <label for="checkbox-signup">Change file?</label>
                 </div> 

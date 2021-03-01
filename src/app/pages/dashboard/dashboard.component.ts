@@ -31,11 +31,17 @@ export class DashboardComponent implements OnInit {
   public tickets:any[] = [];
   public nomInversion:string;
   public idInv:number;
-  public capital:number;
+  public capitalExtra:number;
+  public capitalCop:number;
+  public interesExtra:number;
+  public interesCop:number;
+  public rentaExtra:number;
+  public rentaCop:number;
   public moneda:string;
   public pais:string;
   public tiempo:string;
   public tasa:string;
+  public tasaCambio:number;
   public estado:number;
   public descripcion:string;
   public fechareg:string;
@@ -77,14 +83,21 @@ export class DashboardComponent implements OnInit {
     this.inversionesServ.getInversionesUserService(idUs).subscribe( (resp:any) =>{
 
       this.inversiones = resp.inversiones || [];
+      console.log(this.inversiones)
       
       this.idInv = this.inversiones[0].id_inv;
       this.nomInversion = this.inversiones[0].nombre_inv;
-      this.capital = this.inversiones[0].capital_inv;
-      this.moneda = this.inversiones[0].moneda_inv;
+      this.capitalExtra = this.inversiones[0].capital_extra_inv;
+      this.capitalCop = this.inversiones[0].capital_cop_inv;
+      this.interesExtra = this.inversiones[0].interes_extra_inv;
+      this.interesCop = this.inversiones[0].interes_cop_inv;
+      this.rentaExtra = this.inversiones[0].renta_extra_inv;
+      this.rentaCop = this.inversiones[0].renta_cop_inv;
+      this.moneda = this.inversiones[0].moneda_extra_inv;
       this.pais = this.inversiones[0].pais_inv;
       this.tiempo = this.inversiones[0].tiempo_inv;
       this.tasa = this.inversiones[0].tasa_ea_inv;
+      this.tasaCambio = this.inversiones[0].tasa_cambio_inv;
       this.descripcion = this.inversiones[0].descripcion_inv;
       this.fechareg = this.inversiones[0].fechareg_inv;
       this.estado = this.inversiones[0].estado_inv;
@@ -115,13 +128,13 @@ export class DashboardComponent implements OnInit {
         let dataGanan = [];
 
         for (let i = 0; i < this.anexos.length; i++) {
-          dataGanan[i] = this.anexos[i].ganacias_anex;
+          dataGanan[i] = this.anexos[i].capital_interes_extra_anex;
           this.labels2[i] = this.anexos[i].fechAnexo;
 
-          this.sumGanan += this.anexos[i].ganacias_anex;  
+          this.sumGanan += this.anexos[i].capital_interes_extra_anex;  
         }
 
-        this.Data2 = [{data: dataGanan, label: 'Profits'}]; 
+        this.Data2 = [{data: dataGanan, label: 'Winnings'}]; 
 
       }
       
@@ -228,11 +241,11 @@ export class DashboardComponent implements OnInit {
       let dataInver = [];
 
       for (let i = 0; i < this.userInver.length; i++) {
-        dataInver[i] = this.userInver[i].capital_inv;
+        dataInver[i] = this.userInver[i].capital_extra_inv;
         this.labels3[i] = this.userInver[i].nombres_us; 
       }
 
-      this.Data3 = [{data: dataInver, label: 'Investment($)'}]; 
+      this.Data3 = [{data: dataInver, label: 'Project($)'}]; 
 
     }, (err) =>{
       //En caso de un error

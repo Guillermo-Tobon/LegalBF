@@ -67,7 +67,7 @@
 
 <div *ngIf=" usuario[0].admin_us === 'N' " class="row">
   <div class="col-lg-12">
-    <app-lineal [labels]="labels2" [data]="Data2" title="Inversión/Ganancias" [nombreInv]="nomInversion" [capitalInv]="capital" [monedaInv]="moneda" [tasaInv]="tasa"></app-lineal>
+    <app-lineal [labels]="labels2" [data]="Data2" title="Project/Winnings" [nombreInv]="nomInversion" [capitalInv]="capitalExtra" [monedaInv]="moneda" [tasaInv]="tasa"></app-lineal>
   </div>
 </div>
 
@@ -89,37 +89,63 @@
         <div class="tab-pane active" id="settings" role="tabpanel">
           <div class="card-body">
             <div class="row">
-              <div class="col-lg-6 col-md-6">
+              <div class="col-lg-8 col-md-8">
                 <small class="text-muted">Project ID: &nbsp; <b>{{ idInv }}</b> </small>
               </div>
               <br>
-              <div class="col-lg-6 col-md-6">
+              <div class="col-lg-4 col-md-4">
                 <small class="text-muted">Project date: &nbsp; {{ fechareg | date: 'dd/MM/yyyy'}} </small>
               </div>
             </div>
             <br>
 
             <div class="row">
-              <div class="col-lg-12">
+              <div class="col-lg-4 col-md-4">
                 <small class="text-muted">Project name:</small>
-                <h6>{{ nomInversion }}</h6> 
+                <h6>{{nomInversion}}</h6> 
+              </div>
+              <div class="col-lg-4 col-md-4">
+                <small class="text-muted">Capital invested in foreign currency:</small>
+                <h6>{{ capitalExtra | currency: moneda }}</h6> 
+              </div>
+              <div class="col-lg-4 col-md-4">
+                <small class="text-muted">Foreign currency:</small>
+                <h6>{{ moneda }}</h6> 
               </div>
             </div>
             <br>
 
             <div class="row">
               <div class="col-lg-4 col-md-4">
-                <small class="text-muted">Project capital:</small>
-                <h6>{{ capital | currency: moneda }}</h6> 
+                <small class="text-muted">Exchange rate:</small>
+                <h6>{{ tasaCambio | currency: moneda }}</h6> 
               </div>
               <br>
               <div class="col-lg-4 col-md-4">
-                <small class="text-muted">Type of currency:</small>
-                <h6>{{ moneda }}</h6> 
+                <small class="text-muted">Capital invested in COP currency:</small>
+                <h6>{{capitalCop | currency: 'COP' }}</h6> 
               </div>
               <br>
               <div class="col-lg-4 col-md-4">
-                <small class="text-muted">Country:</small>
+                <small class="text-muted">Interest rate (AE):</small>
+                <h6>{{ tasa }}%</h6>
+              </div>
+            </div>
+            <br>
+
+            <div class="row">
+              <div class="col-lg-4 col-md-4">
+                <small class="text-muted">Interest accrued to date in Foreign Currency:</small>
+                <h6>{{ interesExtra }}%</h6>
+              </div>
+              <br>
+              <div class="col-lg-4 col-md-4">
+                <small class="text-muted">Interest accrued to date in Currency COP:</small>
+                <h6>{{ interesCop }}%</h6>
+              </div>
+              <br>
+              <div class="col-lg-4 col-md-4">
+                <small class="text-muted">Project country:</small>
                 <h6>{{ pais }}</h6>
               </div>
             </div>
@@ -127,31 +153,35 @@
 
             <div class="row">
               <div class="col-lg-4 col-md-4">
-                <small class="text-muted">Project date:</small>
+                <small class="text-muted">Annual return in foreign currency:</small>
+                <h6>{{ rentaExtra | currency: moneda }}</h6>
+              </div>
+              <br>
+              <div class="col-lg-4 col-md-4">
+                <small class="text-muted">Annual return in COP currency:</small>
+                <h6>{{ rentaCop | currency: 'COP' }}</h6>
+              </div>
+              <br>
+              <div class="col-lg-4 col-md-4">
+                <small class="text-muted">Project time:</small>
                 <h6>{{ tiempo }} days</h6>
-              </div>
-              <br>
-              <div class="col-lg-4 col-md-4">
-                <small class="text-muted">Interest rate (AE):</small>
-                <h6>{{ tasa }}%</h6>
-              </div>
-              <br>
-              <div class="col-lg-4 col-md-4">
-                <small class="text-muted">Project status:</small>
-                <h6 *ngIf=" estado === 1 " class="text-warning">ACTIVE</h6>
-                <h6 *ngIf=" estado === 0" class="text-danger">INACTIVE</h6>
               </div>
             </div>
             <br>
 
             <div class="row">
-              <div class="col-lg-10">
+              <div class="col-lg-8 col-md-8">
                 <small class="text-muted">Description:</small>
                 <h6>{{ descripcion }}</h6>
               </div>
+              <br>
+              <div class="col-lg-4 col-md-4">
+                <small class="text-muted">Project status:</small>
+                <h6 *ngIf=" estado === 1" class="text-warning">ACTIVE</h6>
+                <h6 *ngIf=" estado === 0" class="text-danger">INACTIVE</h6>
+              </div>
             </div>
             <br>
-
           </div>
         </div>
       </div>
@@ -172,23 +202,23 @@
             <thead>
               <tr>
                 <th># Annexed</th>
-                <th>Nom. Annexed</th>
-                <th>Ganancias</th>
-                <th>Tasa (EA) inicial</th>
-                <th>Moneda</th>
-                <th>Comentario</th>
-                <th class="headW">Fecha</th>
+                <th>Movement</th>
+                <th>Capital foreign currency</th>
+                <th>Capital currency COP</th>
+                <th>Interest in foreign currency</th>
+                <th>Interest in COP currency</th>
+                <th class="headW">Date</th>
                 <th>File</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let anexo of anexos">
                 <td> <a class="aAnexos" title="Ver Anexo" (click)="navegarAnexo(anexo)"> {{anexo.id_anex}} </a></td>
-                <td>{{anexo.nombre_anex}}</td>
-                <td>{{anexo.ganacias_anex | currency: anexo.moneda_anex }} </td>
-                <td>{{anexo.tasa_anex}}%</td>
-                <td>{{anexo.moneda_anex}}</td>
-                <td>{{anexo.comentario_anex}}</td>
+                <td>{{anexo.movimiento_anex}}</td>
+                <td>{{anexo.capital_extra_anex | currency: anexo.moneda_anex }} </td>
+                <td>{{anexo.capital_cop_anex | currency: anexo.moneda_anex }} </td>
+                <td>{{anexo.interes_extra_anex}}%</td>
+                <td>{{anexo.interes_cop_anex}}%</td>
                 <td><span class="text-muted"><i class="fa fa-calendar-o"></i> {{ anexo.fechAnexo }}</span> </td>
                 <td *ngIf=" anexo.tipo_archivo_info === 'pdf' " (click)="verArchivo( anexo.tipo_archivo_info, anexo.nom_archivo_info )" class="cursor"><img class="logoFile" src="../../../assets/images/pdf.png" alt=""> </td>
                 <td *ngIf=" anexo.tipo_archivo_info === 'word' " (click)="verArchivo( anexo.tipo_archivo_info, anexo.nom_archivo_info )" class="cursor"><img class="logoFile" src="../../../assets/images/word.png" alt=""></td>
@@ -206,7 +236,7 @@
 
 <div *ngIf=" usuario[0].admin_us === 'Y' " class="row">
   <div class="col-lg-8 col-md-8">
-    <app-lineal-admin [labels]="labels3" [data]="Data3" title="Users / initial project"></app-lineal-admin>
+    <app-lineal-admin [labels]="labels3" [data]="Data3" title="Users / Initial project"></app-lineal-admin>
   </div>
   <div class="col-lg-4 col-md-4">
     <app-datepicker-inline title="Calendary"></app-datepicker-inline>
