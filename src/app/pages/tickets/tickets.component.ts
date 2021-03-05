@@ -57,15 +57,16 @@ export class TicketsComponent implements OnInit {
       const json = {
         nombres: 'LegalBF Administrator',
         apellidos: '',
-        email: 'desarrollomemo@gmail.com',
-        asunto: 'Ticket creation in LegalBF',
+        //email: 'desarrollomemo@gmail.com',
+        email: 'Legalbusinessf@gmail.com',
+        asunto: 'Ticket creation in Clients LegalBF',
         descripcion: `<p>A ticket with a number has been created <b>${resp.idticket}</b> in LegalBF.</p>
                       <p><b>Name: </b>${this.usuario[0]['nombres_us']} ${this.usuario[0]['apellidos_us']}</p>
                       <p><b>Email: </b>${this.usuario[0]['email_us']}</p>
                       <p><b>Phone: </b>${this.usuario[0]['telefono_us']}</p>
                       <p><b>Affair: </b>${this.ticketFormCliente.get('asunto').value}</p>
                       <p><b>Message: </b>${this.ticketFormCliente.get('descripcion').value}</p>
-                      <p>Enter: <a href="https://www.legalbf.com/" target="_blank">www.legalbf.com</a> and check the tickets.</p>
+                      <p>Enter: <a href="http://clientslegalbf.com/" target="_blank">www.clientslegalbf.com</a> and check the tickets.</p>
                       <br>
                       <p>©2021 - All rights reserved - it is a free service of LegalBG</p>`
       }

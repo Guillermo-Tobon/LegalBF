@@ -153,14 +153,14 @@ export class ListaTicketsComponent implements OnInit {
           nombres: ticket.nombre_tic,
           apellidos: '',
           email: ticket.email_tic,
-          asunto: `Response to ticket ${ticket.id_tic} created in LegalBF`,
+          asunto: `Response to ticket ${ticket.id_tic} created in Clients LegalBF`,
           descripcion: `<p>The administrator has responded to his ticket created in LegalBF.</p>
                         <p>Ticket: ${ticket.id_tic}</p>
                         <p>Affair: ${ticket.asunto_tic}</p>
                         <p>Message: ${ticket.mensaje_tic}</p>
                         <p>Answer: ${this.FormAnswerTicket.get('respuesta').value}</p>
                         <br>
-                        <p>Enter: <a href="https://www.legalbf.com/" target="_blank">www.legalbf.com</a>and verify your ticket.</p>
+                        <p>Enter: <a href="http://clientslegalbf.com/" target="_blank">www.clientslegalbf.com</a>and verify your ticket.</p>
                         <br>
                         <b>For more information, contact LegalBF administrator. </b>
                         <br>

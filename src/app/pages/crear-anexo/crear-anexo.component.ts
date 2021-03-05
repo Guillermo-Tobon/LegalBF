@@ -86,9 +86,9 @@ export class CrearAnexoComponent implements OnInit {
               apellidos: this.usuario[0].apellidos_us,
               email: this.usuario[0].email_us,
               //email: 'desarrollomemo@gmail.com',
-              asunto: 'Creating an annex to your project in LegalBF',
+              asunto: 'Creating an annex to your project in Clients LegalBF',
               descripcion: `<p>An annex to your <strong>${this.inversion['nombre_inv']}</strong> project was created.</p>
-                            <p>Please go to: <a href="https://www.legalbf.com/" target="_blank">www.legalbf.com</a> verify your information.</p>
+                            <p>Please go to: <a href="http://clientslegalbf.com/" target="_blank">www.clientslegalbf.com</a> verify your information.</p>
                             <br>
                             <b>For more information, contact LegalBF administrator. </b>
                             <br>

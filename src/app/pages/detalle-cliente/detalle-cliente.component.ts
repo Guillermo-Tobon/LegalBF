@@ -62,9 +62,9 @@ export class DetalleClienteComponent implements OnInit {
           nombres: this.updateFormCliente.get('nombres').value,
           apellidos: this.updateFormCliente.get('apellidos').value,
           email: this.updateFormCliente.get('email').value,
-          asunto: 'Update account in LegalBF',
+          asunto: 'Update account in Clients LegalBF',
           descripcion: `<p>Your LegalBF account was updated by the administrator.</p>
-                        <p>Please go to: <a href="https://www.legalbf.com/" target="_blank">www.legalbf.com</a> You can verify your information</p>
+                        <p>Please go to: <a href="http://clientslegalbf.com/" target="_blank">www.clientslegalbf.com</a> You can verify your information</p>
                         <br>
                         <b>For more information, contact LegalBF administrator. </b>
                         <br>

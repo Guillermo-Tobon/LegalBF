@@ -71,9 +71,9 @@ export class DetalleAnexoComponent implements OnInit {
           apellidos: this.userAsociado[0].apellidos_us,
           email: this.userAsociado[0].email_us,
           //email: 'desarrollomemo@gmail.com',
-          asunto: 'Annex update to your project in LegalBF',
+          asunto: 'Annex update to your project in Clients LegalBF',
           descripcion: `<p>The <strong>${this.anexo['movimiento_anex']}</strong> annex was updated of your project at LegalBF.</p>
-                        <p>Please go to: <a href="https://www.legalbf.com/" target="_blank">www.legalbf.com</a> You can verify your information.</p>
+                        <p>Please go to: <a href="http://clientslegalbf.com/" target="_blank">www.clientslegalbf.com</a> You can verify your information.</p>
                         <br>
                         <b>For more information, contact LegalBF administrator. </b>
                         <br>

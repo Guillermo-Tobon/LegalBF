@@ -39,7 +39,7 @@ export class ListaClientesComponent implements OnInit {
 
     }, (err) =>{
       //En caso de un error
-      Swal.fire('Error', err.error.msg, 'error');
+      console.log(err)
     })
   }
 

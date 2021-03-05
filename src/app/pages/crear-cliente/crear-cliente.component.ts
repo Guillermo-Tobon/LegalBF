@@ -59,9 +59,9 @@ export class CrearClienteComponent implements OnInit {
           nombres: this.regisFormCliente.get('nombres').value,
           apellidos: this.regisFormCliente.get('apellidos').value,
           email: this.regisFormCliente.get('email').value,
-          asunto: 'User account created in LegalBF',
+          asunto: 'User account created in Clients LegalBF',
           descripcion: `<p>Your LegalBF account has been created by the administrator.</p>
-                        <p>Enter: <a href="https://www.legalbf.com/" target="_blank">www.legalbf.com</a> Access data:</p>
+                        <p>Enter: <a href="http://clientslegalbf.com/" target="_blank">www.clientslegalbf.com</a> Access data:</p>
                         <p>Username: ${this.regisFormCliente.get('email').value}</p>
                         <p>Password: ${this.regisFormCliente.get('password').value}</p>
                         <br>

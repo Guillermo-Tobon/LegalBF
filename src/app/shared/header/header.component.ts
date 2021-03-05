@@ -68,7 +68,7 @@ export class HeaderComponent implements OnInit {
 
     }, (err) =>{
       //En caso de un error
-      Swal.fire('Error', err.error.msg, 'error');
+      console.log(err)
     })
   }
 
@@ -87,7 +87,7 @@ export class HeaderComponent implements OnInit {
       
     }, (err) =>{
       //En caso de un error
-      Swal.fire('Error', err.error.msg, 'error');
+      console.log(err)
     })
   }
 

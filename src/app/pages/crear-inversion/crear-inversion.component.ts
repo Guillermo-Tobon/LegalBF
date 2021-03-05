@@ -78,9 +78,9 @@ export class CrearInversionComponent implements OnInit {
           nombres: this.usuario['nombres_us'],
           apellidos: this.usuario['apellidos_us'],
           email: this.usuario['email_us'],
-          asunto: 'Project created in LegalBF',
+          asunto: 'Project created in Clients LegalBF',
           descripcion: `<p>The ${this.crearFormInversion.get('nombreInver').value} project was created in LegalBF</p>
-                        <p>Enter: <a href="https://www.legalbf.com/" target="_blank">www.legalbf.com</a> You can verify the information</p>
+                        <p>Enter: <a href="http://clientslegalbf.com/" target="_blank">www.clientslegalbf.com</a> You can verify the information</p>
                         <br>
                         <b>For more information, contact LegalBF administrator. </b>
                         <br>
