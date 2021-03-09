@@ -79,8 +79,8 @@ export class DocumentacionComponent implements OnInit {
 
     this.archivosServ.viewFileService( archivo.tipo_archivo_info, archivo.nom_archivo_info ).subscribe( (resp:any) =>{
 
-      //window.open(resp.pathFile, "_blank");
-      window.open(`http://127.0.0.1:8887/${archivo.tipo_archivo_info}/${archivo.nom_archivo_info}`, "_blank");
+      const urlFile = `http://files.clientslegalbf.com/${archivo.tipo_archivo_info}/${archivo.nom_archivo_info}`;
+      window.open(urlFile, "_blank");
     
     }, (err) =>{
       //En caso de un error

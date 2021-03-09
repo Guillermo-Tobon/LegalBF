@@ -186,8 +186,8 @@ export class DetalleAnexoComponent implements OnInit {
 
     this.archivosServ.viewFileService( tipoFile, nomFile ).subscribe( (resp:any) =>{
 
-      //window.open(resp.pathFile, "_blank");
-      window.open(`http://127.0.0.1:8887/${tipoFile}/${nomFile}`, "_blank");
+      const urlFile = `http://files.clientslegalbf.com/${tipoFile}/${nomFile}`;
+      window.open(urlFile, "_blank");
     
     }, (err) =>{
       //En caso de un error

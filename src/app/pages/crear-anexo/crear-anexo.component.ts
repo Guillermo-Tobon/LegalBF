@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import Swal from 'sweetalert2';
@@ -19,18 +19,7 @@ export class CrearAnexoComponent implements OnInit {
   public formSubmitted:boolean = false;
   public idAnexo:String = '';
   public archivoSubir:File;
-
-  public FormCrearAnexo = this.fb.group({
-    movimientoAnexo: ['', [Validators.required, Validators.minLength(5)]],
-    fechaAnexo: ['', [Validators.required]],
-    capitalExtra: ['', [Validators.required]],
-    capitalCop: ['', [Validators.required]],
-    interesExtra: ['', [Validators.required]],
-    interesCop: ['', [Validators.required]],
-    capitalInteresExtra: ['', [Validators.required]],
-    capitalInteresCop: ['', [Validators.required]],
-    comentario: ['', [Validators.required, Validators.minLength(20)]],
-  });
+  public FormCrearAnexo:FormGroup;
 
   constructor(
               private routeActive: ActivatedRoute,
@@ -49,6 +38,8 @@ export class CrearAnexoComponent implements OnInit {
       this.getUserById(this.inversion['id_us_inv'])
 
     })
+
+    this.iniciarFormulario();
   }
 
 
@@ -69,7 +60,7 @@ export class CrearAnexoComponent implements OnInit {
     const dataInver = {
       idUser: this.inversion['id_us_inv'],
       idInversion: this.inversion['id_inv'],  
-      moneda: this.inversion['moneda_inv']
+      moneda: this.inversion['moneda_extra_inv']
     }
 
     this.InversionServ.crearAnexoServices( this.FormCrearAnexo.value, dataInver ).subscribe( (resp1:any) =>{
@@ -102,10 +93,12 @@ export class CrearAnexoComponent implements OnInit {
             }, (err) =>{
               //En caso de un error
               Swal.fire('Error', err.error.msg, 'error');
+              console.log('error de email-> ', err.error)
             })
 
           }).catch( (err) =>{
               Swal.fire('Error', err.error.msg, 'error');
+              console.log('error de file-> ', err.error)
           })
       }
 
@@ -113,6 +106,7 @@ export class CrearAnexoComponent implements OnInit {
     }, (err) =>{
       //En caso de un error
       Swal.fire('Error', err.error.msg, 'error');
+      console.log('error de creacion-> ', err.error)
     })
 
   }
@@ -155,6 +149,22 @@ export class CrearAnexoComponent implements OnInit {
       //En caso de un error
       console.log(err.error.msg);
     })
+  }
+
+
+
+  public iniciarFormulario = () =>{
+    this.FormCrearAnexo = this.fb.group({
+      movimientoAnexo: ['', [Validators.required, Validators.minLength(5)]],
+      fechaAnexo: ['', [Validators.required]],
+      capitalExtra: ['', [Validators.required]],
+      capitalCop: ['', [Validators.required]],
+      interesExtra: ['', [Validators.required]],
+      interesCop: ['', [Validators.required]],
+      capitalInteresExtra: ['', [Validators.required]],
+      capitalInteresCop: ['', [Validators.required]],
+      comentario: ['', [Validators.required, Validators.minLength(20)]],
+    });
   }
 
 

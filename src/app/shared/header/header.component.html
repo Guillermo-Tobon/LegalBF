@@ -9,20 +9,20 @@
     <div class="navbar-header">
       <a class="navbar-brand" routerLink="/">
         <!-- Logo icon -->
-        <b>
+        <b class="logoPrin">
           <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
           <!-- Dark Logo icon -->
           <img src="./assets/images/logo-icon.png" alt="homepage" class="dark-logo" />
           <!-- Light Logo icon -->
-          <img src="./assets/images/logo-light-icon.png" alt="homepage" class="light-logo" />
+          <img src="./assets/images/logo-icon.png" alt="homepage" class="light-logo" />
         </b>
         <!--End Logo icon -->
         <!-- Logo text -->
-        <span>
+        <span class="logosLetra">
           <!-- dark Logo text -->
           <img src="./assets/images/logo-text.png" alt="homepage" class="dark-logo" />
           <!-- Light Logo text -->    
-          <img src="./assets/images/logo-light-text.png" class="light-logo" alt="homepage" />
+          <img src="./assets/images/logo-text.png" class="light-logo" alt="homepage" />
         </span>
       </a>
     </div>
@@ -149,12 +149,12 @@
         <!-- Profile -->
         <!-- ============================================================== -->
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="./assets/images/users/1.jpg" alt="user" class="profile-pic" /></a>
+          <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="./assets/images/users/Avatar.png" alt="user" class="profile-pic" /></a>
           <div class="dropdown-menu dropdown-menu-right animated flipInY fast">
             <ul class="dropdown-user">
               <li>
                 <div class="dw-user-box">
-									<div class="u-img"><img src="./assets/images/users/1.jpg" alt="user"></div>
+									<div class="u-img"><img src="./assets/images/users/Avatar.png" alt="user"></div>
 									<div class="u-text">
 										<h4>{{usuario[0].nombres_us | slice:0:18 }}{{ (usuario[0].nombres_us.length > 18)? '...':'' }}</h4>
                     <h4>{{usuario[0].apellidos_us}}</h4>

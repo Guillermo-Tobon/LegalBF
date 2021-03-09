@@ -18,6 +18,10 @@ File: scss
 /*******************
 Login register and recover password Page
 ******************/
+.card{
+  background-color: rgba(255,255,255,0.4);
+  color: white;
+}
 .login-register {
   background-size: cover;
   background-repeat: no-repeat;
@@ -25,7 +29,13 @@ Login register and recover password Page
   height: 100%;
   width: 100%;
   padding: 10% 0;
-  position: fixed; }
+  position: fixed;
+}
+#loginform h3,
+#loginform input,
+.Forgot a{
+  color: white !important;
+}
 
 .login-box {
   width: 400px;
