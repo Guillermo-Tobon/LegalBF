@@ -86,9 +86,13 @@ export class CrearInversionComponent implements OnInit {
                         <br>
                         <p>©2021 - LegalBF Service</p>`,
         }
-        this.clienteSrs.sendEmailClienteService(json);
+        this.clienteSrs.sendEmailClienteService(json).subscribe( (resp:any) =>{
+          console.log(resp)
+        }, err => console.error(err));
+        
         Swal.fire('Success!', resp.msg, 'success');
-        setTimeout(() => { window.location.reload(); }, 2000);
+        setTimeout(() => { this.router.navigate(['dashboard/inversiones']); }, 2000);
+        //setTimeout(() => { window.location.reload(); }, 2000);
         this.idInversion = resp.idInver;       
       }
 

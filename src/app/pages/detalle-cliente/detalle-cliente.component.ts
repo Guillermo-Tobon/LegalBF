@@ -71,16 +71,12 @@ export class DetalleClienteComponent implements OnInit {
                         <p>©2021 - LegalBF Service</p>`
         }
         this.clienteServ.sendEmailClienteService(json).subscribe( (resp2:any) =>{
+          console.log(resp2)
+          
+        }, err => console.error(err))
 
-          if (resp2.ok) {
-            Swal.fire('Success!', `Cliente ${this.updateFormCliente.get('nombres').value } updated and notified by email successfully.`, 'success');
-            setTimeout(() => { this.router.navigate(['dashboard/lista-clientes']) }, 2000);
-          }
-
-        }, (err) =>{
-          //En caso de un error
-          Swal.fire('Error', err.error.msg, 'error');
-        })
+        Swal.fire('Success!', `Cliente ${this.updateFormCliente.get('nombres').value } updated and notified by email successfully.`, 'success');
+        setTimeout(() => { this.router.navigate(['dashboard/lista-clientes']) }, 2000);
 
 
       } else{

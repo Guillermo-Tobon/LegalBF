@@ -57,4 +57,45 @@ Login register and recover password Page
   .login-sidebar .login-box {
     right: 0px;
     position: absolute;
-    height: 100%; }
+    height: 100%;
+  }
+
+  .contLogo{
+    position: relative;
+    text-align: center;
+  }
+  .contLogo img{
+    width: 380px;
+    margin-bottom: 20px;
+    margin-top: -115px;
+  }
+
+
+
+
+  @media screen and (max-width: 992px){
+    .contLogo img{
+      margin-top: -50px;
+    }
+  }
+
+
+  @media screen and (max-width: 560px){
+    .contLogo img{
+      width: 300px;
+      margin-top: 0px;
+    }
+    .login-box{
+      width: 330px;
+    }
+  }
+
+
+  @media screen and (max-width: 380px){
+    .contLogo img{
+      width: 270px;
+    }
+    .login-box{
+      width: 100%;
+    }
+  }

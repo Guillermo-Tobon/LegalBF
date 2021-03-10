@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import Swal from 'sweetalert2';
 import { InversionesService } from 'src/app/services/inversiones.service';
@@ -27,6 +27,7 @@ export class CrearAnexoComponent implements OnInit {
               private archivosServ: ArchivosService,
               private clientesSrv: ClientesService,
               private location: Location,
+              private router: Router,
               private fb: FormBuilder,
   ) { }
 
@@ -86,15 +87,12 @@ export class CrearAnexoComponent implements OnInit {
                             <p>©2021 - LegalBF Service</p>`
             }
             this.clientesSrv.sendEmailClienteService(json).subscribe( (resp:any) =>{
+              console.log(resp)
 
-              Swal.fire('Success!', `${resp1.msg}`, 'success');
-              setTimeout(() => { window.location.reload(); }, 2000);
+            }, err => console.error('error de email-> ', err.error))
 
-            }, (err) =>{
-              //En caso de un error
-              Swal.fire('Error', err.error.msg, 'error');
-              console.log('error de email-> ', err.error)
-            })
+            Swal.fire('Success!', `${resp1.msg}`, 'success');
+            setTimeout(() => { this.router.navigate(['dashboard/inversiones']); }, 2000);
 
           }).catch( (err) =>{
               Swal.fire('Error', err.error.msg, 'error');

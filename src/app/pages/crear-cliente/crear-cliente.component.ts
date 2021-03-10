@@ -71,23 +71,17 @@ export class CrearClienteComponent implements OnInit {
         }
 
         this.clienteSrs.sendEmailClienteService(json).subscribe( (resp2:any) =>{
+          console.log(resp2)
 
-          if( resp2.ok ){
-            Swal.fire('Success!', resp.msg, 'success');
-            setTimeout(() => { this.router.navigate(['dashboard/lista-clientes']) }, 2000);
-          }
+        }, err => console.error(err))
 
-        }, (err) =>{
-          //En caso de un error
-          Swal.fire('Error', err.error.msg, 'error');
-          console.log(err);
-        })
+        Swal.fire('Success!', resp.msg, 'success');
+        setTimeout(() => { this.router.navigate(['dashboard/lista-clientes']) }, 2000);
         
       } else {
         Swal.fire('Error', 'It is not possible to process the data. Please try again later.', 'error');
 
       }
-
 
     }, (err) => {
       //En caso de un error

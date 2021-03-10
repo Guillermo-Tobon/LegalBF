@@ -8,6 +8,7 @@ import { AuthModule } from './auth/auth.module';
 
 import { AppComponent } from './app.component';
 import { NotpagefoundComponent } from './notpagefound/notpagefound.component';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 
 @NgModule({
@@ -21,7 +22,9 @@ import { NotpagefoundComponent } from './notpagefound/notpagefound.component';
     PagesModule,
     AuthModule
   ],
-  providers: [],
+  providers: [
+    { provide: LocationStrategy, useClass: HashLocationStrategy }
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

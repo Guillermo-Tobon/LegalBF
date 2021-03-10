@@ -79,7 +79,7 @@ export class DocumentacionComponent implements OnInit {
 
     this.archivosServ.viewFileService( archivo.tipo_archivo_info, archivo.nom_archivo_info ).subscribe( (resp:any) =>{
 
-      const urlFile = `http://files.clientslegalbf.com/${archivo.tipo_archivo_info}/${archivo.nom_archivo_info}`;
+      const urlFile = `https://files.clientslegalbf.com/${archivo.tipo_archivo_info}/${archivo.nom_archivo_info}`;
       window.open(urlFile, "_blank");
     
     }, (err) =>{

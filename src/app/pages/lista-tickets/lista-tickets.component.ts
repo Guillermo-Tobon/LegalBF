@@ -168,16 +168,12 @@ export class ListaTicketsComponent implements OnInit {
         }
 
         this.clienteSrs.sendEmailClienteService(json).subscribe( (resp2:any) =>{
+          console.log(resp2)
 
-          if( resp2.ok ){
-            Swal.fire('Success!', resp.msg, 'success');
-            this.getAllTickets();
-          }
+        }, err => console.error(err))
 
-        }, (err) =>{
-          //En caso de un error
-          Swal.fire('Error', err.error.msg, 'error');
-        })
+        Swal.fire('Success!', resp.msg, 'success');
+        this.getAllTickets();
         
       }
 
