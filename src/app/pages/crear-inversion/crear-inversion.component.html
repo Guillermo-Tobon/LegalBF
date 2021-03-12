@@ -5,7 +5,7 @@
         <h4 class="card-title">In the following form you can create projects for {{usuario['nombres_us']}}.</h4>
         <h6 class="card-subtitle">Once the investment is created, it will be notified via email ( {{usuario['email_us']}} ).</h6>
         
-        <form class="floating-labels formCrearInver m-t-40" #FormInver="ngForm" [formGroup]="crearFormInversion" (submit)="crearInversion(); FormInver.reset()">
+        <form class="floating-labels formCrearInver m-t-40" [formGroup]="crearFormInversion" (submit)="crearInversion()">
           <div class="row">
             <div class="col-lg-4 ">
               <div class="form-group m-b-40 focused">

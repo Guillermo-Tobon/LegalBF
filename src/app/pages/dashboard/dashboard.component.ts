@@ -123,6 +123,8 @@ export class DashboardComponent implements OnInit {
 
     this.inversionesServ.getAnexosByIdService(idInversion).subscribe( (resp:any) =>{
 
+      console.log(resp.anexos)
+
       if( resp.ok ){
         this.anexos = resp.anexos || [];
         let dataGanan = [];

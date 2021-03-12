@@ -188,7 +188,7 @@ export class DetalleInversionComponent implements OnInit {
       
     }, (err) =>{
       //En caso de un error
-      console.log(err.error.msg);
+      console.error(err.error.msg);
     });
   }
 

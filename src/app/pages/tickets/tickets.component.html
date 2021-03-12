@@ -44,7 +44,7 @@
           </div>
         </div>
         
-        <form class="floating-labels m-t-40" #FormTicket="ngForm" [formGroup]="ticketFormCliente" (submit)="regisTicketCliente(); FormTicket.reset()">
+        <form class="floating-labels m-t-40" [formGroup]="ticketFormCliente" (submit)="regisTicketCliente()">
           <div class="row">
             <div class="col-7">
               <div class="form-group m-b-40 focused">

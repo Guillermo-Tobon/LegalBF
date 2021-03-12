@@ -149,9 +149,10 @@ export class InversionesService {
    * @param formData => Datos del formulario
    * @param idUser => ID del inverción
    */
-  public updateAnexoService = (dataForm:any, idInversion:string) =>{
+  public updateAnexoService = (dataForm:any, idAnexo:string, idInversion:string) =>{
 
     const json = {
+      idAnexo,
       idInversion,
       movimiento: dataForm.movimientoAnexo,
       fecha: dataForm.fechaAnexo,

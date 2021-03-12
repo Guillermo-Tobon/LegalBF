@@ -43,8 +43,6 @@ export class DetalleAnexoComponent implements OnInit {
     this.routeActive.params.subscribe( data =>{
       this.anexo = JSON.parse( data['anexo'] ) || [];
 
-      console.log(this.anexo)
-
       this.getUserById(this.anexo['id_us_inv']);
       
       this.cargarFormEditAnexo(this.anexo);
@@ -57,14 +55,13 @@ export class DetalleAnexoComponent implements OnInit {
    * Método para actualizar el anexo
    * @param idInversion => ID inversión
    */
-  public editarAnexosById = ( idInversion:string ) =>{
+  public editarAnexosById = (idAnexo:any,  idInversion:string ) =>{
     this.formSubmitted = true;
 
     if ( this.FormEditarAnexo.invalid ) {
       return; 
     }
-
-    this.InversionServ.updateAnexoService( this.FormEditarAnexo.value, idInversion ).subscribe( (resp:any) =>{
+    this.InversionServ.updateAnexoService( this.FormEditarAnexo.value, idAnexo, idInversion ).subscribe( (resp:any) =>{
 
       if( resp.ok ){
         const json = {

@@ -58,10 +58,7 @@ export class ListaTicketsComponent implements OnInit {
     this.ticketServ.getAllTicketsService().subscribe( (resp:any) =>{
       this.tickets = resp.tickets || []; 
 
-    }, (err) =>{
-      //En caso de un error
-      Swal.fire('Error', err.error.msg, 'error');
-    })
+    }, err => console.error(err))
   }
 
 
@@ -75,10 +72,7 @@ export class ListaTicketsComponent implements OnInit {
     this.ticketServ.getTicketByIdService(id).subscribe( (resp:any) =>{
       this.tickets = resp.tickets; 
       
-    }, (err) =>{
-      //En caso de un error
-      Swal.fire('Error', err.error.msg, 'error');
-    })
+    }, err => console.error(err))
   }
 
 
@@ -138,8 +132,6 @@ export class ListaTicketsComponent implements OnInit {
    */
   public contestarTicket = (ticket:any) =>{
     this.formSubmitted = true;
-
-    console.log(ticket)
 
     if ( this.FormAnswerTicket.invalid ) {
       return; 
@@ -207,7 +199,7 @@ export class ListaTicketsComponent implements OnInit {
         this.ticketServ.deleteTicketService(idTicket).subscribe( (resp:any) =>{
           
           Swal.fire('Success!', resp.msg, 'success');
-          this.getAllTickets();
+          setTimeout(() => { window.location.reload() }, 1500);
         
         }, (err) =>{
           //En caso de un error

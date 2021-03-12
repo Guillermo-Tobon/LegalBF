@@ -49,16 +49,13 @@ export class TicketsComponent implements OnInit {
     if ( !this.ticketFormCliente.get('acepto').value ) {
       return;
     }
-
     this.ticketServ.creatTicketService( this.ticketFormCliente.value ).subscribe( (resp:any) =>{
-
-      Swal.fire('Success!!', `${resp.msg} - Ticket ( ${resp.idticket} )`, 'success');
 
       const json = {
         nombres: 'LegalBF Administrator',
         apellidos: '',
-        //email: 'desarrollomemo@gmail.com',
-        email: 'Legalbusinessf@gmail.com',
+        email: 'desarrollomemo@gmail.com',
+        //email: 'timotheerodier@legalbf.com',
         asunto: 'Ticket creation in Clients LegalBF',
         descripcion: `<p>A ticket with a number has been created <b>${resp.idticket}</b> in LegalBF.</p>
                       <p><b>Name: </b>${this.usuario[0]['nombres_us']} ${this.usuario[0]['apellidos_us']}</p>
@@ -66,7 +63,7 @@ export class TicketsComponent implements OnInit {
                       <p><b>Phone: </b>${this.usuario[0]['telefono_us']}</p>
                       <p><b>Affair: </b>${this.ticketFormCliente.get('asunto').value}</p>
                       <p><b>Message: </b>${this.ticketFormCliente.get('descripcion').value}</p>
-                      <p>Enter: <a href="http://clientslegalbf.com/" target="_blank">www.clientslegalbf.com</a> and check the tickets.</p>
+                      <p>Enter: <a href="http://clientslegalbf.com" target="_blank">www.clientslegalbf.com</a> and check the tickets.</p>
                       <br>
                       <p>©2021 - All rights reserved - it is a free service of LegalBG</p>`
       }
@@ -76,11 +73,15 @@ export class TicketsComponent implements OnInit {
       }, (err) =>{
         console.log(err)
       })
+
+      Swal.fire('Success!!', `${resp.msg} - Ticket ( ${resp.idticket} )`, 'success');
+      setTimeout(() => { this.router.navigate(['dashboard/lista-tickets']) }, 2000);
       
 
     }, (err) =>{
       //En caso de un error
       Swal.fire('Error', err.error.msg, 'error');
+      console.log(err.error)
     })
     
   }

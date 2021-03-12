@@ -114,7 +114,7 @@
 
 
 <!-- ************************************************************************************************* -->
-<!-- Modal para editar la inversión -->
+<!-- Modal para editar el anexo -->
 <!-- ************************************************************************************************* -->
 <div class="modal fade modalEditAnexo" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
   <div class="modal-dialog modal-lg">
@@ -126,7 +126,7 @@
       <div class="modal-body">
         <div class="comment-text w-100">
 
-          <form class="formEditAnexo floating-labels m-t-40" [formGroup]="FormEditarAnexo" (submit)="editarAnexosById(editAnexo['id_inv'])">
+          <form class="formEditAnexo floating-labels m-t-40" [formGroup]="FormEditarAnexo" (submit)="editarAnexosById(editAnexo['id_anex'], editAnexo['id_inv'])">
             <div class="row">
               <div class="col-lg-6 col-md-6">
                 <div class="form-group m-b-40 focused">
@@ -138,7 +138,7 @@
               <div class="col-lg-6 col-md-6">
                 <div class="form-group grupoDate">
                   <span class="spanFech" >Annex date</span>
-                  <input type="date" formControlName="fechaAnexo" [min]="getFechaHoy()" class="form-control">
+                  <input type="date" formControlName="fechaAnexo" class="form-control">
                   <span class="bar"></span>
                 </div>
               </div>
