@@ -95,6 +95,7 @@ export class InversionesService {
       nombreInver: formData.nombreInver,
       capitalExtra: formData.capitalExtra,
       monedaInver: formData.monedaExtra,
+      fecha: formData.fecha,
       tasaCambio: formData.tasaCambio,
       capitalCop: formData.capitalCop,
       tasaEA: formData.tasaInteres,
@@ -107,7 +108,6 @@ export class InversionesService {
       descripcion: formData.descripcion,
       estado: formData.estado == true? 1 : 0
     }
-
     return this.http.put(`${BASE_URL}/updateInversion`, json, this.httpOptions).pipe(
       tap( (resp:any) =>{})
     )

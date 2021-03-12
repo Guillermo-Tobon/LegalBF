@@ -177,7 +177,8 @@ export class DashboardComponent implements OnInit {
     
     }, (err) =>{
       //En caso de un error
-      Swal.fire('Error', err.error.msg, 'error');
+      const urlFile = `https://files.clientslegalbf.com/file-malo.png`;
+      window.open(urlFile, "_blank");
     })
 
   }

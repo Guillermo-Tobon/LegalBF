@@ -17,7 +17,7 @@
             <div class="col-lg-6 col-md-6">
               <div class="form-group grupoDate">
                 <span class="spanFech" >Annex date</span>
-                <input type="date" formControlName="fechaAnexo" class="form-control">
+                <input type="date" formControlName="fechaAnexo" [min]="getFechaHoy()"  class="form-control">
                 <span class="bar"></span>
               </div>
             </div>

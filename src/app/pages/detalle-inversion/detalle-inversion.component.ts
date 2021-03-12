@@ -89,7 +89,8 @@ export class DetalleInversionComponent implements OnInit {
     
     }, (err) =>{
       //En caso de un error
-      Swal.fire('Error', err.error.msg, 'error');
+      const urlFile = `https://files.clientslegalbf.com/file-malo.png`;
+      window.open(urlFile, "_blank");
     })
 
   }
@@ -168,6 +169,7 @@ export class DetalleInversionComponent implements OnInit {
     }, (err) =>{
       //En caso de un error
       Swal.fire('Error', err.error.msg, 'error');
+      console.log(err)
     })
 
   }
@@ -199,6 +201,8 @@ export class DetalleInversionComponent implements OnInit {
    * @param inversion => Objeto de inversión a editar
    */
   public cargarFormEditInver = (inversion:any) =>{
+    const fecha = inversion['fechareg_inv'].split('T');
+
     this.FormEditInversion = this.fb.group({
       nombreInver: [inversion['nombre_inv'], [Validators.required, Validators.minLength(3)]],
       capitalExtra: [inversion['capital_extra_inv'], [Validators.required]],
@@ -214,6 +218,7 @@ export class DetalleInversionComponent implements OnInit {
       tiempo: [inversion['tiempo_inv'], [Validators.required]],
       descripcion: [inversion['descripcion_inv'], [Validators.required, Validators.minLength(20)]],
       estado: [inversion['estado_inv'] == 1? true : false, [Validators.required]],
+      fecha: [fecha[0], [Validators.required]],
     })
   }
 

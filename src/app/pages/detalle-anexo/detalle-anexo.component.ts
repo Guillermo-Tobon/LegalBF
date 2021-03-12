@@ -23,6 +23,7 @@ export class DetalleAnexoComponent implements OnInit {
   public formSubmitted = false;
   public cambiarFile:String = 'hiddenInputFile';
   public archivoSubir:File;
+  public fechaHoy:Date = new Date();
 
   constructor(
               private routeActive: ActivatedRoute,
@@ -149,9 +150,10 @@ export class DetalleAnexoComponent implements OnInit {
    * @param inversion => Objeto de inversión a editar
    */
   public cargarFormEditAnexo = (anexo:any) =>{
+    const fecha = anexo['fechpublica_anex'].split('T');
     this.FormEditarAnexo = this.fb.group({
       movimientoAnexo: [anexo['movimiento_anex'], [Validators.required, Validators.minLength(3)]],
-      fechaAnexo: [anexo['fechpublica_anex'], [Validators.required]],
+      fechaAnexo: [fecha[0], [Validators.required]],
       capitalExtra: [anexo['capital_extra_anex'], [Validators.required]],
       capitalCop: [anexo['capital_cop_anex'], [Validators.required]],
       interesExtra: [anexo['interes_extra_anex'], [Validators.required, Validators.minLength(1)]],
@@ -191,7 +193,8 @@ export class DetalleAnexoComponent implements OnInit {
     
     }, (err) =>{
       //En caso de un error
-      Swal.fire('Error', err.error.msg, 'error');
+      const urlFile = `https://files.clientslegalbf.com/file-malo.png`;
+      window.open(urlFile, "_blank");
     })
 
   }
@@ -229,7 +232,13 @@ export class DetalleAnexoComponent implements OnInit {
   }
 
 
+  //Obtener la fecha de hoy
+  public getFechaHoy = () =>{
+    const hoy = this.fechaHoy.toISOString().split('T');
+    return hoy[0];
+  }
 
+  //Volver atras
   goBack(){
     this.location.back();
   }

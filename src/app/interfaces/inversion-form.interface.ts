@@ -14,4 +14,5 @@ export interface InversionForm {
   tiempo: number;
   descripcion: string;
   estado: boolean;
+  fecha: string;
 }

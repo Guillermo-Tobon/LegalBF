@@ -20,6 +20,7 @@ export class CrearAnexoComponent implements OnInit {
   public idAnexo:String = '';
   public archivoSubir:File;
   public FormCrearAnexo:FormGroup;
+  public fechaHoy:Date = new Date();
 
   constructor(
               private routeActive: ActivatedRoute,
@@ -150,7 +151,9 @@ export class CrearAnexoComponent implements OnInit {
   }
 
 
-
+  /**
+   * Método para validar los campos del formulario
+   */
   public iniciarFormulario = () =>{
     this.FormCrearAnexo = this.fb.group({
       movimientoAnexo: ['', [Validators.required, Validators.minLength(5)]],
@@ -166,13 +169,17 @@ export class CrearAnexoComponent implements OnInit {
   }
 
 
-
-  goBack(){
-    this.location.back();
+  //Obtener la fecha de hoy
+  public getFechaHoy = () =>{
+    const hoy = this.fechaHoy.toISOString().split('T');
+    return hoy[0];
   }
 
 
-
+  //Volver a atras
+  goBack(){
+    this.location.back();
+  }
 
 
 }

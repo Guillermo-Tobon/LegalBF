@@ -87,7 +87,7 @@
               <br>
               <div class="col-lg-4 col-md-4">
                 <small class="text-muted">Project time:</small>
-                <h6>{{inversion['tiempo_inv']}} días</h6>
+                <h6>{{inversion['tiempo_inv']}} Months</h6>
               </div>
             </div>
             <br>
@@ -198,14 +198,21 @@
                   <label for="input1">Project name</label>
                 </div>
               </div>
-              <div class="col-lg-4 col-md-4">
+              <div class="col-lg-3 col-md-3">
                 <div class="form-group m-b-40 focused">
                   <input type="number" formControlName="capitalExtra" class="form-control">
                   <span class="bar"></span>
                   <label for="input2">Capital invested in foreign currency</label>
                 </div>
               </div>
-              <div class="col-lg-4 col-md-4">
+              <div class="col-lg-3 col-md-3">
+                <div class="form-group m-b-40 focused">
+                  <input type="date" formControlName="fecha" class="form-control">
+                  <span class="bar"></span>
+                  <label for="input1">Project date</label>
+                </div>
+              </div>
+              <div class="col-lg-2 col-md-2">
                 <div class="form-group m-b-40 focused">
                   <label for="input3">Foreign currency</label>
                   <select formControlName="monedaExtra" class="form-control">
