@@ -83,7 +83,6 @@ export class DashboardComponent implements OnInit {
     this.inversionesServ.getInversionesUserService(idUs).subscribe( (resp:any) =>{
 
       this.inversiones = resp.inversiones || [];
-      console.log(this.inversiones)
       
       this.idInv = this.inversiones[0].id_inv;
       this.nomInversion = this.inversiones[0].nombre_inv;
@@ -123,8 +122,6 @@ export class DashboardComponent implements OnInit {
 
     this.inversionesServ.getAnexosByIdService(idInversion).subscribe( (resp:any) =>{
 
-      console.log(resp.anexos)
-
       if( resp.ok ){
         this.anexos = resp.anexos || [];
         let dataGanan = [];
@@ -142,7 +139,7 @@ export class DashboardComponent implements OnInit {
       
     }, (err) =>{
       //En caso de un error
-      console.log(err.error.msg);
+      console.error(err.error.msg);
     });
   }
 
@@ -160,7 +157,7 @@ export class DashboardComponent implements OnInit {
 
     }, (err) =>{
       //En caso de un error
-      console.log(err.error.msg);
+      console.error(err.error.msg);
     })
   }
 

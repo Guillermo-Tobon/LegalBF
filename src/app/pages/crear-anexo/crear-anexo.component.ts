@@ -58,6 +58,11 @@ export class CrearAnexoComponent implements OnInit {
     if ( this.FormCrearAnexo.invalid ) {
       return; 
     }
+    if(this.archivoSubir == undefined){
+      Swal.fire('Warning!', 'A document is required for this annex.', 'warning');
+      return;
+    }
+    
 
     const dataInver = {
       idUser: this.inversion['id_us_inv'],
@@ -116,7 +121,7 @@ export class CrearAnexoComponent implements OnInit {
    * @param file => Objeto file del archivo a subir
    */
   public obtenerArchivo = (file:File) =>{
-    this.archivoSubir = file
+    this.archivoSubir = file;
   }
   
   
@@ -164,7 +169,7 @@ export class CrearAnexoComponent implements OnInit {
       interesCop: ['', [Validators.required]],
       capitalInteresExtra: ['', [Validators.required]],
       capitalInteresCop: ['', [Validators.required]],
-      comentario: ['', [Validators.required, Validators.minLength(20)]],
+      comentario: ['', [Validators.required, Validators.minLength(10)]],
     });
   }
 
