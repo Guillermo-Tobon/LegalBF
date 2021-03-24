@@ -3,6 +3,7 @@ import Swal from 'sweetalert2';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 import { TicketsService } from 'src/app/services/tickets.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-header',
@@ -13,10 +14,13 @@ export class HeaderComponent implements OnInit {
 
   public usuario:any[] = [];
   public tickets:any[] = [];
+  public idioma:string;
+  public bandera:any;
 
   constructor(
               private autServ: AuthService,
               private ticketServ: TicketsService,
+              private translate: TranslateService
   ) { }
 
   ngOnInit(): void {
@@ -29,6 +33,12 @@ export class HeaderComponent implements OnInit {
       
     } else {
       this.getTicketsUsuario(this.usuario[0].id_us);
+    }
+
+    this.idioma = localStorage.getItem('idioma');
+    this.bandera = localStorage.getItem('bandera');
+    if (!this.bandera) {
+      this.bandera = 'flag-icon-us';
     }
 
   }
@@ -91,6 +101,39 @@ export class HeaderComponent implements OnInit {
     })
   }
 
+
+  /**
+   * Método para cambiar el idioma a francés
+   * @param lang => Idioma 
+   */
+  public idiomaFrances = (lang:any) =>{
+    localStorage.setItem('idioma', lang);
+    localStorage.setItem('bandera', 'flag-icon-fr');
+    this.translate.use(lang);
+    setTimeout(() => { window.location.reload() }, 600);
+  }
+
+  /**
+   * Método para cambiar el idioma a inglés
+   * @param lang => Idioma 
+   */
+   public idiomaIngles = (lang:any) =>{
+    localStorage.setItem('idioma', lang);
+    localStorage.setItem('bandera', 'flag-icon-us');
+    this.translate.use(lang);
+    setTimeout(() => { window.location.reload() }, 600);
+  }
+
+  /**
+   * Método para cambiar el idioma a español
+   * @param lang => Idioma 
+   */
+   public idiomaEspanol = (lang:any) =>{
+    localStorage.setItem('idioma', lang);
+    localStorage.setItem('bandera', 'flag-icon-es');
+    this.translate.use(lang);
+    setTimeout(() => { window.location.reload() }, 600);
+  }
 
 
 

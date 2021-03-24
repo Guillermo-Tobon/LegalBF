@@ -5,7 +5,7 @@
         <div class="d-flex no-block">
           <div class="m-r-20 align-self-center"><span class="lstick m-r-20"></span><img src="../assets/images/icon/staff.png" alt="Income"></div>
           <div class="align-self-center">
-            <h6 class="text-muted m-t-10 m-b-0">User</h6>
+            <h6 class="text-muted m-t-10 m-b-0"> {{'user' | translate}} </h6>
             <h2 class="m-t-0">{{usuario[0]?.nombres_us | slice:0:10 }}</h2>
           </div>
         </div>
@@ -18,12 +18,12 @@
         <div class="d-flex no-block">
           <div class="m-r-20 align-self-center"><span class="lstick m-r-20"></span><img src="../assets/images/icon/income.png" alt="Income"></div>
           <div *ngIf=" usuario[0].admin_us === 'N' " class="align-self-center">
-            <h6 class="text-muted m-t-10 m-b-0">Total winnings</h6>
+            <h6 class="text-muted m-t-10 m-b-0"> {{'totalWinnings' | translate}} </h6>
             <h2 class="m-t-0">{{ sumGanan | currency: moneda }}</h2>
           </div>
           <div *ngIf=" usuario[0].admin_us === 'Y' " class="align-self-center">
-            <h6 class="text-muted m-t-10 m-b-0">Associates</h6>
-            <h2 class="m-t-0">{{ usuarios.length }} users</h2>
+            <h6 class="text-muted m-t-10 m-b-0"> {{'associates' | translate}} </h6>
+            <h2 class="m-t-0">{{ usuarios.length }} {{'user' | translate}} </h2>
           </div>
         </div>
       </div>
@@ -35,12 +35,12 @@
         <div class="d-flex no-block">
           <div class="m-r-20 align-self-center"><span class="lstick m-r-20"></span><img src="../assets/images/icon/expense.png" alt="Income"></div>
           <div *ngIf=" usuario[0].admin_us === 'N' " class="align-self-center">
-            <h6 class="text-muted m-t-10 m-b-0">Total annexes</h6>
-            <h2 class="m-t-0">{{ anexos.length }} annexes</h2>
+            <h6 class="text-muted m-t-10 m-b-0"> {{'totalAnnexes' | translate}} </h6>
+            <h2 class="m-t-0">{{ anexos.length }} {{'annexes' | translate}} </h2>
           </div>
           <div *ngIf=" usuario[0].admin_us === 'Y' " class="align-self-center">
-            <h6 class="text-muted m-t-10 m-b-0">Projects</h6>
-            <h2 class="m-t-0">{{ totalInver.length }} active</h2>
+            <h6 class="text-muted m-t-10 m-b-0"> {{'projects' | translate}} </h6>
+            <h2 class="m-t-0">{{ totalInver.length }} {{'active' | translate}} </h2>
           </div>
         </div>
       </div>
@@ -52,12 +52,12 @@
         <div class="d-flex no-block">
           <div class="m-r-20 align-self-center"><span class="lstick m-r-20"></span><img src="../assets/images/icon/assets.png" alt="Income"></div>
           <div *ngIf=" usuario[0].admin_us === 'N' " class="align-self-center">
-            <h6 class="text-muted m-t-10 m-b-0">Project time</h6>
-            <h2 class="m-t-0">{{ tiempo }} Months</h2>
+            <h6 class="text-muted m-t-10 m-b-0"> {{'projectTime' | translate}} </h6>
+            <h2 class="m-t-0">{{ tiempo }} {{'months' | translate}} </h2>
           </div>
           <div *ngIf=" usuario[0].admin_us === 'Y' " class="align-self-center">
-            <h6 class="text-muted m-t-10 m-b-0">Slopes</h6>
-            <h2 class="m-t-0">{{ tickets.length }} tickets</h2>
+            <h6 class="text-muted m-t-10 m-b-0"> {{'slopes' | translate}} </h6>
+            <h2 class="m-t-0">{{ tickets.length }} {{'tickets' | translate}} </h2>
           </div>
         </div>
       </div>
@@ -67,7 +67,7 @@
 
 <div *ngIf=" usuario[0].admin_us === 'N' " class="row">
   <div class="col-lg-12">
-    <app-lineal [labels]="labels2" [data]="Data2" title="Project/Winnings" [nombreInv]="nomInversion" [capitalInv]="capitalExtra" [monedaInv]="moneda" [tasaInv]="tasa"></app-lineal>
+    <app-lineal [labels]="labels2" [data]="Data2" title="{{'projectWinnings' | translate}}" [nombreInv]="nomInversion" [capitalInv]="capitalExtra" [monedaInv]="moneda" [tasaInv]="tasa"></app-lineal>
   </div>
 </div>
 
@@ -81,7 +81,7 @@
       <!-- Nav tabs -->
       <ul class="nav nav-tabs profile-tab" role="tablist">
         <li class="nav-item">
-          <a class="nav-link active" data-toggle="tab" href="#settings" role="tab">General project information</a>
+          <a class="nav-link active" data-toggle="tab" href="#settings" role="tab"> {{'genProInfo' | translate}} </a>
         </li>
       </ul>
       <!-- Tab panes -->

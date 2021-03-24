@@ -60,7 +60,7 @@
           <div class="dropdown-menu dropdown-menu-right mailbox animated bounceInDown fast">
             <ul>
               <li>
-                <div class="drop-title">Notifications</div>
+                <div class="drop-title"> {{ 'notications' | translate }} </div>
               </li>
               <li>
                 <div class="message-center">
@@ -73,7 +73,7 @@
                       <div class="mail-contnet">
                         <h5>{{ticket.asunto_tic}}</h5> 
                         <span class="mail-desc">{{ticket.mensaje_tic | slice:0:30 }} {{ (ticket.mensaje_tic.length > 30)? '...':'' }}</span>
-                        <span *ngIf="ticket.estado_tic === 0" class="time">{{ticket.fechareg_tic | date: 'dd/MM/yyyy'}} <span class="label label-info">Pending</span> </span>
+                        <span *ngIf="ticket.estado_tic === 0" class="time">{{ticket.fechareg_tic | date: 'dd/MM/yyyy'}} <span class="label label-info"> {{'pending'| translate}} </span> </span>
                       </div>
                     </a>
 
@@ -83,19 +83,19 @@
                       <div class="mail-contnet">
                         <h5>{{ticket.asunto_tic}}</h5> 
                         <span class="mail-desc">{{ticket.mensaje_tic | slice:0:30 }} {{ (ticket.mensaje_tic.length > 30)? '...':'' }}</span>
-                        <span *ngIf="ticket.estado_tic === 0" class="time">{{ticket.fechareg_tic | date: 'dd/MM/yyyy'}} <span class="label label-info">Pending</span> </span>
-                        <span *ngIf="ticket.estado_tic === 1" class="time">{{ticket.fechareg_tic | date: 'dd/MM/yyyy'}} <span class="label label-success">Attended</span> </span>
+                        <span *ngIf="ticket.estado_tic === 0" class="time">{{ticket.fechareg_tic | date: 'dd/MM/yyyy'}} <span class="label label-info">{{'pending'| translate}}</span> </span>
+                        <span *ngIf="ticket.estado_tic === 1" class="time">{{ticket.fechareg_tic | date: 'dd/MM/yyyy'}} <span class="label label-success">{{'attended'| translate}}</span> </span>
                       </div>
                     </a>
 
                   </div>
                   
-                  <div *ngIf=" tickets.length === 0 " class="text-center" >No pending tickets!</div>
+                  <div *ngIf=" tickets.length === 0 " class="text-center" >{{'noTicket'| translate}}!</div>
 
                 </div>
               </li>
               <li>
-                <a class="nav-link text-center" routerLink="lista-tickets"><i class="fa fa-eye"></i><strong>View tickets</strong></a>
+                <a class="nav-link text-center" routerLink="lista-tickets"><i class="fa fa-eye"></i><strong>{{'viewTicket'| translate}}</strong></a>
               </li>
             </ul>
           </div>
@@ -138,12 +138,12 @@
         <!-- Language -->
         <!-- ============================================================== -->
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="flag-icon flag-icon-us"></i></a>
-          <!-- <div class="dropdown-menu dropdown-menu-right animated bounceInDown fast">
-            <a class="dropdown-item" href="#"><i class="flag-icon flag-icon-fr"></i> French</a>
-            <a class="dropdown-item" href="#"><i class="flag-icon flag-icon-us"></i> Inglés</a>
-            <a class="dropdown-item" href="#"><i class="flag-icon flag-icon-es"></i> Spanish</a>
-          </div> -->
+          <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="flag-icon {{bandera}}"></i></a>
+          <div class="dropdown-menu dropdown-menu-right animated bounceInDown fast">
+            <a *ngIf="idioma != 'fr'" class="dropdown-item cursor" (click)="idiomaFrances('fr')"><i class="flag-icon flag-icon-fr"></i> French</a>
+            <a *ngIf="idioma != 'en'" class="dropdown-item cursor" (click)="idiomaIngles('en')"><i class="flag-icon flag-icon-us"></i> Inglés</a>
+            <a *ngIf="idioma != 'es'" class="dropdown-item cursor" (click)="idiomaEspanol('es')"><i class="flag-icon flag-icon-es"></i> Spanish</a>
+          </div>
         </li>
         <!-- ============================================================== -->
         <!-- Profile -->
@@ -164,11 +164,11 @@
 								</div>
               </li>
               <li role="separator" class="divider"></li>
-              <li><a routerLink="perfil"><i class="ti-user"></i> My profile</a></li>
+              <li><a routerLink="perfil"><i class="ti-user"></i> {{'myProfile'| translate}} </a></li>
               <li role="separator" class="divider"></li>
-              <li><a routerLink="configuracion-cuenta"><i class="ti-settings"></i> Settings</a></li>
+              <li><a routerLink="configuracion-cuenta"><i class="ti-settings"></i> {{'settings'| translate}} </a></li>
               <li role="separator" class="divider"></li>
-              <li class="aCursor"><a (click)="logoutUser()"><i class="fa fa-power-off"></i> LogOut</a></li>
+              <li class="aCursor"><a (click)="logoutUser()"><i class="fa fa-power-off"></i> {{'logOut'| translate}} </a></li>
             </ul>
           </div>
         </li>

@@ -27,6 +27,7 @@ import { DetalleInversionComponent } from './detalle-inversion/detalle-inversion
 import { DetalleAnexoComponent } from './detalle-anexo/detalle-anexo.component';
 import { CalendarModule, DatePickerModule } from '@syncfusion/ej2-angular-calendars';
 import { CrearAnexoComponent } from './crear-anexo/crear-anexo.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -67,6 +68,7 @@ import { CrearAnexoComponent } from './crear-anexo/crear-anexo.component';
     BrowserModule,
     CalendarModule,
     DatePickerModule,
+    TranslateModule
   ]
 })
 export class PagesModule { }
