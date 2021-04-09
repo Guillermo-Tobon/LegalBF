@@ -2,8 +2,8 @@
   <div class="col-12">
     <div class="card">
       <div class="card-body">
-        <h4 class="card-title">In the following form you can create projects for {{usuario['nombres_us']}}.</h4>
-        <h6 class="card-subtitle">Once the investment is created, it will be notified via email ( {{usuario['email_us']}} ).</h6>
+        <h4 class="card-title">{{'theFollowCreateProject' | translate}} {{usuario['nombres_us']}}.</h4>
+        <h6 class="card-subtitle">{{'notifiedCreatedEmail' | translate}} ( {{usuario['email_us']}} ).</h6>
         
         <form class="floating-labels formCrearInver m-t-40" [formGroup]="crearFormInversion" (submit)="crearInversion()">
           <div class="row">
@@ -11,19 +11,19 @@
               <div class="form-group m-b-40 focused">
                 <input type="text" formControlName="nombreInver" class="form-control">
                 <span class="bar"></span>
-                <label for="input1">Project name</label>
+                <label for="input1">{{'ProjectName' | translate}}</label>
               </div>
             </div>
             <div class="col-lg-4 ">
               <div class="form-group m-b-40 focused">
                 <input type="number" formControlName="capitalExtra" class="form-control">
                 <span class="bar"></span>
-                <label for="input2">Capital invested in foreign currency</label>
+                <label for="input2">{{'capitalInverted' | translate}}</label>
               </div>
             </div>
             <div class="col-lg-4 ">
               <div class="form-group m-b-40 focused">
-                <label for="input3">Foreign currency</label>
+                <label for="input3">{{'ForeignCurrency' | translate}}</label>
                 <select formControlName="monedaExtra" class="form-control">
                   <option value="COP">COP</option>
                   <option value="EUR">EUR</option>
@@ -38,21 +38,21 @@
               <div class="form-group m-b-40 focused">
                 <input type="number" formControlName="tasaCambio" class="form-control">
                 <span class="bar"></span>
-                <label for="input3">Exchange rate</label>
+                <label for="input3">{{'ExchangeRate' | translate}}</label>
               </div>
             </div>
             <div class="col-lg-4 ">
               <div class="form-group m-b-40 focused">
                 <input type="number" formControlName="capitalCop" class="form-control">
                 <span class="bar"></span>
-                <label for="input3">Capital invested in COP currency</label>
+                <label for="input3">{{'CapitalInvesCOP' | translate}}</label>
               </div>
             </div>
             <div class="col-lg-4 ">
               <div class="form-group m-b-40 focused">
                 <input type="number" formControlName="tasaInteres" class="form-control">
                 <span class="bar"></span>
-                <label for="input1">Interest rate (AE)</label>
+                <label for="input1">{{'InterestRate' | translate}}</label>
               </div>
             </div>
           </div>
@@ -62,21 +62,21 @@
               <div class="form-group m-b-40 focused">
                 <input type="text" formControlName="interesExtra" class="form-control">
                 <span class="bar"></span>
-                <label for="input1">Interest accrued to date in Foreign Currency</label>
+                <label for="input1">{{'InterestAccrForeign' | translate}}</label>
               </div>
             </div>
             <div class="col-lg-4 ">
               <div class="form-group m-b-40 focused">
                 <input type="text" formControlName="interesCop" class="form-control">
                 <span class="bar"></span>
-                <label for="input1">Interest accrued to date in Currency COP</label>
+                <label for="input1">{{'InterestAccrCOP' | translate}}</label>
               </div>
             </div>
             <div class="col-lg-4 ">
               <div class="form-group m-b-40 focused">
                 <input type="text" formControlName="pais" class="form-control">
                 <span class="bar"></span>
-                <label for="input1">Project country</label>
+                <label for="input1">{{'ProjectCountry' | translate}}</label>
               </div>
             </div>
           </div>
@@ -86,21 +86,21 @@
               <div class="form-group m-b-40 focused">
                 <input type="number" formControlName="rentaExtra" class="form-control">
                 <span class="bar"></span>
-                <label for="input1">Annual return in foreign currency</label>
+                <label for="input1">{{'AnnualReturnForeign' | translate}}</label>
               </div>
             </div>
             <div class="col-lg-4 ">
               <div class="form-group m-b-40 focused">
                 <input type="number" formControlName="rentaCop" class="form-control">
                 <span class="bar"></span>
-                <label for="input1">Annual return in COP currency</label>
+                <label for="input1">{{'AnnualReturnCOP' | translate}}</label>
               </div>
             </div>
             <div class="col-lg-4 ">
               <div class="form-group m-b-40 focused">
                 <input type="number" formControlName="tiempo" class="form-control">
                 <span class="bar"></span>
-                <label for="input1">Project time</label>
+                <label for="input1">{{'ProjectTime' | translate}}</label>
               </div>
             </div>
           </div>
@@ -110,14 +110,14 @@
               <div class="form-group m-b-40 focused">
                 <textarea class="form-control" formControlName="descripcion" rows="2"></textarea>
                 <span class="bar"></span>
-                <label for="input3">Description</label>
+                <label for="input3">{{'Description' | translate}}</label>
               </div>
             </div>
             <div class="col-lg-4 ">
               <div class="checkbox checkbox-info pull-left p-t-0">
                 <input id="checkbox-signup" formControlName="estado" type="checkbox" class="filled-in chk-col-light-blue">
-                <label for="checkbox-signup">Project enabled </label><br><br>
-                <h6>You can create the project and allow it to be viewed by {{usuario['nombres_us']}}. </h6>
+                <label for="checkbox-signup">{{'ProjectEnabled' | translate}} </label><br><br>
+                <h6>{{'createProjectViewed' | translate}} {{usuario['nombres_us']}}. </h6>
               </div> 
             </div>
           </div>
@@ -125,28 +125,28 @@
           <div class="row">
             <div class="col-lg-12">
               <div class="form-group">
-                <button type="submit" class="btn waves-effect waves-light btn-rounded btn-success">Create project</button>
+                <button type="submit" class="btn waves-effect waves-light btn-rounded btn-success">{{'btnCreateProject' | translate}}</button>
                 &nbsp;
-                <button type="button" (click)="goBack()" class="btn waves-effect waves-light btn-rounded btn-danger">Back</button>
+                <button type="button" (click)="goBack()" class="btn waves-effect waves-light btn-rounded btn-danger">{{'Back' | translate}}</button>
               </div>
             </div>
           </div>
 
           <div class="row">
             <div class="col text-danger">
-              <p *ngIf="campoNoValido('nombreInver')">*Project name is required.</p>
-              <p *ngIf="campoNoValido('capitalExtra')">*Capital in foreign currency is required.</p>
-              <p *ngIf="campoNoValido('monedaExtra')">*Foreign currency is required.</p>
-              <p *ngIf="campoNoValido('tasaCambio')">*The exchange rate is required.</p>
-              <p *ngIf="campoNoValido('capitalCop')">*The capital invested in COP is required.</p>
-              <p *ngIf="campoNoValido('tasaInteres')">*The interest rate is required.</p>
-              <p *ngIf="campoNoValido('interesExtra')">*Interest in foreign currency is required.</p>
-              <p *ngIf="campoNoValido('interesCop')">*Interest in COP currency is required.</p>
-              <p *ngIf="campoNoValido('pais')">*Country is required.</p>
-              <p *ngIf="campoNoValido('rentaExtra')">*Profitability in Foreign Currency is required.</p>
-              <p *ngIf="campoNoValido('rentaCop')">*Profitability in COP Currency is required.</p>
-              <p *ngIf="campoNoValido('tiempo')">*Project time is required.</p>
-              <p *ngIf="campoNoValido('descripcion')">*Description is required.</p>
+              <p *ngIf="campoNoValido('nombreInver')">*{{'ProjectNameRequired' | translate}}</p>
+                <p *ngIf="campoNoValido('capitalExtra')">*{{'CapitalForeignRequired' | translate}} </p>
+                <p *ngIf="campoNoValido('monedaExtra')">*{{'ForeignRequired' | translate}} </p>
+                <p *ngIf="campoNoValido('tasaCambio')">*{{'exchangeRequired' | translate}} </p>
+                <p *ngIf="campoNoValido('capitalCop')">*{{'capitalCOPRequired' | translate}} </p>
+                <p *ngIf="campoNoValido('tasaInteres')">*{{'interestRequired' | translate}} </p>
+                <p *ngIf="campoNoValido('interesExtra')">*{{'InterestForeignRequired' | translate}} </p>
+                <p *ngIf="campoNoValido('interesCop')">*{{'InterestCOPRequired' | translate}} </p>
+                <p *ngIf="campoNoValido('pais')">*{{'CountryRequired' | translate}} </p>
+                <p *ngIf="campoNoValido('rentaExtra')">*{{'ProfitabilityForeignRequired' | translate}} </p>
+                <p *ngIf="campoNoValido('rentaCop')">*{{'ProfitabilityCOPRequired' | translate}} </p>
+                <p *ngIf="campoNoValido('tiempo')">*{{'ProjectTimeRequired' | translate}} </p>
+              <p *ngIf="campoNoValido('descripcion')">*{{'DescriptionRequired' | translate}}</p>
             </div>
           </div>
       

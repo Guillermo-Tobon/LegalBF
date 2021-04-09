@@ -90,26 +90,26 @@
           <div class="card-body">
             <div class="row">
               <div class="col-lg-8 col-md-8">
-                <small class="text-muted">Project ID: &nbsp; <b>{{ idInv }}</b> </small>
+                <small class="text-muted"> {{'ProjectID' | translate}} : &nbsp; <b>{{ idInv }}</b> </small>
               </div>
               <br>
               <div class="col-lg-4 col-md-4">
-                <small class="text-muted">Project date: &nbsp; {{ fechareg | date: 'dd/MM/yyyy'}} </small>
+                <small class="text-muted"> {{'ProjectDate' | translate}} : &nbsp; {{ fechareg | date: 'dd/MM/yyyy'}} </small>
               </div>
             </div>
             <br>
 
             <div class="row">
               <div class="col-lg-4 col-md-4">
-                <small class="text-muted">Project name:</small>
+                <small class="text-muted"> {{'ProjectName' | translate}} :</small>
                 <h6>{{nomInversion}}</h6> 
               </div>
               <div class="col-lg-4 col-md-4">
-                <small class="text-muted">Capital invested in foreign currency:</small>
+                <small class="text-muted"> {{'capitalInverted' | translate}} :</small>
                 <h6>{{ capitalExtra | currency: moneda }}</h6> 
               </div>
               <div class="col-lg-4 col-md-4">
-                <small class="text-muted">Foreign currency:</small>
+                <small class="text-muted"> {{'ForeignCurrency' | translate}} :</small>
                 <h6>{{ moneda }}</h6> 
               </div>
             </div>
@@ -117,17 +117,17 @@
 
             <div class="row">
               <div class="col-lg-4 col-md-4">
-                <small class="text-muted">Exchange rate:</small>
+                <small class="text-muted"> {{'ExchangeRate' | translate}} :</small>
                 <h6>{{ tasaCambio | currency: moneda }}</h6> 
               </div>
               <br>
               <div class="col-lg-4 col-md-4">
-                <small class="text-muted">Capital invested in COP currency:</small>
+                <small class="text-muted"> {{'CapitalInvesCOP' | translate}} :</small>
                 <h6>{{capitalCop | currency: 'COP' }}</h6> 
               </div>
               <br>
               <div class="col-lg-4 col-md-4">
-                <small class="text-muted">Interest rate (AE):</small>
+                <small class="text-muted"> {{'InterestRate' | translate}} :</small>
                 <h6>{{ tasa }}%</h6>
               </div>
             </div>
@@ -135,17 +135,17 @@
 
             <div class="row">
               <div class="col-lg-4 col-md-4">
-                <small class="text-muted">Interest accrued to date in Foreign Currency:</small>
+                <small class="text-muted"> {{'InterestAccrForeign' | translate}} :</small>
                 <h6>{{ interesExtra }}%</h6>
               </div>
               <br>
               <div class="col-lg-4 col-md-4">
-                <small class="text-muted">Interest accrued to date in Currency COP:</small>
+                <small class="text-muted"> {{'InterestAccrCOP' | translate}} :</small>
                 <h6>{{ interesCop }}%</h6>
               </div>
               <br>
               <div class="col-lg-4 col-md-4">
-                <small class="text-muted">Project country:</small>
+                <small class="text-muted"> {{'ProjectCountry' | translate}} :</small>
                 <h6>{{ pais }}</h6>
               </div>
             </div>
@@ -153,32 +153,32 @@
 
             <div class="row">
               <div class="col-lg-4 col-md-4">
-                <small class="text-muted">Annual return in foreign currency:</small>
+                <small class="text-muted"> {{'AnnualReturnForeign' | translate}} :</small>
                 <h6>{{ rentaExtra | currency: moneda }}</h6>
               </div>
               <br>
               <div class="col-lg-4 col-md-4">
-                <small class="text-muted">Annual return in COP currency:</small>
+                <small class="text-muted"> {{'AnnualReturnCOP' | translate}} :</small>
                 <h6>{{ rentaCop | currency: 'COP' }}</h6>
               </div>
               <br>
               <div class="col-lg-4 col-md-4">
-                <small class="text-muted">Project time:</small>
-                <h6>{{ tiempo }} days</h6>
+                <small class="text-muted"> {{'ProjectTime' | translate}}:</small>
+                <h6>{{ tiempo }} {{'months' | translate}} </h6>
               </div>
             </div>
             <br>
 
             <div class="row">
               <div class="col-lg-8 col-md-8">
-                <small class="text-muted">Description:</small>
+                <small class="text-muted"> {{'Description' | translate}} :</small>
                 <h6>{{ descripcion }}</h6>
               </div>
               <br>
               <div class="col-lg-4 col-md-4">
-                <small class="text-muted">Project status:</small>
-                <h6 *ngIf=" estado === 1" class="text-warning">ACTIVE</h6>
-                <h6 *ngIf=" estado === 0" class="text-danger">INACTIVE</h6>
+                <small class="text-muted"> {{'ProjectStatus' | translate}}:</small>
+                <h6 *ngIf=" estado === 1" class="text-warning"> {{'active' | translate}} </h6>
+                <h6 *ngIf=" estado === 0" class="text-danger"> {{'inactive' | translate}} </h6>
               </div>
             </div>
             <br>
@@ -195,20 +195,20 @@
   <div class="col-lg-12">
     <div class="card">
       <div class="card-body">
-        <h4 class="card-title">Investment Monitoring</h4>
-        <h6 class="card-subtitle">Investment number: &nbsp; <b>{{ idInv }}</b></h6>
+        <h4 class="card-title"> {{'InvestmentMonitoring' | translate}} </h4>
+        <h6 class="card-subtitle"> {{'ProjectNumber' | translate}}: &nbsp; <b>{{ idInv }}</b></h6>
         <div class="table-responsive">
           <table class="table tablaAnexos">
             <thead>
               <tr>
-                <th># Annexed</th>
-                <th>Movement</th>
-                <th>Capital foreign currency</th>
-                <th>Capital currency COP</th>
-                <th>Interest in foreign currency</th>
-                <th>Interest in COP currency</th>
-                <th class="headW">Date</th>
-                <th>File</th>
+                <th># {{'Annexed' | translate}} </th>
+                <th> {{'Movement' | translate}} </th>
+                <th> {{'CapitalForeignCurrency' | translate}} </th>
+                <th> {{'CapitalCurrencyCOP' | translate}} </th>
+                <th> {{'InterestForeignCurrency' | translate}} </th>
+                <th> {{'InterestCOPCurrency' | translate}} </th>
+                <th class="headW"> {{'Date' | translate}} </th>
+                <th> {{'File' | translate}} </th>
               </tr>
             </thead>
             <tbody>
@@ -236,31 +236,31 @@
 
 <div *ngIf=" usuario[0].admin_us === 'Y' " class="row">
   <div class="col-lg-8 col-md-8">
-    <app-lineal-admin [labels]="labels3" [data]="Data3" title="Users / Initial project"></app-lineal-admin>
+    <app-lineal-admin [labels]="labels3" [data]="Data3" title="{{'UsersInitial' | translate}}"></app-lineal-admin>
   </div>
   <div class="col-lg-4 col-md-4">
-    <app-datepicker-inline title="Calendary"></app-datepicker-inline>
+    <app-datepicker-inline title="{{'Calendary' | translate}}"></app-datepicker-inline>
   </div>
 
   <div class="col-lg-5 col-md-5">
-    <app-dona [labels]="labels1" [data]="Data1" title="Platform status"></app-dona>
+    <app-dona [labels]="labels1" [data]="Data1" title="{{'PlatformStatus' | translate}}"></app-dona>
   </div>
   <div class="col-lg-7 col-md-7">
     <div class="card">
       <div class="card-body">
         <div class="d-flex">
           <div>
-            <h4 class="card-title"><span class="lstick"></span>Registered users </h4>
-            <a routerLink="lista-clientes" class="btn waves-effect waves-light btn-rounded btn-success verUsuarios">View users</a>
+            <h4 class="card-title"><span class="lstick"></span> {{'RegisteredUsers' | translate}} </h4>
+            <a routerLink="lista-clientes" class="btn waves-effect waves-light btn-rounded btn-success verUsuarios"> {{'ViewUsers' | translate}} </a>
           </div>
         </div>
         <div class="table-responsive m-t-20 tableUsers">
           <table class="table vm no-th-brd no-wrap pro-of-month">
             <thead>
               <tr>
-                <th colspan="2">User</th>
-                <th>Email</th>
-                <th>Status</th>
+                <th colspan="2"> {{'user' | translate}} </th>
+                <th> {{'Email' | translate}} </th>
+                <th> {{'Status' | translate}} </th>
               </tr>
             </thead>
             <tbody>
@@ -268,8 +268,8 @@
                 <td style="width:50px;"><span class="round"><img src="../assets/images/users/1.jpg" alt="user" width="50"></span></td>
                 <td><h6> {{usuario.nombres_us}} </h6><small class="text-muted">{{usuario.compania_us}}</small></td>
                 <td>{{usuario.email_us | slice:0:11 }} {{ (usuario.email_us.length > 11)? '...':'' }}</td>
-                <td *ngIf=" usuario.estado_us === 1 " ><span class="label label-success label-rounded">Active</span></td>
-                <td *ngIf=" usuario.estado_us === 0 " ><span class="label label-warning label-rounded">Inactive</span></td>
+                <td *ngIf=" usuario.estado_us === 1 " ><span class="label label-success label-rounded"> {{'active' | translate}} </span></td>
+                <td *ngIf=" usuario.estado_us === 0 " ><span class="label label-warning label-rounded">{{'inactive' | translate}}</span></td>
               </tr>
             </tbody>
           </table>

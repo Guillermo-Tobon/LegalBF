@@ -25,22 +25,23 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.usuario = this.autServ.usuario;
-
+    
     this.alertBienvenida(this.usuario[0].nombres_us);
-
+    
     if ( this.usuario[0].admin_us === 'Y' ) {
       this.getAllTickets();
       
     } else {
       this.getTicketsUsuario(this.usuario[0].id_us);
     }
-
+    
     this.idioma = localStorage.getItem('idioma');
+    this.translate.use(this.idioma);
+
     this.bandera = localStorage.getItem('bandera');
     if (!this.bandera) {
       this.bandera = 'flag-icon-us';
     }
-
   }
 
 
@@ -50,11 +51,14 @@ export class HeaderComponent implements OnInit {
    * @param nombre => Nombre del usuario
    */
   public alertBienvenida = (nombre:string) =>{
+    let trad = "";
+    this.translate.get('Welcome').subscribe((res: string) =>{trad = res});
+
     const ingresado = localStorage.getItem('Ingresado') || '';
     if( ingresado === 'Si' ){
       Swal.fire({
         icon: 'success',
-        title: `Welcome`,
+        title: `${trad}`,
         text: `${nombre}`,
         showConfirmButton: false,
         timer: 2500
@@ -141,15 +145,21 @@ export class HeaderComponent implements OnInit {
    * Método para cerrar sesión user
    */
   public logoutUser = () =>{
+    let traTitle;
+    let traText;
+    let traButton;
+    this.translate.get('DoWantLogOut').subscribe((res: string) =>{traTitle = res});
+    this.translate.get('RememberProcessedData').subscribe((res: string) =>{traText = res});
+    this.translate.get('YesLogOut').subscribe((res: string) =>{traButton = res});
 
     Swal.fire({
-      title: 'Do you want to LogOut?',
-      text: "Remember to verify all processed data!",
+      title: `${traTitle}`,
+      text: `${traText}`,
       icon: 'question',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, LogOut!'
+      confirmButtonText: `${traButton}`
     }).then((result) => {
       if (result.isConfirmed) {
         setTimeout(() => { this.autServ.logoutService(); }, 1200);

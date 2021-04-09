@@ -3,20 +3,20 @@
   <div class="col-12">
     <div class="card">
       <div class="card-body">
-        <h4 *ngIf="usuario[0].admin_us == 'N'" class="card-title">Projects carried out by {{usuario[0].nombres_us}}</h4>
-        <h4 *ngIf="usuario[0].admin_us == 'Y'" class="card-title">All projects carried out.</h4>
-        <h6 class="card-subtitle">You can view the details of the project by clicking on the ID.</h6>
+        <h4 *ngIf="usuario[0].admin_us == 'N'" class="card-title">{{'ProjectsCarriedOut' | translate}} {{usuario[0].nombres_us}}</h4>
+        <h4 *ngIf="usuario[0].admin_us == 'Y'" class="card-title">{{'allProjectsCarriedOut' | translate}}</h4>
+        <h6 class="card-subtitle">{{'viewProjectClickingID' | translate}}</h6>
         <div class="table-responsive">
           <table class="table">
             <thead>
               <tr>
                 <th># ID</th>
-                <th>Project name</th>
-                <th>Capital in Foreign Currency</th>
-                <th>Foreign currency</th>
-                <th>Capital Invested in COP</th>
-                <th>Date</th>
-                <th>Status</th>
+                <th>{{'ProjectName' | translate}}</th>
+                <th>{{'CapitalForeignCurrency' | translate}}</th>
+                <th>{{'ForeignCurrency' | translate}}</th>
+                <th>{{'CapitalInvesCOP' | translate}}</th>
+                <th>{{'Date' | translate}}</th>
+                <th>{{'Status' | translate}}</th>
               </tr>
             </thead>
             <tbody>
@@ -27,8 +27,8 @@
                 <td> {{inversion.moneda_extra_inv}} </td>
                 <td>{{inversion.capital_cop_inv | currency: inversion.moneda_extra_inv }} </td>
                 <td><span class="text-muted"><i class="fa fa-calendar-o"></i> {{inversion.fechareg_inv | date: 'dd/MM/yyyy'}}</span> </td>
-                <td *ngIf=" inversion.estado_inv === 1 " ><div class="label label-table label-success">Active</div></td>
-                <td *ngIf=" inversion.estado_inv === 0 " ><div class="label label-table label-danger">Inactive</div></td>
+                <td *ngIf=" inversion.estado_inv === 1 " ><div class="label label-table label-success">{{'active' | translate}}</div></td>
+                <td *ngIf=" inversion.estado_inv === 0 " ><div class="label label-table label-danger">{{'inactive' | translate}}</div></td>
               </tr>
             </tbody>
           </table>

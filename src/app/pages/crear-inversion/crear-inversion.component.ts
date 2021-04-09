@@ -7,6 +7,7 @@ import Swal from 'sweetalert2';
 import { InversionesService } from 'src/app/services/inversiones.service';
 import { ArchivosService } from 'src/app/services/archivos.service';
 import { ClientesService } from 'src/app/services/clientes.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-crear-inversion',
@@ -18,6 +19,7 @@ export class CrearInversionComponent implements OnInit {
   public usuario:any[] = [];
   public idInversion:string = '';
   public formSubmitted = false;
+  public year = new Date().getFullYear();
   
 
   public crearFormInversion = this.fb.group({
@@ -43,6 +45,7 @@ export class CrearInversionComponent implements OnInit {
               private location: Location,
               private inversionServ: InversionesService,
               private clienteSrs: ClientesService,
+              private translate: TranslateService,
               private fb: FormBuilder,
               private router: Router,
   ) { }
@@ -51,10 +54,9 @@ export class CrearInversionComponent implements OnInit {
 
     this.routeActive.params.subscribe( data =>{
       this.usuario = JSON.parse( data['usuario'] ) || [];
+    });
 
-      console.log(this.usuario)
-
-    })
+    this.translate.use(localStorage.getItem('idioma'));
 
   }
 
@@ -70,6 +72,23 @@ export class CrearInversionComponent implements OnInit {
       return; 
     }
 
+    let traAsunto;
+    let traDesc1;
+    let traDesc2;
+    let traDesc3;
+    let traDesc4;
+    let traDesc5;
+    let traSuccess;
+    let traError;
+    this.translate.get('ProjectCreatedClientsLegalBF').subscribe((res: string) =>{traAsunto = res});
+    this.translate.get('projectWasCreated').subscribe((res: string) =>{traDesc1 = res});
+    this.translate.get('Enter').subscribe((res: string) =>{traDesc2 = res});
+    this.translate.get('verifyInformation').subscribe((res: string) =>{traDesc3 = res});
+    this.translate.get('ForMoreInformation').subscribe((res: string) =>{traDesc4 = res});
+    this.translate.get('ClientsLegalBFService').subscribe((res: string) =>{traDesc5 = res});
+    this.translate.get('Success').subscribe((res: string) =>{traSuccess = res});
+    this.translate.get('Error').subscribe((res: string) =>{traError = res});
+
     this.inversionServ.crearInversionService( this.crearFormInversion.value, this.usuario['id_us'] ).subscribe( (resp:any) =>{
 
       if( resp.ok ){
@@ -78,27 +97,26 @@ export class CrearInversionComponent implements OnInit {
           nombres: this.usuario['nombres_us'],
           apellidos: this.usuario['apellidos_us'],
           email: this.usuario['email_us'],
-          asunto: 'Project created in Clients LegalBF',
-          descripcion: `<p>The ${this.crearFormInversion.get('nombreInver').value} project was created in LegalBF</p>
-                        <p>Enter: <a href="http://clientslegalbf.com/" target="_blank">www.clientslegalbf.com</a> You can verify the information</p>
+          asunto: `${traAsunto}`,
+          descripcion: `<p>${this.crearFormInversion.get('nombreInver').value} ${traDesc1}</p>
+                        <p>${traDesc2}: <a href="http://clientslegalbf.com/" target="_blank">www.clientslegalbf.com</a> ${traDesc3}</p>
                         <br>
-                        <b>For more information, contact LegalBF administrator. </b>
+                        <b>${traDesc4}</b>
                         <br>
-                        <p>©2021 - LegalBF Service</p>`,
+                        <p>©${this.year} - ${traDesc5}</p>`,
         }
         this.clienteSrs.sendEmailClienteService(json).subscribe( (resp:any) =>{
           console.log(resp)
         }, err => console.error(err));
         
-        Swal.fire('Success!', resp.msg, 'success');
+        Swal.fire(`${traSuccess}`, resp.msg, 'success');
         setTimeout(() => { this.router.navigate(['dashboard/inversiones']); }, 2000);
-        //setTimeout(() => { window.location.reload(); }, 2000);
         this.idInversion = resp.idInver;       
       }
 
     }, (err) =>{
       //En caso de un error
-      Swal.fire('Error', err.error.msg, 'error');
+      Swal.fire(`${traError}`, err.error.msg, 'error');
       console.log(err)
     })
 

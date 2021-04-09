@@ -5,7 +5,7 @@
     <div class="card">
       <!-- Nav tabs -->
       <ul class="nav nav-tabs profile-tab" role="tablist">
-        <li class="nav-item"> <a class="nav-link active liInfoGen" data-toggle="tab" href="#" role="tab">General project information</a> <span class="nomUser">User: {{userAsociado[0]?.nombres_us}}</span></li>
+        <li class="nav-item"> <a class="nav-link active liInfoGen" data-toggle="tab" href="#" role="tab"> {{'GeneralProject' | translate}} </a> <span class="nomUser">User: {{userAsociado[0]?.nombres_us}}</span></li>
       </ul>
       <!-- Tab panes -->
       <div class="tab-content">        
@@ -13,26 +13,26 @@
           <div class="card-body">
             <div class="row">
               <div class="col-lg-8 col-md-8">
-                <small class="text-muted">Project ID: &nbsp; <b>{{inversion['id_inv']}}</b> </small>
+                <small class="text-muted">{{'ProjectID' | translate}}: &nbsp; <b>{{inversion['id_inv']}}</b> </small>
               </div>
               <br>
               <div class="col-lg-4 col-md-4">
-                <small class="text-muted">Project date: &nbsp; {{inversion['fechareg_inv'] | date: 'dd/MM/yyyy'}} </small>
+                <small class="text-muted">{{'ProjectDate' | translate}}: &nbsp; {{inversion['fechareg_inv'] | date: 'dd/MM/yyyy'}} </small>
               </div>
             </div>
             <br>
 
             <div class="row">
               <div class="col-lg-4 col-md-4">
-                <small class="text-muted">Project name:</small>
+                <small class="text-muted">{{'ProjectName' | translate}}:</small>
                 <h6>{{inversion['nombre_inv']}}</h6> 
               </div>
               <div class="col-lg-4 col-md-4">
-                <small class="text-muted">Capital invested in foreign currency:</small>
+                <small class="text-muted">{{'capitalInverted' | translate}}:</small>
                 <h6>{{inversion['capital_extra_inv'] | currency: inversion['moneda_extra_inv']}}</h6> 
               </div>
               <div class="col-lg-4 col-md-4">
-                <small class="text-muted">Foreign currency:</small>
+                <small class="text-muted">{{'ForeignCurrency' | translate}}:</small>
                 <h6>{{inversion['moneda_extra_inv']}}</h6> 
               </div>
             </div>
@@ -40,17 +40,17 @@
 
             <div class="row">
               <div class="col-lg-4 col-md-4">
-                <small class="text-muted">Exchange rate:</small>
+                <small class="text-muted">{{'ExchangeRate' | translate}}:</small>
                 <h6>{{ inversion['tasa_cambio_inv'] | currency: inversion['moneda_extra_inv'] }}</h6> 
               </div>
               <br>
               <div class="col-lg-4 col-md-4">
-                <small class="text-muted">Capital invested in COP currency:</small>
+                <small class="text-muted">{{'CapitalInvesCOP' | translate}}:</small>
                 <h6>{{inversion['capital_cop_inv'] | currency: inversion['moneda_extra_inv']}}</h6> 
               </div>
               <br>
               <div class="col-lg-4 col-md-4">
-                <small class="text-muted">Interest rate (AE):</small>
+                <small class="text-muted"> {{'InterestRate' |translate}}:</small>
                 <h6>{{inversion['tasa_ea_inv']}}%</h6>
               </div>
             </div>
@@ -58,17 +58,17 @@
 
             <div class="row">
               <div class="col-lg-4 col-md-4">
-                <small class="text-muted">Interest accrued to date in Foreign Currency:</small>
+                <small class="text-muted">{{'InterestAccrForeign' | translate}}:</small>
                 <h6>{{inversion['interes_extra_inv']}}%</h6>
               </div>
               <br>
               <div class="col-lg-4 col-md-4">
-                <small class="text-muted">Interest accrued to date in Currency COP:</small>
+                <small class="text-muted">{{'InterestAccrCOP' | translate}}:</small>
                 <h6>{{inversion['interes_cop_inv']}}%</h6>
               </div>
               <br>
               <div class="col-lg-4 col-md-4">
-                <small class="text-muted">Project country:</small>
+                <small class="text-muted">{{'ProjectCountry' |translate}}:</small>
                 <h6>{{inversion['pais_inv']}}</h6>
               </div>
             </div>
@@ -76,41 +76,41 @@
 
             <div class="row">
               <div class="col-lg-4 col-md-4">
-                <small class="text-muted">Annual return in foreign currency:</small>
+                <small class="text-muted">{{'AnnualReturnForeign' | translate}}:</small>
                 <h6>{{inversion['renta_extra_inv'] | currency: inversion['moneda_extra_inv']}}</h6>
               </div>
               <br>
               <div class="col-lg-4 col-md-4">
-                <small class="text-muted">Annual return in COP currency:</small>
+                <small class="text-muted">{{'AnnualReturnCOP' | translate}}:</small>
                 <h6>{{inversion['renta_cop_inv'] | currency: inversion['moneda_extra_inv']}}</h6>
               </div>
               <br>
               <div class="col-lg-4 col-md-4">
-                <small class="text-muted">Project time:</small>
-                <h6>{{inversion['tiempo_inv']}} Months</h6>
+                <small class="text-muted">{{'ProjectTime' | translate}}:</small>
+                <h6>{{inversion['tiempo_inv']}} {{'months' | translate}} </h6>
               </div>
             </div>
             <br>
 
             <div class="row">
               <div class="col-lg-8 col-md-8">
-                <small class="text-muted">Description:</small>
+                <small class="text-muted"> {{'Description' | translate}}:</small>
                 <h6>{{inversion['descripcion_inv']}}</h6>
               </div>
               <br>
               <div class="col-lg-4 col-md-4">
-                <small class="text-muted">Project status:</small>
-                <h6 *ngIf="inversion['estado_inv'] === 1" class="text-warning">ACTIVE</h6>
-                <h6 *ngIf="inversion['estado_inv'] === 0" class="text-danger">INACTIVE</h6>
+                <small class="text-muted"> {{'ProjectStatus' | translate}}:</small>
+                <h6 *ngIf="inversion['estado_inv'] === 1" class="text-warning"> {{'active' | translate}} </h6>
+                <h6 *ngIf="inversion['estado_inv'] === 0" class="text-danger">{{'inactive' | translate}}</h6>
               </div>
             </div>
             <br>
 
             <div class="row">
               <div class="col-lg-12">
-                <button *ngIf="this.usuario[0].admin_us === 'Y'" type="button" (click)="modalEditInvert(inversion)" class="btn waves-effect waves-light btn-rounded btn-success" data-toggle="modal" data-target=".modalEditInver">Edit project</button>
+                <button *ngIf="this.usuario[0].admin_us === 'Y'" type="button" (click)="modalEditInvert(inversion)" class="btn waves-effect waves-light btn-rounded btn-success" data-toggle="modal" data-target=".modalEditInver"> {{'EditProject' | translate}} </button>
                 &nbsp;
-                <button type="button" (click)="goBack()" class="btn waves-effect waves-light btn-rounded btn-danger">Back</button>
+                <button type="button" (click)="goBack()" class="btn waves-effect waves-light btn-rounded btn-danger"> {{'Back' | translate}} </button>
               </div>
             </div>
 
@@ -126,20 +126,20 @@
   <div class="col-lg-12">
     <div class="card">
       <div class="card-body">
-        <h4 class="card-title">Currently loaded attachments</h4>
-        <h6 class="card-subtitle">These are the annexes loaded for the project {{inversion['nombre_inv']}} </h6>
+        <h4 class="card-title"> {{'RecentlyAttachments' | translate}} </h4>
+        <h6 class="card-subtitle"> {{'annexesProject' | translate}} {{inversion['nombre_inv']}} </h6>
         <div class="table-responsive">
           <table class="table tablaAnexos">
             <thead>
               <tr>
-                <th># Annexed</th>
-                <th>Movement</th>
-                <th>Capital foreign currency</th>
-                <th>Capital currency COP</th>
-                <th>Interest in foreign currency</th>
-                <th>Interest in COP currency</th>
-                <th class="headW">Date</th>
-                <th>File</th>
+                <th># {{'Annexed' | translate}} </th>
+                <th> {{'Movement' | translate}} </th>
+                <th> {{'CapitalForeignCurrency' | translate}} </th>
+                <th> {{'CapitalCurrencyCOP' | translate}} </th>
+                <th> {{'InterestForeignCurrency' | translate}} </th>
+                <th> {{'InterestCOPCurrency' | translate}} </th>
+                <th class="headW">{{'Date' | translate}}</th>
+                <th>{{'File' | translate}}</th>
               </tr>
             </thead>
             <tbody>
@@ -167,7 +167,7 @@
   <div class="col-lg-12">
     <div class="card">
       <div class="card-body">
-        <button type="button" (click)="navegarCrearAnexo()" class="btn waves-effect waves-light btn-rounded btn-success btn-block" >Create Annex</button>
+        <button type="button" (click)="navegarCrearAnexo()" class="btn waves-effect waves-light btn-rounded btn-success btn-block" > {{'CreateAnnex' | translate}} </button>
       </div>
     </div>
   </div>
@@ -183,8 +183,8 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="myLargeModalLabel">Project ID: &nbsp; <b>{{editInversion['id_inv']}}</b></h4>
-        <h4 class="modal-title" id="myLargeModalLabel">Project date: &nbsp; {{editInversion['fechareg_inv'] | date: 'dd/MM/yyyy'}}</h4>
+        <h4 class="modal-title" id="myLargeModalLabel"> {{'ProjectID' | translate}}: &nbsp; <b>{{editInversion['id_inv']}}</b></h4>
+        <h4 class="modal-title" id="myLargeModalLabel">{{'ProjectDate' | translate}}: &nbsp; {{editInversion['fechareg_inv'] | date: 'dd/MM/yyyy'}}</h4>
       </div>
       <div class="modal-body">
         <div class="comment-text w-100">
@@ -195,21 +195,21 @@
                 <div class="form-group m-b-40 focused">
                   <input type="text" formControlName="nombreInver" class="form-control">
                   <span class="bar"></span>
-                  <label for="input1">Project name</label>
+                  <label for="input1"> {{'ProjectName' | translate}} </label>
                 </div>
               </div>
               <div class="col-lg-3 col-md-3">
                 <div class="form-group m-b-40 focused">
                   <input type="number" formControlName="capitalExtra" class="form-control">
                   <span class="bar"></span>
-                  <label for="input2">Capital invested in foreign currency</label>
+                  <label for="input2"> {{'capitalInverted' | translate}} </label>
                 </div>
               </div>
               <div class="col-lg-3 col-md-3">
                 <div class="form-group m-b-40 focused">
                   <input type="date" formControlName="fecha" class="form-control">
                   <span class="bar"></span>
-                  <label for="input1">Project date</label>
+                  <label for="input1"> {{'ProjectDate' | translate}} </label>
                 </div>
               </div>
               <div class="col-lg-2 col-md-2">
@@ -229,21 +229,21 @@
                 <div class="form-group m-b-40 focused">
                   <input type="number" formControlName="tasaCambio" class="form-control">
                   <span class="bar"></span>
-                  <label for="input3">Exchange rate</label>
+                  <label for="input3"> {{'ExchangeRate' | translate}} </label>
                 </div>
               </div>
               <div class="col-lg-4 col-md-4">
                 <div class="form-group m-b-40 focused">
                   <input type="number" formControlName="capitalCop" class="form-control">
                   <span class="bar"></span>
-                  <label for="input3">Capital invested in COP currency</label>
+                  <label for="input3"> {{'CapitalInvesCOP' | translate}} </label>
                 </div>
               </div>
               <div class="col-lg-4 col-md-4">
                 <div class="form-group m-b-40 focused">
                   <input type="number" formControlName="tasaInteres" class="form-control">
                   <span class="bar"></span>
-                  <label for="input1">Interest rate (AE)</label>
+                  <label for="input1"> {{'InterestRate' | translate}} </label>
                 </div>
               </div>
             </div>
@@ -253,21 +253,21 @@
                 <div class="form-group m-b-40 focused">
                   <input type="text" formControlName="interesExtra" class="form-control">
                   <span class="bar"></span>
-                  <label for="input1">Interest accrued to date in Foreign Currency</label>
+                  <label for="input1"> {{'InterestAccrForeign' | translate}} </label>
                 </div>
               </div>
               <div class="col-lg-4 col-md-4">
                 <div class="form-group m-b-40 focused">
                   <input type="text" formControlName="interesCop" class="form-control">
                   <span class="bar"></span>
-                  <label for="input1">Interest accrued to date in Currency COP</label>
+                  <label for="input1"> {{'InterestAccrCOP' | translate}} </label>
                 </div>
               </div>
               <div class="col-lg-4 col-md-4">
                 <div class="form-group m-b-40 focused">
                   <input type="text" formControlName="pais" class="form-control">
                   <span class="bar"></span>
-                  <label for="input1">Project country</label>
+                  <label for="input1"> {{'ProjectCountry' | translate}} </label>
                 </div>
               </div>
             </div>
@@ -277,21 +277,21 @@
                 <div class="form-group m-b-40 focused">
                   <input type="number" formControlName="rentaExtra" class="form-control">
                   <span class="bar"></span>
-                  <label for="input1">Annual return in foreign currency</label>
+                  <label for="input1"> {{'AnnualReturnForeign' | translate}} </label>
                 </div>
               </div>
               <div class="col-lg-4 col-md-4">
                 <div class="form-group m-b-40 focused">
                   <input type="number" formControlName="rentaCop" class="form-control">
                   <span class="bar"></span>
-                  <label for="input1">Annual return in COP currency</label>
+                  <label for="input1"> {{'AnnualReturnCOP' | translate}} </label>
                 </div>
               </div>
               <div class="col-lg-4 col-md-4">
                 <div class="form-group m-b-40 focused">
                   <input type="number" formControlName="tiempo" class="form-control">
                   <span class="bar"></span>
-                  <label for="input1">Project time</label>
+                  <label for="input1"> {{'ProjectTime' | translate}} </label>
                 </div>
               </div>
             </div>
@@ -301,14 +301,14 @@
                 <div class="form-group m-b-40 focused">
                   <textarea class="form-control" formControlName="descripcion" rows="2"></textarea>
                   <span class="bar"></span>
-                  <label for="input3">Description</label>
+                  <label for="input3">{{'Description' | translate}}</label>
                 </div>
               </div>
               <div class="col-lg-4 col-md-4">
                 <div class="checkbox checkbox-info pull-left p-t-0">
                   <input id="checkbox-signup" formControlName="estado" type="checkbox" class="filled-in chk-col-light-blue">
-                   <label for="checkbox-signup">Project enabled</label><br><br>
-                  <h6>You can update the project and allow it to be seen. </h6>
+                   <label for="checkbox-signup"> {{'ProjectEnabled' | translate}} </label><br><br>
+                  <h6> {{'canProjectSeen' | translate}} </h6>
                 </div> 
               </div>
             </div>
@@ -316,29 +316,28 @@
             <div class="row">
               <div class="col-lg-6 col-md-6">
                 <div class="form-group">
-                  <button type="submit" class="btn waves-effect waves-light btn-rounded btn-success btn-block">Edit project</button>
+                  <button type="submit" class="btn waves-effect waves-light btn-rounded btn-success btn-block"> {{'EditProject' | translate}} </button>
                 </div>
               </div>
               <div class="col-lg-6 col-md-6">
-                <button type="button" class="btn waves-effect waves-light btn-rounded btn-danger btn-block" data-dismiss="modal">Close</button>
+                <button type="button" class="btn waves-effect waves-light btn-rounded btn-danger btn-block" data-dismiss="modal"> {{'Close' | translate}} </button>
               </div>
             </div>
   
-            <div class="row">
+            <div class="row">-
               <div class="col text-danger">
-                <p *ngIf="campoNoValido('nombreInver')">*Project name is required.</p>
-                <p *ngIf="campoNoValido('capitalExtra')">*Capital in foreign currency is required.</p>
-                <p *ngIf="campoNoValido('monedaExtra')">*Foreign currency is required.</p>
-                <p *ngIf="campoNoValido('tasaCambio')">*The exchange rate is required.</p>
-                <p *ngIf="campoNoValido('capitalCop')">*The capital invested in COP is required.</p>
-                <p *ngIf="campoNoValido('tasaInteres')">*The interest rate is required.</p>
-                <p *ngIf="campoNoValido('interesExtra')">*Interest in foreign currency is required.</p>
-                <p *ngIf="campoNoValido('interesCop')">*Interest in COP currency is required.</p>
-                <p *ngIf="campoNoValido('pais')">*Country is required.</p>
-                <p *ngIf="campoNoValido('rentaExtra')">*Profitability in Foreign Currency is required.</p>
-                <p *ngIf="campoNoValido('rentaCop')">*Profitability in COP Currency is required.</p>
-                <p *ngIf="campoNoValido('tiempo')">*Project time is required.</p>
-                <p *ngIf="campoNoValido('descripcion')">*Description is required.</p>
+                <p *ngIf="campoNoValido('nombreInver')">*{{'ProjectNameRequired' | translate}}</p>
+                <p *ngIf="campoNoValido('capitalExtra')">*{{'CapitalForeignRequired' | translate}} </p>
+                <p *ngIf="campoNoValido('monedaExtra')">*{{'ForeignRequired' | translate}} </p>
+                <p *ngIf="campoNoValido('tasaCambio')">*{{'exchangeRequired' | translate}} </p>
+                <p *ngIf="campoNoValido('capitalCop')">*{{'capitalCOPRequired' | translate}} </p>
+                <p *ngIf="campoNoValido('tasaInteres')">*{{'interestRequired' | translate}} </p>
+                <p *ngIf="campoNoValido('interesExtra')">*{{'InterestForeignRequired' | translate}} </p>
+                <p *ngIf="campoNoValido('interesCop')">*{{'InterestCOPRequired' | translate}} </p>
+                <p *ngIf="campoNoValido('pais')">*{{'CountryRequired' | translate}} </p>
+                <p *ngIf="campoNoValido('rentaExtra')">*{{'ProfitabilityForeignRequired' | translate}} </p>
+                <p *ngIf="campoNoValido('rentaCop')">*{{'ProfitabilityCOPRequired' | translate}} </p>
+                <p *ngIf="campoNoValido('tiempo')">*{{'ProjectTimeRequired' | translate}} </p>
               </div>
             </div>
           </form>

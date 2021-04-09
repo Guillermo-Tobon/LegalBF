@@ -8,6 +8,7 @@ import { LinealAdminComponent } from './lineal-admin/lineal-admin.component';
 import { DatepickerInlineComponent } from './datepicker-inline/datepicker-inline.component';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 
@@ -28,6 +29,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     CommonModule,
     ChartsModule,
     BrowserAnimationsModule,
+    TranslateModule,
     BsDatepickerModule.forRoot(),
   ]
 })

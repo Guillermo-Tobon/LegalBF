@@ -2,8 +2,8 @@
   <div class="col-lg-12">
     <div class="card">
       <div class="card-body">
-        <h4 class="card-title">In the following form you can create accounts for new clients</h4>
-        <h6 class="card-subtitle">Once the account is created, the customer will be notified via email.</h6>
+        <h4 class="card-title">{{'followingNewClients' | translate}}</h4>
+        <h6 class="card-subtitle">{{'CreatedNotifiedEmail' | translate}}</h6>
         
         <form class="floating-labels m-t-40" [formGroup]="regisFormCliente" (submit)="registrarCliente()">
           <div class="row">
@@ -11,14 +11,14 @@
               <div class="form-group m-b-40 focused">
                 <input type="text" formControlName="nombres" class="form-control">
                 <span class="bar"></span>
-                <label for="input1">Name</label>
+                <label for="input1">{{'Names' | translate}}</label>
               </div>
             </div>
             <div class="col-lg-6 col-md-6">
               <div class="form-group m-b-40 focused">
                 <input type="text" formControlName="apellidos" class="form-control">
                 <span class="bar"></span>
-                <label for="input2">Surnames</label>
+                <label for="input2">{{'Surnames' | translate}}</label>
               </div>
             </div>
           </div>
@@ -28,21 +28,21 @@
               <div class="form-group m-b-40 focused">
                 <input type="email" formControlName="email" class="form-control">
                 <span class="bar"></span>
-                <label for="input3">E-mail</label>
+                <label for="input3">{{'Email' | translate}}</label>
               </div>
             </div>
             <div class="col-lg-4 col-md-4">
               <div class="form-group m-b-40 focused">
                 <input type="text" formControlName="telefono" class="form-control">
                 <span class="bar"></span>
-                <label for="input3">Phone</label>
+                <label for="input3">{{'phone' | translate}}</label>
               </div>
             </div>
             <div class="col-lg-4 col-md-4">
               <div class="form-group m-b-40 focused">
                 <input type="text" formControlName="pais" class="form-control">
                 <span class="bar"></span>
-                <label for="input3">Country</label>
+                <label for="input3">{{'Country' | translate}}</label>
               </div>
             </div>
           </div>
@@ -52,14 +52,14 @@
               <div class="form-group m-b-40 focused">
                 <input type="password" formControlName="password" class="form-control" id="input5">
                 <span class="bar"></span>
-                <label for="input3">Password</label>
+                <label for="input3">{{'Password' | translate}}</label>
               </div>
             </div>
             <div class="col-lg-6 col-md-6">
               <div class="form-group m-b-40 focused">
                 <input type="password" formControlName="passwordConfir" class="form-control" id="input5">
                 <span class="bar"></span>
-                <label for="input3">Confirm Password</label>
+                <label for="input3">{{'ConfirmPassword' | translate}}</label>
               </div>
             </div>
           </div>
@@ -69,14 +69,14 @@
               <div class="form-group m-b-40 focused">
                 <input type="text" formControlName="compania" class="form-control">
                 <span class="bar"></span>
-                <label for="input3">Company name</label>
+                <label for="input3">{{'CompanyName' | translate}}</label>
               </div>
             </div>
             <div class="col-lg-6 col-md-6">
               <div class="form-group m-b-40 focused">
                 <textarea class="form-control" formControlName="descripcion" rows="2"></textarea>
                 <span class="bar"></span>
-                <label for="input3">Description</label>
+                <label for="input3">{{'Description' | translate}}</label>
               </div>
             </div>
           </div>
@@ -90,22 +90,22 @@
             <div class="col-lg-6 col-md-6">
               <div class="checkbox checkbox-info pull-left p-t-0">
                 <input id="checkbox-signup" formControlName="estado" type="checkbox" class="filled-in chk-col-light-blue">
-                <label for="checkbox-signup">Active Client </label><br><br>
-                <h6>By default the customer account must be active. </h6>
+                <label for="checkbox-signup">{{'ActiveClient' | translate}} </label><br><br>
+                <h6>{{'defaultCustomerActive' | translate}} </h6>
               </div> 
             </div>
           </div>
 
           <div class="row">
             <div class="col text-danger">
-              <p *ngIf="campoNoValido('nombres')">*The name is required.</p>
-              <p *ngIf="campoNoValido('apellidos')">*The last name is required.</p>
-              <p *ngIf="campoNoValido('email')">*The E-mail is mandatory and valid.</p>
-              <p *ngIf="campoNoValido('telefono')">*The phone is mandatory.</p>
-              <p *ngIf="campoNoValido('pais')">*Country is required.</p>
-              <p *ngIf="campoNoValido('compania')">*The company name is required.</p>
-              <p *ngIf="campoNoValido('descripcion')">*Description is required.</p>
-              <p *ngIf="contrasenasNoValidas()">*Passwords must be the same (min 6 characters).</p>
+              <p *ngIf="campoNoValido('nombres')">*{{'nameRequired' | translate}}</p>
+              <p *ngIf="campoNoValido('apellidos')">*{{'SurnamesRequired' | translate}}</p>
+              <p *ngIf="campoNoValido('email')">*{{'emailRequired' | translate}}</p>
+              <p *ngIf="campoNoValido('telefono')">*{{'phoneRequired' | translate}}</p>
+              <p *ngIf="campoNoValido('pais')">*{{'CountryRequired' | translate}}</p>
+              <p *ngIf="campoNoValido('compania')">*{{'companyNameRequired' | translate}}</p>
+              <p *ngIf="campoNoValido('descripcion')">*{{'DescriptionRequired' | translate}}</p>
+              <p *ngIf="contrasenasNoValidas()">*{{'PasswordsMustSame' | translate}}</p>
             </div>
           </div>
       

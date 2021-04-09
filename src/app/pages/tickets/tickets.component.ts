@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ClientesService } from 'src/app/services/clientes.service';
 import { TicketsService } from 'src/app/services/tickets.service';
+import { TranslateService } from '@ngx-translate/core';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -15,13 +16,15 @@ export class TicketsComponent implements OnInit {
   public usuario:any[] = [];
   public formSubmitted = false;
   public ticketFormCliente:any;
+  public year = new Date().getFullYear();
 
   constructor(
               private routeActive: ActivatedRoute,
               private fb: FormBuilder,
               private router: Router,
               private ticketServ: TicketsService,
-              private clienteSrs: ClientesService
+              private clienteSrs: ClientesService,
+              private translate: TranslateService,
   ) { }
 
   ngOnInit(): void {
@@ -30,7 +33,9 @@ export class TicketsComponent implements OnInit {
       this.usuario = JSON.parse( data['usuario'] ) || [];
       
       this.iniciarFormulario(this.usuario);
-    })
+    });
+
+    this.translate.use(localStorage.getItem('idioma'));
 
   }
 
@@ -49,23 +54,53 @@ export class TicketsComponent implements OnInit {
     if ( !this.ticketFormCliente.get('acepto').value ) {
       return;
     }
+
+    let traNombres;
+    let traAsunto;
+    let traDesc1;
+    let traDesc2;
+    let traName;
+    let traEmail;
+    let traPhone;
+    let traAffair;
+    let traMessage;
+    let traDesc3;
+    let traDesc4;
+    let traDesc5;
+    let traSuccess;
+    let traError;
+    this.translate.get('CliLegalAdministrator').subscribe((res: string) =>{traNombres = res});
+    this.translate.get('TicketCreation').subscribe((res: string) =>{traAsunto = res});
+    this.translate.get('ticketCreated').subscribe((res: string) =>{traDesc1 = res});
+    this.translate.get('inClientLegalBF').subscribe((res: string) =>{traDesc2 = res});
+    this.translate.get('Names').subscribe((res: string) =>{traName = res});
+    this.translate.get('Email').subscribe((res: string) =>{traEmail = res});
+    this.translate.get('phone').subscribe((res: string) =>{traPhone = res});
+    this.translate.get('Affair').subscribe((res: string) =>{traAffair = res});
+    this.translate.get('Message').subscribe((res: string) =>{traMessage = res});
+    this.translate.get('Enter').subscribe((res: string) =>{traDesc3 = res});
+    this.translate.get('checkTickets').subscribe((res: string) =>{traDesc4 = res});
+    this.translate.get('ClientsLegalBFService').subscribe((res: string) =>{traDesc5 = res});
+    this.translate.get('Success').subscribe((res: string) =>{traSuccess = res});
+    this.translate.get('Error').subscribe((res: string) =>{traError = res});
+
     this.ticketServ.creatTicketService( this.ticketFormCliente.value ).subscribe( (resp:any) =>{
 
       const json = {
-        nombres: 'LegalBF Administrator',
+        nombres: `${traNombres}`,
         apellidos: '',
-        email: 'desarrollomemo@gmail.com',
-        //email: 'timotheerodier@legalbf.com',
-        asunto: 'Ticket creation in Clients LegalBF',
-        descripcion: `<p>A ticket with a number has been created <b>${resp.idticket}</b> in LegalBF.</p>
-                      <p><b>Name: </b>${this.usuario[0]['nombres_us']} ${this.usuario[0]['apellidos_us']}</p>
-                      <p><b>Email: </b>${this.usuario[0]['email_us']}</p>
-                      <p><b>Phone: </b>${this.usuario[0]['telefono_us']}</p>
-                      <p><b>Affair: </b>${this.ticketFormCliente.get('asunto').value}</p>
-                      <p><b>Message: </b>${this.ticketFormCliente.get('descripcion').value}</p>
-                      <p>Enter: <a href="http://clientslegalbf.com" target="_blank">www.clientslegalbf.com</a> and check the tickets.</p>
+        //email: 'desarrollomemo@gmail.com',
+        email: 'timotheerodier@legalbf.com',
+        asunto: `${traAsunto}`,
+        descripcion: `<p>${traDesc1} <b>${resp.idticket}</b> ${traDesc2}</p>
+                      <p><b>${traName}: </b>${this.usuario[0]['nombres_us']} ${this.usuario[0]['apellidos_us']}</p>
+                      <p><b>${traEmail}: </b>${this.usuario[0]['email_us']}</p>
+                      <p><b>${traPhone}: </b>${this.usuario[0]['telefono_us']}</p>
+                      <p><b>${traAffair}: </b>${this.ticketFormCliente.get('asunto').value}</p>
+                      <p><b>${traMessage}: </b>${this.ticketFormCliente.get('descripcion').value}</p>
+                      <p>${traDesc3}: <a href="http://clientslegalbf.com" target="_blank">www.clientslegalbf.com</a> ${traDesc4}</p>
                       <br>
-                      <p>©2021 - All rights reserved - it is a free service of LegalBG</p>`
+                      <p>©${this.year} - ${traDesc5}</p>`
       }
 
       this.clienteSrs.sendEmailClienteService(json).subscribe( (resp2:any) =>{
@@ -74,13 +109,13 @@ export class TicketsComponent implements OnInit {
         console.log(err)
       })
 
-      Swal.fire('Success!!', `${resp.msg} - Ticket ( ${resp.idticket} )`, 'success');
+      Swal.fire(`${traSuccess}`, `${resp.msg} - Ticket ( ${resp.idticket} )`, 'success');
       setTimeout(() => { this.router.navigate(['dashboard/lista-tickets']) }, 2000);
       
 
     }, (err) =>{
       //En caso de un error
-      Swal.fire('Error', err.error.msg, 'error');
+      Swal.fire(`${traError}`, err.error.msg, 'error');
       console.log(err.error)
     })
     

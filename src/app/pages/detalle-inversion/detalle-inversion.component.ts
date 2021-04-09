@@ -8,6 +8,7 @@ import { ArchivosService } from 'src/app/services/archivos.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { InversionesService } from 'src/app/services/inversiones.service';
 import { ClientesService } from 'src/app/services/clientes.service';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -27,12 +28,14 @@ export class DetalleInversionComponent implements OnInit {
   public FormEditInversion:any;
   public formSubmitted = false;
   public archivoSubir:File;
+  public year = new Date().getFullYear();
 
   constructor(
               private routeActive: ActivatedRoute,
               private archivosServ: ArchivosService,
               private InversionServ: InversionesService,
               private clientesSrv: ClientesService,
+              private translate: TranslateService,
               private authServ: AuthService,
               private location: Location,
               private router: Router,
@@ -53,9 +56,9 @@ export class DetalleInversionComponent implements OnInit {
       this.getAnexosByIdInver(this.inversion['id_inv']);
 
       this.getUserById(this.inversion['id_us_inv']);
+    });
 
-
-    })
+    this.translate.use(localStorage.getItem('idioma'));
   }
 
 
@@ -103,25 +106,34 @@ export class DetalleInversionComponent implements OnInit {
    */
   public eliminarArchivo = (archivo:any) =>{
 
+    let traText;
+    let traButton;
+    let traSuccess;
+    let traError;
+    this.translate.get('reallyDeleteFile').subscribe((res: string) =>{traText = res});
+    this.translate.get('YesDelete').subscribe((res: string) =>{traButton = res});
+    this.translate.get('Success').subscribe((res: string) =>{traSuccess = res});
+    this.translate.get('Error').subscribe((res: string) =>{traError = res});
+
     Swal.fire({
-      text: "¿You really want to delete the file " + archivo.nom_archivo_info + "?",
+      text: `${traText} ${archivo.nom_archivo_info}?`,
       icon: 'question',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete!'
+      confirmButtonText: `${traButton}`
     }).then((result) => {
       if (result.isConfirmed) {
         this.archivosServ.deleleFileService(archivo.tipo_archivo_info, archivo.nom_archivo_info, archivo.id_info).subscribe( (resp:any) =>{
           
           if ( resp.ok ) {
-            Swal.fire('Success!', resp.msg, 'success');
+            Swal.fire(`${traSuccess}`, resp.msg, 'success');
             this.getArchivosUserInversion(this.inversion['id_inv'], this.inversion['id_us_inv']);
           }
     
         }, (err) =>{
           //En caso de un error
-          Swal.fire('Error', err.error.msg, 'error');
+          Swal.fire(`${traError}`, err.error.msg, 'error');
         })
       }
     })
@@ -152,12 +164,17 @@ export class DetalleInversionComponent implements OnInit {
       return; 
     }
 
+    let traSuccess;
+    let traError;
+    this.translate.get('Success').subscribe((res: string) =>{traSuccess = res});
+    this.translate.get('Error').subscribe((res: string) =>{traError = res});
+
     this.InversionServ.updateInversionService( this.FormEditInversion.value, idInversion ).subscribe( (resp:any) =>{
 
       if( resp.ok ){
         Swal.fire({
           icon: 'success',
-          title: 'Success!',
+          title: `${traSuccess}`,
           text: resp.msg,
           showConfirmButton: true,
           timer: 1800
@@ -168,7 +185,7 @@ export class DetalleInversionComponent implements OnInit {
 
     }, (err) =>{
       //En caso de un error
-      Swal.fire('Error', err.error.msg, 'error');
+      Swal.fire(`${traError}`, err.error.msg, 'error');
       console.log(err)
     })
 
@@ -216,7 +233,7 @@ export class DetalleInversionComponent implements OnInit {
       rentaExtra: [inversion['renta_extra_inv'], [Validators.required]],
       rentaCop: [inversion['renta_cop_inv'], [Validators.required]],
       tiempo: [inversion['tiempo_inv'], [Validators.required]],
-      descripcion: [inversion['descripcion_inv'], [Validators.required, Validators.minLength(20)]],
+      descripcion: [inversion['descripcion_inv']],
       estado: [inversion['estado_inv'] == 1? true : false, [Validators.required]],
       fecha: [fecha[0], [Validators.required]],
     })

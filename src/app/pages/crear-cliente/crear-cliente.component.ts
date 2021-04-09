@@ -4,6 +4,7 @@ import Swal from 'sweetalert2';
 
 import { ClientesService } from 'src/app/services/clientes.service';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -14,6 +15,7 @@ import { Router } from '@angular/router';
 export class CrearClienteComponent implements OnInit {
 
   public formSubmitted = false;
+  public year = new Date().getFullYear();
 
   public regisFormCliente = this.fb.group({
     nombres: ['', [Validators.required, Validators.minLength(3)]],
@@ -33,10 +35,12 @@ export class CrearClienteComponent implements OnInit {
   constructor( 
               private fb: FormBuilder,
               private router: Router,
-              private clienteSrs: ClientesService
+              private clienteSrs: ClientesService,
+              private translate: TranslateService,
   ) { }
 
   ngOnInit(): void {
+    this.translate.use(localStorage.getItem('idioma'));
   }
 
 
@@ -51,6 +55,28 @@ export class CrearClienteComponent implements OnInit {
       return; 
     }
 
+    let traAsunto;
+    let traDesc1;
+    let traDesc2;
+    let traDesc3;
+    let traDesc4;
+    let traDesc5;
+    let traDesc6;
+    let traSuccess;
+    let traError;
+    let traMsgAlert;
+    this.translate.get('UserCreatedClientsLegalBF').subscribe((res: string) =>{traAsunto = res});
+    this.translate.get('accountHasBeenCreated').subscribe((res: string) =>{traDesc1 = res});
+    this.translate.get('Enter').subscribe((res: string) =>{traDesc2 = res});
+    this.translate.get('Username').subscribe((res: string) =>{traDesc3 = res});
+    this.translate.get('Password').subscribe((res: string) =>{traDesc4 = res});
+    this.translate.get('ForMoreInformation').subscribe((res: string) =>{traDesc5 = res});
+    this.translate.get('ClientsLegalBFService').subscribe((res: string) =>{traDesc6 = res});
+    this.translate.get('Success').subscribe((res: string) =>{traSuccess = res});
+    this.translate.get('Error').subscribe((res: string) =>{traError = res});
+    this.translate.get('notPossibleTryAgainLater').subscribe((res: string) =>{traMsgAlert = res});
+
+
     this.clienteSrs.insertUsuariosServices(this.regisFormCliente.value).subscribe( resp =>{
 
       if ( resp.ok ) {
@@ -59,15 +85,15 @@ export class CrearClienteComponent implements OnInit {
           nombres: this.regisFormCliente.get('nombres').value,
           apellidos: this.regisFormCliente.get('apellidos').value,
           email: this.regisFormCliente.get('email').value,
-          asunto: 'User account created in Clients LegalBF',
-          descripcion: `<p>Your LegalBF account has been created by the administrator.</p>
-                        <p>Enter: <a href="http://clientslegalbf.com/" target="_blank">www.clientslegalbf.com</a> Access data:</p>
-                        <p>Username: ${this.regisFormCliente.get('email').value}</p>
-                        <p>Password: ${this.regisFormCliente.get('password').value}</p>
+          asunto: `${traAsunto}`,
+          descripcion: `<p>${traDesc1}</p>
+                        <p>${traDesc2}: <a href="http://clientslegalbf.com/" target="_blank">www.clientslegalbf.com</a></p>
+                        <p>${traDesc3}: ${this.regisFormCliente.get('email').value}</p>
+                        <p>${traDesc4}: ${this.regisFormCliente.get('password').value}</p>
                         <br>
-                        <b>For more information, contact LegalBF administrator. </b>
+                        <b>${traDesc5}</b>
                         <br>
-                        <p>©2021 - LegalBF Service</p>`,
+                        <p>©${this.year} - ${traDesc6}</p>`,
         }
 
         this.clienteSrs.sendEmailClienteService(json).subscribe( (resp2:any) =>{
@@ -75,17 +101,17 @@ export class CrearClienteComponent implements OnInit {
 
         }, err => console.error(err))
 
-        Swal.fire('Success!', resp.msg, 'success');
+        Swal.fire(`${traSuccess}`, resp.msg, 'success');
         setTimeout(() => { this.router.navigate(['dashboard/lista-clientes']) }, 2000);
         
       } else {
-        Swal.fire('Error', 'It is not possible to process the data. Please try again later.', 'error');
+        Swal.fire(`${traError}`, `${traMsgAlert}`, 'error');
 
       }
 
     }, (err) => {
       //En caso de un error
-      Swal.fire('Error', err.error.msg, 'error');
+      Swal.fire(`${traError}`, err.error.msg, 'error');
     });
     
   }

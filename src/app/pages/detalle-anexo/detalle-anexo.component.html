@@ -4,7 +4,7 @@
     <div class="card">
       <!-- Nav tabs -->
       <ul class="nav nav-tabs profile-tab" role="tablist">
-        <li class="nav-item"> <a class="nav-link active liInfoGen" data-toggle="tab" href="#" role="tab">Annex general information</a> <span class="nomUser">User: {{userAsociado[0]?.nombres_us}}</span></li>
+        <li class="nav-item"> <a class="nav-link active liInfoGen" data-toggle="tab" href="#" role="tab">{{'AnnexInformation' | translate}}</a> <span class="nomUser">{{'user' | translate}}: {{userAsociado[0]?.nombres_us}}</span></li>
       </ul>
       <!-- Tab panes -->
       <div class="tab-content">        
@@ -12,18 +12,18 @@
           <div class="card-body">
             <div class="row">
               <div class="col-lg-6 col-md-6">
-                <small class="text-muted">Project ID: &nbsp; <b>{{anexo['id_inv']}}</b> </small>
+                <small class="text-muted">{{'ProjectID' | translate}}: &nbsp; <b>{{anexo['id_inv']}}</b> </small>
               </div>
             </div>
             <br>
 
             <div class="row">
               <div class="col-lg-6 col-md-6">
-                <small class="text-muted">Annex movement:</small>
+                <small class="text-muted">{{'AnnexMovement' | translate}}:</small>
                 <h6>{{anexo['movimiento_anex']}}</h6> 
               </div>
               <div class="col-lg-6 col-md-6">
-                <small class="text-muted">Annex date:</small>
+                <small class="text-muted">{{'AnnexDate' | translate}}:</small>
                 <h6>{{anexo['fechAnexo']}}</h6> 
               </div>
             </div>
@@ -31,12 +31,12 @@
 
             <div class="row">
               <div class="col-lg-6 col-md-6">
-                <small class="text-muted">Capital in Foreign Currency:</small>
+                <small class="text-muted">{{'CapitalForeignCurrency' | translate}}:</small>
                 <h6>{{ anexo['capital_extra_anex'] | currency: anexo['moneda_anex'] }}</h6> 
               </div>
               <br>
               <div class="col-lg-6 col-md-6">
-                <small class="text-muted">Capital in COP Currency:</small>
+                <small class="text-muted">{{'CapitalCurrencyCOP' | translate}}:</small>
                 <h6>{{anexo['capital_cop_anex'] | currency: anexo['moneda_anex']}}</h6> 
               </div>
             </div>
@@ -44,12 +44,12 @@
 
             <div class="row">
               <div class="col-lg-6 col-md-6">
-                <small class="text-muted">Interests in Foreign Currency:</small>
+                <small class="text-muted">{{'InterestForeignCurrency' | translate}}:</small>
                 <h6>{{anexo['interes_extra_anex']}}%</h6>
               </div>
               <br>
               <div class="col-lg-6 col-md-6">
-                <small class="text-muted">Interest in Currency COP:</small>
+                <small class="text-muted">{{'InterestCOPCurrency' | translate}}:</small>
                 <h6>{{anexo['interes_cop_anex']}}%</h6>
               </div>
             </div>
@@ -57,12 +57,12 @@
 
             <div class="row">
               <div class="col-lg-6 col-md-6">
-                <small class="text-muted">Capital + Interest in Foreign Currency:</small>
+                <small class="text-muted">{{'CapitalInterestForeign' | translate}}:</small>
                 <h6>{{anexo['capital_interes_extra_anex'] | currency: anexo['moneda_anex']}}</h6>
               </div>
               <br>
               <div class="col-lg-6 col-md-6">
-                <small class="text-muted">Capital + Interest in Currency COP:</small>
+                <small class="text-muted">{{'CapitalInterestCOP' | translate}}:</small>
                 <h6>{{anexo['capital_interes_cop_anex'] | currency: anexo['moneda_anex']}}</h6>
               </div>
             </div>
@@ -70,27 +70,27 @@
 
             <div class="row">
               <div class="col-lg-6 col-md-6">
-                <small class="text-muted">Description:</small>
+                <small class="text-muted">{{'Description' | translate}}:</small>
                 <h6>{{anexo['descripcion_anex']}}</h6>
               </div>
               <br>
               <div class="col-lg-6 col-md-6">
-                <small class="text-muted">Attached document:</small>
+                <small class="text-muted">{{'AttachedDocument' | translate}}:</small>
                 <h6 *ngIf="anexo['tipo_archivo_info'] === 'pdf'" (click)="verArchivo( anexo['tipo_archivo_info'], anexo['nom_archivo_info'] )" class="cursor"><img class="logoFile" src="../../../assets/images/pdf.png" alt=""> {{anexo['nom_archivo_info'] | slice:9:50 }}</h6>
                 <h6 *ngIf="anexo['tipo_archivo_info'] === 'word'" (click)="verArchivo( anexo['tipo_archivo_info'], anexo['nom_archivo_info'] )" class="cursor"><img class="logoFile" src="../../../assets/images/word.png" alt=""> {{anexo['nom_archivo_info'] }}</h6>
 
                 <br>
                 <div *ngIf="this.usuario[0].admin_us === 'Y'" class="checkbox checkbox-info">
                   <input id="checkbox-signup" type="checkbox" (change)="checkCambiarFile($event.target.checked)" class="filled-in chk-col-light-blue">
-                  <label for="checkbox-signup">Change file?</label>
+                  <label for="checkbox-signup">{{'ChangeFile' | translate}}?</label>
                 </div> 
                 <br>
                 
                 <div class="form-group m-b-40 focused {{cambiarFile}}">
-                  <label for="input-file-now">Upload the file for the attachment.</label>
+                  <label for="input-file-now">{{'UploadFile' | translate}}</label>
                   <input type="file" (change)="obtenerArchivo( $event.target.files[0] )" id="input-file-now" class="dropify"/>
                   <span class="bar"></span>
-                  <button type="button" (click)="cambiarArchivoById()" class="btn waves-effect waves-light btn-rounded btn-success btn-block">Change file</button>
+                  <button type="button" (click)="cambiarArchivoById()" class="btn waves-effect waves-light btn-rounded btn-success btn-block">{{'ChangeFile' | translate}}</button>
                 </div>
               </div>
             </div>
@@ -98,9 +98,9 @@
 
             <div class="row">
               <div class="col-lg-12">
-                <button *ngIf="this.usuario[0].admin_us === 'Y'" type="button" (click)="modalEditAnexo(anexo)" class="btn waves-effect waves-light btn-rounded btn-success" data-toggle="modal" data-target=".modalEditAnexo">Edit annex</button>
+                <button *ngIf="this.usuario[0].admin_us === 'Y'" type="button" (click)="modalEditAnexo(anexo)" class="btn waves-effect waves-light btn-rounded btn-success" data-toggle="modal" data-target=".modalEditAnexo">{{'EditAnnex' | translate}}</button>
                 &nbsp;
-                <button type="button" (click)="goBack()" class="btn waves-effect waves-light btn-rounded btn-danger">back</button>
+                <button type="button" (click)="goBack()" class="btn waves-effect waves-light btn-rounded btn-danger">{{'Back' | translate}}</button>
               </div>
             </div>
 
@@ -120,8 +120,8 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="myLargeModalLabel">Project ID: &nbsp; <b>{{editAnexo['id_inv']}}</b></h4>
-        <h4 class="modal-title" id="myLargeModalLabel">Project date: &nbsp; {{editAnexo['fechAnexo']}}</h4>
+        <h4 class="modal-title" id="myLargeModalLabel">{{'ProjectID' | translate}}: &nbsp; <b>{{editAnexo['id_inv']}}</b></h4>
+        <h4 class="modal-title" id="myLargeModalLabel">{{'ProjectDate' | translate}}: &nbsp; {{editAnexo['fechAnexo']}}</h4>
       </div>
       <div class="modal-body">
         <div class="comment-text w-100">
@@ -130,14 +130,14 @@
             <div class="row">
               <div class="col-lg-6 col-md-6">
                 <div class="form-group m-b-40 focused">
-                  <label for="input1">Annex movement</label>
+                  <label for="input1">{{'AnnexMovement' | translate}}</label>
                   <input type="text" formControlName="movimientoAnexo" class="form-control">
                   <span class="bar"></span>
                 </div>
               </div>
               <div class="col-lg-6 col-md-6">
                 <div class="form-group grupoDate">
-                  <span class="spanFech" >Annex date</span>
+                  <span class="spanFech">{{'AnnexDate' | translate}}</span>
                   <input type="date" formControlName="fechaAnexo" class="form-control">
                   <span class="bar"></span>
                 </div>
@@ -147,14 +147,14 @@
             <div class="row">
               <div class="col-lg-6 col-md-6">
                 <div class="form-group m-b-40 focused">
-                  <label for="input1">Capital in Foreign Currency</label>
+                  <label for="input1">{{'CapitalForeignCurrency' | translate}}</label>
                   <input type="number" formControlName="capitalExtra" class="form-control">
                   <span class="bar"></span>
                 </div>
               </div>
               <div class="col-lg-6 col-md-6">
                 <div class="form-group m-b-40 focused">
-                  <label for="input1">Capital in COP Currency</label>
+                  <label for="input1">{{'CapitalCurrencyCOP' | translate}}</label>
                   <input type="number" formControlName="capitalCop" class="form-control">
                   <span class="bar"></span>
                 </div>
@@ -164,14 +164,14 @@
             <div class="row">
               <div class="col-lg-6 col-md-6">
                 <div class="form-group m-b-40 focused">
-                  <label for="input1">Interests in Foreign Currency</label>
+                  <label for="input1">{{'InterestForeignCurrency' | translate}}</label>
                   <input type="text" formControlName="interesExtra" class="form-control">
                   <span class="bar"></span>
                 </div>
               </div>
               <div class="col-lg-6 col-md-6">
                 <div class="form-group m-b-40 focused">
-                  <label for="input1">Interest in Currency COP</label>
+                  <label for="input1">{{'InterestCOPCurrency' | translate}}</label>
                   <input type="text" formControlName="interesCop" class="form-control">
                   <span class="bar"></span>
                 </div>
@@ -181,14 +181,14 @@
             <div class="row">
               <div class="col-lg-6 col-md-6">
                 <div class="form-group m-b-40 focused">
-                  <label for="input1">Capital + Interest in Foreign Currency</label>
+                  <label for="input1">{{'CapitalInterestForeign' | translate}}</label>
                   <input type="number" formControlName="capitalInteresExtra" class="form-control">
                   <span class="bar"></span>
                 </div>
               </div>
               <div class="col-lg-6 col-md-6">
                 <div class="form-group m-b-40 focused">
-                  <label for="input1">Capital + Interest in Currency COP</label>
+                  <label for="input1">{{'CapitalInterestForeign' | translate}}</label>
                   <input type="number" formControlName="capitalInteresCop" class="form-control">
                   <span class="bar"></span>
                 </div>
@@ -198,7 +198,7 @@
             <div class="row">
               <div class="col-lg-10 col-md-10">
                 <div class="form-group m-b-40 focused">
-                  <label for="input2">Description</label>
+                  <label for="input2">{{'Description' | translate}}</label>
                   <textarea class="form-control" formControlName="descripcion" rows="3"></textarea>
                   <span class="bar"></span>
                 </div>
@@ -207,24 +207,23 @@
   
             <div class="row">
               <div class="col text-danger">
-                <p *ngIf="campoNoValido('movimientoAnexo')">*The annex movement is required.</p>
-                <p *ngIf="campoNoValido('fechaAnexo')">*The date of the annex is required.</p>
-                <p *ngIf="campoNoValido('capitalExtra')">*The capital in foreign currency is required.</p>
-                <p *ngIf="campoNoValido('capitalCop')">*The capital in COP currency is required.</p>
-                <p *ngIf="campoNoValido('interesExtra')">*Interest in Foreign Currency is required.</p>
-                <p *ngIf="campoNoValido('interesCop')">*Interest in COP Currency is required.</p>
-                <p *ngIf="campoNoValido('capitalInteresExtra')">*The Capital + Interest in Foreign Currency is required.</p>
-                <p *ngIf="campoNoValido('capitalInteresCop')">*The Capital + Interest in Currency COP is required.</p>
-                <p *ngIf="campoNoValido('descripcion')">*Description is required.</p>
+                <p *ngIf="campoNoValido('movimientoAnexo')">*{{'annexMoveRequired' | translate}} </p>
+                <p *ngIf="campoNoValido('fechaAnexo')">*{{'annexDateRequired' | translate}} </p>
+                <p *ngIf="campoNoValido('capitalExtra')">*{{'CapitalForeignRequired' | translate}} </p>
+                <p *ngIf="campoNoValido('capitalCop')">*{{'capitalCurrCOPRequired' | translate}}</p>
+                <p *ngIf="campoNoValido('interesExtra')">*{{'InterestForeignRequired' | translate}}</p>
+                <p *ngIf="campoNoValido('interesCop')">*{{'InterestCOPRequired' | translate}}</p>
+                <p *ngIf="campoNoValido('capitalInteresExtra')">*{{'Cap+InterForeignRequired' | translate}}</p>
+                <p *ngIf="campoNoValido('capitalInteresCop')">*{{'Cap+InterCOPRequired' | translate}}</p>
               </div>
             </div>
   
             <div class="row">
               <div class="col-lg-6 col-md-6">
                 <div class="form-group">
-                  <button type="submit" class="btn waves-effect waves-light btn-rounded btn-success">Update annex</button>
+                  <button type="submit" class="btn waves-effect waves-light btn-rounded btn-success">{{'UpdateAnnex' | translate}}</button>
                   &nbsp;
-                  <button type="button" class="btn waves-effect waves-light btn-rounded btn-danger" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn waves-effect waves-light btn-rounded btn-danger" data-dismiss="modal">{{'Close' | translate}}</button>
                 </div>
               </div>
             </div>

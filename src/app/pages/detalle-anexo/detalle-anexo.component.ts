@@ -7,6 +7,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { ArchivosService } from 'src/app/services/archivos.service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { InversionesService } from 'src/app/services/inversiones.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-detalle-anexo',
@@ -24,6 +25,7 @@ export class DetalleAnexoComponent implements OnInit {
   public cambiarFile:String = 'hiddenInputFile';
   public archivoSubir:File;
   public fechaHoy:Date = new Date();
+  public year = new Date().getFullYear();
 
   constructor(
               private routeActive: ActivatedRoute,
@@ -32,6 +34,7 @@ export class DetalleAnexoComponent implements OnInit {
               private archivosServ: ArchivosService,
               private clientesSrv: ClientesService,
               private InversionServ: InversionesService,
+              private translate: TranslateService,
               private router: Router,
               private fb: FormBuilder,
   ) { }
@@ -47,7 +50,8 @@ export class DetalleAnexoComponent implements OnInit {
       
       this.cargarFormEditAnexo(this.anexo);
 
-    })
+    });
+    this.translate.use(localStorage.getItem('idioma'));
   }
 
 
@@ -61,6 +65,22 @@ export class DetalleAnexoComponent implements OnInit {
     if ( this.FormEditarAnexo.invalid ) {
       return; 
     }
+
+    let traAsunto;
+    let traDesc1;
+    let traDesc2;
+    let traDesc3;
+    let traDesc4;
+    let traDesc5;
+    let traSuccess;
+    this.translate.get('updateAnnexClientsLegalBF').subscribe((res: string) =>{traAsunto = res});
+    this.translate.get('annexUpdateClientLegalBF').subscribe((res: string) =>{traDesc1 = res});
+    this.translate.get('PleaseGoTo').subscribe((res: string) =>{traDesc2 = res});
+    this.translate.get('verifyInformation').subscribe((res: string) =>{traDesc3 = res});
+    this.translate.get('ForMoreInformation').subscribe((res: string) =>{traDesc4 = res});
+    this.translate.get('ClientsLegalBFService').subscribe((res: string) =>{traDesc5 = res});
+    this.translate.get('Success').subscribe((res: string) =>{traSuccess = res});
+
     this.InversionServ.updateAnexoService( this.FormEditarAnexo.value, idAnexo, idInversion ).subscribe( (resp:any) =>{
 
       if( resp.ok ){
@@ -69,18 +89,18 @@ export class DetalleAnexoComponent implements OnInit {
           apellidos: this.userAsociado[0].apellidos_us,
           email: this.userAsociado[0].email_us,
           //email: 'desarrollomemo@gmail.com',
-          asunto: 'Annex update to your project in Clients LegalBF',
-          descripcion: `<p>The <strong>${this.anexo['movimiento_anex']}</strong> annex was updated of your project at LegalBF.</p>
-                        <p>Please go to: <a href="http://clientslegalbf.com/" target="_blank">www.clientslegalbf.com</a> You can verify your information.</p>
+          asunto: `${traAsunto}`,
+          descripcion: `<p><strong>${this.anexo['movimiento_anex']}</strong> ${traDesc1}</p>
+                        <p>${traDesc2}: <a href="http://clientslegalbf.com/" target="_blank">www.clientslegalbf.com</a> ${traDesc3}</p>
                         <br>
-                        <b>For more information, contact LegalBF administrator. </b>
+                        <b>${traDesc4}</b>
                         <br>
-                        <p>©2021 - LegalBF Service</p>`
+                        <p>©${this.year} - ${traDesc5}</p>`
         }
         this.clientesSrv.sendEmailClienteService(json);
         Swal.fire({
           icon: 'success',
-          title: 'Success!',
+          title: `${traSuccess}`,
           text: resp.msg,
           showConfirmButton: true,
           timer: 1800
@@ -157,7 +177,7 @@ export class DetalleAnexoComponent implements OnInit {
       interesCop: [anexo['interes_cop_anex'], [Validators.required, Validators.minLength(1)]],
       capitalInteresExtra: [anexo['capital_interes_extra_anex'], [Validators.required]],
       capitalInteresCop: [anexo['capital_interes_cop_anex'], [Validators.required]],
-      descripcion: [anexo['descripcion_anex'], [Validators.required, Validators.minLength(20)]],
+      descripcion: [anexo['descripcion_anex']],
     })
   }
 
@@ -210,20 +230,25 @@ export class DetalleAnexoComponent implements OnInit {
       return;
     }
 
+    let traSuccess;
+    let traError;
+    this.translate.get('Success').subscribe((res: string) =>{traSuccess = res});
+    this.translate.get('Error').subscribe((res: string) =>{traError = res});
+
     this.archivosServ.deleleFileService(this.anexo['tipo_archivo_info'], this.anexo['nom_archivo_info'], this.anexo['id_info']).subscribe((resp:any) =>{
 
       this.archivosServ.uploadFilesServices(this.archivoSubir, this.anexo['id_inv'], this.anexo['id_anex'], this.userAsociado[0].id_us).then(
         (resp2:any) =>{
-          Swal.fire('Success!', `${resp2.msg}`, 'success');
+          Swal.fire(`${traSuccess}`, `${resp2.msg}`, 'success');
           this.location.back();
 
         }).catch( (err) =>{
-              Swal.fire('Error', err.error.msg, 'error');
+              Swal.fire(`${traError}`, err.error.msg, 'error');
           })
 
     }, (err) =>{
       //En caso de un error
-      Swal.fire('Error', err.error.msg, 'error');
+      Swal.fire(`${traError}`, err.error.msg, 'error');
     })
 
   }

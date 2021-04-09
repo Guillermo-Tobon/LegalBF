@@ -4,6 +4,7 @@ import Swal from 'sweetalert2';
 import { AuthService } from 'src/app/services/auth.service';
 import { TicketsService } from 'src/app/services/tickets.service';
 import { ClientesService } from 'src/app/services/clientes.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-lista-tickets',
@@ -19,11 +20,13 @@ export class ListaTicketsComponent implements OnInit {
   public FormEditTicket:any;
   public FormAnswerTicket:any;
   public formSubmitted = false;
+  public year = new Date().getFullYear();
 
   constructor(
               private authServ: AuthService,
               private ticketServ: TicketsService,
               private clienteSrs: ClientesService,
+              private translate: TranslateService,
               private fb: FormBuilder,
   ) { }
 
@@ -45,8 +48,10 @@ export class ListaTicketsComponent implements OnInit {
     })
 
     this.FormAnswerTicket = this.fb.group({
-      respuesta: ['', [Validators.required, Validators.minLength(20)]],
-    })
+      respuesta: ['', [Validators.required, Validators.minLength(2)]],
+    });
+
+    this.translate.use(localStorage.getItem('idioma'));
     
   }
 
@@ -109,16 +114,21 @@ export class ListaTicketsComponent implements OnInit {
    */
   public editarTicket = (idTicket:string) =>{
 
+    let traSuccess;
+    let traError;
+    this.translate.get('Success').subscribe((res: string) =>{traSuccess = res});
+    this.translate.get('Error').subscribe((res: string) =>{traError = res});
+
     this.ticketServ.updateTicketService( this.FormEditTicket.value, idTicket ).subscribe( (resp:any) =>{
 
       if(resp.ok){
-        Swal.fire('Success!', resp.msg, 'success');
+        Swal.fire(`${traSuccess}`, resp.msg, 'success');
         setTimeout(() => { window.location.reload(); }, 2000);
       }
 
     }, (err) =>{
       //En caso de un error
-      Swal.fire('Error', err.error.msg, 'error');
+      Swal.fire(`${traError}`, err.error.msg, 'error');
     })
 
   }
@@ -137,6 +147,33 @@ export class ListaTicketsComponent implements OnInit {
       return; 
     }
 
+    let traAsunto1;
+    let traAsunto2;
+    let traDesc1;
+    let traTicket;
+    let traAffair;
+    let traMessage;
+    let traAnswer;
+    let traDesc2;
+    let traDesc3;
+    let traDesc4;
+    let traDesc5;
+    let traSuccess;
+    let traError;
+    this.translate.get('ResponseTicket').subscribe((res: string) =>{traAsunto1 = res});
+    this.translate.get('createdClientsLegalBF').subscribe((res: string) =>{traAsunto2 = res});
+    this.translate.get('adminRespondedTicket').subscribe((res: string) =>{traDesc1 = res});
+    this.translate.get('ticket').subscribe((res: string) =>{traTicket = res});
+    this.translate.get('Affair').subscribe((res: string) =>{traAffair = res});
+    this.translate.get('Message').subscribe((res: string) =>{traMessage = res});
+    this.translate.get('Answer').subscribe((res: string) =>{traAnswer = res});
+    this.translate.get('Enter').subscribe((res: string) =>{traDesc2 = res});
+    this.translate.get('verifyInformation').subscribe((res: string) =>{traDesc3 = res});
+    this.translate.get('ForMoreInformation').subscribe((res: string) =>{traDesc4 = res});
+    this.translate.get('ClientsLegalBFService').subscribe((res: string) =>{traDesc5 = res});
+    this.translate.get('Success').subscribe((res: string) =>{traSuccess = res});
+    this.translate.get('Error').subscribe((res: string) =>{traError = res});
+
     this.ticketServ.upResponTicketService( this.FormAnswerTicket.value, ticket.id_tic ).subscribe( (resp:any) =>{
 
       if(resp.ok){
@@ -145,18 +182,18 @@ export class ListaTicketsComponent implements OnInit {
           nombres: ticket.nombre_tic,
           apellidos: '',
           email: ticket.email_tic,
-          asunto: `Response to ticket ${ticket.id_tic} created in Clients LegalBF`,
-          descripcion: `<p>The administrator has responded to his ticket created in LegalBF.</p>
-                        <p>Ticket: ${ticket.id_tic}</p>
-                        <p>Affair: ${ticket.asunto_tic}</p>
-                        <p>Message: ${ticket.mensaje_tic}</p>
-                        <p>Answer: ${this.FormAnswerTicket.get('respuesta').value}</p>
+          asunto: `${traAsunto1} ${ticket.id_tic} ${traAsunto2}`,
+          descripcion: `<p>${traDesc1}</p>
+                        <p>${traTicket}: ${ticket.id_tic}</p>
+                        <p>${traAffair}: ${ticket.asunto_tic}</p>
+                        <p>${traMessage}: ${ticket.mensaje_tic}</p>
+                        <p>${traAnswer}: ${this.FormAnswerTicket.get('respuesta').value}</p>
                         <br>
-                        <p>Enter: <a href="http://clientslegalbf.com/" target="_blank">www.clientslegalbf.com</a>and verify your ticket.</p>
+                        <p>${traDesc2}: <a href="http://clientslegalbf.com/" target="_blank">www.clientslegalbf.com</a> ${traDesc3} Ticket</p>
                         <br>
-                        <b>For more information, contact LegalBF administrator. </b>
+                        <b>${traDesc4}</b>
                         <br>
-                        <p>©2021 - LegalBF Service</p>`,
+                        <p>©${this.year} - ${traDesc5}</p>`,
         }
 
         this.clienteSrs.sendEmailClienteService(json).subscribe( (resp2:any) =>{
@@ -164,14 +201,14 @@ export class ListaTicketsComponent implements OnInit {
 
         }, err => console.error(err))
 
-        Swal.fire('Success!', resp.msg, 'success');
+        Swal.fire(`${traSuccess}`, resp.msg, 'success');
         this.getAllTickets();
         
       }
 
     }, (err) =>{
       //En caso de un error
-      Swal.fire('Error', err.error.msg, 'error');
+      Swal.fire(`${traError}`, err.error.msg, 'error');
     })
 
   }
@@ -184,26 +221,37 @@ export class ListaTicketsComponent implements OnInit {
    * @param idTicket => ID Ticket
    */
   public eliminarTicket = (idTicket:any) =>{
+
+    let traTitle;
+    let traText;
+    let traButton;
+    let traSuccess;
+    let traError;
+    this.translate.get('deleteTicket').subscribe((res: string) =>{traTitle = res});
+    this.translate.get('OnceDelRecovered').subscribe((res: string) =>{traText = res});
+    this.translate.get('YesDelete').subscribe((res: string) =>{traButton = res});
+    this.translate.get('Success').subscribe((res: string) =>{traSuccess = res});
+    this.translate.get('Error').subscribe((res: string) =>{traError = res});
     
     Swal.fire({
-      title: `You want to delete the Ticket ${idTicket}`,
-      text: "Once deleted it cannot be recovered!",
+      title: `${traTitle} ${idTicket}?`,
+      text: `${traText}`,
       icon: 'question',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete!'
+      confirmButtonText: `${traButton}`
     }).then((result) => {
 
       if (result.isConfirmed) {
         this.ticketServ.deleteTicketService(idTicket).subscribe( (resp:any) =>{
           
-          Swal.fire('Success!', resp.msg, 'success');
+          Swal.fire(`${traSuccess}`, resp.msg, 'success');
           setTimeout(() => { window.location.reload() }, 1500);
         
         }, (err) =>{
           //En caso de un error
-          Swal.fire('Error', err.error.msg, 'error');
+          Swal.fire(`${traError}`, err.error.msg, 'error');
         })
       }
 

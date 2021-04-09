@@ -9,7 +9,7 @@
       <div class="login-box card">
         <div class="card-body">
           <form class="form-horizontal form-material" id="loginform" [formGroup]="loginForm" (submit)="login()" autocomplete="off">
-            <h3 class="box-title m-b-20 text-center">LogIn</h3>
+            <h3 class="box-title m-b-20 text-center"> {{'LogIn' | translate}} </h3>
 
             <div class="form-group ">
               <div class="col-xs-12">
@@ -27,31 +27,31 @@
               <div class="col-md-12">
                 <div class="checkbox checkbox-info pull-left p-t-0">
                   <input id="checkbox-signup" type="checkbox" formControlName="remember" class="filled-in chk-col-light-blue">
-                  <label for="checkbox-signup"> Remember me </label>
+                  <label for="checkbox-signup"> {{'Remember' | translate}} </label>
                 </div> 
             </div>   
             </div>
 
             <div class="form-group text-center">
               <div class="col-xs-12 p-b-20">
-                <button class="btn btn-block btn-lg btn-info btn-rounded" type="submit">Log In</button>
+                <button class="btn btn-block btn-lg btn-info btn-rounded" type="submit">{{'LogIn' | translate}}</button>
               </div>
             </div>
 
             <div class="col-xs-12 text-danger">
-              <p *ngIf="campoNoValido('email')">*The E-mail is required and valid.</p>
-              <p *ngIf="campoNoValido('password')">*The Password is required and valid.</p>
+              <p *ngIf="campoNoValido('email')">*{{'emailRequired' | translate}}</p>
+              <p *ngIf="campoNoValido('password')">*{{'PasswordRequired' | translate}}</p>
             </div>
             <br>
             <div class="form-group m-b-0 Forgot">
-              <div class="col-sm-12 text-center">Forgot to login?<a href="https://www.legalbf.com/contacto/" target="_blank" class="text-primary m-l-5"><b>Request collaboration
+              <div class="col-sm-12 text-center"> {{'ForgotLogin' | translate}}?<a href="https://www.legalbf.com/contacto/" target="_blank" class="text-primary m-l-5"><b> {{'RequestCollaboration' | translate}}
               </b></a>
             </div>
             </div>
 
             <div class="form-group m-b-0">
               <div class="col-sm-12 text-center">
-                ©2021 - LegalBF - All rights reserved.
+                ©2021 - LegalBF - {{'AllRights' | translate}}
               </div>
             </div>
           </form>

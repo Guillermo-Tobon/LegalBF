@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 import { Location } from '@angular/common';
 import { ClientesService } from 'src/app/services/clientes.service';
 import { InversionesService } from 'src/app/services/inversiones.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-detalle-cliente',
@@ -19,13 +20,14 @@ export class DetalleClienteComponent implements OnInit {
   public formSubmitted = false;
   public updateFormCliente:any;
   public archivoSubir:File;
-  
+  public year = new Date().getFullYear();
 
   constructor(
               private routeActive: ActivatedRoute,
               private location: Location,
               private clienteServ: ClientesService,
               private inversionesServ: InversionesService,
+              private translate: TranslateService,
               private router: Router,
               private fb: FormBuilder,
   ) { }
@@ -41,6 +43,8 @@ export class DetalleClienteComponent implements OnInit {
 
     })
 
+    this.translate.use(localStorage.getItem('idioma'));
+
   }
 
 
@@ -54,6 +58,27 @@ export class DetalleClienteComponent implements OnInit {
       return; 
     }
 
+    let traAsunto;
+    let traDesc1;
+    let traDesc2;
+    let traDesc3;
+    let traDesc4;
+    let traDesc5;
+    let traSuccess;
+    let traError;
+    let traMsgAlert;
+    let traMsgAlert2;
+    this.translate.get('UpdateAccountClientsLegalBF').subscribe((res: string) =>{traAsunto = res});
+    this.translate.get('UpWasAccountClientsLegalBF').subscribe((res: string) =>{traDesc1 = res});
+    this.translate.get('PleaseGoTo').subscribe((res: string) =>{traDesc2 = res});
+    this.translate.get('verifyInformation').subscribe((res: string) =>{traDesc3 = res});
+    this.translate.get('ForMoreInformation').subscribe((res: string) =>{traDesc4 = res});
+    this.translate.get('ClientsLegalBFService').subscribe((res: string) =>{traDesc5 = res});
+    this.translate.get('Success').subscribe((res: string) =>{traSuccess = res});
+    this.translate.get('Error').subscribe((res: string) =>{traError = res});
+    this.translate.get('updatedNotifiedSuccessfully').subscribe((res: string) =>{traMsgAlert = res});
+    this.translate.get('notUpdatedTryAgainLater').subscribe((res: string) =>{traMsgAlert2 = res});
+
     this.clienteServ.updateClienteService(this.updateFormCliente.value).subscribe( (resp:any) =>{
       
       if(resp.ok){
@@ -62,31 +87,30 @@ export class DetalleClienteComponent implements OnInit {
           nombres: this.updateFormCliente.get('nombres').value,
           apellidos: this.updateFormCliente.get('apellidos').value,
           email: this.updateFormCliente.get('email').value,
-          asunto: 'Update account in Clients LegalBF',
-          descripcion: `<p>Your LegalBF account was updated by the administrator.</p>
-                        <p>Please go to: <a href="http://clientslegalbf.com/" target="_blank">www.clientslegalbf.com</a> You can verify your information</p>
+          asunto: `${traAsunto}`,
+          descripcion: `<p>${traDesc1}</p>
+                        <p>${traDesc2}: <a href="http://clientslegalbf.com/" target="_blank">www.clientslegalbf.com</a> ${traDesc3}</p>
                         <br>
-                        <b>For more information, contact LegalBF administrator. </b>
+                        <b>${traDesc4}</b>
                         <br>
-                        <p>©2021 - LegalBF Service</p>`
+                        <p>©${this.year} - ${traDesc5}</p>`
         }
         this.clienteServ.sendEmailClienteService(json).subscribe( (resp2:any) =>{
           console.log(resp2)
           
         }, err => console.error(err))
 
-        Swal.fire('Success!', `Cliente ${this.updateFormCliente.get('nombres').value } updated and notified by email successfully.`, 'success');
+        Swal.fire(`${traSuccess}`, `${this.updateFormCliente.get('nombres').value } ${traMsgAlert}`, 'success');
         setTimeout(() => { this.router.navigate(['dashboard/lista-clientes']) }, 2000);
 
 
       } else{
-
-        Swal.fire('Error', 'At this time the client cannot be updated. Please try again later.', 'error');
+        Swal.fire(`${traError}`, `${traMsgAlert2}`, 'error');
       }
 
     }, (err) =>{
       //En caso de un error
-      Swal.fire('Error', err.error.msg, 'error');
+      Swal.fire(`${traError}`, err.error.msg, 'error');
     })
   }
 

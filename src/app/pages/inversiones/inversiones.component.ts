@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { InversionesService } from 'src/app/services/inversiones.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-inversiones',
@@ -16,6 +17,7 @@ export class InversionesComponent implements OnInit {
   constructor(
               private inversionesServ: InversionesService,
               private authServ: AuthService,
+              private translate: TranslateService,
               private router: Router,
   
   ) { }
@@ -30,6 +32,8 @@ export class InversionesComponent implements OnInit {
       this.getInversionesById(this.usuario[0].id_us);
       
     }
+
+    this.translate.use(localStorage.getItem('idioma'));
     
   }
 

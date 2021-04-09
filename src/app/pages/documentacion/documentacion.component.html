@@ -2,9 +2,9 @@
   <div class="col-lg-12">
     <div class="card">
       <div class="card-body">
-        <h4 *ngIf="usuario[0].admin_us == 'N'" class="card-title">Files uploaded for {{usuario[0].nombres_us}}</h4>
-        <h4 *ngIf="usuario[0].admin_us == 'Y'" class="card-title">All Uploaded Files</h4>
-        <label for="input-file-now">List of all uploaded files.</label>
+        <h4 *ngIf="usuario[0].admin_us == 'N'" class="card-title">{{'FilesUploadedFor' | translate}} {{usuario[0].nombres_us}}</h4>
+        <h4 *ngIf="usuario[0].admin_us == 'Y'" class="card-title">{{'AllUploadedFiles' | translate}}</h4>
+        <label for="input-file-now">{{'ListUploadedFiles' | translate}}</label>
         <div class="contenidoArchivos">
           
           <div *ngFor="let archivo of archivos" class="alert alert-info">

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 import { ClientesService } from 'src/app/services/clientes.service';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-lista-clientes',
@@ -14,11 +15,14 @@ export class ListaClientesComponent implements OnInit {
 
   constructor(
               private clientesServ: ClientesService,
+              private translate: TranslateService,
               private router: Router
   ) { }
 
   ngOnInit(): void {
-    this.obtenerUsuarios()
+    this.translate.use(localStorage.getItem('idioma'));
+    this.obtenerUsuarios();
+
   }
 
 
@@ -26,13 +30,18 @@ export class ListaClientesComponent implements OnInit {
    * Método para obtener los usuarios
    */
   public obtenerUsuarios = () =>{
+    let traError;
+    let traMsgAlert;
+    this.translate.get('Error').subscribe((res: string) =>{traError = res});
+    this.translate.get('notUnableTryAgainLater').subscribe((res: string) =>{traMsgAlert = res});
+
     this.clientesServ.getUsuariosService().subscribe( (data:any) =>{
       if(data.ok){
 
         this.usuarios = data.usuarios || [];
 
       } else {
-        Swal.fire('Error', 'At this time we are unable to process the information. Please try again later.', 'error');
+        Swal.fire(`${traError}`, `${traMsgAlert}`, 'error');
         setTimeout(() => { this.router.navigateByUrl('/'); }, 1200);
 
       }

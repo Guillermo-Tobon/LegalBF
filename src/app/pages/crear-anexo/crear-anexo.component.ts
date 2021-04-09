@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 import { InversionesService } from 'src/app/services/inversiones.service';
 import { ArchivosService } from 'src/app/services/archivos.service';
 import { ClientesService } from 'src/app/services/clientes.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-crear-anexo',
@@ -21,12 +22,14 @@ export class CrearAnexoComponent implements OnInit {
   public archivoSubir:File;
   public FormCrearAnexo:FormGroup;
   public fechaHoy:Date = new Date();
+  public year = new Date().getFullYear();
 
   constructor(
               private routeActive: ActivatedRoute,
               private InversionServ: InversionesService,
               private archivosServ: ArchivosService,
               private clientesSrv: ClientesService,
+              private translate: TranslateService,
               private location: Location,
               private router: Router,
               private fb: FormBuilder,
@@ -42,6 +45,8 @@ export class CrearAnexoComponent implements OnInit {
     })
 
     this.iniciarFormulario();
+
+    this.translate.use(localStorage.getItem('idioma'));
   }
 
 
@@ -52,18 +57,48 @@ export class CrearAnexoComponent implements OnInit {
    * @param inversion => ID de la inversión
    */
   public crearAnexos = () =>{
-    
     this.formSubmitted = true;
-    
+
+    let traWarning;
+    let traMsgAlert1;
+    let traMsgAlert2;
+    this.translate.get('Warning').subscribe((res: string) =>{traWarning = res});
+    this.translate.get('documentRequiredAnnex').subscribe((res: string) =>{traMsgAlert1 = res});
+    this.translate.get('fileisNotAllowed').subscribe((res: string) =>{traMsgAlert2 = res});
+
     if ( this.FormCrearAnexo.invalid ) {
       return; 
     }
     if(this.archivoSubir == undefined){
-      Swal.fire('Warning!', 'A document is required for this annex.', 'warning');
+      Swal.fire(`${traWarning}`, `${traMsgAlert1}`, 'warning');
       return;
     }
-    
+    const extension = this.archivoSubir.name.split('.').pop() || undefined;
+    if (extension != 'pdf') {
+      Swal.fire(`${traWarning}`, `${traMsgAlert2}`, 'warning');
+      return;
+    }
 
+    
+    let traAsunto;
+    let traDesc1;
+    let traDesc2;
+    let traDesc3;
+    let traDesc4;
+    let traDesc5;
+    let traDesc6;
+    let traSuccess;
+    let traError;
+    this.translate.get('CreatingAnnexClientsLegalBF').subscribe((res: string) =>{traAsunto = res});
+    this.translate.get('AnAnnexYour').subscribe((res: string) =>{traDesc1 = res});
+    this.translate.get('projectCreated').subscribe((res: string) =>{traDesc2 = res});
+    this.translate.get('PleaseGoTo').subscribe((res: string) =>{traDesc3 = res});
+    this.translate.get('verifyInformation').subscribe((res: string) =>{traDesc4 = res});
+    this.translate.get('ForMoreInformation').subscribe((res: string) =>{traDesc5 = res});
+    this.translate.get('ClientsLegalBFService').subscribe((res: string) =>{traDesc6 = res});
+    this.translate.get('Success').subscribe((res: string) =>{traSuccess = res});
+    this.translate.get('Error').subscribe((res: string) =>{traError = res});
+    
     const dataInver = {
       idUser: this.inversion['id_us_inv'],
       idInversion: this.inversion['id_inv'],  
@@ -84,24 +119,24 @@ export class CrearAnexoComponent implements OnInit {
               apellidos: this.usuario[0].apellidos_us,
               email: this.usuario[0].email_us,
               //email: 'desarrollomemo@gmail.com',
-              asunto: 'Creating an annex to your project in Clients LegalBF',
-              descripcion: `<p>An annex to your <strong>${this.inversion['nombre_inv']}</strong> project was created.</p>
-                            <p>Please go to: <a href="http://clientslegalbf.com/" target="_blank">www.clientslegalbf.com</a> verify your information.</p>
+              asunto: `${traAsunto}`,
+              descripcion: `<p>${traDesc1} <strong>${this.inversion['nombre_inv']}</strong> ${traDesc2}</p>
+                            <p>${traDesc3}: <a href="http://clientslegalbf.com/" target="_blank">www.clientslegalbf.com</a> ${traDesc4}</p>
                             <br>
-                            <b>For more information, contact LegalBF administrator. </b>
+                            <b>${traDesc5}</b>
                             <br>
-                            <p>©2021 - LegalBF Service</p>`
+                            <p>©${this.year} - ${traDesc6}</p>`
             }
             this.clientesSrv.sendEmailClienteService(json).subscribe( (resp:any) =>{
               console.log(resp)
 
             }, err => console.error('error de email-> ', err.error))
 
-            Swal.fire('Success!', `${resp1.msg}`, 'success');
+            Swal.fire(`${traSuccess}`, `${resp1.msg}`, 'success');
             setTimeout(() => { this.router.navigate(['dashboard/inversiones']); }, 2000);
 
           }).catch( (err) =>{
-              Swal.fire('Error', err.error.msg, 'error');
+              Swal.fire(`${traError}`, err.error.msg, 'error');
               console.log('error de file-> ', err.error)
           })
       }
@@ -109,7 +144,7 @@ export class CrearAnexoComponent implements OnInit {
       
     }, (err) =>{
       //En caso de un error
-      Swal.fire('Error', err.error.msg, 'error');
+      Swal.fire(`${traError}`, err.error.msg, 'error');
       console.log('error de creacion-> ', err.error)
     })
 
@@ -169,7 +204,7 @@ export class CrearAnexoComponent implements OnInit {
       interesCop: ['', [Validators.required]],
       capitalInteresExtra: ['', [Validators.required]],
       capitalInteresCop: ['', [Validators.required]],
-      comentario: ['', [Validators.required, Validators.minLength(10)]],
+      comentario: ['',],
     });
   }
 

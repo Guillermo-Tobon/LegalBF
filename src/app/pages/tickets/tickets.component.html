@@ -2,42 +2,42 @@
   <div class="col-12">
     <div class="card">
       <div class="card-body">
-        <h4 class="card-title">Contact the administrator directly and argue the matter.</h4>
-        <h6 class="card-subtitle">Once the ticket is created, the administrator will be notified via email and has a response period between 24 and 48 hours.</h6>
+        <h4 class="card-title">{{'ContactAdministratorMatter' | translate}}</h4>
+        <h6 class="card-subtitle">{{'response24and48Hours' | translate}}</h6>
 
         <div class="tab-content">        
           <div class="tab-pane active" id="settings" role="tabpanel">
             <div class="card-body">
               <div class="row">
                 <div class="col-lg-6 col-md-6">
-                  <small class="text-muted">Name:</small>
+                  <small class="text-muted">{{'Names' | translate}}:</small>
                   <h6>{{usuario[0].nombres_us}} {{usuario[0].apellidos_us}}</h6> 
                 </div>
                 <div class="col-lg-6 col-md-6">
-                  <small class="text-muted">E-mail:</small>
+                  <small class="text-muted">{{'Email' | translate}}:</small>
                   <h6>{{usuario[0].email_us}}</h6> 
                 </div>
               </div>
               <br>
               <div class="row">
                 <div class="col-lg-6 col-md-6">
-                  <small class="text-muted">Phone:</small>
+                  <small class="text-muted">{{'phone' | translate}}:</small>
                   <h6>{{usuario[0].telefono_us}}</h6> 
                 </div>
                 <div class="col-lg-6 col-md-6">
-                  <small class="text-muted">Company:</small>
+                  <small class="text-muted">{{'CompanyName' | translate}}:</small>
                   <h6>{{usuario[0].compania_us}}</h6> 
                 </div>
               </div>
               <br>
               <div class="row">
                 <div class="col-lg-6 col-md-6">
-                  <small class="text-muted">Registration date:</small>
+                  <small class="text-muted">{{'RegistrationDate' | translate}}:</small>
                   <h6>{{usuario[0].fecha_reg_us | date: 'dd/MM/yyyy'}}</h6> 
                 </div>
                 <div class="col-lg-6 col-md-6">
-                  <small class="text-muted">Status:</small>
-                  <h6 class="text-warning">ACTIVE</h6> 
+                  <small class="text-muted">{{'Status' | translate}}:</small>
+                  <h6 class="text-warning">{{'active' | translate}}</h6> 
                 </div>
               </div>
             </div>
@@ -50,7 +50,7 @@
               <div class="form-group m-b-40 focused">
                 <input type="text" formControlName="asunto" class="form-control">
                 <span class="bar"></span>
-                <label for="input3">Affair</label>
+                <label for="input3">{{'Affair' | translate}}</label>
               </div>
             </div>
           </div>
@@ -59,13 +59,13 @@
               <div class="form-group m-b-40 focused">
                 <textarea class="form-control" formControlName="descripcion" rows="2"></textarea>
                 <span class="bar"></span>
-                <label for="input3">Message</label>
+                <label for="input3">{{'Message' | translate}}</label>
               </div>
             </div>
             <div class="col-5">
               <div class="checkbox checkbox-info pull-left p-t-0">
                 <input id="checkbox-signup" formControlName="acepto" type="checkbox" class="filled-in chk-col-light-blue">
-                <label for="checkbox-signup">I accept terms and conditions <a routerLink="terminos">Read here.</a> </label><br><br>
+                <label for="checkbox-signup">{{'acceptConditions' | translate}} <a routerLink="terminos">{{'ReadHere' | translate}}.</a> </label><br><br>
               </div> 
             </div>
           </div>
@@ -73,7 +73,7 @@
           <div class="row">
             <div class="col-lg-6 col-md-6">
               <div class="form-group">
-                <button type="submit" class="btn waves-effect waves-light btn-rounded btn-success btn-block">Send ticket</button>
+                <button type="submit" class="btn waves-effect waves-light btn-rounded btn-success btn-block">{{'SendTicket' | translate}}</button>
               </div>
             </div>
             <div class="col-lg-6 col-md-6">
@@ -85,9 +85,9 @@
 
           <div class="row">
             <div class="col text-danger">
-              <p *ngIf="campoNoValido('asunto')">*The issue is required.</p>
-              <p *ngIf="campoNoValido('descripcion')">*The message is required.</p>
-              <p *ngIf="campoNoValido('acepto')">*You must accept terms and conditions.</p>
+              <p *ngIf="campoNoValido('asunto')">*{{'subjectRequired' | translate}}</p>
+              <p *ngIf="campoNoValido('descripcion')">*{{'messageRequired' | translate}}</p>
+              <p *ngIf="campoNoValido('acepto')">*{{'mustAcceptConditions' | translate}}</p>
             </div>
           </div>
       

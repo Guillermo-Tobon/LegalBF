@@ -16,11 +16,11 @@
       <div>
         <hr> </div>
       <div class="card-body"> 
-        <small class="text-muted">Description</small>
+        <small class="text-muted">{{'Description' | translate}}</small>
         <h6>{{usuario[0].descripcion_us}}</h6> 
-        <small class="text-muted">Profile</small>
-        <h6 *ngIf="usuario[0].admin_us === 'Y'" class="h6Perfil">ADMINISTRATOR</h6> 
-        <h6 *ngIf="usuario[0].admin_us === 'N'" class="h6Perfil">ASSOCIATED</h6> 
+        <small class="text-muted">{{'Profile' | translate}}</small>
+        <h6 *ngIf="usuario[0].admin_us === 'Y'" class="h6Perfil">{{'ADMINISTRATOR' | translate}}</h6> 
+        <h6 *ngIf="usuario[0].admin_us === 'N'" class="h6Perfil">{{'ASSOCIATED' | translate}}</h6> 
         <small class="text-muted p-t-30 db">Social Profile</small>
         <br>
         <button class="btn btn-circle btn-secondary"><i class="fa fa-facebook"></i></button>
@@ -35,31 +35,31 @@
     <div class="card">
       <!-- Nav tabs -->
       <ul class="nav nav-tabs profile-tab" role="tablist">
-        <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#settings" role="tab">General Information</a> </li>
+        <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#settings" role="tab">{{'GeneralInformation' | translate}}</a> </li>
       </ul>
       <!-- Tab panes -->
       <div class="tab-content">        
         <div class="tab-pane active" id="settings" role="tabpanel">
           <div class="card-body">
-            <small class="text-muted">Name:</small>
+            <small class="text-muted">{{'Names' | translate}}:</small>
             <h6>{{usuario[0].nombres_us}} {{usuario[0].apellidos_us}}</h6> 
             <br>
-            <small class="text-muted">Company:</small>
+            <small class="text-muted">{{'CompanyName' | translate}}:</small>
             <h6>{{usuario[0].compania_us}}</h6> 
             <br>
-            <small class="text-muted">E-mail:</small>
+            <small class="text-muted">{{'Email' | translate}}:</small>
             <h6>{{usuario[0].email_us}}</h6> 
             <br>
-            <small class="text-muted">Phone:</small>
+            <small class="text-muted">{{'phone' | translate}}:</small>
             <h6>{{usuario[0].telefono_us}}</h6> 
             <br>
-            <small class="text-muted">Registration date:</small>
+            <small class="text-muted">{{'RegistrationDate' | translate}}:</small>
             <h6>{{usuario[0].fecha_reg_us | date: 'dd/MM/yyyy'}}</h6> 
             <br>
-            <small class="text-muted">Status:</small>
+            <small class="text-muted">{{'Status' | translate}}:</small>
             <h6 class="text-warning">{{estado}}</h6> 
             <br>
-            <button type="button" routerLink="/" class="btn waves-effect waves-light btn-rounded btn-danger">Back</button>
+            <button type="button" routerLink="/" class="btn waves-effect waves-light btn-rounded btn-danger">{{'Back' | translate}}</button>
 
           </div>
         </div>

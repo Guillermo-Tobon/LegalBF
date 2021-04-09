@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 import { AuthService } from 'src/app/services/auth.service';
 import { JsonpClientBackend } from '@angular/common/http';
 import { LoginForm } from 'src/app/interfaces/login-form.interface';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-login',
@@ -14,6 +15,7 @@ import { LoginForm } from 'src/app/interfaces/login-form.interface';
 export class LoginComponent implements OnInit {
 
   public formSubmitted = false;
+  public idioma:string;
 
   public loginForm = this.fb.group({
     email: [localStorage.getItem('email') || '', [Validators.required, Validators.email, Validators.minLength(6)]],
@@ -24,9 +26,13 @@ export class LoginComponent implements OnInit {
   constructor( 
               private router: Router,
               private fb: FormBuilder,
-              private authServ: AuthService ) { }
+              private authServ: AuthService,
+              private translate: TranslateService
+  ) { }
 
   ngOnInit(): void {
+    this.idioma = localStorage.getItem('idioma');
+    this.translate.use(this.idioma);
   }
 
   /**
@@ -40,13 +46,17 @@ export class LoginComponent implements OnInit {
     }
 
     this.authServ.loginService( this.loginForm.value ).subscribe( resp =>{
+      let traError;
+      let traMsgAlert;
+      this.translate.get('Error').subscribe((res: string) =>{traError = res});
+      this.translate.get('loginTryLater').subscribe((res: string) =>{traMsgAlert = res});
       
       if ( resp.ok ) {
         this.guardaLocalStorage(this.loginForm.value);
         this.router.navigateByUrl('/');
         
       } else {
-        Swal.fire('Error', 'En este momento no se puede iniciar sesión. Inténtelo más tarde.', 'error');
+        Swal.fire(`${traError}`, `${traMsgAlert}`, 'error');
 
       }
 

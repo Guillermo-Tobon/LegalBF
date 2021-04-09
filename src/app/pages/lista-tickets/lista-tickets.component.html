@@ -10,8 +10,8 @@
         <h5>{{ticket.nombre_tic}}</h5>
         <div class="comment-footer">
           <span class="date">{{ticket.fechareg_tic | date: 'EEEE, MMMM d, y'}}</span>&nbsp;
-          <span *ngIf="ticket.estado_tic === 0" class="label label-info">Pending</span>
-          <span *ngIf="ticket.estado_tic === 1" class="label label-success">Attended</span>
+          <span *ngIf="ticket.estado_tic === 0" class="label label-info">{{'pending' | translate}}</span>
+          <span *ngIf="ticket.estado_tic === 1" class="label label-success">{{'attended' | translate}}</span>
 
           <span class="action-icons">
             <a *ngIf="ticket.estado_tic === 0 && this.usuario[0].admin_us === 'N'" (click)="modalEditTicket(ticket)" title="Edit" data-toggle="modal" data-target=".modalEditTicket"><i class="mdi mdi-lead-pencil"></i></a>
@@ -20,10 +20,10 @@
           </span>
 
         </div>
-        <p>Ticket <span class="label label-default" style="color:#839daa;">{{ticket.id_tic}}</span></p>
+        <p>{{'ticket' | translate}} <span class="label label-default" style="color:#839daa;">{{ticket.id_tic}}</span></p>
         <p class="m-b-5 m-t-10"><b>{{ticket.asunto_tic}}: </b>{{ticket.mensaje_tic}}</p>
         <p *ngIf="ticket.estado_tic === 1" class="m-b-5 m-t-10 pRespuesta"><b>
-          <i class="mdi mdi-subdirectory-arrow-right"></i>Answer: </b>{{ticket.respuesta_tic}}
+          <i class="mdi mdi-subdirectory-arrow-right"></i>{{'Answer' | translate}}: </b>{{ticket.respuesta_tic}}
         </p>
 
       </div>
@@ -38,7 +38,7 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="myLargeModalLabel">Edit ticket</h4>
+        <h4 class="modal-title" id="myLargeModalLabel">{{'EditTicket' | translate}}</h4>
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
       </div>
       <div class="modal-body">
@@ -46,22 +46,22 @@
           <h5>{{editTicket['nombre_tic']}}</h5>
           <div class="comment-footer">
             <span class="date">{{editTicket['fechareg_tic'] | date: 'EEEE, MMMM d, y'}}</span>&nbsp;
-            <span *ngIf="editTicket['estado_tic'] === 0" class="label label-info">Pending</span>
+            <span *ngIf="editTicket['estado_tic'] === 0" class="label label-info">{{'pending' | translate}}</span>
           </div>
-          <p>Ticket <span class="label label-default" style="color:#839daa;">{{editTicket['id_tic']}}</span></p>
+          <p>{{'ticket' | translate}} <span class="label label-default" style="color:#839daa;">{{editTicket['id_tic']}}</span></p>
           
           <form class="formEditTicket m-t-40" [formGroup]="FormEditTicket" (submit)="editarTicket(editTicket['id_tic'])">
             <div class="row">
               <div class="col-lg-7 col-md-7">
                 <div class="form-group m-b-40 focused">
-                  <label for="input1">Affair</label>
+                  <label for="input1">{{'Affair' | translate}}</label>
                   <input type="text" formControlName="asunto" class="form-control">
                   <span class="bar"></span>
                 </div>
               </div>
               <div class="col-lg-12">
                 <div class="form-group m-b-40 focused">
-                  <label for="input2">Message</label>
+                  <label for="input2">{{'Message' | translate}}</label>
                   <textarea class="form-control" formControlName="mensaje" rows="2"></textarea>
                   <span class="bar"></span>
                 </div>
@@ -71,11 +71,11 @@
             <div class="row">
               <div class="col-lg-6 col-md-6">
                 <div class="form-group">
-                  <button type="submit" class="btn waves-effect waves-light btn-rounded btn-success btn-block">Edit ticket</button>
+                  <button type="submit" class="btn waves-effect waves-light btn-rounded btn-success btn-block">{{'EditTicket' | translate}}</button>
                 </div>
               </div>
               <div class="col-lg-6 col-md-6">
-                <button type="button" class="btn waves-effect waves-light btn-rounded btn-danger btn-block" data-dismiss="modal">Close</button>
+                <button type="button" class="btn waves-effect waves-light btn-rounded btn-danger btn-block" data-dismiss="modal">{{'Close' | translate}}</button>
               </div>
             </div>
           </form>
@@ -92,7 +92,7 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="myLargeModalLabel">Reply Ticket</h4>
+        <h4 class="modal-title" id="myLargeModalLabel">{{'ReplyTicket' | translate}}</h4>
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
       </div>
       <div class="modal-body">
@@ -100,7 +100,7 @@
           <h5>{{responTicket['nombre_tic']}}</h5>
           <div class="comment-footer">
             <span class="date">{{responTicket['fechareg_tic'] | date: 'EEEE, MMMM d, y'}}</span>&nbsp;
-            <span *ngIf="responTicket['estado_tic'] === 0" class="label label-info">Pending</span>
+            <span *ngIf="responTicket['estado_tic'] === 0" class="label label-info">{{'pending' | translate}}</span>
           </div>
           <p>Ticket <span class="label label-default" style="color:#839daa;">{{responTicket['id_tic']}}</span></p>
           <p class="m-b-5 m-t-10"><b>{{responTicket['asunto_tic']}}: </b>{{responTicket['mensaje_tic']}}</p>
@@ -111,25 +111,25 @@
                 <div class="form-group m-b-40 focused">
                   <textarea class="form-control" formControlName="respuesta" rows="2"></textarea>
                   <span class="bar"></span>
-                  <label for="input2">Response to ticket</label>
+                  <label for="input2">{{'ResponseTicket' | translate}}</label>
                 </div>
               </div>
             </div>
 
             <div class="row">
               <div class="col text-danger">
-                <p *ngIf="campoNoValido('respuesta')">*The answer is required.</p>
+                <p *ngIf="campoNoValido('respuesta')">*{{'answerRequired' | translate}}</p>
               </div>
             </div>
             <br><br>
             <div class="row">
               <div class="col-lg-6 col-md-6">
                 <div class="form-group">
-                  <button type="submit" class="btn waves-effect waves-light btn-rounded btn-success btn-block">Reply ticket</button>
+                  <button type="submit" class="btn waves-effect waves-light btn-rounded btn-success btn-block">{{'ReplyTicket' | translate}}</button>
                 </div>
               </div>
               <div class="col-lg-6 col-md-6">
-                <button type="button" class="btn waves-effect waves-light btn-rounded btn-danger btn-block" data-dismiss="modal">Close</button>
+                <button type="button" class="btn waves-effect waves-light btn-rounded btn-danger btn-block" data-dismiss="modal">{{'Close' | translate}}</button>
               </div>
             </div>
           </form>

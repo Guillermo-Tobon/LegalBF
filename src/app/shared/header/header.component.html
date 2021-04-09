@@ -140,9 +140,9 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="flag-icon {{bandera}}"></i></a>
           <div class="dropdown-menu dropdown-menu-right animated bounceInDown fast">
-            <a *ngIf="idioma != 'fr'" class="dropdown-item cursor" (click)="idiomaFrances('fr')"><i class="flag-icon flag-icon-fr"></i> French</a>
-            <a *ngIf="idioma != 'en'" class="dropdown-item cursor" (click)="idiomaIngles('en')"><i class="flag-icon flag-icon-us"></i> Inglés</a>
-            <a *ngIf="idioma != 'es'" class="dropdown-item cursor" (click)="idiomaEspanol('es')"><i class="flag-icon flag-icon-es"></i> Spanish</a>
+            <a *ngIf="idioma != 'fr'" class="dropdown-item cursor" (click)="idiomaFrances('fr')"><i class="flag-icon flag-icon-fr"></i> {{'French' | translate}}</a>
+            <a *ngIf="idioma != 'en'" class="dropdown-item cursor" (click)="idiomaIngles('en')"><i class="flag-icon flag-icon-us"></i> {{'English' | translate}}</a>
+            <a *ngIf="idioma != 'es'" class="dropdown-item cursor" (click)="idiomaEspanol('es')"><i class="flag-icon flag-icon-es"></i> {{'Spanish' | translate}}</a>
           </div>
         </li>
         <!-- ============================================================== -->

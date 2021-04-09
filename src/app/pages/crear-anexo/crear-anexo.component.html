@@ -2,21 +2,21 @@
   <div class="col-lg-12">
     <div class="card">
       <div class="card-body">
-        <h4 class="card-title">In the following form you can create attachments for the project <span class="aInversion"> {{inversion['id_inv']}} </span> <span class="nomUser">User: {{usuario[0]?.nombres_us}}</span></h4>
-        <h6 class="card-subtitle">Once the annex is created, it will be notified via email.</h6>
+        <h4 class="card-title"> {{'followingProject' | translate}} <span class="aInversion"> {{inversion['id_inv']}} </span> <span class="nomUser">{{'user' | translate}}: {{usuario[0]?.nombres_us}}</span></h4>
+        <h6 class="card-subtitle"> {{'annexCreatedEmail' | translate}} </h6>
       
         <form class="floating-labels m-t-40" [formGroup]="FormCrearAnexo" (submit)="crearAnexos()">
           <div class="row">
             <div class="col-lg-6 col-md-6">
               <div class="form-group m-b-40 focused">
-                <label for="input1">Annex movement</label>
+                <label for="input1"> {{'AnnexMovement' | translate}} </label>
                 <input type="text" formControlName="movimientoAnexo" class="form-control">
                 <span class="bar"></span>
               </div>
             </div>
             <div class="col-lg-6 col-md-6">
               <div class="form-group grupoDate">
-                <span class="spanFech" >Annex date</span>
+                <span class="spanFech" > {{'AnnexDate' | translate}} </span>
                 <input type="date" formControlName="fechaAnexo"  class="form-control">
                 <span class="bar"></span>
               </div>
@@ -26,14 +26,14 @@
           <div class="row">
             <div class="col-lg-6 col-md-6">
               <div class="form-group m-b-40 focused">
-                <label for="input1">Capital in Foreign Currency</label>
+                <label for="input1"> {{'CapitalForeignCurrency' | translate}} </label>
                 <input type="number" formControlName="capitalExtra" class="form-control">
                 <span class="bar"></span>
               </div>
             </div>
             <div class="col-lg-6 col-md-6">
               <div class="form-group m-b-40 focused">
-                <label for="input1">Capital in COP Currency</label>
+                <label for="input1"> {{'CapitalCurrencyCOP' | translate}} </label>
                 <input type="number" formControlName="capitalCop" class="form-control">
                 <span class="bar"></span>
               </div>
@@ -43,14 +43,14 @@
           <div class="row">
             <div class="col-lg-6 col-md-6">
               <div class="form-group m-b-40 focused">
-                <label for="input1">Interests in Foreign Currency</label>
+                <label for="input1"> {{'InterestForeignCurrency' | translate}} </label>
                 <input type="text" formControlName="interesExtra" class="form-control">
                 <span class="bar"></span>
               </div>
             </div>
             <div class="col-lg-6 col-md-6">
               <div class="form-group m-b-40 focused">
-                <label for="input1">Interest in Currency COP</label>
+                <label for="input1"> {{'InterestCOPCurrency' | translate}} </label>
                 <input type="text" formControlName="interesCop" class="form-control">
                 <span class="bar"></span>
               </div>
@@ -60,14 +60,14 @@
           <div class="row">
             <div class="col-lg-6 col-md-6">
               <div class="form-group m-b-40 focused">
-                <label for="input1">Capital + Interest in Foreign Currency</label>
+                <label for="input1"> {{'CapitalInterestForeign' | translate}} </label>
                 <input type="number" formControlName="capitalInteresExtra" class="form-control">
                 <span class="bar"></span>
               </div>
             </div>
             <div class="col-lg-6 col-md-6">
               <div class="form-group m-b-40 focused">
-                <label for="input1">Capital + Interest in Currency COP</label>
+                <label for="input1"> {{'CapitalInterestCOP' | translate}} </label>
                 <input type="number" formControlName="capitalInteresCop" class="form-control">
                 <span class="bar"></span>
               </div>
@@ -77,14 +77,14 @@
           <div class="row">
             <div class="col-lg-7 col-md-7">
               <div class="form-group m-b-40 focused">
-                <label for="input2">Description</label>
+                <label for="input2">{{'Description' | translate}}</label>
                 <textarea class="form-control" formControlName="comentario" rows="3"></textarea>
                 <span class="bar"></span>
               </div>
             </div>
             <div class="col-lg-5 col-md-5">
               <div class="form-group m-b-40 focused">
-                <label for="input-file-now">Upload file for attachment.</label>
+                <label for="input-file-now"> {{'UploadFile' | translate}} </label>
                 <input type="file" (change)="obtenerArchivo( $event.target.files[0] )" id="input-file-now" class="dropify"/>
                 <span class="bar"></span>
               </div>
@@ -93,24 +93,23 @@
 
           <div class="row">
             <div class="col text-danger">
-              <p *ngIf="campoNoValido('movimientoAnexo')">*The annex movement is required.</p>
-                <p *ngIf="campoNoValido('fechaAnexo')">*The date of the annex is required.</p>
-                <p *ngIf="campoNoValido('capitalExtra')">*The capital in foreign currency is required.</p>
-                <p *ngIf="campoNoValido('capitalCop')">*The capital in COP currency is required.</p>
-                <p *ngIf="campoNoValido('interesExtra')">*Interest in Foreign Currency is required.</p>
-                <p *ngIf="campoNoValido('interesCop')">*Interest in COP Currency is required.</p>
-                <p *ngIf="campoNoValido('capitalInteresExtra')">*The Capital + Interest in Foreign Currency is required.</p>
-                <p *ngIf="campoNoValido('capitalInteresCop')">*The Capital + Interest in Currency COP is required.</p>
-                <p *ngIf="campoNoValido('comentario')">*Description is required.</p>
+              <p *ngIf="campoNoValido('movimientoAnexo')">*{{'annexMoveRequired' | translate}} </p>
+              <p *ngIf="campoNoValido('fechaAnexo')">*{{'annexDateRequired' | translate}} </p>
+              <p *ngIf="campoNoValido('capitalExtra')">*{{'CapitalForeignRequired' | translate}} </p>
+              <p *ngIf="campoNoValido('capitalCop')">*{{'capitalCurrCOPRequired' | translate}}</p>
+              <p *ngIf="campoNoValido('interesExtra')">*{{'InterestForeignRequired' | translate}}</p>
+              <p *ngIf="campoNoValido('interesCop')">*{{'InterestCOPRequired' | translate}}</p>
+              <p *ngIf="campoNoValido('capitalInteresExtra')">*{{'Cap+InterForeignRequired' | translate}}</p>
+              <p *ngIf="campoNoValido('capitalInteresCop')">*{{'Cap+InterCOPRequired' | translate}}</p>
             </div>
           </div>
 
           <div class="row">
             <div class="col-lg-6 col-md-6">
               <div class="form-group">
-                <button type="submit" class="btn waves-effect waves-light btn-rounded btn-success">Create annex</button>
+                <button type="submit" class="btn waves-effect waves-light btn-rounded btn-success"> {{'CreateAnnex' | translate}} </button>
                 &nbsp;
-                <button type="button" (click)="goBack()" class="btn waves-effect waves-light btn-rounded btn-danger" data-dismiss="modal">Back</button>
+                <button type="button" (click)="goBack()" class="btn waves-effect waves-light btn-rounded btn-danger" data-dismiss="modal">{{'Back' | translate}}</button>
               </div>
             </div>
           </div>

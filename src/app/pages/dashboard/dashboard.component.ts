@@ -7,6 +7,7 @@ import { ArchivosService } from 'src/app/services/archivos.service';
 import { ClientesService } from 'src/app/services/clientes.service';
 import { TicketsService } from 'src/app/services/tickets.service';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-dashboard',
@@ -46,6 +47,7 @@ export class DashboardComponent implements OnInit {
   public descripcion:string;
   public fechareg:string;
   public sumGanan:Number = 0;
+  public year = new Date().getFullYear();
 
   constructor(
               private autServ: AuthService,
@@ -53,6 +55,7 @@ export class DashboardComponent implements OnInit {
               private clientesServ: ClientesService,
               private ticketServ: TicketsService,
               private archivosServ: ArchivosService,
+              private translate: TranslateService,
               private router: Router
   ) { }
 
@@ -69,6 +72,7 @@ export class DashboardComponent implements OnInit {
       this.getUsuariosInversiones();
       setTimeout(() => { this.cargarGraficaDona(); }, 1000);
     }
+    this.translate.use(localStorage.getItem('idioma'));
   }
 
 
@@ -122,6 +126,9 @@ export class DashboardComponent implements OnInit {
 
     this.inversionesServ.getAnexosByIdService(idInversion).subscribe( (resp:any) =>{
 
+      let traWinnings;
+      this.translate.get('Winnings').subscribe((res: string) =>{traWinnings = res});
+
       if( resp.ok ){
         this.anexos = resp.anexos || [];
         let dataGanan = [];
@@ -133,7 +140,7 @@ export class DashboardComponent implements OnInit {
           this.sumGanan += this.anexos[i].capital_interes_extra_anex;  
         }
 
-        this.Data2 = [{data: dataGanan, label: 'Winnings'}]; 
+        this.Data2 = [{data: dataGanan, label: `${traWinnings}`}]; 
 
       }
       
@@ -237,6 +244,9 @@ export class DashboardComponent implements OnInit {
   public getUsuariosInversiones = () =>{
     this.inversionesServ.getUserInversionService().subscribe( (resp:any) =>{
 
+      let traProject;
+      this.translate.get('project').subscribe((res: string) =>{traProject = res});
+
       this.userInver = resp.datos || [];
       let dataInver = [];
 
@@ -245,7 +255,7 @@ export class DashboardComponent implements OnInit {
         this.labels3[i] = this.userInver[i].nombres_us; 
       }
 
-      this.Data3 = [{data: dataInver, label: 'Project($)'}]; 
+      this.Data3 = [{data: dataInver, label: `${traProject}($)`}]; 
 
     }, (err) =>{
       //En caso de un error
@@ -259,7 +269,14 @@ export class DashboardComponent implements OnInit {
    * Método para cargar la grafica de rosca
    */
   public cargarGraficaDona = () =>{
-    this.labels1 = ['Users', 'Projects', 'Tickets'];
+    let traUser;
+    let traProjects;
+    let traTickets;
+    this.translate.get('user').subscribe((res: string) =>{traUser = res});
+    this.translate.get('projects').subscribe((res: string) =>{traProjects = res});
+    this.translate.get('tickets').subscribe((res: string) =>{traTickets = res});
+
+    this.labels1 = [`${traUser}`, `${traProjects}`, `${traTickets}`];
     this.Data1 = [[this.usuarios.length, this.totalInver.length, this.tickets.length]];
 
   }

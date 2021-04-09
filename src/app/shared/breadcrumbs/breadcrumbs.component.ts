@@ -17,7 +17,7 @@ export class BreadcrumbsComponent implements OnInit {
 
     this.tituloSubs = this.getArgumentosRuta().subscribe( data =>{
       this.titulo = data.titulo;
-      document.title = `LegalBF - ${data.titulo}`;
+      document.title = `Client LegalBF - ${data.titulo}`;
     })
   }
 
