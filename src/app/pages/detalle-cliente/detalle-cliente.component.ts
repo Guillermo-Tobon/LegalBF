@@ -181,7 +181,7 @@ export class DetalleClienteComponent implements OnInit {
       telefono: [usuario['telefono_us'], [Validators.required, Validators.minLength(6)]],
       pais: [usuario['pais_us'], [Validators.required, Validators.minLength(3)]],
       compania: [usuario['compania_us'], [Validators.required, Validators.minLength(5)]],
-      descripcion: [usuario['descripcion_us'], [Validators.required, Validators.minLength(20)]],
+      descripcion: [usuario['descripcion_us'], [Validators.required, Validators.minLength(3)]],
       estado: [usuario['estado_us'] === 1? true : false, [Validators.required]],
       id: [usuario['id_us'], [Validators.required, Validators.minLength(5)]],
     });

@@ -35,7 +35,7 @@ export class CrearInversionComponent implements OnInit {
     rentaExtra: ['', [Validators.required]],
     rentaCop: ['', [Validators.required]],
     tiempo: ['', [Validators.required]],
-    descripcion: ['', [Validators.required, Validators.minLength(20)]],
+    descripcion: ['', [Validators.required, Validators.minLength(3)]],
     estado: [true, [Validators.required]],
   })
   

@@ -52,7 +52,7 @@
         <div class="d-flex no-block">
           <div class="m-r-20 align-self-center"><span class="lstick m-r-20"></span><img src="../assets/images/icon/assets.png" alt="Income"></div>
           <div *ngIf=" usuario[0].admin_us === 'N' " class="align-self-center">
-            <h6 class="text-muted m-t-10 m-b-0"> {{'projectTime' | translate}} </h6>
+            <h6 class="text-muted m-t-10 m-b-0"> {{'projectTime' | translate }} </h6>
             <h2 class="m-t-0">{{ tiempo }} {{'months' | translate}} </h2>
           </div>
           <div *ngIf=" usuario[0].admin_us === 'Y' " class="align-self-center">
@@ -163,7 +163,7 @@
               </div>
               <br>
               <div class="col-lg-4 col-md-4">
-                <small class="text-muted"> {{'ProjectTime' | translate}}:</small>
+                <small class="text-muted"> {{'ProjectTime' | translate }}:</small>
                 <h6>{{ tiempo }} {{'months' | translate}} </h6>
               </div>
             </div>

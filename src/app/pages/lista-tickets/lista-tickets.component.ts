@@ -89,8 +89,8 @@ export class ListaTicketsComponent implements OnInit {
     this.editTicket =  ticket;
 
     this.FormEditTicket = this.fb.group({
-      asunto: [this.editTicket['asunto_tic'], [Validators.required, Validators.minLength(5)]],
-      mensaje: [this.editTicket['mensaje_tic'], [Validators.required, Validators.minLength(20)]],
+      asunto: [this.editTicket['asunto_tic'], [Validators.required, Validators.minLength(3)]],
+      mensaje: [this.editTicket['mensaje_tic'], [Validators.required, Validators.minLength(3)]],
     })
 
   }

@@ -135,7 +135,7 @@ export class TicketsComponent implements OnInit {
       telefono: [usuario[0]['telefono_us'], [Validators.required, Validators.minLength(6)]],
       compania: [usuario[0]['compania_us'], [Validators.required, Validators.minLength(5)]],
       asunto: ['', [Validators.required, Validators.minLength(5)]],
-      descripcion: ['', [Validators.required, Validators.minLength(20)]],
+      descripcion: ['', [Validators.required, Validators.minLength(3)]],
       acepto: ['', [Validators.required]],
       id: [usuario[0]['id_us'], [Validators.required, Validators.minLength(5)]],
     });
