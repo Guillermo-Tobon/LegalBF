@@ -18,6 +18,7 @@ export class CrearAnexoComponent implements OnInit {
   public inversion:any[] = [];
   public usuario:any[] = [];
   public formSubmitted:boolean = false;
+  public preloader:boolean = false;
   public idAnexo:String = '';
   public archivoSubir:File;
   public FormCrearAnexo:FormGroup;
@@ -105,6 +106,8 @@ export class CrearAnexoComponent implements OnInit {
       moneda: this.inversion['moneda_extra_inv']
     }
 
+    this.preloader = true;
+  
     this.InversionServ.crearAnexoServices( this.FormCrearAnexo.value, dataInver ).subscribe( (resp1:any) =>{
 
       if( resp1.ok ){
@@ -137,7 +140,8 @@ export class CrearAnexoComponent implements OnInit {
 
           }).catch( (err) =>{
               Swal.fire(`${traError}`, err.error.msg, 'error');
-              console.log('error de file-> ', err.error)
+              console.log('error de file-> ', err.error);
+              this.preloader = false;
           })
       }
 

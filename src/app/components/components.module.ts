@@ -9,6 +9,7 @@ import { DatepickerInlineComponent } from './datepicker-inline/datepicker-inline
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateModule } from '@ngx-translate/core';
+import { PreloaderComponent } from './preloader/preloader.component';
 
 
 
@@ -18,12 +19,14 @@ import { TranslateModule } from '@ngx-translate/core';
     LinealComponent,
     LinealAdminComponent,
     DatepickerInlineComponent,
+    PreloaderComponent,
   ],
   exports: [
     DonaComponent,
     LinealComponent,
     LinealAdminComponent,
-    DatepickerInlineComponent
+    DatepickerInlineComponent,
+    PreloaderComponent
   ],
   imports: [
     CommonModule,

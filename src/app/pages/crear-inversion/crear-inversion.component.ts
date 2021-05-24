@@ -19,6 +19,7 @@ export class CrearInversionComponent implements OnInit {
   public usuario:any[] = [];
   public idInversion:string = '';
   public formSubmitted = false;
+  public preloader:boolean = false;
   public year = new Date().getFullYear();
   
 
@@ -89,6 +90,7 @@ export class CrearInversionComponent implements OnInit {
     this.translate.get('Success').subscribe((res: string) =>{traSuccess = res});
     this.translate.get('Error').subscribe((res: string) =>{traError = res});
 
+    this.preloader = true;
     this.inversionServ.crearInversionService( this.crearFormInversion.value, this.usuario['id_us'] ).subscribe( (resp:any) =>{
 
       if( resp.ok ){
@@ -117,7 +119,8 @@ export class CrearInversionComponent implements OnInit {
     }, (err) =>{
       //En caso de un error
       Swal.fire(`${traError}`, err.error.msg, 'error');
-      console.log(err)
+      console.log(err);
+      this.preloader = false;
     })
 
   }

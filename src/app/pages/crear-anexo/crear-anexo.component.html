@@ -107,7 +107,8 @@
           <div class="row">
             <div class="col-lg-6 col-md-6">
               <div class="form-group">
-                <button type="submit" class="btn waves-effect waves-light btn-rounded btn-success"> {{'CreateAnnex' | translate}} </button>
+                <button *ngIf="!preloader" type="submit" class="btn waves-effect waves-light btn-rounded btn-success"> {{'CreateAnnex' | translate}} </button>
+                <div *ngIf="preloader"><app-preloader></app-preloader></div>
                 &nbsp;
                 <button type="button" (click)="goBack()" class="btn waves-effect waves-light btn-rounded btn-danger" data-dismiss="modal">{{'Back' | translate}}</button>
               </div>
